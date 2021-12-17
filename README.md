@@ -105,6 +105,10 @@
 
 ## DataBase
 
+## Emails
+
+## Payment APIs
+
 ## Feedbacks
 - If you have any feedback or improvements tips about this project, send a pull request or send me a email at: aleexgvieira@gmail.com
 - I really apreciate good feedbacks
