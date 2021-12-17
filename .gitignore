@@ -1,13 +1,5 @@
-# folders
-# tests
-
-# uploads
-# public/uploads/avatars/*
-
-# logs/
-# logs/all-logs.log
-# logs/error.log
-logs/*
+logs/
+dev/
 
 package-lock.json
 
