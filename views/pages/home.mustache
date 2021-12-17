@@ -1,0 +1,226 @@
+{{>partials/header}}
+
+	<div class="container col-lg-12 mt-3">
+
+      	<div class="row">
+
+            <input type="text" id="user_id" hidden value="{{user.id}}" readonly>
+            <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
+
+            {{^games}}
+                {{^game}}
+                    <div class="text-center alert alert-warning" role="alert" class="mb-3">
+                        <b class="fw-bold">No games found!</b>
+                    </div>
+                {{/game}}
+            {{/games}}
+
+
+            {{#flash_success}}
+                <div class="text-center alert alert-success" role="alert">
+                    <b>{{flash_success}}</b>
+                </div>
+            {{/flash_success}}
+
+            {{#flash_warning}}
+                <div class="text-center alert alert-warning" role="alert">
+                    <b>{{flash_warning}}</b>
+                </div>
+            {{/flash_warning}}
+
+
+
+            {{#game}}
+                <input id="game_id" name="game_id" type="hidden" value="{{id}}">
+
+                <div class="col-lg-3 text-center">
+
+                    <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="game_image">
+
+                    {{#user.admin}}
+                        <a href="/admin/update/game/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow-sm">
+                        <i class="bi bi-unlock-fill"></i>
+                        Edit This Game</a>
+                    {{/user.admin}}
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                                <a target="_blank" id="game_igdb_link" href="{{igdb_link}}" class="fs-3 card-link text-decoration-none">
+                                    <span id="game_title" class="fw-bold">{{title}}</span>
+                                    (<span id="game_year_release" class="text-muted">{{year_release}}</span>)
+                                </a>
+
+
+                            <h3 class="fw-bold text-warning">⭐
+                                <span id="game_igdb_rating">
+                                    {{igdb_rating}}
+                                </span>
+                            </h3>
+                        </div>
+
+                        <p class="card-text" id="game_resume">{{resume}}</p>
+
+                        <ul class="mt-3 bg-light">
+
+                            <li class=""><small><b>Genres:</b></small> <small id="game_genres">{{genres}}</small></li>
+
+                            <li class=""><small><b>Platforms:</b></small> <small id="game_platforms">{{platforms}}</small></li>
+
+                            <li class=""><small><b>Developer:</b></small> <small id="game_developer">{{developer}}</small></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- END GAME POST -->
+
+
+
+                <div class="col-lg-3 mb-3">
+
+                    <form class="mb-3" action="/searchGame" method="GET">
+                        <input class="form-control" type="search" placeholder="Search Game Title..." aria-label="Search" name="title">
+                    </form>
+
+                    <div class="list-group">
+                        <a href="/" class="d-flex justify-content-between list-group-item list-group-item-action text-white bg-dark">
+                            <i class="bi bi-controller"></i>
+                            <span>Games</span>
+                            <span>{{totalGames}}</span>
+                        </a>
+
+                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <i class="bi bi-book"></i>
+                            <span>Books</span>
+                            <span>{{totalBooks}}</span>
+                        </a>
+
+                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <i class="bi bi-camera-video"></i>
+                            <span>Movies</span>
+                            <span>{{totalBooks}}</span>
+                        </a>
+
+                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <i class="bi bi-tv"></i>
+                            <span>TV Shows</span>
+                            <span>{{totalBooks}}</span>
+                        </a>
+                    </div>
+
+                    <button class="mt-3 w-100 btn btn-outline-primary shadow-sm mb-3" onclick="recommendOtherGame()">
+                            <i class="bi bi-play-fill"></i>
+                            Recommend Other Game
+                    </button>
+
+                    {{^user}}
+                        <div id="newsletter_card">
+
+                        </div>
+                    {{/user}}
+
+                </div>
+            {{/game}}
+
+
+
+
+
+
+            {{#games}}
+
+                <div class="mt-2"></div>
+
+                <div class="col-lg-3 text-center">
+
+                    <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="game_image">
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h4 class="card-title">
+                                <a target="_blank" id="game_igdb_link" style="text-decoration:none;" href="{{igdb_link}}" class="card-link">
+                                    <span id="game_title" class="fw-bold text-primary">{{title}}</span>
+                                    (<span id="game_year_release" class="text-muted">
+                                        {{year_release}}
+                                    </span>)
+                                </a>
+                            </h4>
+
+                            <h4 class="fw-bold text-warning">⭐
+                                <span id="game_igdb_rating">
+                                    {{igdb_rating}}
+                                </span>
+                            </h4>
+                        </div>
+
+                        <small class="card-text" id="game_resume">{{resume}}</small>
+
+                        <ul class="mt-3">
+
+                            <li><small><b>Genres:</b></small> <small id="game_genres">{{genres}}</small></li>
+
+                            <li><small><b>Platforms:</b></small> <small id="game_platforms">{{platforms}}</small></li>
+
+                            <li><small><b>Developer:</b></small> <small id="game_developer">{{developer}}</small></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- END GAME POST -->
+
+                {{#firstGame}}
+                    <div class="col-lg-3 mb-3">
+
+                        <form class="mb-3" action="/searchGame" method="GET">
+                            <input class="form-control" type="search" placeholder="Search Game Title..." aria-label="Search" name="title">
+                        </form>
+
+                        <div class="list-group">
+                            <a href="/" class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white" aria-current="true">
+                                <i class="bi bi-controller"></i>
+                                <span>Games</span>
+                                <span>{{totalGames}}</span>
+                            </a>
+
+                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                                <i class="bi bi-book"></i>
+                                <span>Books</span>
+                                <span>{{totalBooks}}</span>
+                            </a>
+                        </div>
+
+                        {{^user}}
+                            <div id="newsletter_card">
+
+                            </div>
+                        {{/user}}
+
+                    </div>
+                {{/firstGame}}
+
+                {{^firstGame}}<div class="col-lg-3"></div>{{/firstGame}}
+
+            {{/games}}
+
+
+        </div>
+	
+    </div>
+
+    <script src="scripts/games.js"></script>
+
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+    <script src="scripts/newsletter.js"></script>
+
+{{>partials/footer}}

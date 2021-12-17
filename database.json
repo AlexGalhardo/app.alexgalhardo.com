@@ -1,0 +1,1373 @@
+{
+  "users": [
+    {
+      "id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "name": "Test Jack",
+      "email": "test@gmail.com",
+      "confirmed_email": true,
+      "confirm_email_token": null,
+      "password": "$2b$12$qmFqKwOkAfdQLy04VBtOLObd6FUU7H2P3XKa1f95JbKlLgjyOy4kG",
+      "reset_password_token": "123",
+      "admin": false,
+      "avatar": "alex.png",
+      "document": "44557777777",
+      "phone": "18999999999",
+      "birth_date": "2021-08-05",
+      "google_id": null,
+      "github_id": null,
+      "facebook_id": null,
+      "address": {
+        "zipcode": "13560290",
+        "street": "Rua Dona Alexandrina",
+        "street_number": "42",
+        "neighborhood": "Vila Monteiro (Gleba I)",
+        "city": "São Carlos",
+        "state": "SP",
+        "country": "BRAZIL"
+      },
+      "stripe": {
+        "customer_id": "cus_KARqXVbwHvPZyS",
+        "card_id": null,
+        "card_brand": null,
+        "card_last4": null,
+        "card_exp_month": null,
+        "card_exp_year": null,
+        "currently_subscription_id": "sub_KASPZ9F5iNXsBG",
+        "currently_subscription_name": "FREE",
+        "subscription_start": "04/09/2021 19:37:40",
+        "subscription_end": "04/10/2021 19:37:40",
+        "cancel_at_period_end": true
+      },
+      "created_at": "09/08/2021 03:52:14",
+      "updated_at": "11/08/2021 04:04:17"
+    },
+    {
+      "id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "name": "ADMIN Alex",
+      "email": "admin@gmail.com",
+      "confirmed_email": true,
+      "confirm_email_token": null,
+      "password": "$2a$12$0v0OSYD/CLAjRiYDc/9rIOFpA1BgHK83fGUEsOyld4O/uSv0pFYHq",
+      "reset_password_token": "I3wVSlYIPHVHX3GY2Q7xlsPu",
+      "admin": true,
+      "avatar": "admin_avatar.png",
+      "document": "44557777777",
+      "phone": "18999999999",
+      "birth_date": "2021-08-05",
+      "google_id": null,
+      "github_id": null,
+      "facebook_id": null,
+      "address": {
+        "zipcode": "17280000",
+        "street": "Avenida Paulista",
+        "street_number": "42",
+        "neighborhood": "Bairro Chique",
+        "city": "São Paulo",
+        "state": "SP",
+        "country": "Brazil"
+      },
+      "stripe": {
+        "customer_id": "cus_K8y63RgFsRst7l",
+        "card_id": "card_1Ja8xcHoneB4ZvrppnvND5tf",
+        "card_brand": "Visa",
+        "card_last4": "4242",
+        "card_exp_month": 8,
+        "card_exp_year": 2022,
+        "currently_subscription_id": "sub_1Ja8xeHoneB4ZvrpJRRiccJY",
+        "currently_subscription_name": "STARTER",
+        "subscription_start": "15/09/2021 22:00:22",
+        "subscription_end": "15/10/2021 22:00:22",
+        "cancel_at_period_end": false,
+        "card_token_id": "tok_1Ja8xcHoneB4ZvrpSWK9M4Xv"
+      },
+      "created_at": "10/08/2021 02:25:35",
+      "updated_at": "04/09/2021 18:45:39"
+    }
+  ],
+  "blog": [
+    {
+      "id": 1,
+      "title": "Why Simpsons Is So Succesfull?",
+      "resume": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+      "image": "https://picsum.photos/id/1/230/230",
+      "category": "software",
+      "body": "<p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\r\n\r\n<img src='https://observatoriodocinema.uol.com.br/wp-content/uploads/2020/05/Os-Simpsons.jpg' class='w-100 image-fluid'>\r\n\r\n<p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<p>",
+      "updated_at": "12/08/2021 18:49:33",
+      "comments": [
+        {
+          "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+          "user_logged_can_delete": false,
+          "user_name": "ADMIN Alex",
+          "user_avatar": "admin_avatar.png",
+          "comment": "NEW ADMIN COMMENT",
+          "created_at": "19/08/2021 09:15:10",
+          "comment_id": 4
+        },
+        {
+          "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+          "user_logged_can_delete": false,
+          "user_name": "Test Jack",
+          "user_avatar": "alex.png",
+          "comment": "when an unknown printer took a galley of type and scrambled it to make a type specimen book. What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since ",
+          "created_at": "19/08/2021 08:33:35",
+          "comment_id": 3
+        },
+        {
+          "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+          "user_logged_can_delete": false,
+          "user_name": "Test Jack",
+          "user_avatar": "alex.png",
+          "comment": "new comment 2",
+          "created_at": "19/08/2021 08:33:29",
+          "comment_id": 2
+        },
+        {
+          "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+          "user_logged_can_delete": false,
+          "user_name": "Test Jack",
+          "user_avatar": "alex.png",
+          "comment": "new comment 1",
+          "created_at": "19/08/2021 08:33:23",
+          "comment_id": 1
+        }
+      ],
+      "slug": "why-simpsons-is-so-succesfull",
+      "created_at": "04/08/2021 18:35:09"
+    },
+    {
+      "title": "Blog Title 2",
+      "resume": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+      "slug": "blog-title-2",
+      "category": "Bussiness",
+      "body": "<p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<p>",
+      "image": "https://picsum.photos/id/2/230/230",
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "id": 2,
+      "comments": []
+    },
+    {
+      "title": "Blog Title 3",
+      "resume": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+      "slug": "blog-title-3",
+      "category": "Software",
+      "body": "Blog Body 3",
+      "image": "https://picsum.photos/id/3/230/230",
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "id": 3,
+      "comments": []
+    },
+    {
+      "title": "Blog Title 4",
+      "resume": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+      "slug": "blog-title-5",
+      "category": "software",
+      "body": "Blog Body 5",
+      "image": "https://picsum.photos/id/5/230/230",
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "id": 4,
+      "comments": []
+    },
+    {
+      "title": "Blog Title 5",
+      "resume": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+      "slug": "blog-title-6",
+      "category": "software",
+      "body": "Blog Body 6",
+      "image": "https://picsum.photos/id/6/230/230",
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "id": 5,
+      "comments": []
+    },
+    {
+      "title": "New blog title insomnia",
+      "resume": "New blog resume by insomnia",
+      "image": "https://picsum.photos/id/10/230/230",
+      "category": "Software",
+      "body": "new blog post body by insomnia",
+      "comments": [],
+      "created_at": "17/08/2021 04:48:46",
+      "updated_at": "17/08/2021 04:48:46",
+      "slug": "New-blog-title-insomnia",
+      "id": 6
+    }
+  ],
+  "games": [
+    {
+      "id": 1,
+      "title": "God Of War",
+      "year_release": 2018,
+      "price": 139.9,
+      "resume": "It is a new beginning for Kratos. Living as a man, outside the shadow of the gods, he seeks solitude in the unfamiliar lands of Norse mythology. With new purpose and his son at his side, Kratos must fight for survival as powerful forces threaten to disrupt the new life he has created...",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
+      "igdb_link": "https://www.igdb.com/games/god-of-war--1",
+      "igdb_rating": 9.5,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Santa Mônica Studios",
+      "genres": "Action, Third Person, Adventure, Hack and slash/Beat 'em up",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 2,
+      "title": "Ghost Of Tsushima",
+      "year_release": 2020,
+      "price": 199.9,
+      "resume": "The year is 1274. Samurai warriors are the legendary defenders of Japan — until the fearsome Mongol Empire invades the island of Tsushima, wreaking havoc and conquering the local population. As one of the last surviving samurai, you rise from the ashes to fight back. But, honorable tactics won’t lead you to victory. You must move beyond your samurai traditions to forge a new way of fighting — the way of the Ghost — as you wage an unconventional war for the freedom of Japan.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2crj.jpg",
+      "igdb_link": "https://www.igdb.com/games/ghost-of-tsushima",
+      "igdb_rating": 9,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Sucker Punch Productions",
+      "genres": "Action, Third Person, Drama, Open world, Stealth, Adventure, Hack and slash/Beat 'em up",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-danger"
+    },
+    {
+      "id": 3,
+      "title": "Marvel's SpiderMan",
+      "year_release": 2018,
+      "price": 129.9,
+      "resume": "Starring the world’s most iconic Super Hero, Spider-Man features the acrobatic abilities, improvisation and web-slinging that the wall-crawler is famous for, while also introducing elements never-before-seen in a Spider-Man game. From traversing with parkour and utilizing the environment, to new combat and blockbuster set pieces, it’s Spider-Man unlike any you’ve played before.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r77.jpg",
+      "igdb_link": "https://www.igdb.com/games/marvels-spider-man",
+      "igdb_rating": 8.8,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Insomniac Games",
+      "genres": "Action, Third Person, Drama, Open world, Stealth, Adventure, Hack and slash/Beat 'em up",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 4,
+      "title": "Uncharted 4: A Thief's End",
+      "year_release": 2016,
+      "price": 59.9,
+      "resume": "Several years after his last adventure, retired fortune hunter, Nathan Drake, is forced back into the world of thieves. With the stakes much more personal, Drake embarks on a globe-trotting journey in pursuit of a historical conspiracy behind a fabled pirate treasure. His greatest adventure will test his physical limits, his resolve, and ultimately what he's willing to sacrifice to save the ones he loves.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7h.jpg",
+      "igdb_link": "https://www.igdb.com/games/uncharted-4-a-thief-s-end",
+      "igdb_rating": 9.2,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Naughty Dog",
+      "genres": "SinglePlayer, Action, Drama, Stealth, Adventure",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 5,
+      "title": "Uncharted: The Lost Legacy",
+      "year_release": 2017,
+      "price": 89.9,
+      "resume": "From the critically acclaimed developer, Naughty Dog, comes the first standalone adventure in the Uncharted series. Fan-favorite character, Chloe Frazer, must enlist the aid of renowned mercenary Nadine Ross from Uncharted 4: A Thief’s End in order to recover a fabled ancient Indian artifact and keep it out of the hands of a ruthless war profiteer. Together, they’ll venture deep into the mountains of India in search of the legendary artifact. Along the way, they’ll learn to work together to unearth the mystery of the artifact, fight their way through fierce opposition, and prevent the region from falling into chaos.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tp9.jpg",
+      "igdb_link": "https://www.igdb.com/games/uncharted-the-lost-legacy",
+      "igdb_rating": 9.2,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Naughty Dog",
+      "genres": "SinglePlayer, Third Person, Action, Drama, Stealth, Adventure",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 6,
+      "title": "Bloodborne",
+      "year_release": 2015,
+      "price": 29.9,
+      "resume": "An action RPG in which the player embodies a Hunter who, after being transfused with the mysterious blood local to the city of Yharnam, sets off into a 'night of the Hunt', an extended night in which Hunters may phase in and out of dream and reality in order to thin the outbreak of abominable beasts that plague the land and, for the more resilient and insightful Hunters, uncover the answers to the Hunt's many mysteries.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rba.jpg",
+      "igdb_link": "https://www.igdb.com/games/bloodborne",
+      "igdb_rating": 9.1,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "FromSoftware",
+      "genres": "SinglePlayer, Third Person, RPG, Action, Adventure",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 7,
+      "title": "Persona 5 Royal",
+      "year_release": 2019,
+      "price": 39.9,
+      "resume": "An enhanced version of Persona 5 with some new characters and a third semester added to the game. Released Internationally in 2020.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nic.jpg",
+      "igdb_link": "https://www.igdb.com/games/persona-5-royal",
+      "igdb_rating": 9.4,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Atlus",
+      "genres": "SinglePlayer, Third Person, RPG, Turn-Based, Adventure",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 8,
+      "title": "God of War III",
+      "year_release": 2010,
+      "price": 9.9,
+      "resume": "Set in the realm of brutal Greek mythology, God of War III is a single-player game that allows players to take on the climatic role of the ex-Spartan warrior, Kratos, as he scales through the intimidating heights of Mt. Olympus and the dark depths of Hell to seek revenge on those who have betrayed him. Armed with double-chained blades, and an array of new weapons and magic for this iteration of the trilogy, Kratos must take on mythology's darkest creatures while solving intricate puzzles throughout his merciless quest to destroy Olympus.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co30a3.jpg",
+      "igdb_link": "https://www.igdb.com/games/god-of-war-iii",
+      "igdb_rating": 8.6,
+      "units": 6,
+      "platforms": "PS3, PS4",
+      "developer": "Santa Mônica Studios",
+      "genres": "SinglePlayer, Third Person, Adventure, Hack and slash/Beat 'em up",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-danger"
+    },
+    {
+      "id": 9,
+      "title": "The Last of Us Part II",
+      "year_release": 2020,
+      "price": 99.9,
+      "resume": "Set 5 years after the events of The Last of Us, we see the return of Joel and Ellie. Driven by hatred, Ellie sets out for Seattle to serve justice. However, she begins to wonder what justice really means.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r0o.jpg",
+      "igdb_link": "https://www.igdb.com/games/the-last-of-us-part-ii",
+      "igdb_rating": 9.3,
+      "units": 6,
+      "platforms": "PS3, PS4",
+      "developer": "Naughty Dog",
+      "genres": "SinglePlayer, Third Person, Shooter, Adventure",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 10,
+      "title": "The Last of Us",
+      "year_release": 2013,
+      "price": 89.9,
+      "resume": "A third person shooter/stealth/survival hybrid, in which twenty years after the outbreak of a parasitic fungus which takes over the neural functions of humans, Joel, a Texan with a tragic familial past, finds himself responsible with smuggling a fourteen year old girl named Ellie to a militia group called the Fireflies, while avoiding strict and deadly authorities, infected fungal hosts and other violent survivors.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg",
+      "igdb_link": "https://www.igdb.com/games/the-last-of-us",
+      "igdb_rating": 9.4,
+      "units": 6,
+      "platforms": "PS3, PS4",
+      "developer": "Naughty Dog",
+      "genres": "SinglePlayer, Third Person, Shooter, Adventure",
+      "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 11,
+      "title": "Hades",
+      "year_release": "2020",
+      "price": 79.9,
+      "resume": "A rogue-lite hack and slash dungeon crawler in which Zagreus, son of Hades the Greek god of the dead, attempts to escape his home and his oppressive father by fighting the souls of the dead through the various layers of the ever-shifting underworld, while getting to know and forging relationships with its inhabitants.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co39vc.jpg",
+      "igdb_link": "https://www.igdb.com/games/hades--1",
+      "igdb_rating": "94",
+      "units": 6,
+      "platforms": "PC, XboxOne Series S|X, PS4, PS5",
+      "developer": "Supergiant Games",
+      "genres": "Adventure, Hack and slash/Beat 'em up, Indie, Role-playing (RPG)",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "17/08/2021 05:28:54",
+      "created_at": "17/08/2021 05:28:54",
+      "userLoggedRecommend": "btn-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 12,
+      "title": "Detroit: Become Human",
+      "year_release": 2018,
+      "price": 69.9,
+      "resume": "Detroit: Become Human is an neo-noir thriller. The plot revolves around three androids: Kara, who escapes the factory she was made in to explore her newfound sentience; Connor, whose job it is to hunt down deviant androids like Kara; and Markus, who devotes himself to releasing the androids from servitude. The characters may survive or perish depending on the choices that are made, which serve to shape the story as customised by the player.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2md2.png",
+      "igdb_link": "https://www.igdb.com/games/detroit-become-human--1",
+      "igdb_rating": 8.3,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Quantic Dream",
+      "genres": "Adventure, Puzzle",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 13,
+      "title": "Shadow of the Colossus",
+      "year_release": 2018,
+      "price": 59.9,
+      "resume": "Tales speak of an ancient land where creatures the size of mountains, roam the majestic landscape. Bound to the land, these creatures hold a key to a mystical power of revival - a power you must obtain to waken a loved one. Shadow of the Colossus is a majestic journey through ancient lands to seek out and destroy gigantic mythical beasts. With your trusty horse at your side, explore the spacious lands and unearth each Colossi. Armed with your wits, a sword and a bow, use cunning and strategy to topple each behemoth. A remake of the critically-claimed game of the same title. Also from the minds that brought you The Last Guardian & ICO",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co272w.png",
+      "igdb_link": "https://www.igdb.com/games/shadow-of-the-colossus--1",
+      "igdb_rating": 8.5,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Bluepoint Games",
+      "genres": "Single Player, Adventure, Platform",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 14,
+      "title": "Gran Turismo Sport",
+      "year_release": 2018,
+      "price": 49.9,
+      "resume": "Welcome to the future of motorsports – the definitive motor racing experience is back and better than ever only on PlayStation 4. Gran Turismo Sport is the world’s first racing experience to be built from the ground up to bring global, online competitions sanctioned by the highest governing body of international motorsports, the FIA (Federation International Automobile). Create your legacy as you represent and compete for your home country or favorite manufacturer.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1pd4.png",
+      "igdb_link": "https://www.igdb.com/games/gran-turismo-sport",
+      "igdb_rating": 7.6,
+      "units": 6,
+      "platforms": "PS4, PS5",
+      "developer": "Bluepoint Games",
+      "genres": "Single/Multiplayer Player, Simulation, Race",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 15,
+      "title": "Horizon Zero Dawn",
+      "year_release": 2018,
+      "price": 39.9,
+      "resume": "Horizon Zero Dawn, an exhilarating new action role playing game exclusively for the PlayStation 4 system, developed by the award winning Guerrilla Games, creatos of PlayStation's venerated Killzone franchise. As Horizon Zero Dawn's main protagonist Aloy, a skilled hunter, explore a vibrant and lush world inhabited by mysterious mechanized creatures.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2una.png",
+      "igdb_link": "https://www.igdb.com/games/horizon-zero-dawn",
+      "igdb_rating": 9.1,
+      "units": 6,
+      "platforms": "PS4, PS5, PC",
+      "developer": "Guerrilla Games",
+      "genres": "Single Player, Adventure, Platform, Third Person",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 16,
+      "title": "Final Fantasy 7 Remake",
+      "year_release": 2020,
+      "price": 29.9,
+      "resume": "A spectacular re-imagining of one of the most visionary games ever, FINAL FANTASY VII REMAKE rebuilds and expands the legendary RPG for today. The first game in this project is set in the eclectic city of Midgar and presents a fully standalone gaming experience.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1qxr.png",
+      "igdb_link": "https://www.igdb.com/games/final-fantasy-vii-remake",
+      "igdb_rating": 8.8,
+      "units": 6,
+      "platforms": "PS4, PS5, PC",
+      "developer": "Square Enix",
+      "genres": "Single Player, Adventure, RPG, Third Person",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 17,
+      "title": "Death Stranding",
+      "year_release": 2019,
+      "price": 9.9,
+      "resume": "Action & exploration third person game set in a post-apocalyptic open world.Developed by Kojima Productions and published first on PS4 by Sony Interactive and later on PC by 505 Games.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co316v.png",
+      "igdb_link": "https://www.igdb.com/games/death-stranding",
+      "igdb_rating": 8.9,
+      "units": 6,
+      "platforms": "PS4, PS5, PC",
+      "developer": "Kojima Productions",
+      "genres": "Single Player, Adventure, Third Person",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 18,
+      "title": "Metal Gear Solid V",
+      "year_release": 2015,
+      "price": 19.9,
+      "resume": "The 5th installment of the Metal Gear Solid saga, Metal Gear Solid V: The Phantom Pain continues the story of Big Boss (aka Naked Snake, aka David), connecting the story lines from Metal Gear Solid: Peace Walker, Metal Gear Solid: Ground Zeroes, and the rest of the Metal Gear Universe.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1v85.png",
+      "igdb_link": "https://www.igdb.com/games/metal-gear-solid-v-the-phantom-pain",
+      "igdb_rating": 8.6,
+      "units": 6,
+      "platforms": "PS4, PS5, PC",
+      "developer": "Konami",
+      "genres": "Single Player, Adventure, Action, Shooter, Third Person",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 2,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-danger"
+    },
+    {
+      "id": 19,
+      "title": "Uncharted: The Nathan Drake Collection",
+      "year_release": 2015,
+      "price": 59.9,
+      "resume": "Uncharted: The Nathan Drake Collection is a remastered compilation of the action-adventure shooter platform video games Drake's Fortune, Among Thieves, and Drake's Deception. Ported by Bluepoint Games, the collection was released exclusively for the PlayStation 4 on October 7, 2015 in Europe and October 9th, 2015 in North America. The Nathan Drake Collection features the original three games in the Uncharted series with 1080p resolution, 60 frames per second, better lighting, textures and models. The collection also implements a photo mode, a mode where the player can freeze the game at any moment to take personalized screenshots, derived from Naughty Dog's other remastered entry, The Last of Us Remastered, as well as new trophies. The ported games only include their respective single-player modes.",
+      "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tps.png",
+      "igdb_link": "https://www.igdb.com/games/uncharted-the-nathan-drake-collection",
+      "igdb_rating": 9,
+      "units": 6,
+      "platforms": "PS4",
+      "developer": "Naughty Dog",
+      "genres": "Single Player, Adventure, Action, Shooter, Third Person",
+      "amazon_link": "#",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    }
+  ],
+  "games_recommendations": [
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 10,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 5,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 6,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 2,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 9,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 8,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 8,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 9,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 3,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 11,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 7,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 4,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 10,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 5,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 6,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 1,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 2,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 11,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 4,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 7,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 1,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "game_id": 3,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 16,
+      "user_recommend": false,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "game_id": 18,
+      "user_recommend": false,
+      "user_not_recommend": true
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "Sapiens: A Brief History of Humankind",
+      "year_release": 2014,
+      "image": "https://m.media-amazon.com/images/I/51Sn8PEXwcL.jpg",
+      "amazon_link": "https://www.amazon.com/Sapiens-Humankind-Yuval-Noah-Harari-ebook/dp/B00ICN066A/ref=sr_1_2?crid=165V6E4JEUXKV&dchild=1&keywords=yuval+harari&qid=1632431375&s=digital-text&sprefix=yuval+ha%2Cdigital-text%2C288&sr=1-2",
+      "resume": "From a renowned historian comes a groundbreaking narrative of humanity’s creation and evolution—a #1 international bestseller—that explores the ways in which biology and history have defined us and enhanced our understanding of what it means to be “human.” One hundred thousand years ago, at least six different species of humans inhabited Earth. Yet today there is only one—homo sapiens. What happened to the others? And what may happen to us? Most books about the history of humanity pursue either a historical or a biological approach, but Dr. Yuval Noah Harari breaks the mold with this highly original book that begins about 70,000 years ago with the appearance of modern cognition. From examining the role evolving humans have played in the global ecosystem to charting the rise of empires, Sapiens integrates history and science to reconsider accepted narratives, connect past developments with contemporary concerns, and examine specific events within the context of larger ideas.",
+      "pages": 464,
+      "genres": "Historic",
+      "author": "Yuval Noah Harari ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "11/08/2021 20:36:33",
+      "created_at": "11/08/2021 20:36:33",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 2,
+      "title": "21 Lessons for the 21st Century",
+      "year_release": 2018,
+      "image": "https://m.media-amazon.com/images/I/41+uVWlucWL.jpg",
+      "amazon_link": "https://www.amazon.com/Lessons-21st-Century-Yuval-Harari-ebook/dp/B079WM7KLS/ref=sr_1_1?crid=165V6E4JEUXKV&dchild=1&keywords=yuval+harari&qid=1632431324&s=digital-text&sprefix=yuval+ha%2Cdigital-text%2C288&sr=1-1",
+      "resume": "How do computers and robots change the meaning of being human? How do we deal with the epidemic of fake news? Are nations and religions still relevant? What should we teach our children? Yuval Noah Harari’s 21 Lessons for the 21st Century is a probing and visionary investigation into today’s most urgent issues as we move into the uncharted territory of the future. As technology advances faster than our understanding of it, hacking becomes a tactic of war, and the world feels more polarized than ever, Harari addresses the challenge of navigating life in the face of constant and disorienting change and raises the important questions we need to ask ourselves in order to survive.",
+      "pages": "355",
+      "genres": "Historic",
+      "author": "Yuval Harari",
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "11/08/2021 20:32:39",
+      "created_at": "11/08/2021 20:32:39",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 3,
+      "title": "Homo Deus: A Brief History of Tomorrow",
+      "year_release": 2016,
+      "image": "https://m.media-amazon.com/images/I/4193zapM4cL._SY346_.jpg",
+      "amazon_link": "https://www.amazon.com.br/gp/product/B01LXCJTO4/ref=dbs_a_def_rwt_bibl_vppi_i0",
+      "resume": "Yuval Noah Harari, author of the critically-acclaimed New York Times bestseller and international phenomenon Sapiens, returns with an equally original, compelling, and provocative book, turning his focus toward humanity’s future, and our quest to upgrade humans into gods. Over the past century humankind has managed to do the impossible and rein in famine, plague, and war. This may seem hard to accept, but, as Harari explains in his trademark style—thorough, yet riveting—famine, plague and war have been transformed from incomprehensible and uncontrollable forces of nature into manageable challenges. For the first time ever, more people die from eating too much than from eating too little; more people die from old age than from infectious diseases; and more people commit suicide than are killed by soldiers, terrorists and criminals put together. The average American is a thousand times more likely to die from binging at McDonalds than from being blown up by Al Qaeda.",
+      "pages": "464",
+      "genres": "Historic",
+      "author": "Yuval Noah Harari ",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "04/08/2021 18:35:09",
+      "updated_at": "04/08/2021 18:55:16",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 4,
+      "title": "The Code Breaker: Jennifer Doudna, Gene Editing, and the Future of the Human Race",
+      "year_release": "2020",
+      "image": "https://m.media-amazon.com/images/I/41sdqD62cSL._SY346_.jpg",
+      "amazon_link": "https://www.amazon.com.br/dp/8532531768/ref=s9_acsd_al_bw_c2_x_1_t?pf_rd_m=A3RN7G7QC5MWSZ&pf_rd_s=merchandised-search-4&pf_rd_r=94401YP4EFQBKS2C6QK8&pf_rd_t=101&pf_rd_p=bed818b6-7184-4c08-8637-f6cb1f410f34&pf_rd_i=13348890011",
+      "resume": "The bestselling author of Leonardo da Vinci and Steve Jobs returns with a gripping account of how Nobel Prize winner Jennifer Doudna and her colleagues launched a revolution that will allow us to cure diseases, fend off viruses, and have healthier babies. When Jennifer Doudna was in sixth grade, she came home one day to find that her dad had left a paperback titled The Double Helix on her bed. She put it aside, thinking it was one of those detective tales she loved. When she read it on a rainy Saturday, she discovered she was right, in a way. As she sped through the pages, she became enthralled by the intense drama behind the competition to discover the code of life.",
+      "pages": "256",
+      "genres": "Biography",
+      "author": "Walter Isaacson",
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+      "year_release": "2009",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/41SH-SvWPxL._SX342_SY445_QL70_FMwebp_.jpg",
+      "amazon_link": "https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM/ref=sr_1_1?crid=1AGS1CVBWJ2I9&dchild=1&keywords=clean+code&qid=1632431269&s=digital-text&sprefix=clean+code%2Cdigital-text%2C298&sr=1-1",
+      "resume": "Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way. Noted software expert Robert C. Martin presents a revolutionary paradigm with Clean Code: A Handbook of Agile Software Craftsmanship. Martin has teamed up with his colleagues from Object Mentor to distill their best agile practice of cleaning code “on the fly” into a book that will instill within you the values of a software craftsman and make you a better programmer–but only if you work at it.",
+      "pages": "425",
+      "genres": "Software",
+      "author": "Robert C. Martin",
+      "id": 5,
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "19/08/2021 03:34:40",
+      "created_at": "19/08/2021 03:34:40",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "title": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+      "year_release": "2016",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51OWGtzQLLL._SX342_SY445_QL70_FMwebp_.jpg",
+      "amazon_link": "https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software-ebook/dp/B00794TAUG/ref=sr_1_1?crid=3MSX5CWJWV1HH&dchild=1&keywords=domain+driven+design&qid=1632431205&s=digital-text&sprefix=domain+dri%2Cdigital-text%2C295&sr=1-1",
+      "resume": "Domain-Driven Design fills that need. This is not a book about specific technologies. It offers readers a systematic approach to domain-driven design, presenting an extensive set of design best practices, experience-based techniques, and fundamental principles that facilitate the development of software projects facing complex domains. Intertwining design and development practice, this book incorporates numerous examples based on actual projects to illustrate the application of domain-driven design to real-world software development.",
+      "pages": "528",
+      "genres": "Software",
+      "author": "Eric Evans",
+      "id": 6,
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "19/08/2021 03:35:50",
+      "created_at": "19/08/2021 03:35:50",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-danger"
+    },
+    {
+      "title": "How To Win Friends and Influence People",
+      "year_release": "2012",
+      "image": "https://m.media-amazon.com/images/I/51NVtjOrnqL._SY346_.jpg",
+      "amazon_link": "https://www.amazon.com/How-Win-Friends-Influence-People-ebook/dp/B003WEAI4E/ref=sr_1_1?crid=P2NW8U2G4S65&dchild=1&keywords=how+to+make+friends+and+influence+people&qid=1632431120&s=digital-text&sprefix=how+to+make+fri%2Cdigital-text%2C303&sr=1-1",
+      "resume": "Dale Carnegie’s rock-solid, time-tested advice has carried countless people up the ladder of success in their business and personal lives. One of the most groundbreaking and timeless bestsellers of all time, How to Win Friends & Influence People will teach you: -Six ways to make people like you -Twelve ways to win people to your way of thinking -Nine ways to change people without arousing resentment. And much more! Achieve your maximum potential—a must-read for the twenty-first century with more than 15 million copies sold!",
+      "pages": "264",
+      "genres": "Personal Development",
+      "author": "Dale Carnegie",
+      "id": 7,
+      "recommend": 1,
+      "not_recommend": 1,
+      "updated_at": "19/08/2021 04:48:10",
+      "created_at": "19/08/2021 04:48:10",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "title": "The Art Of War",
+      "year_release": "2021",
+      "image": "https://m.media-amazon.com/images/I/41MyeYYbBoL.jpg",
+      "amazon_link": "https://www.amazon.com/Art-War-Sun-Tzu-ebook/dp/B003ZUY13E/ref=sr_1_1?crid=3716V7D9ETKYB&dchild=1&keywords=sun+tzu+art+of+war&qid=1632431049&s=digital-text&sprefix=sun+tzu%2Cdigital-text%2C289&sr=1-1",
+      "resume": "Art of War is almost certainly the most famous study of strategy ever written and has had an extraordinary influence on the history of warfare. The principles Sun-tzu expounded were utilized brilliantly by such great Asian war leaders as Mao Tse-tung, Giap, and Yamamoto. First translated two hundred years ago by a French missionary, Sun-tzu's Art of War has been credited with influencing Napoleon, the German General Staff, and even the planning for Desert Storm. Many Japanese companies make this book required reading for their key executives. And increasingly, Western businesspeople and others are turning to the Art of War for inspiration and advice on how to succeed in competitive situations of all kinds.",
+      "pages": "160",
+      "genres": "Strategic",
+      "author": "Sun Tzu",
+      "recommend": 1,
+      "not_recommend": 1,
+      "created_at": "19/08/2021 06:46:13",
+      "updated_at": "19/08/2021 06:46:13",
+      "id": 8,
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 9,
+      "title": "Steve Jobs",
+      "year_release": "2020",
+      "image": "https://m.media-amazon.com/images/I/4119AW7yvlL.jpg",
+      "amazon_link": "https://www.amazon.com/gp/product/B004W2UBYW/ref=dbs_a_def_rwt_bibl_vppi_i1",
+      "resume": "Based on more than forty interviews with Steve Jobs conducted over two years—as well as interviews with more than 100 family members, friends, adversaries, competitors, and colleagues—Walter Isaacson has written a riveting story of the roller-coaster life and searingly intense personality of a creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies, music, phones, tablet computing, and digital publishing. Isaacson’s portrait touched millions of readers. At a time when America is seeking ways to sustain its innovative edge, Jobs stands as the ultimate icon of inventiveness and applied imagination. He knew that the best way to create value in the twenty-first century was to connect creativity with technology. He built a company where leaps of the imagination were combined with remarkable feats of engineering.",
+      "pages": "256",
+      "genres": "Biography",
+      "author": "Walter Isaacson",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 10,
+      "title": "Leonardo da Vinci",
+      "year_release": "2020",
+      "image": "https://m.media-amazon.com/images/I/51gFt86kFAL.jpg",
+      "amazon_link": "https://www.amazon.com/gp/product/B071Y385Q1/ref=dbs_a_def_rwt_bibl_vppi_i2",
+      "resume": "Based on thousands of pages from Leonardo da Vinci’s astonishing notebooks and new discoveries about his life and work, Walter Isaacson “deftly reveals an intimate Leonardo” (San Francisco Chronicle) in a narrative that connects his art to his science. He shows how Leonardo’s genius was based on skills we can improve in ourselves, such as passionate curiosity, careful observation, and an imagination so playful that it flirted with fantasy. He produced the two most famous paintings in history, The Last Supper and the Mona Lisa. With a passion that sometimes became obsessive, he pursued innovative studies of anatomy, fossils, birds, the heart, flying machines, botany, geology, and weaponry. He explored the math of optics, showed how light rays strike the cornea, and produced illusions of changing perspectives in The Last Supper. His ability to stand at the crossroads of the humanities and the sciences, made iconic by his drawing of Vitruvian Man, made him history’s most creative genius.",
+      "pages": "256",
+      "genres": "Biography",
+      "author": "Walter Isaacson",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 11,
+      "title": "Benjamin Franklin: An American Life",
+      "year_release": "2020",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51e4pdrIVKL._SX328_BO1,204,203,200_.jpg",
+      "amazon_link": "https://www.amazon.com/gp/product/B000FBJG4U/ref=dbs_a_def_rwt_bibl_vppi_i4",
+      "resume": "Benjamin Franklin is the founding father who winks at us, the one who seems made of flesh rather than marble. In a sweeping narrative that follows Franklin’s life from Boston to Philadelphia to London and Paris and back, Walter Isaacson chronicles the adventures of the runaway apprentice who became, over the course of his eighty-four-year life, America’s best writer, inventor, media baron, scientist, diplomat, and business strategist, as well as one of its most practical and ingenious political leaders. He explores the wit behind Poor Richard’s Almanac and the wisdom behind the Declaration of Independence, the new nation’s alliance with France, the treaty that ended the Revolution, and the compromises that created a near-perfect Constitution.",
+      "pages": "256",
+      "genres": "Biography",
+      "author": "Walter Isaacson",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 12,
+      "title": "Einstein: His Life and Universe",
+      "year_release": "2020",
+      "image": "https://m.media-amazon.com/images/I/510RQE9G+AL.jpg",
+      "amazon_link": "https://www.amazon.com/Einstein-Life-Universe-Walter-Isaacson-ebook/dp/B000PC0S0K/ref=sr_1_1?crid=1SVNXRWCK9N0J&dchild=1&keywords=einstein&qid=1632431547&s=digital-text&sprefix=einstein%2Cdigital-text%2C306&sr=1-1",
+      "resume": "How did his mind work? What made him a genius? Isaacson’s biography shows how his scientific imagination sprang from the rebellious nature of his personality. His fascinating story is a testament to the connection between creativity and freedom. Based on newly released personal letters of Einstein, this book explores how an imaginative, impertinent patent clerk—a struggling father in a difficult marriage who couldn’t get a teaching job or a doctorate—became the mind reader of the creator of the cosmos, the locksmith of the mysteries of the atom, and the universe. His success came from questioning conventional wisdom and marveling at mysteries that struck others as mundane. This led him to embrace a morality and politics based on respect for free minds, free spirits, and free individuals. These traits are just as vital for this new century of globalization, in which our success will depend on our creativity, as they were for the beginning of the last century, when Einstein helped usher in the modern age.",
+      "pages": "705",
+      "genres": "Biography",
+      "author": "Walter Isaacson",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 13,
+      "title": "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future",
+      "year_release": "2015",
+      "image": "https://m.media-amazon.com/images/I/51tw6UjHpDL._SY346_.jpg",
+      "amazon_link": "https://www.amazon.com/Elon-Musk-SpaceX-Fantastic-Future-ebook/dp/B00KVI76ZS/ref=sr_1_1?crid=1L76QFVRLPXOW&dchild=1&keywords=elon+musk&qid=1632431662&s=digital-text&sprefix=elon+musk%2Cdigital-text%2C303&sr=1-1",
+      "resume": "In Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future, veteran technology journalist Ashlee Vance provides the first inside look into the extraordinary life and times of Silicon Valley's most audacious entrepreneur. Written with exclusive access to Musk, his family and friends, the book traces the entrepreneur's journey from a rough upbringing in South Africa to the pinnacle of the global business world. Vance spent over 40 hours in conversation with Musk and interviewed close to 300 people to tell the tumultuous stories of Musk's world-changing companies: PayPal, Tesla Motors, SpaceX and SolarCity, and to characterize a man who has renewed American industry and sparked new levels of innovation while making plenty of enemies along the way.",
+      "pages": "705",
+      "genres": "Biography",
+      "author": "Walter Isaacson",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 14,
+      "title": "Alice's Adventures in Wonderland",
+      "year_release": "1865",
+      "image": "https://m.media-amazon.com/images/I/51HFDCO5f4L.jpg",
+      "amazon_link": "https://www.amazon.com/Alices-Adventures-Wonderland-Lewis-Carroll-ebook/dp/B09DJNGYJZ/ref=sr_1_2?crid=1U7MZJ195HFXT&dchild=1&keywords=alice+in+wonderland&qid=1632431725&s=digital-text&sprefix=alice+in%2Cdigital-text%2C309&sr=1-2",
+      "resume": "In Alice in Wonderland looking for a pastime, Alice will discover a whole new world and its bizarre inhabitants. In Through the Looking-Glass, six months after the visit to Wonderland, crossing a mirror, Alice is once again involved in unlikely adventures.",
+      "pages": "92",
+      "genres": "Fantasy, Fiction",
+      "author": "Lewis Carroll",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 15,
+      "title": "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses",
+      "year_release": "1865",
+      "image": "https://m.media-amazon.com/images/I/51N-u8AsmdL.jpg",
+      "amazon_link": "https://www.amazon.com/Lean-Startup-Entrepreneurs-Continuous-Innovation-ebook/dp/B004J4XGN6/ref=sr_1_1?crid=1F9VTKTRXNCT7&dchild=1&keywords=lean+startup&qid=1632431932&s=digital-text&sprefix=lean+st%2Cdigital-text%2C302&sr=1-1",
+      "resume": "Most startups fail. But many of those failures are preventable. The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched. Eric Ries defines a startup as an organization dedicated to creating something new under conditions of extreme uncertainty. This is just as true for one person in a garage or a group of seasoned professionals in a Fortune 500 boardroom. What they have in common is a mission to penetrate that fog of uncertainty to discover a successful path to a sustainable business. The Lean Startup approach fosters companies that are both more capital efficient and that leverage human creativity more effectively. Inspired by lessons from lean manufacturing, it relies on “validated learning,” rapid scientific experimentation, as well as a number of counter-intuitive practices that shorten product development cycles, measure actual progress without resorting to vanity metrics, and learn what customers really want. It enables a company to shift directions with agility, altering plans inch by inch, minute by minute.",
+      "pages": "92",
+      "genres": "Bussiness",
+      "author": "Eric Reis",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 16,
+      "title": "I, Robot",
+      "year_release": "1982",
+      "image": "https://m.media-amazon.com/images/I/41ED86iNFkL.jpg",
+      "amazon_link": "https://www.amazon.com/I-Robot-Book-1-ebook/dp/B000FC1PW0/ref=sr_1_2?crid=37Q92VPCQTPHH&dchild=1&keywords=isaac+asimov&qid=1632432064&s=digital-text&sprefix=isaac+asi%2Cdigital-text%2C305&sr=1-2",
+      "resume": "I, Robot, the first and most widely read book in Asimov’s Robot series, forever changed the world’s perception of artificial intelligence. Here are stories of robots gone mad, of mind-reading robots, and robots with a sense of humor. Of robot politicians, and robots who secretly run the world—all told with the dramatic blend of science fact and science fiction that has become Asimov’s trademark. The Three Laws of Robotics: 1) A robot may not injure a human being or, through inaction, allow a human being to come to harm. 2) A robot must obey orders given to it by human beings except where such orders would conflict with the First Law. 3) A robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
+      "pages": "92",
+      "genres": "Science Fiction",
+      "author": "Isaac Asimov",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 17,
+      "title": "The Hitchhiker's Guide to the Galaxy",
+      "year_release": "2007",
+      "image": "https://m.media-amazon.com/images/I/51vfuNNWMTS.jpg",
+      "amazon_link": "https://www.amazon.com/Hitchhikers-Guide-Galaxy-Douglas-Adams-ebook/dp/B000XUBC2C/ref=sr_1_1?dchild=1&keywords=The+Hitchhiker%27s+Guide+to+the+Galaxy&qid=1632432113&s=digital-text&sr=1-1",
+      "resume": "It’s an ordinary Thursday morning for Arthur Dent . . . until his house gets demolished. The Earth follows shortly after to make way for a new hyperspace express route, and Arthur’s best friend has just announced that he’s an alien. After that, things get much, much worse. With just a towel, a small yellow fish, and a book, Arthur has to navigate through a very hostile universe in the company of a gang of unreliable aliens. Luckily the fish is quite good at languages. And the book is The Hitchhiker’s Guide to the Galaxy . . . which helpfully has the words DON’T PANIC inscribed in large, friendly letters on its cover. Douglas Adams’s mega-selling pop-culture classic sends logic into orbit, plays havoc with both time and physics, offers up pithy commentary on such things as ballpoint pens, potted plants, and digital watches . . . and, most important, reveals the ultimate answer to life, the universe, and everything.",
+      "pages": "92",
+      "genres": "Science Fiction",
+      "author": "Douglas Adams",
+      "recommend": 2,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    },
+    {
+      "id": 18,
+      "title": "Foundation",
+      "year_release": "2007",
+      "image": "https://m.media-amazon.com/images/I/41sIWKtP-4L.jpg",
+      "amazon_link": "https://www.amazon.com/Foundation-Isaac-Asimov-ebook/dp/B000FC1PWA/ref=sr_1_1?crid=20BD250HGCU0S&dchild=1&keywords=foundation+asimov&qid=1632432306&s=digital-text&sprefix=foundation%2Cdigital-text%2C320&sr=1-1",
+      "resume": "For twelve thousand years the Galactic Empire has ruled supreme. Now it is dying. But only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future—to a dark age of ignorance, barbarism, and warfare that will last thirty thousand years. To preserve knowledge and save humankind, Seldon gathers the best minds in the Empire—both scientists and scholars—and brings them to a bleak planet at the edge of the galaxy to serve as a beacon of hope for future generations. He calls his sanctuary the Foundation. The Foundation novels of Isaac Asimov are among the most influential in the history of science fiction, celebrated for their unique blend of breathtaking action, daring ideas, and extensive worldbuilding. In Foundation, Asimov has written a timely and timeless novel of the best—and worst—that lies in humanity, and the power of even a few courageous souls to shine a light in a universe of darkness.",
+      "pages": "255",
+      "genres": "Science Fiction",
+      "author": "Isaac Asimov",
+      "recommend": 1,
+      "not_recommend": 2,
+      "updated_at": "17/08/2021 05:49:19",
+      "created_at": "17/08/2021 05:49:19",
+      "userLoggedRecommend": "btn-outline-success",
+      "userLoggedNotRecommend": "btn-outline-danger"
+    }
+  ],
+  "books_recommendations": [
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 3,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 8,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 9,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 1,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 5,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 4,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 7,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 2,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 6,
+      "user_recommend": true,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 3,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 1,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 6,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 2,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 7,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 8,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 9,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 5,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 4,
+      "user_recommend": false,
+      "user_not_recommend": true
+    },
+    {
+      "user_id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+      "book_id": 18,
+      "user_recommend": false,
+      "user_not_recommend": false
+    },
+    {
+      "user_id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+      "book_id": 17,
+      "user_recommend": true,
+      "user_not_recommend": false
+    }
+  ],
+  "stripe": {
+    "shop_transactions": [
+      {
+        "transaction_id": "ch_3JW8A0HoneB4Zvrp1IZCNdbE",
+        "total_amount": "33.46",
+        "payment_method": {
+          "card_id": "card_1JW8A0HoneB4ZvrpAE6vcaDK",
+          "brand": "Visa",
+          "exp_month": 8,
+          "exp_year": 2022,
+          "last4": "4242"
+        },
+        "currency": "usd",
+        "paid": true,
+        "products_amount": "6.46",
+        "products": [
+          {
+            "quantity": "1",
+            "name": "Oranges",
+            "total": "0.49"
+          },
+          {
+            "quantity": "1",
+            "name": "Grapes",
+            "total": "0.99"
+          },
+          {
+            "quantity": "1",
+            "name": "Apples",
+            "total": "1.99"
+          },
+          {
+            "quantity": "1",
+            "name": "Bananas",
+            "total": "2.99"
+          }
+        ],
+        "customer": {
+          "id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+          "stripe_id": "cus_KARqXVbwHvPZyS",
+          "email": "test@gmail.com",
+          "phone": "18999999999",
+          "name": "Test Jack"
+        },
+        "shipping": {
+          "address_zipcode": "13560290",
+          "address_street": "Rua Dona Alexandrina",
+          "address_street_number": 42,
+          "address_neighborhood": "Vila Monteiro (Gleba I)",
+          "address_city": "São Carlos",
+          "address_state": "SP",
+          "address_country": "Brazil",
+          "carrier": "Correios",
+          "fee": "27.00"
+        },
+        "created_at": "04/09/2021 20:20:33"
+      },
+      {
+        "transaction_id": "ch_3JW8BtHoneB4Zvrp1i37fotT",
+        "total_amount": "33.46",
+        "payment_method": {
+          "card_id": "card_1JW8BtHoneB4ZvrpA00R2Vnn",
+          "brand": "Visa",
+          "exp_month": 8,
+          "exp_year": 2022,
+          "last4": "4242"
+        },
+        "currency": "usd",
+        "paid": true,
+        "products_amount": "6.46",
+        "products": [
+          {
+            "quantity": "1",
+            "name": "Oranges",
+            "total": "0.49"
+          },
+          {
+            "quantity": "1",
+            "name": "Grapes",
+            "total": "0.99"
+          },
+          {
+            "quantity": "1",
+            "name": "Apples",
+            "total": "1.99"
+          },
+          {
+            "quantity": "1",
+            "name": "Bananas",
+            "total": "2.99"
+          }
+        ],
+        "customer": {
+          "id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+          "stripe_id": "cus_KARqXVbwHvPZyS",
+          "email": "test@gmail.com",
+          "phone": "18999999999",
+          "name": "Test Jack"
+        },
+        "shipping": {
+          "address_zipcode": "13560290",
+          "address_street": "Rua Dona Alexandrina",
+          "address_street_number": 42,
+          "address_neighborhood": "Vila Monteiro (Gleba I)",
+          "address_city": "São Carlos",
+          "address_state": "SP",
+          "address_country": "Brazil",
+          "carrier": "Correios",
+          "fee": "27.00"
+        },
+        "created_at": "04/09/2021 20:22:30"
+      },
+      {
+        "transaction_id": "ch_3JW8DOHoneB4Zvrp0W0S0Sr7",
+        "total_amount": "60.37",
+        "payment_method": {
+          "card_id": "card_1JW8DOHoneB4ZvrpQxAMSmiY",
+          "brand": "Visa",
+          "exp_month": 8,
+          "exp_year": 2022,
+          "last4": "4242"
+        },
+        "currency": "usd",
+        "paid": true,
+        "products_amount": "33.37",
+        "products": [
+          {
+            "quantity": "1",
+            "name": "Oranges",
+            "total": "0.49"
+          },
+          {
+            "quantity": "1",
+            "name": "Grapes",
+            "total": "0.99"
+          },
+          {
+            "quantity": "1",
+            "name": "Apples",
+            "total": "1.99"
+          },
+          {
+            "quantity": "10",
+            "name": "Bananas",
+            "total": "29.90"
+          }
+        ],
+        "customer": {
+          "id": "13667f62-03d6-4b46-bd22-0bbf2a3b89d2",
+          "stripe_id": "cus_KARqXVbwHvPZyS",
+          "email": "test@gmail.com",
+          "phone": "18999999999",
+          "name": "Test Jack"
+        },
+        "shipping": {
+          "address_zipcode": "13560290",
+          "address_street": "Rua Dona Alexandrina",
+          "address_street_number": 42,
+          "address_neighborhood": "Vila Monteiro (Gleba I)",
+          "address_city": "São Carlos",
+          "address_state": "SP",
+          "address_country": "Brazil",
+          "carrier": "Correios",
+          "fee": "27.00"
+        },
+        "created_at": "04/09/2021 20:24:03"
+      }
+    ],
+    "subscriptions_transactions": [
+      {
+        "created_at": "15/09/2021 22:00:24",
+        "transaction_id": "sub_1Ja8xeHoneB4ZvrpJRRiccJY",
+        "status": "active",
+        "payment_method": {
+          "card_id": "card_1Ja8xcHoneB4ZvrppnvND5tf",
+          "card_brand": "Visa",
+          "card_exp_month": 8,
+          "card_exp_year": 2022,
+          "card_last4": "4242"
+        },
+        "plan": {
+          "id": "price_1JUfS6HoneB4ZvrpSFzvXhXN",
+          "name": "STARTER",
+          "amount": "199",
+          "current_period_start": "15/09/2021 22:00:22",
+          "current_period_end": "15/10/2021 22:00:22",
+          "cancel_at_period_end": false
+        },
+        "customer": {
+          "id": "7f9c1c22-98f6-4472-a031-d027b7196ba9",
+          "stripe_id": "cus_K8y63RgFsRst7l",
+          "email": "admin@gmail.com",
+          "name": "ADMIN Alex"
+        },
+        "stripe_request_response": "{\"id\":\"sub_1Ja8xeHoneB4ZvrpJRRiccJY\",\"object\":\"subscription\",\"application_fee_percent\":null,\"automatic_tax\":{\"enabled\":false},\"billing_cycle_anchor\":1631754022,\"billing_thresholds\":null,\"cancel_at\":null,\"cancel_at_period_end\":false,\"canceled_at\":null,\"collection_method\":\"charge_automatically\",\"created\":\"15/09/2021 22:00:22\",\"current_period_end\":\"15/10/2021 22:00:22\",\"current_period_start\":\"15/09/2021 22:00:22\",\"customer\":\"cus_K8y63RgFsRst7l\",\"days_until_due\":null,\"default_payment_method\":null,\"default_source\":null,\"default_tax_rates\":[],\"discount\":null,\"ended_at\":null,\"items\":{\"object\":\"list\",\"data\":[{\"id\":\"si_KEcCKl2l1pDgjE\",\"object\":\"subscription_item\",\"billing_thresholds\":null,\"created\":1631754023,\"metadata\":{},\"plan\":{\"id\":\"price_1JUfS6HoneB4ZvrpSFzvXhXN\",\"object\":\"plan\",\"active\":true,\"aggregate_usage\":null,\"amount\":199,\"amount_decimal\":\"199\",\"billing_scheme\":\"per_unit\",\"created\":1630448950,\"currency\":\"usd\",\"interval\":\"month\",\"interval_count\":1,\"livemode\":false,\"metadata\":{},\"nickname\":null,\"product\":\"prod_K8xMlcmmUrLcDY\",\"tiers\":null,\"tiers_mode\":null,\"transform_usage\":null,\"trial_period_days\":null,\"usage_type\":\"licensed\"},\"price\":{\"id\":\"price_1JUfS6HoneB4ZvrpSFzvXhXN\",\"object\":\"price\",\"active\":true,\"billing_scheme\":\"per_unit\",\"created\":1630448950,\"currency\":\"usd\",\"livemode\":false,\"lookup_key\":null,\"metadata\":{},\"nickname\":null,\"product\":\"prod_K8xMlcmmUrLcDY\",\"recurring\":{\"aggregate_usage\":null,\"interval\":\"month\",\"interval_count\":1,\"trial_period_days\":null,\"usage_type\":\"licensed\"},\"tax_behavior\":\"unspecified\",\"tiers_mode\":null,\"transform_quantity\":null,\"type\":\"recurring\",\"unit_amount\":199,\"unit_amount_decimal\":\"199\"},\"quantity\":1,\"subscription\":\"sub_1Ja8xeHoneB4ZvrpJRRiccJY\",\"tax_rates\":[]}],\"has_more\":false,\"total_count\":1,\"url\":\"/v1/subscription_items?subscription=sub_1Ja8xeHoneB4ZvrpJRRiccJY\"},\"latest_invoice\":\"in_1Ja8xeHoneB4ZvrpVxAuc31e\",\"livemode\":false,\"metadata\":{},\"next_pending_invoice_item_invoice\":null,\"pause_collection\":null,\"payment_settings\":{\"payment_method_options\":null,\"payment_method_types\":null},\"pending_invoice_item_interval\":null,\"pending_setup_intent\":null,\"pending_update\":null,\"plan\":{\"id\":\"price_1JUfS6HoneB4ZvrpSFzvXhXN\",\"object\":\"plan\",\"active\":true,\"aggregate_usage\":null,\"amount\":199,\"amount_decimal\":\"199\",\"billing_scheme\":\"per_unit\",\"created\":1630448950,\"currency\":\"usd\",\"interval\":\"month\",\"interval_count\":1,\"livemode\":false,\"metadata\":{},\"nickname\":null,\"product\":\"prod_K8xMlcmmUrLcDY\",\"tiers\":null,\"tiers_mode\":null,\"transform_usage\":null,\"trial_period_days\":null,\"usage_type\":\"licensed\"},\"quantity\":1,\"schedule\":null,\"start_date\":1631754022,\"status\":\"active\",\"tax_percent\":null,\"transfer_data\":null,\"trial_end\":null,\"trial_start\":null}"
+      }
+    ]
+  }
+}
