@@ -10,14 +10,14 @@
 
 
 // HELPERS
-const DateTime = require('../helpers/DateTime');
-const NodeMailer = require('../helpers/NodeMailer');
-const TelegramBOTLogger = require('../helpers/TelegramBOTLogger');
-const Header = require('../helpers/Header');
+import DateTime from '../helpers/DateTime'
+import NodeMailer from '../helpers/NodeMailer'
+import TelegramBOTLogger from '../helpers/TelegramBOTLogger'
+import Header from '../helpers/Header'
 
 // MODELS
-const Users = require(`../models/${process.env.APP_DATABASE}/Users`)
-const StripeModel = require(`../models/${process.env.APP_DATABASE}/Stripe`)
+import Users from `../models/JSON/Users`
+import StripeModel from `../models/JSON/Stripe`
 
 
 // STRIPE
@@ -27,16 +27,16 @@ stripe = require('stripe')(`${process.env.STRIPE_SK_TEST}`);
 
 class PlansController {
 
-	static getViewPlans (req, res) {
-		return res.render('pages/plans/plans', {
+    static getViewPlans(req, res) {
+        return res.render('pages/plans/plans', {
             flash_warning: req.flash('warning'),
-			user: SESSION_USER,
+            user: SESSION_USER,
             header: Header.plans('Plans - Galhardo APP')
-		});
-	}
+        });
+    }
 
 
-    static getViewPlanStarterCheckout (req, res) {
+    static getViewPlanStarterCheckout(req, res) {
         return res.render('pages/plans/starter_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -45,7 +45,7 @@ class PlansController {
     }
 
 
-    static getViewPlanProCheckout (req, res) {
+    static getViewPlanProCheckout(req, res) {
         return res.render('pages/plans/pro_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -54,7 +54,7 @@ class PlansController {
     }
 
 
-    static getViewPlanPremiumCheckout (req, res) {
+    static getViewPlanPremiumCheckout(req, res) {
         return res.render('pages/plans/premium_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -64,8 +64,8 @@ class PlansController {
 
 
 
-    static getSubscriptionBanner (plan_name){
-        if(plan_name === 'STARTER'){
+    static getSubscriptionBanner(plan_name) {
+        if (plan_name === 'STARTER') {
             return `
             <div class="card mb-4 rounded-3 shadow-sm text-center">
                     <div class="card-header py-3 bg-warning">
@@ -83,7 +83,7 @@ class PlansController {
 
                 </div>`
         }
-        else if(plan_name === 'PRO'){
+        else if (plan_name === 'PRO') {
             return `
             <div class="card mb-4 rounded-3 shadow-sm text-center">
                     <div class="card-header py-3 bg-danger">
@@ -125,8 +125,8 @@ class PlansController {
 
 
 
-    static async verifyIfUserIsAlreadyAStripeCustomer(){
-        if(!SESSION_USER.stripe.customer_id){
+    static async verifyIfUserIsAlreadyAStripeCustomer() {
+        if (!SESSION_USER.stripe.customer_id) {
             const stripeCustomer = await stripe.customers.create({
                 description: 'Customer created in Subscription checkout!',
                 email: SESSION_USER.email
@@ -140,25 +140,25 @@ class PlansController {
 
 
 
-    static async verifyIfUserAlreadyHasAStripeCardRegistred(req){
-        if(!SESSION_USER.stripe.card_id){
+    static async verifyIfUserAlreadyHasAStripeCardRegistred(req) {
+        if (!SESSION_USER.stripe.card_id) {
             const { card_number,
                 card_exp_year,
                 card_exp_month,
                 card_cvc } = req.body
 
             const cardToken = await stripe.tokens.create({
-                 card: {
+                card: {
                     number: card_number,
                     exp_month: card_exp_month,
                     exp_year: card_exp_year,
                     cvc: card_cvc,
-                  },
+                },
             });
 
             const card = await stripe.customers.createSource(
                 SESSION_USER.stripe.customer_id,
-                {source: cardToken.id}
+                { source: cardToken.id }
             );
 
             const stripeCard = await Users.createStripeCard(SESSION_USER.id, cardToken.id, card)
@@ -177,7 +177,7 @@ class PlansController {
 
 
 
-    static getStripePlan(){
+    static getStripePlan() {
         return {
             STARTER: {
                 name: "STARTER",
@@ -189,7 +189,7 @@ class PlansController {
                 id: process.env.STRIPE_PLAN_PRO_PRICE_ID,
                 amount: process.env.STRIPE_PLAN_PRO_AMOUNT,
             },
-            PREMIUM:  {
+            PREMIUM: {
                 name: "PREMIUM",
                 id: process.env.STRIPE_PLAN_PREMIUM_PRICE_ID,
                 amount: process.env.STRIPE_PLAN_PREMIUM_AMOUNT,
@@ -203,7 +203,7 @@ class PlansController {
         const subscription = await stripe.subscriptions.create({
             customer: stripe_customer_id,
             items: [
-                {price: plan_id},
+                { price: plan_id },
             ],
         });
 
@@ -223,14 +223,14 @@ class PlansController {
      * verify if user already has a stripe credit card registred
      * Verify if user is not already registred in other plan
      */
-    static async postSubscription (req, res) {
+    static async postSubscription(req, res) {
 
         try {
             const { plan_name, confirm_password } = req.body
 
             const validPassword = await Users.verifyPassword(SESSION_USER.id, confirm_password)
 
-            if(!validPassword){
+            if (!validPassword) {
                 req.flash('warning', 'Invalid Password!')
                 return res.redirect(`/plan/${plan_name.toLowerCase()}/checkout`)
             }
@@ -287,10 +287,10 @@ class PlansController {
                 divPlanBanner: PlansController.getSubscriptionBanner(plan_name)
             });
 
-        } catch(error){
+        } catch (error) {
             throw new Error(error)
         }
-	}
+    }
 };
 
 module.exports = PlansController;

@@ -103,11 +103,22 @@
 - config
    - important app configs
 
+## GIT Branchs
+- main: branch in production
+- dev: branch to tests all merges and unit tests before merge to production
+- adonis: project refactored to adonisjs5 framework 
+
+## Install Locally
+
 ## DataBase
 
 ## Emails
 
-## Payment APIs
+## APIs
+
+## Payments
+
+## Logs
 
 ## Feedbacks
 - If you have any feedback or improvements tips about this project, send a pull request or send me a email at: aleexgvieira@gmail.com
