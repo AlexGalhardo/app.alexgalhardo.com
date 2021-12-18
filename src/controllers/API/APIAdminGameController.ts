@@ -3,28 +3,22 @@
  * Created By © Alex Galhardo  | August 2021-Present
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
- * 
- * 
+ *
+ *
  *  http://localhost:3000/api/admin/game
  */
 
-
 // helpers
-const DateTime = require('../../helpers/DateTime')
+import DateTime from '../../helpers/DateTime';
 
 // MODEL
-const Games = require(`../../models/${process.env.APP_DATABASE}/Games`)
-
-
-
+import Games from '../../models/JSON/Games';
 
 class APIAdminGameController {
-
     /**
      * http://localhost:3000/api/admin/game/create
      */
-    static async postCreateGame(req, res){
-
+    static async postCreateGame(req, res) {
         const {
             title,
             year_release,
@@ -35,8 +29,8 @@ class APIAdminGameController {
             platforms,
             developer,
             genres,
-            amazon_link
-        } = req.body
+            amazon_link,
+        } = req.body;
 
         const gameObject = {
             title,
@@ -50,26 +44,24 @@ class APIAdminGameController {
             genres,
             amazon_link,
             created_at: DateTime.getNow(),
-            updated_at: DateTime.getNow()
-        }
+            updated_at: DateTime.getNow(),
+        };
 
-        const gameCreated = await Games.create(gameObject)
+        const gameCreated = await Games.create(gameObject);
 
-        gameObject.id = gameCreated.insertId
+        gameObject.id = gameCreated.insertId;
 
-        if(gameCreated) return res.json(gameCreated)
+        if (gameCreated) return res.json(gameCreated);
 
-        return res.json({ error: 'Game NOT Created!'})
+        return res.json({ error: 'Game NOT Created!' });
     }
-
-
 
     /**
      * http://localhost:3000/api/admin/game/patch/:game_id
      */
-    static async patchGame(req, res, next){
+    static async patchGame(req, res, next) {
         try {
-            const game_id = req.params.game_id
+            const { game_id } = req.params;
 
             const {
                 title,
@@ -81,8 +73,8 @@ class APIAdminGameController {
                 platforms,
                 developer,
                 genres,
-                amazon_link
-            } = req.body
+                amazon_link,
+            } = req.body;
 
             const gameObject = {
                 id: game_id,
@@ -96,40 +88,35 @@ class APIAdminGameController {
                 developer,
                 genres,
                 amazon_link,
-                updated_at: DateTime.getNow()
-            }
-            
-            const gameUpdated = await Games.update(gameObject)
-            
+                updated_at: DateTime.getNow(),
+            };
+
+            const gameUpdated = await Games.update(gameObject);
+
             return res.json({
-                gameUpdated
-            });            
-        }
-        catch(err){
+                gameUpdated,
+            });
+        } catch (err) {
             next(err);
         }
     }
-
-
 
     /**
      * http://localhost:3000/api/admin/game/delete/:game_id
      */
-    static async deleteGame(req, res, next){
+    static async deleteGame(req, res, next) {
         try {
-            const game_id = req.params.game_id
-            
-            const gameDeleted = await Games.delete(game_id)
+            const { game_id } = req.params;
+
+            const gameDeleted = await Games.delete(game_id);
 
             return res.json({
-                status: gameDeleted
-            });        
-        }
-        catch(err){
+                status: gameDeleted,
+            });
+        } catch (err) {
             next(err);
         }
     }
-
 }
 
-module.exports = APIAdminGameController;
+export default APIAdminGameController;

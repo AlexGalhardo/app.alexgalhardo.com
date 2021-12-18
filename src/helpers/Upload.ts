@@ -8,34 +8,33 @@
  * ./helpers/Upload.js
  */
 
+import { unlink } from 'fs/promises';
+import multer from 'multer';
+import sharp from 'sharp';
 
-const { unlink } = require('fs/promises');
-const sharp = require('sharp')
-
-const multer = require("multer");
-const multerConfig = require("../config/multer");
-
-const Users = require(`../models/${process.env.APP_DATABASE}/Users`)
-
+import multerConfig from '../config/multer';
+import Users from '../models/JSON/Users';
 
 class Upload {
-
-	static async profileAvatar(req){
-        if(req.file){
+    static async profileAvatar(req) {
+        if (req.file) {
             const filename = `${req.file.filename}.jpg`;
 
             await sharp(req.file.path)
                 .resize(200, 200)
                 .toFormat('jpeg')
-                .toFile(`./public/uploads/avatars/${filename}`)
+                .toFile(`./public/uploads/avatars/${filename}`);
 
             await unlink(req.file.path);
 
-            await Users.updateAvatarName(`${req.file.filename}.jpg`, req.session.userID)
+            await Users.updateAvatarName(
+                `${req.file.filename}.jpg`,
+                req.session.userID
+            );
         } else {
-            return res.status(400).json({error: 'Invalid file type.'})
+            return res.status(400).json({ error: 'Invalid file type.' });
         }
-	}
+    }
 }
 
-module.exports = Upload;
+export default Upload;

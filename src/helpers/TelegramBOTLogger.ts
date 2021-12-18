@@ -10,54 +10,61 @@
  * bot
  */
 
+import dotenv from 'dotenv';
+import https from 'https';
 
-const https = require('https')
-const DateTime = require('./DateTime')
+import DateTime from './DateTime';
 
-
+dotenv.config();
 
 class TelegramBOTLogger {
-
     constructor(token, channelName) {
-        this.isThereToken(token)
-        this.isThereChannel(channelName)
-        this.token = token
-        this.channelName = channelName
-        this.baseUrl = `https://api.telegram.org/bot${token}`
+        this.isThereToken(token);
+        this.isThereChannel(channelName);
+        this.token = token;
+        this.channelName = channelName;
+        this.baseUrl = `https://api.telegram.org/bot${token}`;
     }
 
-    isThereToken(token){
-        if(!token) throw new Error('There is no Telegram Token in TelegramLogger Class Constructor')
+    isThereToken(token) {
+        if (!token)
+            throw new Error(
+                'There is no Telegram Token in TelegramLogger Class Constructor'
+            );
     }
 
-    isThereChannel(channel){
-        if(!channel) throw new Error('There is no Telegram Channel name in TelegramLogger Class Constructor')
+    isThereChannel(channel) {
+        if (!channel)
+            throw new Error(
+                'There is no Telegram Channel name in TelegramLogger Class Constructor'
+            );
     }
 
-    emojiMap(){
+    emojiMap() {
         return {
-            CONTACT:'💬',
-            ERROR:'🚨',
-            SUBSCRIPTION:'🏆',
-            SHOP:'💵'
-        }
+            CONTACT: '💬',
+            ERROR: '🚨',
+            SUBSCRIPTION: '🏆',
+            SHOP: '💵',
+        };
     }
 
-    sendMessage(level, type, message){
-        let emoji = this.emojiMap()[level]
+    sendMessage(level, type, message) {
+        const emoji = this.emojiMap()[level];
 
-        message = `${emoji} ${type} ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${message}`
+        message = `${emoji} ${type} ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${message}`;
 
-        let urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`)
+        const urlParams = encodeURI(
+            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
+        );
 
-        let url =  `${this.baseUrl}/sendMessage?${urlParams}`
+        const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
-        this.sendRequest(url)
+        this.sendRequest(url);
     }
 
-
-    logContact(contactObject){
-        let emoji = this.emojiMap()['CONTACT']
+    logContact(contactObject) {
+        const emoji = this.emojiMap().CONTACT;
 
         const log = `
         <b>CONTACT_FROM_NAME:</b> ${contactObject.name}
@@ -65,19 +72,21 @@ class TelegramBOTLogger {
         <b>SUBJECT:</b> ${contactObject.subject}
         ---------------------------------------
         <b>MESSAGE:</b> ${contactObject.message}
-                    `
+                    `;
 
-        let message = `${emoji} CONTACT ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`
+        const message = `${emoji} CONTACT ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
 
-        let urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`)
+        const urlParams = encodeURI(
+            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
+        );
 
-        let url =  `${this.baseUrl}/sendMessage?${urlParams}`
+        const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
-        this.sendRequest(url)
+        this.sendRequest(url);
     }
 
-    logShopTransaction(shopTransactionObject){
-        let emoji = this.emojiMap()['SHOP']
+    logShopTransaction(shopTransactionObject) {
+        const emoji = this.emojiMap().SHOP;
 
         const log = `
         <b>TRANSACTION_ID:</b> ${shopTransactionObject.transaction_id}
@@ -92,27 +101,29 @@ class TelegramBOTLogger {
         ---------------------------------------
         <b>PRODUCTS:</b> ${JSON.stringify(shopTransactionObject.products)}
         ---------------------------------------
-        <b>SHIPPING_ZIPCODE: </b> ${shopTransactionObject.shipping.address_zipcode}
+        <b>SHIPPING_ZIPCODE: </b> ${shopTransactionObject.shipping.address_zipcode
+            }
         <b>SHIPPING_STREET:</b> ${shopTransactionObject.shipping.address_street}
-        <b>SHIPPING_NEIGHBORHOOD:</b> ${shopTransactionObject.shipping.address_neighborhood}
+        <b>SHIPPING_NEIGHBORHOOD:</b> ${shopTransactionObject.shipping.address_neighborhood
+            }
         <b>SHIPPING_CITY:</b> ${shopTransactionObject.shipping.address_city}
         <b>SHIPPING_STATE:</b> ${shopTransactionObject.shipping.address_state}
         <b>SHIPPING_COUNTRY:</b> BRAZIL
-        `
+        `;
 
-        let message = `${emoji} SHOP TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`
+        const message = `${emoji} SHOP TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
 
-        let urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`)
+        const urlParams = encodeURI(
+            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
+        );
 
-        let url =  `${this.baseUrl}/sendMessage?${urlParams}`
+        const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
-        this.sendRequest(url)
+        this.sendRequest(url);
     }
 
-
-
-    logSubscriptionTransaction(subsTransactionObject){
-        let emoji = this.emojiMap()['SUBSCRIPTION']
+    logSubscriptionTransaction(subsTransactionObject) {
+        const emoji = this.emojiMap().SUBSCRIPTION;
 
         const log = `
         <b>TRANSACTION_ID:</b> ${subsTransactionObject.transaction_id}
@@ -130,34 +141,40 @@ class TelegramBOTLogger {
         <b>CUSTOMER_STRIPE_ID:</b> ${subsTransactionObject.customer.stripe_id}
         <b>CUSTOMER_EMAIL:</b> ${subsTransactionObject.customer.email}
         <b>CUSTOMER_NAME:</b> ${subsTransactionObject.customer.name}
-        `
+        `;
 
-        let message = `${emoji} SUBSCRIPTION TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`
+        const message = `${emoji} SUBSCRIPTION TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
 
-        let urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`)
+        const urlParams = encodeURI(
+            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
+        );
 
-        let url =  `${this.baseUrl}/sendMessage?${urlParams}`
+        const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
-        this.sendRequest(url)
+        this.sendRequest(url);
     }
 
-
-    sendRequest(url){
-        return https.get(url, (res) => {
-            const { statusCode } = res;
-            if(statusCode !== 200){
-                let data
-                res.on('data',(chunk)=>{
-                    data += chunk
-                })
-                res.on('end',() => {
-                    console.log(data)
-                })
-            }
-        }).on('error',(e)=>{
-            console.log(e)
-        })
+    sendRequest(url) {
+        return https
+            .get(url, (res) => {
+                const { statusCode } = res;
+                if (statusCode !== 200) {
+                    let data;
+                    res.on('data', (chunk) => {
+                        data += chunk;
+                    });
+                    res.on('end', () => {
+                        console.log(data);
+                    });
+                }
+            })
+            .on('error', (e) => {
+                console.log(e);
+            });
     }
 }
 
-module.exports = new TelegramBOTLogger(process.env.TELEGRAM_BOT_HTTP_TOKEN, process.env.TELEGRAM_BOT_CHANNEL_ID)
+export default new TelegramBOTLogger(
+    process.env.TELEGRAM_BOT_HTTP_TOKEN,
+    process.env.TELEGRAM_BOT_CHANNEL_ID
+);

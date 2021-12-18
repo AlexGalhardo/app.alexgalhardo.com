@@ -7,7 +7,7 @@
  * ./helpers/GoogleLogin.js
  */
 
-const NodeGoogleLogin = require('node-google-login');
+import NodeGoogleLogin from 'node-google-login';
 
 const config = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -16,9 +16,9 @@ const config = {
     defaultScope: [
         'https://www.googleapis.com/auth/userinfo.email',
         'https://www.googleapis.com/auth/userinfo.profile',
-    ]
-}
+    ],
+};
 
 const googleLogin = new NodeGoogleLogin(config);
 
-module.exports = googleLogin;
+export default googleLogin;
