@@ -2,9 +2,31 @@
   "compilerOptions": {
     "target": "es2021",
     "module": "commonjs",
+    "rootDir": "./",
+    "baseUrl": "./src",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "paths": {
+      "@routes/*": [
+        "routes/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@models/*": [
+        "models/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@controllers/*": [
+        "controllers/*"
+      ]
+    },
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   }
 }

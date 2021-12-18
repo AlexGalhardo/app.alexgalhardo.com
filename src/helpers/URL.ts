@@ -8,15 +8,12 @@
  * ./helpers/URL.js
  */
 
+import facebookLogin from 'node-fb-login';
+import queryString from 'query-string';
 
-const queryString = require('query-string');
-const googleLogin = require('./GoogleLogin');
-const facebookLogin = require('node-fb-login');
-
-
+import googleLogin from './GoogleLogin';
 
 class URL {
-    
     static getGitHubURL() {
         const params = queryString.stringify({
             client_id: process.env.GITHUB_CLIENT_ID,
@@ -29,23 +26,22 @@ class URL {
     }
 
     static getGoogleURL() {
-        const googleLoginURL = googleLogin.generateAuthUrl()
-        return googleLoginURL
+        const googleLoginURL = googleLogin.generateAuthUrl();
+        return googleLoginURL;
     }
 
-    static async getFacebookURL () {
+    static async getFacebookURL() {
         try {
             const facebookLoginURL = await facebookLogin.generateAuthURL({
-              fbAppID: process.env.FACEBOOK_CLIENT_ID,
-              redirectURI: process.env.FACEBOOK_CALLBACK_URL,
-              scopes:["public_profile", "email"]
-            })
-            return facebookLoginURL
-        }
-        catch(error){
-            throw new Error(error)
+                fbAppID: process.env.FACEBOOK_CLIENT_ID,
+                redirectURI: process.env.FACEBOOK_CALLBACK_URL,
+                scopes: ['public_profile', 'email'],
+            });
+            return facebookLoginURL;
+        } catch (error) {
+            throw new Error(error);
         }
     }
-};
+}
 
-module.exports = URL;
+export default URL;

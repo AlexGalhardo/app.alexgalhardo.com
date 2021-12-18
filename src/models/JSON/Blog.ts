@@ -11,7 +11,6 @@ import fs from 'fs-extra';
 import slugify from 'slugify';
 
 import database from '../../config/jsonDatabase';
-import DateTime from '../../helpers/DateTime';
 
 class Blog {
 	static save(database, error_message) {

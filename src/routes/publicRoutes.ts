@@ -77,12 +77,12 @@ router
     .get('/bank', AppController.getViewBank)
     .get('/toDo', AppController.getViewToDo)
     .get('/books', AppController.getViewBooks)
+    .get('/about', AppController.getViewAbout)
 
     .get('/contact', csrfProtection, AppController.getViewContact)
     .post('/contact', csrfProtection, AppController.postContact)
 
     .get('/privacy', AppController.getViewPrivacy)
-    .get('/criptoBOT', AppController.getViewCriptoBOT)
 
     .get('/searchGame', AppController.getSearchGameTitle)
     .get('/searchBook', AppController.getSearchBookTitle)

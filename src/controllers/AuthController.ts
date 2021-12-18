@@ -44,7 +44,7 @@ class AuthController {
         try {
             const errors = validationResult(req);
 
-            if (!req.recaptcha.error) {
+            /* if (!req.recaptcha.error) {
                 if (!errors.isEmpty()) {
                     req.flash('warning', `${errors.array()}`);
                     return res.redirect('/login');
@@ -52,7 +52,7 @@ class AuthController {
             } else {
                 req.flash('warning', `Invalid Recaptcha!`);
                 return res.redirect('/login');
-            }
+            } */
 
             const { email, password } = req.body;
 

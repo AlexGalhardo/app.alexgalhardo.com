@@ -8,38 +8,36 @@
  * http://localhost:3000/profile
  */
 
-
-const multer = require('multer')
-const csrf = require('csurf')
-const csrfProtection = csrf({ cookie: true })
-
-
-// INIT ROUTER
-const router = require('express').Router()
-
+import csrf from 'csurf';
+import express from 'express';
+import multer from 'multer';
 
 // CONTROLLER
-const ProfileController = require('../controllers/ProfileController');
+import ProfileController from '../controllers/ProfileController';
 
+// INIT ROUTER
+
+const csrfProtection = csrf({ cookie: true });
+
+const router = express.Router();
 
 // ------- MIDDLEWARES
 const userIsNotLoggedIn = (req, res, next) => {
-    if(!req.session.userID) {
-        req.flash('warning', 'You need to login first')
+    if (!req.session.userID) {
+        req.flash('warning', 'You need to login first');
         return res.redirect('/login');
     }
-    next()
-}
-
+    next();
+};
 
 const storageConfig = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './tmp');
     },
     filename: (req, file, cb) => {
-        let randomName = Math.floor(Math.random()*99999)
-        cb(null, `${randomName+Date.now()}.jpg`);
-    }
+        const randomName = Math.floor(Math.random() * 99999);
+        cb(null, `${randomName + Date.now()}.jpg`);
+    },
 });
 
 const upload = multer({
@@ -52,34 +50,69 @@ const upload = multer({
 
         const allowed = ['image/jpg', 'image/jpeg', 'image/png'];
 
-        cb(null, allowed.includes(file.mimetype))
+        cb(null, allowed.includes(file.mimetype));
     },
-    limits: { fieldSize: 1000000 } // 1MB
+    limits: { fieldSize: 1000000 }, // 1MB
 });
 
-
-
-
 router
-    .get('/', userIsNotLoggedIn, csrfProtection, ProfileController.getViewProfile)
+    .get(
+        '/',
+        userIsNotLoggedIn,
+        csrfProtection,
+        ProfileController.getViewProfile
+    )
 
-    .post('/', userIsNotLoggedIn, csrfProtection, ProfileController.updateProfile)
+    .post(
+        '/',
+        userIsNotLoggedIn,
+        csrfProtection,
+        ProfileController.updateProfile
+    )
 
-    .post('/avatar', userIsNotLoggedIn, upload.single('avatar'), ProfileController.updateProfileAvatar)
+    .post(
+        '/avatar',
+        userIsNotLoggedIn,
+        upload.single('avatar'),
+        ProfileController.updateProfileAvatar
+    )
 
-    .get('/shop/transactions', userIsNotLoggedIn, ProfileController.getViewMyShopTransactions)
+    .get(
+        '/shop/transactions',
+        userIsNotLoggedIn,
+        ProfileController.getViewMyShopTransactions
+    )
 
-    .get('/shop/transaction/:shop_transaction_id', userIsNotLoggedIn, ProfileController.getViewShopTransactionByID)
+    .get(
+        '/shop/transaction/:shop_transaction_id',
+        userIsNotLoggedIn,
+        ProfileController.getViewShopTransactionByID
+    )
 
-    .get('/subscriptions/transactions', userIsNotLoggedIn, ProfileController.getViewMySubscriptionsTransactions)
+    .get(
+        '/subscriptions/transactions',
+        userIsNotLoggedIn,
+        ProfileController.getViewMySubscriptionsTransactions
+    )
 
-    .get('/subscription/transaction/:subs_transaction_id', userIsNotLoggedIn, ProfileController.getViewSubscriptionTransactionByID)
+    .get(
+        '/subscription/transaction/:subs_transaction_id',
+        userIsNotLoggedIn,
+        ProfileController.getViewSubscriptionTransactionByID
+    )
 
     .get('/logout', userIsNotLoggedIn, ProfileController.getLogout)
 
-    .get('/delete/stripeCard/:stripe_card_id', userIsNotLoggedIn, ProfileController.deleteStripeCard)
+    .get(
+        '/delete/stripeCard/:stripe_card_id',
+        userIsNotLoggedIn,
+        ProfileController.deleteStripeCard
+    )
 
-    .get('/cancel/subscription/:stripe_currently_subscription_id', userIsNotLoggedIn, ProfileController.cancelStripeSubscriptionRenewAtPeriodEnd)
+    .get(
+        '/cancel/subscription/:stripe_currently_subscription_id',
+        userIsNotLoggedIn,
+        ProfileController.cancelStripeSubscriptionRenewAtPeriodEnd
+    );
 
-
-module.exports = router;
+export default router;

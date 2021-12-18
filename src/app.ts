@@ -23,7 +23,6 @@ import path from 'path';
 
 import morgan from './config/morgan';
 import PinoLog from './config/pino';
-import Logger from './config/winston';
 
 // ROUTES
 import adminRoutes from './routes/adminRoutes';
@@ -40,9 +39,10 @@ dotenv.config();
 global.APP_ROOT_PATH = path.resolve(__dirname);
 global.SESSION_USER = null;
 
-if (process.env.APP_DATABASE === 'JSON') console.log('USING DATABASE: JSON');
-if (process.env.APP_DATABASE === 'POSTGRES')
-    console.log('USING DATABASE: POSTGRES');
+// eslint-disable-next-line no-unused-expressions
+process.env.APP_DATABASE === 'JSON'
+    ? console.log('USING DATABASE: JSON')
+    : console.log('USING PRISMA ORM with POSTGRESQL');
 
 // LocalHost HTTPS | Need to change .env APP_URL to https
 // const app = require("https-localhost")()
@@ -71,7 +71,7 @@ app.use(cookieParser());
 // LOGS
 const pinoHttp = require('pino-http')({ logger: PinoLog });
 
-app.use(morgan); // 08/09/2021 19:37:50 http: GET / 200  162.571 ms
+app.use(morgan);
 
 // Secure HTTP Headers Responses & Requests
 app.use(
@@ -85,7 +85,6 @@ app.use(compression());
 
 // STATUS MONITOR
 // http://localhost:3000/status
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 app.use(require('express-status-monitor')());
 
 // CORS
@@ -121,7 +120,7 @@ app.engine('mustache', mustache());
 // PUBLIC STATIC FILES
 app.use(express.static('src/public'));
 
-// app.use('/api', pinoHttp, apiRoutes);
+// ROUTES
 app.use('/api', apiRoutes);
 app.use('/profile', profileRoutes);
 app.use('/admin', adminRoutes);
@@ -137,7 +136,7 @@ app.use((req, res) => {
 
 // HANDLING SERVER ERRORS
 app.use((err, req, res, next) => {
-    res.status(500); // INTERNAL SERVER ERROR
+    res.status(500);
 
     if (err.code === 'EBADCSRFTOKEN')
         return res.json({ error: 'Invalid CSRF Token!' });

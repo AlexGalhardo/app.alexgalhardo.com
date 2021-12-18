@@ -130,10 +130,10 @@ class Header {
         };
     }
 
-    static criptoBOT() {
+    static about() {
         return {
-            title: 'Cripto BOT',
-            navbar_criptobot_active: true,
+            title: 'about',
+            navbar_about_active: true,
         };
     }
 }

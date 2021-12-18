@@ -9,7 +9,7 @@
 
 import app from './app';
 
-app.listen(process.env.PORT || 3000, (error) => {
+app.listen(process.env.PORT || 3000, (error: string) => {
     if (error) throw new Error(error);
     console.log(`GalhardoAPP running on port ${process.env.PORT}`);
 });
