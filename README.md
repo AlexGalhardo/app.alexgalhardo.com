@@ -1,27 +1,26 @@
 <div align="center">
-<h1 align="center">🥤 Galhardo APP 💵</h1>
+<h1 align="center">🥤 Galhardo APP 2.0 💵</h1>
 <small align="center">A Simple Web App Project for Lifetime Learning</small>
 </div>
 
 ## Why This Project ? 
    - <b>"Talk is cheap. Show me the code." - Linus Torvalds</b>
    - First Commit: August 02, 2021
+   - I started this project using pure JavaScript and Common Modules to learn the basics about NodeJS ecossystem
+   - You can se the archived 1.0 version repository here: 
 
 ## Live Demo
-- **Currently Version: BETA - ALMOST STABLE**
+- **Currently Version: ALPHA**
 - You can access: https://galhardoapp.com/
 - This live demo use "MAIN" branch
-- Last updates and development are made in "DEV" branch
-- You can use default TEST inputs already in forms to try 
-- Dev and Main Branch are using CommonJS Module
+- Last updates and development tests are in "CANARY" branch
+- You can use default test inputs already in forms to try 
 - Test User
    - email: test@gmail.com
    - password: test123
 - **IMPORTANT:**
-   - **This version is FOR LEARNING, PRACTICE and TESTS PURPOSES**
    - **All transactions in this live demo are made in a SANDBOX Environment**
    - **NO REAL Money Transactions will be made**
-   - **All CRUDs in this Live Demo are made in JSON DataBase, for obvious reasons.**
 
 ## Introduction
 ### I created this project to LEARN and PRACTICE in my spare time:
@@ -56,15 +55,13 @@
    - Console, files, telegram, etc
 - Security
    - OWASP, CSRF, XSS, Injection, CORS, HTTP Headers, Google Recaptcha, etc
-- API RESTs
-   - JWT, Oauth2, AJAX, Bearer Token, HTML Documentation, etc
+- API 
+   - REST, GraphQL, JWT, Oauth2, AJAX, Bearer Token, HTML Documentation, etc
 - Others usefull things
    - Mobile First, WebHooks, WebSockets, Regex, Charts, SMTP, Flash Messages, Pagination, Slug, UUID, Searchs, etc
 - Deploys
    - CI, CD, Heroku, Git Workflows, etc
 - <b>I will be refactoring it over the years during my professional career as I develop my programming skills.</b>
-
-
 
 ## MicroServices
 - https://galhardo-correios.herokuapp.com/cep/13560290 (zipcode here)
@@ -79,65 +76,118 @@
    - 23/08/2021 15:52:36
 
 ## Folders
-- views
-   - emails: SMTP Emails requests
-   - partials: used in pages
-   - pages: main html pages responses
-- tests
-   - unit and integration automatic tests using jest
-   - this folder don't need to go to production, used in development
-- routes
-   - all routes/endpoints used in app
-- public
-   - css, scripts, images, uploads, robots.txt, sitemap.xml public access
-- models
-   - all models from databases
-- logs
-   - logs file.txt
-- helpers
-   - usefull code snippets, functions, classes used in app
-- docs
-   - swagger api html documentation config (/api-docs)
-- controllers
-   - all the controllers used in app
-- config
-   - important app configs
+- dist/
+   - build of the project when its ready to go in production
+- prisma/
+   - prisma ORM configurations, migrations, seeds, etc
+- .github/
+   - github workflow CI/CD configuration
+- src/
+   - source code of the project
+   - views/
+      - emails: SMTP Emails requests
+      - partials: used in pages
+      - pages: main html pages responses
+   - tests/
+      - unit and integration automatic tests using jest
+      - this folder don't need to go to production, used in development
+   - routes/
+      - all routes/endpoints used in app
+   - public/
+      - css, scripts, images, uploads, robots.txt, sitemap.xml public access
+   - models/
+      - all models/services from databases
+   - graphql/
+      - all things relationed to graphql api
+   - logs/
+      - locally logs files with errors, requests, etc
+   - tmp/ 
+      - temporary locally uploaded files 
+   - helpers/
+      - usefull code snippets, functions, classes used in app
+   - docs/
+      - swagger api html documentation config (/api-docs)
+   - controllers/
+      - all the controllers used in app
+   - config/
+      - important app configs
 
-## GIT Branchs
-- main: branch in production
-- dev: branch to tests all merges and unit tests before merge to production
-- adonis: project refactored to adonisjs5 framework 
+## Development Process
+- I am using Kanban and Trello principles to develop this project
+- You can see the public trello of this project in: https://trello.com/b/6iHJ2Idy/galhardo-app-20
+
+## GIT Branchs Semantic
+- main: branch to deploy in production
+- feature/*: new feature pull request to review and add to canary branch
+- canary: branch to test lastest updates before merge to master
+
+## GIT Commits Semantic
+- chore: add new chore in this commit
+- docs: add new documentation in this commit
+- feat: add new feature/update in this commit
+- fix: fix some bug or error in this commit
+- refactor: refactor code logic in this commit
+- style: improve code quality in this commit
+- test: improve testing/tests in this commit
 
 ## Install Locally
-- git clone https://github.com/AlexGalhardo/GalhardoAPP
-- cd GalhardoAPP/
-- npm i
-- sudo docker-compose up -d
-- cp .env-example .env
+- $ git clone https://github.com/AlexGalhardo/GalhardoAPP
+- $ cd GalhardoAPP/
+- $ npm install
+- $ sudo docker-compose up -d
+- $ cp .env-example .env
 - Edit .env file with your credentials
-- npm run rocket
-- 
+- $ npm run rocket
+- Go to: http://localhost:3000/
+  
+## Deploy
+- Before deploy, run
+   - $ npm run build
+- This project was deployed mainly in Heroku
+- Also, you can deploy in a tradicional VPS using NGINX
+
 ## DataBase
 - This project uses PRISMA ORM () with PostgreSQL
 - This project also uses JSON as DataBase for learning purposes
 - After installing locally, you can see databases in:
    - ADMINER
- -    - http://localhost:8080
+      - http://localhost:8080
       - system: postgresql
       - server: galhardoapp_postgres
       - username: postgres
       - password: root
    - PRISMA STUDIO
- -    - $ npx prisma studio
+      - $ npx prisma studio
       - http://localhost:5555/
 
+## HTML Templates
+- Using Bootstrap5 and some pure CSS here and there
+
 ## Emails
+- Using NodeMailer and MailTrap SMTP
+- Using HTML Templates
+
+## Uploads
+- Locally and in AWS S3
 
 ## APIs
+- This project uses 2 types of API: REST and Graphql using ApolloServer
+- You can see Graphql ApolloServer Studio in: http://localhost:4000/ after $ npm run dev
 
 ## Payments
+- This project use 2 Payment Gateways: 
+   - PagarME for Brazil BRL Transactions (R$) 
+   - Stripe for USA USD Transactions ($)
+- Payment methods:
+   - Credit Card
+   - Bank Slip (Boleto Bancário)
+   - PIX
 
 ## Logs
+- This project uses 3 types of logs:
+   - Locally inside tmp/ folder (errors, requests, etc)
+   - Telegram (for emails, transactions, etc)
+   - [DataDog](https://www.datadoghq.com/) (for error, analysis, performance, etc)
 
 ## Feedbacks
 - If you have any feedback or improvements tips about this project, send a pull request or send me a email at: aleexgvieira@gmail.com
