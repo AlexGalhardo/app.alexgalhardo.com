@@ -9,6 +9,7 @@
  */
 
 import { PrismaClient } from '@prisma/client';
+import { Request, Response, NextFunction } from 'express';
 
 import Blog from '../../models/Blog';
 import Books from '../../models/Books';
@@ -20,7 +21,11 @@ import Users from '../../models/Users';
 const prisma = new PrismaClient();
 
 class APIPublicController {
-	static async getPublicBlog(req, res, next) {
+	static async getPublicBlog(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const blog = await Blog.getAll();
 			return res.json({
@@ -31,7 +36,11 @@ class APIPublicController {
 		}
 	}
 
-	static async getPublicBlogPostByID(req, res, next) {
+	static async getPublicBlogPostByID(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const { blog_id } = req.params;
 			const blog = await Blog.getByID(blog_id);
@@ -43,7 +52,11 @@ class APIPublicController {
 		}
 	}
 
-	static async getPublicBlogPostRandom(req, res, next) {
+	static async getPublicBlogPostRandom(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const totalBlogPosts = await Blog.getTotal();
 			const random_blogPost_id =
@@ -57,7 +70,11 @@ class APIPublicController {
 		}
 	}
 
-	static async getPublicGames(req, res, next) {
+	static async getPublicGames(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const allGames = await prisma.game.findMany({});
 
@@ -67,48 +84,51 @@ class APIPublicController {
 		}
 	}
 
-	static async getPublicGameByID(req, res, next) {
+	static async getPublicGameByID(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const { game_id } = req.params;
-			const gameById = await prisma.game.findUnique({
-				where: {
-					id: game_id,
-				},
-			});
-
+			const gameById = await Games.getById(game_id);
 			return res.json(gameById);
 		} catch (err) {
 			next(err);
 		}
 	}
 
-	static async getPublicRandomGame(req, res, next) {
+	static async getPublicRandomGame(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
-			const totalGames = await prisma.game.count();
-			const skip = Math.floor(Math.random() * totalGames);
-			const randomGame = await prisma.game.findMany({
-				take: 1,
-				skip,
-			});
-
+			const randomGame = await Games.getRandom();
 			return res.json(randomGame);
 		} catch (err) {
 			next(err);
 		}
 	}
 
-	static async getPublicBooks(req, res, next) {
+	static async getPublicBooks(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const books = await Books.getAll();
-			return res.json({
-				books,
-			});
+			return res.json(books);
 		} catch (err) {
 			next(err);
 		}
 	}
 
-	static async getPublicBookByID(req, res, next) {
+	static async getPublicBookByID(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const { book_id } = req.params;
 			const book = await Books.getByID(book_id);
@@ -120,7 +140,11 @@ class APIPublicController {
 		}
 	}
 
-	static async getPublicRandomBook(req, res, next) {
+	static async getPublicRandomBook(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
 		try {
 			const book = await Books.getRandom();
 			return res.json({

@@ -15,4 +15,12 @@ export default class Games {
   static async getTotal() {
     return await prisma.game.count();
   }
+
+  static async getById(game_id: string) {
+    return await prisma.game.findUnique({
+      where: {
+        id: game_id,
+      },
+    });
+  }
 }

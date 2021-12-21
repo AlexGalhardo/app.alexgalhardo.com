@@ -36,6 +36,18 @@ type User {
   updatedAt: String!
 }
 
+type Blog {
+  id: ID!
+  title: String!
+  resume: String!
+  image: String!
+  category: String!
+  body:  String!
+  slug:  String!
+  createdAt: String!
+  updatedAt: String!
+}
+
 type Game {
 	id:	ID! 
   title: String!
@@ -49,6 +61,8 @@ type Game {
   developer: String!
   genres: String!
   amazon_link: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Book {
@@ -61,6 +75,8 @@ type Book {
   pages: String!
   genres: String!
   amazon_link: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Movie {
@@ -73,6 +89,8 @@ type Movie {
   resume: String!
   duration: String!
   genres: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type TVShow {
@@ -85,6 +103,8 @@ type TVShow {
   resume: String!
   duration: String!
   genres: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 input UserInput {
