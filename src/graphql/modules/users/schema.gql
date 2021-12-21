@@ -1,14 +1,43 @@
 type User {
-	_id: ID!
-	firstName: String!
-	lastName: String!
-	fullName: String!
-	email: String
-	active: Boolean!
+	id: ID!
+  name: String!
+  email: String!
+  confirmed_email: Boolean!
+  confirm_email_token: String!
+  password: String!
+  reset_password_token: String!
+  admin: String!
+  avatar: String!
+  document: String!
+  phone: String!
+  birth_date: String!
+  google_id: String!
+  github_id: String!
+  facebook_id: String!
+  address_zipcode: String!
+  address_street: String!
+  address_street_number: String!
+  address_neighborhood: String!
+  address_city: String!
+  address_state: String!
+  address_country: String!
+  stripe_customer_id: String!
+  stripe_card_id: String!
+  stripe_card_brand: String!
+  stripe_card_last4: String!
+  stripe_card_exp_month: String!
+  stripe_card_exp_year: String!
+  stripe_currently_subscription_id: String!
+  stripe_currently_subscription_name: String!
+  stripe_subscription_start: String!
+  stripe_subscription_end: String!
+  stripe_cancel_at_period_end: Boolean!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Game {
-	_id:	ID! 
+	id:	ID! 
   title: String!
   year_release: Int!
   price: Int!
@@ -23,7 +52,7 @@ type Game {
 }
 
 type Book {
-	_id:	ID! 
+	id:	ID! 
   title: String!
   year_release: Int!
   price: Int!
@@ -35,7 +64,7 @@ type Book {
 }
 
 type Movie {
-	_id:	ID! 
+	id:	ID! 
   title: String!
   year_release: Int!
   image: String!
@@ -47,7 +76,7 @@ type Movie {
 }
 
 type TVShow {
-	_id:	ID! 
+	id:	ID! 
   title: String!
   year_release: Int!
   image: String!
@@ -59,10 +88,8 @@ type TVShow {
 }
 
 input UserInput {
-	firstName: String!
-	lastName: String! 
+	name: String
 	email: String
-	active: Boolean!
 }
 
 type Query {

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id                                 Int      @id @default(autoincrement())
+  id                                 String   @id @default(uuid())
   name                               String
   email                              String   @unique
   confirmed_email                    Boolean  @default(false)
@@ -48,7 +48,7 @@ model User {
 }
 
 model Game {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid())
   title        String
   year_release Int
   price        Int
@@ -67,7 +67,7 @@ model Game {
 }
 
 model Book {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid())
   title        String
   year_release Int
   price        Int
@@ -84,7 +84,7 @@ model Book {
 }
 
 model Movie {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid())
   title        String
   year_release Int
   image        String
@@ -100,7 +100,7 @@ model Movie {
 }
 
 model Tvshow {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid())
   title        String
   year_release Int
   image        String
@@ -117,7 +117,7 @@ model Tvshow {
 }
 
 model StripeShopTransaction {
-  id                             Int      @id @default(autoincrement())
+  id                             String   @id @default(uuid())
   transaction_id                 String
   total_amount                   Float
   card_id                        String
@@ -150,7 +150,7 @@ model StripeShopTransaction {
 }
 
 model StripeSubscriptionTransaction {
-  id                   Int      @id @default(autoincrement())
+  id                   String   @id @default(uuid())
   createdAt            DateTime @default(now())
   transaction_id       String
   status               String

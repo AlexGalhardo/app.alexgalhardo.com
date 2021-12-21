@@ -19,10 +19,12 @@ const GraphqlServer = new ApolloServer({
     context: { hello: 123 },
 });
 GraphqlServer.listen().then(({ url }) =>
-    console.log(`GraphqlServer running on port ${url}`)
+    console.log(`GraphqlServer running on => ${url}`)
 );
 
 app.listen(process.env.PORT || 3000, (error: string) => {
     if (error) throw new Error(error);
-    console.log(`GalhardoAPP running on port ${process.env.PORT}`);
+    console.log(
+        `GalhardoAPP running on =>  http://localhost:${process.env.PORT}`
+    );
 });

@@ -13,21 +13,72 @@ query {
 	}
 }
 
-
-query {
-	posts {
-		title
-		author {
-			fullName
-		}
-	}
-}
-
-query {
-  findOne(data: {
-    id: 1,
-    email: "aleexgvieira@gmail.com"
-  }) {
+query($email: String!) {
+  findUserByEmail(email: $email) {
+    id
+    name
     email
   }
 }
+
+
+query {
+  games {
+    id
+    amazon_link
+    developer
+    genres
+    igdb_link
+    igdb_rating
+    image
+    platforms
+    price
+    resume
+    title
+    year_release
+    __typename
+  }
+}
+
+query {
+  books {
+    id
+    title
+    image
+    pages
+    price
+    amazon_link
+    year_release
+    __typename
+    resume
+  }
+}
+
+query {
+	users {
+		id
+		name
+		email
+		admin
+		avatar
+		confirmed_email
+		birth_date
+		confirm_email_token
+		reset_password_token
+		document
+		facebook_id
+		google_id
+		github_id
+		phone
+		address_city
+		address_country
+		address_neighborhood
+		address_state
+		address_street
+		address_street_number
+		address_zipcode
+		createdAt
+		updatedAt
+	}
+}
+
