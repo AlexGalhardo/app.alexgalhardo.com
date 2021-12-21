@@ -105,7 +105,7 @@ class APIPublicController {
 	) {
 		try {
 			const randomGame = await Games.getRandom();
-			return res.json(randomGame);
+			return res.json({ randomGame });
 		} catch (err) {
 			next(err);
 		}
