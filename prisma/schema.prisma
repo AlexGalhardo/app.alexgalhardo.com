@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,21 +8,156 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
-  // posts Post[]
+  id                                 Int     @id @default(autoincrement())
+  name                               String
+  email                              String  @unique
+  confirmed_email                    Boolean
+  confirm_email_token                String
+  password                           String
+  reset_password_token               String
+  admin                              Boolean
+  avatar                             String
+  document                           String
+  phone                              String
+  birth_date                         String
+  google_id                          String
+  github_id                          String
+  facebook_id                        String
+  address_zipcode                    String
+  address_street                     String
+  address_street_number              String
+  address_neighborhood               String
+  address_city                       String
+  address_state                      String
+  address_country                    String
+  stripe_customer_id                 String
+  stripe_card_id                     String
+  stripe_card_brand                  String
+  stripe_card_last4                  String
+  stripe_card_exp_month              String
+  stripe_card_exp_year               String
+  stripe_currently_subscription_id   String
+  stripe_currently_subscription_name String
+  stripe_subscription_start          String
+  stripe_subscription_end            String
+  stripe_cancel_at_period_end        Boolean
 
   @@map("users")
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  published Boolean @default(true)
-  title     String
-  body      String  @db.Text
-  // authorId  Int
-  // author    User    @relation(fields: [authorId], references: [id])
+model Game {
+  id           Int     @id @default(autoincrement())
+  title        Boolean @default(true)
+  year_release String
+  price        String  @db.Text
+  resume       String
+  image        String
+  igdb_link    String
+  igdb_rating  Int
+  platforms    String
+  developer    String
+  genres       String
+  amazon_link  String
 
-  @@map("posts")
+  @@map("games")
+}
+
+model Book {
+  id           Int     @id @default(autoincrement())
+  title        Boolean @default(true)
+  year_release String
+  image        String  @db.Text
+  amazon_link  String
+  resume       String
+  pages        Int
+  genres       String
+  author       String
+
+  @@map("books")
+}
+
+model Movie {
+  id           Int     @id @default(autoincrement())
+  title        Boolean @default(true)
+  year_release String
+  image        String  @db.Text
+  tmdb_link    String
+  tmdb_rating  Float
+  resume       String
+  duration     Int
+  genres       String
+
+  @@map("movies")
+}
+
+model TVShow {
+  id           Int     @id @default(autoincrement())
+  title        Boolean @default(true)
+  year_release String
+  image        String  @db.Text
+  tmdb_link    String
+  tmdb_rating  Float
+  resume       String
+  duration     Int
+  genres       String
+
+
+  @@map("tv_shows")
+}
+
+model StripeShopTransaction {
+  id                             Int     @id @default(autoincrement())
+  transaction_id                 String
+  total_amount                   Float
+  card_id                        String
+  brand                          String
+  exp_month                      Int
+  exp_year                       Int
+  last4                          Int
+  currency                       String
+  paid                           Boolean
+  products_amount                Float
+  products                       String
+  customer_id                    String
+  stripe_id                      String
+  customer_email                 String
+  customer_phone                 String
+  customer_name                  String
+  shipping_address_zipcode       String
+  shipping_address_street        String
+  shipping_address_street_number Int
+  shipping_address_neighborhood  String
+  shipping_address_city          String
+  shipping_address_state         String
+  shipping_address_country       String
+  carrier                        String
+  fee                            Int
+  created_at                     String
+
+
+  @@map("stripe_shop_transactions")
+}
+
+model StripeSubscriptionTransaction {
+  id                   Int     @id @default(autoincrement())
+  created_at           String
+  transaction_id       String
+  status               String
+  card_id              String
+  card_brand           String
+  card_exp_month       Int
+  card_exp_year        Int
+  card_last4           String
+  plan_id              String
+  name                 String
+  amount               Int
+  current_period_start String
+  current_period_end   String
+  cancel_at_period_end Boolean
+  customer_id          String
+  customer_stripe_id   String
+  customer_email       String
+  customer_name        String
+
+  @@map("stripe_subscriptions_transactions")
 }

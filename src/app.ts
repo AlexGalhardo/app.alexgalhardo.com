@@ -69,6 +69,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(cookieParser());
 
 // LOGS
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pinoHttp = require('pino-http')({ logger: PinoLog });
 
 app.use(morgan);
@@ -85,6 +86,7 @@ app.use(compression());
 
 // STATUS MONITOR
 // http://localhost:3000/status
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 app.use(require('express-status-monitor')());
 
 // CORS

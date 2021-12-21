@@ -205,17 +205,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
       "igdb_link": "https://www.igdb.com/games/god-of-war--1",
       "igdb_rating": 9.5,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Santa Mônica Studios",
       "genres": "Action, Third Person, Adventure, Hack and slash/Beat 'em up",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 2,
@@ -226,13 +221,10 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2crj.jpg",
       "igdb_link": "https://www.igdb.com/games/ghost-of-tsushima",
       "igdb_rating": 9,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Sucker Punch Productions",
       "genres": "Action, Third Person, Drama, Open world, Stealth, Adventure, Hack and slash/Beat 'em up",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
       "updated_at": "04/08/2021 18:55:16",
       "userLoggedRecommend": "btn-outline-success",
@@ -247,17 +239,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r77.jpg",
       "igdb_link": "https://www.igdb.com/games/marvels-spider-man",
       "igdb_rating": 8.8,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Insomniac Games",
       "genres": "Action, Third Person, Drama, Open world, Stealth, Adventure, Hack and slash/Beat 'em up",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 4,
@@ -268,17 +255,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7h.jpg",
       "igdb_link": "https://www.igdb.com/games/uncharted-4-a-thief-s-end",
       "igdb_rating": 9.2,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Naughty Dog",
       "genres": "SinglePlayer, Action, Drama, Stealth, Adventure",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 5,
@@ -289,17 +271,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tp9.jpg",
       "igdb_link": "https://www.igdb.com/games/uncharted-the-lost-legacy",
       "igdb_rating": 9.2,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Naughty Dog",
       "genres": "SinglePlayer, Third Person, Action, Drama, Stealth, Adventure",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 6,
@@ -310,17 +287,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rba.jpg",
       "igdb_link": "https://www.igdb.com/games/bloodborne",
       "igdb_rating": 9.1,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "FromSoftware",
       "genres": "SinglePlayer, Third Person, RPG, Action, Adventure",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 7,
@@ -331,17 +303,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nic.jpg",
       "igdb_link": "https://www.igdb.com/games/persona-5-royal",
       "igdb_rating": 9.4,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Atlus",
       "genres": "SinglePlayer, Third Person, RPG, Turn-Based, Adventure",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 8,
@@ -352,13 +319,10 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co30a3.jpg",
       "igdb_link": "https://www.igdb.com/games/god-of-war-iii",
       "igdb_rating": 8.6,
-      "units": 6,
       "platforms": "PS3, PS4",
       "developer": "Santa Mônica Studios",
       "genres": "SinglePlayer, Third Person, Adventure, Hack and slash/Beat 'em up",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
       "updated_at": "04/08/2021 18:55:16",
       "userLoggedRecommend": "btn-outline-success",
@@ -373,17 +337,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r0o.jpg",
       "igdb_link": "https://www.igdb.com/games/the-last-of-us-part-ii",
       "igdb_rating": 9.3,
-      "units": 6,
       "platforms": "PS3, PS4",
       "developer": "Naughty Dog",
       "genres": "SinglePlayer, Third Person, Shooter, Adventure",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 10,
@@ -394,17 +353,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg",
       "igdb_link": "https://www.igdb.com/games/the-last-of-us",
       "igdb_rating": 9.4,
-      "units": 6,
       "platforms": "PS3, PS4",
       "developer": "Naughty Dog",
       "genres": "SinglePlayer, Third Person, Shooter, Adventure",
       "amazon_link": "https://www.amazon.com.br/God-War-Padr%C3%A3o-PlayStation-4/dp/B079581SQQ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 11,
@@ -415,17 +369,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co39vc.jpg",
       "igdb_link": "https://www.igdb.com/games/hades--1",
       "igdb_rating": "94",
-      "units": 6,
       "platforms": "PC, XboxOne Series S|X, PS4, PS5",
       "developer": "Supergiant Games",
       "genres": "Adventure, Hack and slash/Beat 'em up, Indie, Role-playing (RPG)",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "17/08/2021 05:28:54",
-      "created_at": "17/08/2021 05:28:54",
-      "userLoggedRecommend": "btn-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:28:54"
     },
     {
       "id": 12,
@@ -436,17 +385,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2md2.png",
       "igdb_link": "https://www.igdb.com/games/detroit-become-human--1",
       "igdb_rating": 8.3,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Quantic Dream",
       "genres": "Adventure, Puzzle",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 13,
@@ -457,17 +401,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co272w.png",
       "igdb_link": "https://www.igdb.com/games/shadow-of-the-colossus--1",
       "igdb_rating": 8.5,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Bluepoint Games",
       "genres": "Single Player, Adventure, Platform",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 14,
@@ -478,17 +417,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1pd4.png",
       "igdb_link": "https://www.igdb.com/games/gran-turismo-sport",
       "igdb_rating": 7.6,
-      "units": 6,
       "platforms": "PS4, PS5",
       "developer": "Bluepoint Games",
       "genres": "Single/Multiplayer Player, Simulation, Race",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 15,
@@ -499,17 +433,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2una.png",
       "igdb_link": "https://www.igdb.com/games/horizon-zero-dawn",
       "igdb_rating": 9.1,
-      "units": 6,
       "platforms": "PS4, PS5, PC",
       "developer": "Guerrilla Games",
       "genres": "Single Player, Adventure, Platform, Third Person",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 16,
@@ -520,17 +449,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1qxr.png",
       "igdb_link": "https://www.igdb.com/games/final-fantasy-vii-remake",
       "igdb_rating": 8.8,
-      "units": 6,
       "platforms": "PS4, PS5, PC",
       "developer": "Square Enix",
       "genres": "Single Player, Adventure, RPG, Third Person",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 17,
@@ -541,17 +465,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co316v.png",
       "igdb_link": "https://www.igdb.com/games/death-stranding",
       "igdb_rating": 8.9,
-      "units": 6,
       "platforms": "PS4, PS5, PC",
       "developer": "Kojima Productions",
       "genres": "Single Player, Adventure, Third Person",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 18,
@@ -562,7 +481,6 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1v85.png",
       "igdb_link": "https://www.igdb.com/games/metal-gear-solid-v-the-phantom-pain",
       "igdb_rating": 8.6,
-      "units": 6,
       "platforms": "PS4, PS5, PC",
       "developer": "Konami",
       "genres": "Single Player, Adventure, Action, Shooter, Third Person",
@@ -583,17 +501,12 @@
       "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tps.png",
       "igdb_link": "https://www.igdb.com/games/uncharted-the-nathan-drake-collection",
       "igdb_rating": 9,
-      "units": 6,
       "platforms": "PS4",
       "developer": "Naughty Dog",
       "genres": "Single Player, Adventure, Action, Shooter, Third Person",
       "amazon_link": "#",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     }
   ],
   "games_recommendations": [
@@ -753,12 +666,8 @@
       "pages": 464,
       "genres": "Historic",
       "author": "Yuval Noah Harari ",
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "11/08/2021 20:36:33",
-      "created_at": "11/08/2021 20:36:33",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "11/08/2021 20:36:33"
     },
     {
       "id": 2,
@@ -770,12 +679,8 @@
       "pages": "355",
       "genres": "Historic",
       "author": "Yuval Harari",
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "11/08/2021 20:32:39",
-      "created_at": "11/08/2021 20:32:39",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "11/08/2021 20:32:39"
     },
     {
       "id": 3,
@@ -787,12 +692,8 @@
       "pages": "464",
       "genres": "Historic",
       "author": "Yuval Noah Harari ",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "04/08/2021 18:35:09",
-      "updated_at": "04/08/2021 18:55:16",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "updated_at": "04/08/2021 18:55:16"
     },
     {
       "id": 4,
@@ -804,12 +705,8 @@
       "pages": "256",
       "genres": "Biography",
       "author": "Walter Isaacson",
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
@@ -821,12 +718,8 @@
       "genres": "Software",
       "author": "Robert C. Martin",
       "id": 5,
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "19/08/2021 03:34:40",
-      "created_at": "19/08/2021 03:34:40",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "19/08/2021 03:34:40"
     },
     {
       "title": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
@@ -838,8 +731,6 @@
       "genres": "Software",
       "author": "Eric Evans",
       "id": 6,
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "19/08/2021 03:35:50",
       "created_at": "19/08/2021 03:35:50",
       "userLoggedRecommend": "btn-outline-success",
@@ -855,12 +746,8 @@
       "genres": "Personal Development",
       "author": "Dale Carnegie",
       "id": 7,
-      "recommend": 1,
-      "not_recommend": 1,
       "updated_at": "19/08/2021 04:48:10",
-      "created_at": "19/08/2021 04:48:10",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "19/08/2021 04:48:10"
     },
     {
       "title": "The Art Of War",
@@ -871,13 +758,9 @@
       "pages": "160",
       "genres": "Strategic",
       "author": "Sun Tzu",
-      "recommend": 1,
-      "not_recommend": 1,
       "created_at": "19/08/2021 06:46:13",
       "updated_at": "19/08/2021 06:46:13",
-      "id": 8,
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "id": 8
     },
     {
       "id": 9,
@@ -892,9 +775,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 10,
@@ -909,9 +790,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 11,
@@ -926,9 +805,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 12,
@@ -943,9 +820,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 13,
@@ -960,9 +835,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 14,
@@ -977,9 +850,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 15,
@@ -994,9 +865,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 16,
@@ -1011,9 +880,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 17,
@@ -1028,9 +895,7 @@
       "recommend": 2,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     },
     {
       "id": 18,
@@ -1045,9 +910,7 @@
       "recommend": 1,
       "not_recommend": 2,
       "updated_at": "17/08/2021 05:49:19",
-      "created_at": "17/08/2021 05:49:19",
-      "userLoggedRecommend": "btn-outline-success",
-      "userLoggedNotRecommend": "btn-outline-danger"
+      "created_at": "17/08/2021 05:49:19"
     }
   ],
   "books_recommendations": [

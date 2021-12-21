@@ -147,9 +147,9 @@
 - Also, you can deploy in a tradicional VPS using NGINX
 
 ## DataBase
-- This project uses PRISMA ORM () with PostgreSQL
+- This project uses PRISMA ORM (https://www.prisma.io/) with PostgreSQL
 - This project also uses JSON as DataBase for learning purposes
-- After installing locally, you can see databases in:
+- After installing locally, you can see/use databases in:
    - ADMINER
       - http://localhost:8080
       - system: postgresql
@@ -192,6 +192,8 @@
 ## Feedbacks
 - If you have any feedback or improvements tips about this project, send a pull request or send me a email at: aleexgvieira@gmail.com
 - I really apreciate good feedbacks
+
+- URLSearchParams
 
 ## License
 
