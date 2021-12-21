@@ -1,8 +1,3 @@
-input findUser {
-  id: Int
-  email: String
-}
-
 type User {
 	_id: ID!
 	firstName: String!
@@ -10,6 +5,57 @@ type User {
 	fullName: String!
 	email: String
 	active: Boolean!
+}
+
+type Game {
+	_id:	ID! 
+  title: String!
+  year_release: Int!
+  price: Int!
+  resume: String!
+  image: String!
+  igdb_link: String
+  igdb_rating: Float!
+  platforms: String!
+  developer: String!
+  genres: String!
+  amazon_link: String!
+}
+
+type Book {
+	_id:	ID! 
+  title: String!
+  year_release: Int!
+  price: Int!
+  resume: String!
+  image: String!
+  pages: String!
+  genres: String!
+  amazon_link: String!
+}
+
+type Movie {
+	_id:	ID! 
+  title: String!
+  year_release: Int!
+  image: String!
+  tmdb_link: String!
+  tmdb_rating: String!
+  resume: String!
+  duration: String!
+  genres: String!
+}
+
+type TVShow {
+	_id:	ID! 
+  title: String!
+  year_release: Int!
+  image: String!
+  tmdb_link: String!
+  tmdb_rating: String!
+  resume: String!
+  duration: String!
+  genres: String!
 }
 
 input UserInput {
@@ -22,7 +68,11 @@ input UserInput {
 type Query {
 	users: [User!]!
 	user(id: ID!): User!
-	findOne(data: findUser!): User
+	findUserByEmail(email: String!): User!
+	games: [Game!]!
+	books: [Book!]!
+	movies: [Movie!]!
+	tvshows: [TVShow!]!
 }
 
 type Mutation {

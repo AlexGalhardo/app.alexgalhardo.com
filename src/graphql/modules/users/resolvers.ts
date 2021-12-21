@@ -2,56 +2,39 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-type findOneDataProp = {
-  id?: number;
-  email?: string;
-};
-
-type createDataProp = {
-  email: string;
-  name: string;
-  age?: number;
-};
-
 export default {
   User: {
     fullName: (user) => `alex galhardo`,
   },
   Query: {
     users: async () => {
-      return [
-        {
-          _id: 'aiuhsiuahiusa12',
-          firstName: 'Alex',
-          lastName: 'Galhardo',
-          fullName: 'Alex Galhardo',
-          email: 'aleexgvieira@gmail.com',
-          active: true,
-        },
-        {
-          _id: 'aiuhsiuahiusa12',
-          firstName: 'Alex',
-          lastName: 'Galhardo',
-          fullName: 'Alex Galhardo',
-          email: 'aleexgvieira@gmail.com',
-          active: true,
-        },
-      ];
+      return await prisma.user.findMany();
     },
     user: async (_, { id }) => {
-      return {
-        _id: 'aiuhsiuahiusa12',
-        firstName: 'Alex',
-        lastName: 'Galhardo',
-        fullName: 'Alex Galhardo',
-        email: 'aleexgvieira@gmail.com',
-        active: true,
-      };
-    },
-    findOne: async (_, { data }) => {
       return await prisma.user.findUnique({
-        where: data,
+        where: {
+          id,
+        },
       });
+    },
+    findUserByEmail: async (_, { email }) => {
+      return await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+    },
+    games: async () => {
+      return await prisma.game.findMany();
+    },
+    books: async () => {
+      return await prisma.book.findMany();
+    },
+    movies: async () => {
+      return await prisma.movie.findMany();
+    },
+    tvshows: async () => {
+      return await prisma.tvshow.findMany();
     },
   },
   Mutation: {

@@ -1,0 +1,30 @@
+-- AlterTable
+ALTER TABLE "games" ALTER COLUMN "igdb_rating" SET DATA TYPE DOUBLE PRECISION;
+
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "confirm_email_token" DROP NOT NULL,
+ALTER COLUMN "reset_password_token" DROP NOT NULL,
+ALTER COLUMN "avatar" DROP NOT NULL,
+ALTER COLUMN "document" DROP NOT NULL,
+ALTER COLUMN "phone" DROP NOT NULL,
+ALTER COLUMN "birth_date" DROP NOT NULL,
+ALTER COLUMN "google_id" DROP NOT NULL,
+ALTER COLUMN "github_id" DROP NOT NULL,
+ALTER COLUMN "facebook_id" DROP NOT NULL,
+ALTER COLUMN "address_zipcode" DROP NOT NULL,
+ALTER COLUMN "address_street" DROP NOT NULL,
+ALTER COLUMN "address_street_number" DROP NOT NULL,
+ALTER COLUMN "address_neighborhood" DROP NOT NULL,
+ALTER COLUMN "address_city" DROP NOT NULL,
+ALTER COLUMN "address_state" DROP NOT NULL,
+ALTER COLUMN "address_country" DROP NOT NULL,
+ALTER COLUMN "stripe_customer_id" DROP NOT NULL,
+ALTER COLUMN "stripe_card_id" DROP NOT NULL,
+ALTER COLUMN "stripe_card_brand" DROP NOT NULL,
+ALTER COLUMN "stripe_card_last4" DROP NOT NULL,
+ALTER COLUMN "stripe_card_exp_month" DROP NOT NULL,
+ALTER COLUMN "stripe_card_exp_year" DROP NOT NULL,
+ALTER COLUMN "stripe_currently_subscription_id" DROP NOT NULL,
+ALTER COLUMN "stripe_currently_subscription_name" DROP NOT NULL,
+ALTER COLUMN "stripe_subscription_start" DROP NOT NULL,
+ALTER COLUMN "stripe_subscription_end" DROP NOT NULL;

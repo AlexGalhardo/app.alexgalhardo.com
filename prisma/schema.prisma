@@ -8,105 +8,116 @@ datasource db {
 }
 
 model User {
-  id                                 Int     @id @default(autoincrement())
+  id                                 Int      @id @default(autoincrement())
   name                               String
-  email                              String  @unique
-  confirmed_email                    Boolean
-  confirm_email_token                String
+  email                              String   @unique
+  confirmed_email                    Boolean  @default(false)
+  confirm_email_token                String?
   password                           String
-  reset_password_token               String
-  admin                              Boolean
-  avatar                             String
-  document                           String
-  phone                              String
-  birth_date                         String
-  google_id                          String
-  github_id                          String
-  facebook_id                        String
-  address_zipcode                    String
-  address_street                     String
-  address_street_number              String
-  address_neighborhood               String
-  address_city                       String
-  address_state                      String
-  address_country                    String
-  stripe_customer_id                 String
-  stripe_card_id                     String
-  stripe_card_brand                  String
-  stripe_card_last4                  String
-  stripe_card_exp_month              String
-  stripe_card_exp_year               String
-  stripe_currently_subscription_id   String
-  stripe_currently_subscription_name String
-  stripe_subscription_start          String
-  stripe_subscription_end            String
-  stripe_cancel_at_period_end        Boolean
+  reset_password_token               String?
+  admin                              Boolean  @default(false)
+  avatar                             String?
+  document                           String?
+  phone                              String?
+  birth_date                         String?
+  google_id                          String?
+  github_id                          String?
+  facebook_id                        String?
+  address_zipcode                    String?
+  address_street                     String?
+  address_street_number              String?
+  address_neighborhood               String?
+  address_city                       String?
+  address_state                      String?
+  address_country                    String?
+  stripe_customer_id                 String?
+  stripe_card_id                     String?
+  stripe_card_brand                  String?
+  stripe_card_last4                  String?
+  stripe_card_exp_month              String?
+  stripe_card_exp_year               String?
+  stripe_currently_subscription_id   String?
+  stripe_currently_subscription_name String?
+  stripe_subscription_start          String?
+  stripe_subscription_end            String?
+  stripe_cancel_at_period_end        Boolean  @default(false)
+  createdAt                          DateTime @default(now())
+  updatedAt                          DateTime @updatedAt
 
   @@map("users")
 }
 
 model Game {
-  id           Int     @id @default(autoincrement())
-  title        Boolean @default(true)
-  year_release String
-  price        String  @db.Text
+  id           Int      @id @default(autoincrement())
+  title        String
+  year_release Int
+  price        Int
   resume       String
   image        String
   igdb_link    String
-  igdb_rating  Int
+  igdb_rating  Float
   platforms    String
   developer    String
   genres       String
   amazon_link  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("games")
 }
 
 model Book {
-  id           Int     @id @default(autoincrement())
-  title        Boolean @default(true)
-  year_release String
-  image        String  @db.Text
+  id           Int      @id @default(autoincrement())
+  title        String
+  year_release Int
+  price        Int
+  image        String
   amazon_link  String
   resume       String
   pages        Int
   genres       String
   author       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("books")
 }
 
 model Movie {
-  id           Int     @id @default(autoincrement())
-  title        Boolean @default(true)
-  year_release String
-  image        String  @db.Text
+  id           Int      @id @default(autoincrement())
+  title        String
+  year_release Int
+  image        String
   tmdb_link    String
   tmdb_rating  Float
   resume       String
-  duration     Int
+  duration     String
   genres       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("movies")
 }
 
-model TVShow {
-  id           Int     @id @default(autoincrement())
-  title        Boolean @default(true)
-  year_release String
-  image        String  @db.Text
+model Tvshow {
+  id           Int      @id @default(autoincrement())
+  title        String
+  year_release Int
+  image        String
   tmdb_link    String
   tmdb_rating  Float
   resume       String
-  duration     Int
+  duration     String
   genres       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
 
   @@map("tv_shows")
 }
 
 model StripeShopTransaction {
-  id                             Int     @id @default(autoincrement())
+  id                             Int      @id @default(autoincrement())
   transaction_id                 String
   total_amount                   Float
   card_id                        String
@@ -132,15 +143,15 @@ model StripeShopTransaction {
   shipping_address_country       String
   carrier                        String
   fee                            Int
-  created_at                     String
+  createdAt                      DateTime @default(now())
 
 
   @@map("stripe_shop_transactions")
 }
 
 model StripeSubscriptionTransaction {
-  id                   Int     @id @default(autoincrement())
-  created_at           String
+  id                   Int      @id @default(autoincrement())
+  createdAt            DateTime @default(now())
   transaction_id       String
   status               String
   card_id              String
