@@ -8,26 +8,18 @@
  *  http://localhost:3000/api/public
  */
 
-import bodyParser from 'body-parser';
+import { PrismaClient } from '@prisma/client';
 
-// MODELS
-import Blog from '../../models/JSON/Blog';
-import Books from '../../models/JSON/Books';
-import Games from '../../models/JSON/Games';
-import Users from '../../models/JSON/Users';
+import Blog from '../../models/Blog';
+import Books from '../../models/Books';
+import Games from '../../models/Games';
+import Movies from '../../models/Movies';
+import TVShows from '../../models/TVShows';
+import Users from '../../models/Users';
+
+const prisma = new PrismaClient();
 
 class APIPublicController {
-	static async getPublicEmailRegistred(req, res, next) {
-		try {
-			const emailRegistred = await Users.emailRegistred(req.params.email);
-			return res.json({
-				emailRegistred,
-			});
-		} catch (err) {
-			next(err);
-		}
-	}
-
 	static async getPublicBlog(req, res, next) {
 		try {
 			const blog = await Blog.getAll();
@@ -67,10 +59,9 @@ class APIPublicController {
 
 	static async getPublicGames(req, res, next) {
 		try {
-			const games = await Games.getAll();
-			return res.json({
-				games,
-			});
+			const allGames = await prisma.game.findMany({});
+
+			return res.json(allGames);
 		} catch (err) {
 			next(err);
 		}
@@ -79,10 +70,13 @@ class APIPublicController {
 	static async getPublicGameByID(req, res, next) {
 		try {
 			const { game_id } = req.params;
-			const game = await Games.getByID(game_id);
-			return res.json({
-				game,
+			const gameById = await prisma.game.findUnique({
+				where: {
+					id: game_id,
+				},
 			});
+
+			return res.json(gameById);
 		} catch (err) {
 			next(err);
 		}
@@ -90,10 +84,14 @@ class APIPublicController {
 
 	static async getPublicRandomGame(req, res, next) {
 		try {
-			const game = await Games.getRandom();
-			return res.json({
-				game,
+			const totalGames = await prisma.game.count();
+			const skip = Math.floor(Math.random() * totalGames);
+			const randomGame = await prisma.game.findMany({
+				take: 1,
+				skip,
 			});
+
+			return res.json(randomGame);
 		} catch (err) {
 			next(err);
 		}

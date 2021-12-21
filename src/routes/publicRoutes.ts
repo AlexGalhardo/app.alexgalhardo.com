@@ -87,18 +87,6 @@ router
     .get('/searchGame', AppController.getSearchGameTitle)
     .get('/searchBook', AppController.getSearchBookTitle)
 
-    .get('/recommend/game/:game_id/:user_id', AppController.recommendGame)
-    .get(
-        '/notRecommend/game/:game_id/:user_id',
-        AppController.dontRecommendGame
-    )
-
-    .get('/recommend/book/:book_id/:user_id', AppController.recommendBook)
-    .get(
-        '/notRecommend/book/:book_id/:user_id',
-        AppController.dontRecommendBook
-    )
-
     // BLOG VIEWS CONTROLLER
     .get('/blog', BlogController.getViewBlog)
     .get('/blog/search', BlogController.getSearchBlogTitle)
@@ -131,12 +119,6 @@ router
     // SHOP CONTROLLER
     .get('/shop', ShopController.getViewShop)
     .post('/shop', ShopController.postShopPayLog)
-
-    // STRIPE CHECKOUT
-    .post(
-        '/stripe/checkout/game/:game_id',
-        AppController.postStripeCheckoutGameID
-    )
 
     // PLANS VIEWS CONTROLLER
     .get('/plans', /* RouterCache(300), */ PlansController.getViewPlans)

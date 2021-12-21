@@ -17,7 +17,7 @@ const main = async () => {
       confirm_email_token: '',
       password: 'aiushiuaskopapk12pokpk12',
       reset_password_token: '',
-      admin: false,
+      admin: true,
       avatar: '',
       document: '',
       phone: '',

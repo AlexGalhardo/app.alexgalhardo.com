@@ -8,6 +8,7 @@
  * http://localhost:3000/
  */
 
+import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
 // HELPERS
@@ -18,18 +19,21 @@ import NodeMailer from '../helpers/NodeMailer';
 import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
 
 // MODELS
-import Books from '../models/JSON/Books';
-import Games from '../models/JSON/Games';
+import Books from '../models/Books';
+import Games from '../models/Games';
+import Movies from '../models/Movies';
+import TVShows from '../models/TVShows';
 
 // STRIPE
-
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 class AppController {
-    static async getViewHome(req, res) {
+    static async getViewHome(req: Request, res: Response) {
         const game = await Games.getRandom();
         const totalGames = await Games.getTotal();
         const totalBooks = await Books.getTotal();
+        const totalMovies = await Movies.getTotal();
+        const totalTVShows = await TVShows.getTotal();
 
         return res.render('pages/home', {
             flash_success: req.flash('success'),
@@ -37,6 +41,8 @@ class AppController {
             game,
             totalGames,
             totalBooks,
+            totalMovies,
+            totalTVShows,
             user: SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.games(),
@@ -215,66 +221,6 @@ class AppController {
             user: SESSION_USER,
             header: Header.books(),
         });
-    }
-
-    static async recommendGame(req, res) {
-        const { game_id, user_id } = req.params;
-        const response = await Games.userRecommend(user_id, parseInt(game_id));
-        return res.json(response);
-    }
-
-    static async dontRecommendGame(req, res) {
-        const { game_id, user_id } = req.params;
-        const response = await Games.userNotRecommend(
-            user_id,
-            parseInt(game_id)
-        );
-        return res.json(response);
-    }
-
-    static async recommendBook(req, res) {
-        const { book_id, user_id } = req.params;
-        const response = await Books.userRecommend(user_id, parseInt(book_id));
-        return res.json(response);
-    }
-
-    static async dontRecommendBook(req, res) {
-        const { book_id, user_id } = req.params;
-        const response = await Books.userNotRecommend(
-            user_id,
-            parseInt(book_id)
-        );
-        return res.json(response);
-    }
-
-    static async postStripeCheckoutGameID(req, res) {
-        try {
-            const { game_id } = req.params;
-            let gameStripePriceID = await Games.getStripePriceID(game_id);
-
-            if (!gameStripePriceID) {
-                gameStripePriceID = 'price_1JZklOHoneB4ZvrpPyYSucdx';
-            }
-
-            const session = await stripe.checkout.sessions.create({
-                // customer_email: 'aleexgalhardoo@example.com',
-                submit_type: 'pay',
-                billing_address_collection: 'auto',
-                // locale: 'pt-BR',
-                shipping_address_collection: {
-                    allowed_countries: ['BR'],
-                },
-                line_items: [{ price: gameStripePriceID, quantity: 1 }],
-                payment_method_types: ['card'],
-                mode: 'payment',
-                success_url: `${process.env.APP_URL}`,
-                cancel_url: `${process.env.APP_URL}`,
-            });
-
-            return res.redirect(303, session.url);
-        } catch (error) {
-            throw new Error(error);
-        }
     }
 }
 
