@@ -1,5 +1,5 @@
-import fs from 'fs-extra';
+import { readFileSync } from 'fs-extra';
 
-const jsonDatabase = JSON.parse(fs.readFileSync('./database.json'));
+const jsonDatabase = JSON.parse(readFileSync('./database.json'));
 
 export default jsonDatabase;

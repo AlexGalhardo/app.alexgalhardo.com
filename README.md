@@ -109,8 +109,27 @@
 - adonis: project refactored to adonisjs5 framework 
 
 ## Install Locally
-
+- git clone https://github.com/AlexGalhardo/GalhardoAPP
+- cd GalhardoAPP/
+- npm i
+- sudo docker-compose up -d
+- cp .env-example .env
+- Edit .env file with your credentials
+- npm run rocket
+- 
 ## DataBase
+- This project uses PRISMA ORM () with PostgreSQL
+- This project also uses JSON as DataBase for learning purposes
+- After installing locally, you can see databases in:
+   - ADMINER
+ -    - http://localhost:8080
+      - system: postgresql
+      - server: galhardoapp_postgres
+      - username: postgres
+      - password: root
+   - PRISMA STUDIO
+ -    - $ npx prisma studio
+      - http://localhost:5555/
 
 ## Emails
 
