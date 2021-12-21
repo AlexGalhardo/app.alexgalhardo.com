@@ -1,6 +1,6 @@
 {
   "name": "galhardo-app",
-  "version": "3.0",
+  "version": "2.0.0",
   "description": "A simple Web App project for lifetime learning.",
   "main": "server.js",
   "author": "Alex Galhardo <aleexgvieira@gmail.com>",
@@ -13,6 +13,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/AlexGalhardo/Galhardo-APP"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
@@ -27,6 +30,7 @@
   "dependencies": {
     "@prisma/client": "^3.6.0",
     "@types/axios": "^0.14.0",
+    "apollo-server": "^3.5.0",
     "aws-sdk": "^2.973.0",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
@@ -46,10 +50,12 @@
     "express-validator": "^6.12.1",
     "formidable": "^1.2.2",
     "fs-extra": "^10.0.0",
+    "graphql": "^15.8.0",
     "handlebars": "^4.7.7",
     "helmet": "^4.6.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
+    "merge-graphql-schemas": "^1.7.8",
     "morgan": "^1.10.0",
     "multer": "^1.4.3",
     "multer-s3": "^2.9.0",

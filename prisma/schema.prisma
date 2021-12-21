@@ -14,8 +14,7 @@ model User {
   id    Int    @id @default(autoincrement())
   email String @unique
   name  String
-  age   Int?
-  posts Post[]
+  // posts Post[]
 
   @@map("users")
 }
@@ -25,8 +24,8 @@ model Post {
   published Boolean @default(true)
   title     String
   body      String  @db.Text
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+  // authorId  Int
+  // author    User    @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }

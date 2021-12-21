@@ -1,0 +1,41 @@
+mutation {
+	createUser(data: {
+		firstName: "alex",
+		lastName: "Galhardo",
+		email: "alex@gmail.com",
+		active: true
+	}) {
+		_id
+		email
+	}
+}
+
+mutation {
+	updateUser(id: "618c324aab1e82733cc2a158", data: {
+		firstName: "rodrigo",
+		lastName: "arauho",
+		email: "dygufa@gmail.com",
+		active: true
+	}) {
+		firstName
+		lastName
+	}
+}
+
+mutation {
+	deleteUser(id: "618c324aab1e82733cc2a158")
+}
+
+
+mutation {
+	createPost(data: {
+		title: "New Post Title",
+		content: "Post Content Here",
+		author: "user_id_here",
+	}) {
+		_id
+		title
+		content
+		author
+	}
+}

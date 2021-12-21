@@ -1,0 +1,33 @@
+query {
+	users {
+		_id
+		firstName
+		active
+	}
+}
+
+query {
+	user(id: 'apojdokdoapdkop') {
+		firstName
+		lastName
+	}
+}
+
+
+query {
+	posts {
+		title
+		author {
+			fullName
+		}
+	}
+}
+
+query {
+  findOne(data: {
+    id: 1,
+    email: "aleexgvieira@gmail.com"
+  }) {
+    email
+  }
+}
