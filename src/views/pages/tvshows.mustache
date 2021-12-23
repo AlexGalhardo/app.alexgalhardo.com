@@ -3,17 +3,15 @@
 	<div class="container col-lg-12 mt-3">
 
       	<div class="row">
-
-            <input type="text" id="user_id" hidden value="{{user.id}}" readonly>
             <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
 
-            {{^books}}
-                {{^book}}
+            {{^tvshows}}
+                {{^tvshow}}
                     <div class="text-center alert alert-warning" role="alert" class="mb-3">
-                        <b class="fw-bold">No books found!</b>
+                        <b class="fw-bold">No tvshows found!</b>
                     </div>
-                {{/book}}
-            {{/books}}
+                {{/tvshow}}
+            {{/tvshows}}
 
 
             {{#flash_success}}
@@ -30,14 +28,14 @@
 
 
 
-            {{#book}}
-                <input id="book_id" name="book_id" type="hidden" value="{{id}}">
+            {{#tvshow}}
+                <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
                 <div class="col-lg-3 text-center">
-                    <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="book_image">
+                    <img id="tvshow_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="tvshow_image">
 
                     {{#user.admin}}
-                        <a href="/admin/update/book/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">
+                        <a href="/admin/update/movie/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Book</a>
                     {{/user.admin}}
@@ -49,26 +47,24 @@
 
                     <div class="card-body">
 
-                        <input id="book_id" name="book_id" type="hidden" value="{{id}}">
+                        <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">
                                 <a target="_blank" id="amazon_link" style="text-decoration:none;" href="{{amazon_link}}" class="card-link">
-                                    <span id="book_title" class="fw-bold">{{title}}</span>
-                                    (<span id="book_year_release" class="text-muted">{{year_release}}</span>)
+                                    <span id="tvshow_title" class="fw-bold">{{title}}</span>
+                                    (<span id="tvshow_year_release" class="text-muted">{{year_release}}</span>)
                                 </a>
                             </h3>
                         </div>
 
-                        <p class="card-text" id="book_resume">{{resume}}</p>
+                        <p class="card-text" id="tvshow_resume">{{resume}}</p>
 
                         <ul class="mt-3">
 
-                            <li><b>Author:</b></small> <small id="book_author">{{author}}</small></li>
+                            <li><b>Genres:</b> <small id="tvshow_genres">{{genres}}</small></li>
 
-                            <li><b>Genres:</b> <small id="book_genres">{{genres}}</small></li>
-
-                            <li><b>Pages:</b> <small id="book_pages">{{pages}}</small></li>
+                            <li><b>Duration:</b> <small id="tvshow_duration">{{duration}}</small></li>
                         </ul>
                     </div>
                 </div>
@@ -77,8 +73,8 @@
 
                 <div class="col-lg-3 mb-3">
 
-                    <form class="mb-3" action="/searchBook" method="GET">
-                        <input class="form-control" type="search" placeholder="Search Book Title..." aria-label="Search" name="title">
+                    <form class="mb-3" action="/searchTVShow" method="GET">
+                        <input class="form-control" type="search" placeholder="Search TVShow Title..." aria-label="Search" name="title">
                     </form>
 
                     <div class="list-group">
@@ -88,28 +84,28 @@
                             <span>{{totalGames}}</span>
                         </a>
 
-                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action text-white bg-dark">
+                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
                             <i class="bi bi-book"></i>
                             <span>Books</span>
                             <span>{{totalBooks}}</span>
                         </a>
 
-                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                        <a href="/movies" class="d-flex justify-content-between list-group-item list-group-item-action">
                             <i class="bi bi-tv"></i>
                             <span>Movies</span>
-                            <span>{{totalBooks}}</span>
+                            <span>{{totalMovies}}</span>
                         </a>
 
-                        <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                        <a href="/tvshows" class="d-flex justify-content-between list-group-item list-group-item-action text-white bg-dark">
                             <i class="bi bi-tv"></i>
                             <span>TV Shows</span>
-                            <span>{{totalBooks}}</span>
+                            <span>{{totalTVShows}}</span>
                         </a>
                     </div>
 
-                    <button class="mt-3 w-100 btn btn-outline-primary shadow mb-3" onclick="recommendOtherBook()">
+                    <button class="mt-3 w-100 btn btn-outline-primary shadow mb-3" onclick="recommendOtherTVShow()">
                             <i class="bi bi-play-fill"></i>
-                            Recommend Other
+                            Recommend Other Movie
                     </button>
 
                     {{^user}}
@@ -118,7 +114,7 @@
                         </div>
                     {{/user}}
                 </div>
-            {{/book}}
+            {{/tvshow}}
 
 
 
@@ -126,50 +122,45 @@
 
 
 
-            {{#books}}
+            {{#tvshows}}
 
                 <div class="col-lg-3 text-center">
-                    <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="book_image">
+                    <img id="tvshow_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="tvshow_image">
                 </div>
-
-
 
                 <div class="col-lg-6">
 
                     <div class="card-body">
 
-                        <input id="book_id" name="book_id" type="hidden" value="{{id}}">
+                        <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
                             <h5 class="card-title">
                                 <a target="_blank" id="amazon_link" style="text-decoration:none;" href="{{amazon_link}}" class="card-link">
-                                    <span id="book_title" class="fw-bold text-primary">{{title}}</span>
-                                    (<span id="book_year_release" class="text-muted">{{year_release}}</span>)
+                                    <span id="tvshow_title" class="fw-bold text-primary">{{title}}</span>
+                                    (<span id="tvshow_year_release" class="text-muted">{{year_release}}</span>)
                                 </a>
                             </h5>
                         </div>
 
-                        <small class="card-text" id="book_resume">{{resume}}</small>
+                        <small class="card-text" id="tvshow_resume">{{resume}}</small>
 
                         <ul class="mt-3">
 
-                            <li><small><b>Author:</b></small> <small id="book_author">{{author}}</small></li>
+                            <li><small><b>Genres:</b></small> <small id="tvshow_genres">{{genres}}</small></li>
 
-                            <li><small><b>Genres:</b></small> <small id="book_genres">{{genres}}</small></li>
-
-                            <li><small><b>Pages:</b></small> <small id="book_pages">{{pages}}</small></li>
+                            <li><small><b>Duration:</b></small> <small id="tvshow_duration">{{duration}}</small></li>
                         </ul>
                     </div>
                 </div>
-                <!-- END BOOK POST -->
 
 
 
-                {{#firstBook}}
+                {{#firstTVShow}}
                     <div class="col-lg-3 mb-3">
 
-                        <form class="mb-3" action="/searchBook" method="GET">
-                            <input class="form-control" type="search" placeholder="Search Book Title..." aria-label="Search" name="title">
+                        <form class="mb-3" action="/searchTVShow" method="GET">
+                            <input class="form-control" type="search" placeholder="Search TVShow Title..." aria-label="Search" name="title">
                         </form>
 
                         <div class="list-group">
@@ -179,22 +170,22 @@
                                 <span>{{totalGames}}</span>
                             </a>
 
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white">
+                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
                                 <i class="bi bi-book"></i>
                                 <span>Books</span>
                                 <span>{{totalBooks}}</span>
                             </a>
 
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <a href="/movies" class="d-flex justify-content-between list-group-item list-group-item-action">
                                 <i class="bi bi-tv"></i>
                                 <span>Movies</span>
-                                <span>{{totalBooks}}</span>
+                                <span>{{totalMovies}}</span>
                             </a>
 
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <a href="/tvshows" class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white">
                                 <i class="bi bi-tv"></i>
                                 <span>TV Shows</span>
-                                <span>{{totalBooks}}</span>
+                                <span>{{totalTVShows}}</span>
                             </a>
                         </div>
 
@@ -205,11 +196,11 @@
                         {{/user}}
 
                     </div>
-                {{/firstBook}}
+                {{/firstTVShow}}
 
-                {{^firstBook}}<div class="col-lg-3"></div>{{/firstBook}}
+                {{^firstTVShow}}<div class="col-lg-3"></div>{{/firstTVShow}}
 
-            {{/books}}
+            {{/tvshows}}
 
 
         </div>
