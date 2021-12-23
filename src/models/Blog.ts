@@ -19,7 +19,7 @@ class Blog {
         return prisma.blog.count();
     }
 
-    getByID(blog_id: string) {
+    getById(blog_id: string) {
         return prisma.blog.findUnique({
             where: {
                 id: blog_id,

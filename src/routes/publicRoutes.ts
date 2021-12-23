@@ -27,16 +27,9 @@ import docs from '../docs/index';
 
 dotenv.config();
 
-/* const recaptcha = new Recaptcha.RecaptchaV3(
-    process.env.RECAPTCHA_ID,
-    process.env.RECAPTCHA_SECRET,
-    { callback: 'cb' }
-); */
-
 const csrfProtection = csrf({ cookie: true });
 const router = express.Router();
 
-// ---------------------- MIDDLEWARES
 const userIsAlreadyLoggedIn = (req, res, next) => {
     if (req.session.userID) {
         req.flash('warning', 'You need to logout first');
@@ -71,7 +64,6 @@ router.use(
 );
 
 router
-    // APP VIEWS CONTROLLER
     .get('/', AppController.getViewHome)
     .get('/projects', AppController.getViewProjects)
     .get('/bank', AppController.getViewBank)
@@ -87,7 +79,6 @@ router
     .get('/searchGame', AppController.getSearchGameTitle)
     .get('/searchBook', AppController.getSearchBookTitle)
 
-    // BLOG VIEWS CONTROLLER
     .get('/blog', BlogController.getViewBlog)
     .get('/blog/search', BlogController.getSearchBlogTitle)
     .get('/blog/page/:page', BlogController.getViewBlog)
@@ -100,7 +91,6 @@ router
         BlogController.getDeleteBlogCommentByCommentID
     )
 
-    // NEWSLETTER
     .get('/newsletter-confirm-email', (req, res) => {
         req.flash(
             'success',
@@ -116,12 +106,10 @@ router
         return res.redirect('/');
     })
 
-    // SHOP CONTROLLER
     .get('/shop', ShopController.getViewShop)
     .post('/shop', ShopController.postShopPayLog)
 
-    // PLANS VIEWS CONTROLLER
-    .get('/plans', /* RouterCache(300), */ PlansController.getViewPlans)
+    .get('/plans', PlansController.getViewPlans)
 
     .get(
         '/plan/starter/checkout',
@@ -159,7 +147,6 @@ router
         PlansController.postSubscription
     )
 
-    // AUTH VIEWS CONTROLLER
     .get(
         '/login',
         userIsAlreadyLoggedIn,

@@ -44,17 +44,18 @@ model User {
   createdAt                          DateTime  @default(now())
   updatedAt                          DateTime?
 
+  @@unique(fields: [id, admin], name: "isAdmin")
   @@map("users")
 }
 
 model Blog {
   id        String    @id @default(uuid())
-  title     String
-  resume    String
-  image     String
+  title     String    @unique
+  resume    String    @unique
+  image     String    @unique
   category  String
-  body      String
-  slug      String
+  body      String    @unique
+  slug      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime?
 
@@ -63,17 +64,17 @@ model Blog {
 
 model Game {
   id           String    @id @default(uuid())
-  title        String
+  title        String    @unique
   year_release Int
   price        Int
-  resume       String
-  image        String
-  igdb_link    String
-  igdb_rating  Float
+  resume       String    @unique
+  image        String    @unique
+  igdb_link    String    @unique
+  igdb_rating  Int
   platforms    String
   developer    String
   genres       String
-  amazon_link  String
+  amazon_link  String    @unique
   createdAt    DateTime  @default(now())
   updatedAt    DateTime?
 
@@ -82,12 +83,12 @@ model Game {
 
 model Book {
   id           String    @id @default(uuid())
-  title        String
+  title        String    @unique
   year_release Int
   price        Int
-  image        String
-  amazon_link  String
-  resume       String
+  image        String    @unique
+  amazon_link  String    @unique
+  resume       String    @unique
   pages        Int
   genres       String
   author       String
@@ -99,12 +100,12 @@ model Book {
 
 model Movie {
   id           String    @id @default(uuid())
-  title        String
+  title        String    @unique
   year_release Int
-  image        String
-  tmdb_link    String
+  image        String    @unique
+  tmdb_link    String    @unique
   tmdb_rating  Float
-  resume       String
+  resume       String    @unique
   duration     String
   genres       String
   createdAt    DateTime  @default(now())
@@ -115,12 +116,12 @@ model Movie {
 
 model Tvshow {
   id           String    @id @default(uuid())
-  title        String
+  title        String    @unique
   year_release Int
-  image        String
-  tmdb_link    String
+  image        String    @unique
+  tmdb_link    String    @unique
   tmdb_rating  Float
-  resume       String
+  resume       String    @unique
   duration     String
   genres       String
   createdAt    DateTime  @default(now())
@@ -132,7 +133,7 @@ model Tvshow {
 
 model StripeShopTransaction {
   id                             String   @id @default(uuid())
-  transaction_id                 String
+  transaction_id                 String   @unique
   total_amount                   Float
   card_id                        String
   brand                          String

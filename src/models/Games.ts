@@ -19,7 +19,7 @@ class Games {
         return prisma.game.count();
     }
 
-    getByID(game_id: string) {
+    getById(game_id: string) {
         return prisma.game.findUnique({
             where: {
                 id: game_id,

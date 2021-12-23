@@ -8,15 +8,9 @@
  * http://localhost:3000/api
  */
 
-// MODULES
-
-// INIT EXPRESS
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-// MODELS
-
-// API CONTROLLERS
 import APIAdminBlogController from '../controllers/API/APIAdminBlogController';
 import APIAdminBookController from '../controllers/API/APIAdminBookController';
 import APIAdminController from '../controllers/API/APIAdminController';
@@ -24,12 +18,11 @@ import APIAdminGameController from '../controllers/API/APIAdminGameController';
 import APIController from '../controllers/API/APIController';
 import APIProfileController from '../controllers/API/APIProfileController';
 import APIPublicController from '../controllers/API/APIPublicController';
-import Users from '../models/JSON/Users';
+import Users from '../models/Users';
 
 const router = express.Router();
 
-// ---------------------- MIDDLEWARES
-const verifyAPIAdminJWTToken = (req, res, next) => {
+const authenticateAdmin = (req: Request, res: Response, next: NextFunction) => {
     if (
         !req.headers.authorization ||
         !req.headers.authorization.startsWith('Bearer') ||
@@ -42,28 +35,24 @@ const verifyAPIAdminJWTToken = (req, res, next) => {
     }
 
     const JWT_TOKEN = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET);
+    const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET as string);
 
-    if (!Users.verifyIfAdminByID(decoded.admin_id)) {
+    if (!Users.verifyIfAdminById(decoded.user_id)) {
         return res.status(422).json({
-            message: 'This JWT Token is Inválid!',
+            message: 'This ADMIN JWT Token is Inválid!',
         });
     }
     return next();
 };
 
-// API ROUTES
-
-//  ---------------- INTRODUCTION
 router
     .get('/', APIController.getWelcomeToAPI)
     .get('/public', APIController.getPublicEndpoints)
     .get('/admin', APIController.getAdminEndpoints)
 
-    //  ---------------- PUBLIC
     .get('/public/blog', APIPublicController.getPublicBlog)
-    .get('/public/blog/random', APIPublicController.getPublicBlogPostRandom)
-    .get('/public/blog/:blog_id', APIPublicController.getPublicBlogPostByID)
+    .get('/public/blog/random', APIPublicController.getPublicBlogRandom)
+    .get('/public/blog/:blog_id', APIPublicController.getPublicBlogByID)
 
     .get('/public/games', APIPublicController.getPublicGames)
     .get('/public/games/random', APIPublicController.getPublicRandomGame)
@@ -73,64 +62,72 @@ router
     .get('/public/books/random', APIPublicController.getPublicRandomBook)
     .get('/public/books/:book_id', APIPublicController.getPublicBookByID)
 
-    //  ---------------- PROFILE
+    .get('/public/movies', APIPublicController.getPublicMovies)
+    .get('/public/movies/random', APIPublicController.getPublicRandomMovie)
+    .get('/public/movies/:movie_id', APIPublicController.getPublicMovieByID)
+
+    .get('/public/tvshows', APIPublicController.getPublicTVShows)
+    .get('/public/tvshows/random', APIPublicController.getPublicRandomTVShow)
+    .get('/public/tvshows/:tvshow_id', APIPublicController.getPublicTVShowByID)
+
     .post('/profile/login', APIProfileController.postProfileLogin)
     .patch('/profile/patch', APIProfileController.updateProfile)
     .delete('/profile/delete', APIProfileController.deleteProfile)
 
-    //  ---------------- ADMIN
     .post('/admin/login', APIAdminController.postAdminLogin)
     .post('/admin/test', APIAdminController.postAdminTestJWT)
+    .get(
+        '/admin/users',
+        authenticateAdmin,
+        APIAdminController.getUsersRegistred
+    )
 
-    // ----------------- ADMIN BLOG
     .post(
         '/admin/blog/create',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminBlogController.postCreateBlogPost
     )
     .patch(
         '/admin/blog/patch/:blog_id',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminBlogController.patchBlogPost
     )
     .delete(
         '/admin/blog/delete/:blog_id',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminBlogController.deleteBlogPost
     )
 
-    //  ---------------- ADMIN GAMES
     .post(
         '/admin/games/create',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminGameController.postCreateGame
     )
     .patch(
         '/admin/games/patch/:game_id',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminGameController.patchGame
     )
     .delete(
         '/admin/games/delete/:game_id',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminGameController.deleteGame
     )
 
-    //  ---------------- ADMIN BOOKS
     .get('/admin/books/listAll', APIAdminBookController.getAllBooks)
     .post(
         '/admin/books/create',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminBookController.postCreateBook
     )
     .patch(
         '/admin/books/patch/:book_id',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminBookController.patchBook
     )
     .delete(
         '/admin/books/delete/:book_id',
-        verifyAPIAdminJWTToken,
+        authenticateAdmin,
         APIAdminBookController.deleteBook
     );
 

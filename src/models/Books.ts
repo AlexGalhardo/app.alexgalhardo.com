@@ -19,7 +19,7 @@ class Books {
         return prisma.book.count();
     }
 
-    getByID(book_id: string) {
+    getById(book_id: string) {
         return prisma.book.findUnique({
             where: {
                 id: book_id,

@@ -1,25 +1,23 @@
+/* eslint-disable consistent-return */
 /**
  * GALHARDO APP
  * Created By © Alex Galhardo  | August 2021-Present
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  *  http://localhost:3000/api/admin
  */
 
+import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
-// HELPERS
 import Bcrypt from '../../helpers/Bcrypt';
 import DateTime from '../../helpers/DateTime';
-
-// MODELS
-import Users from '../../models/JSON/Users';
+import Users from '../../models/Users';
 
 class APIAdminController {
-    static async postAdminLogin(req, res, next) {
+    async postAdminLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
@@ -35,12 +33,11 @@ class APIAdminController {
                 });
             }
 
-            const admin = await Users.getUserByEmail(email);
-            console.log(admin);
+            const user = await Users.getUserByEmail(email);
 
-            const passwordIsValid = await Bcrypt.comparePassword(
+            const passwordIsValid = await Bcrypt.compare(
                 password,
-                admin.password
+                user?.password as string
             );
 
             if (!passwordIsValid) {
@@ -49,39 +46,41 @@ class APIAdminController {
                 });
             }
 
-            if (!admin.admin) {
+            if (!user?.admin) {
                 return res.status(422).json({
                     error: 'This user is NOT ADMIN!',
                 });
             }
 
             const JWT_TOKEN = jwt.sign(
-                { admin_id: admin.id },
-                process.env.JWT_SECRET,
+                { user_id: user.id },
+                process.env.JWT_SECRET as string,
                 { expiresIn: '1h' }
             );
 
             return res.json({
-                ADMIN_JWT_TOKEN: JWT_TOKEN,
+                jwt_token: JWT_TOKEN,
             });
         } catch (err) {
             next(err);
         }
     }
 
-    /**
-     * POST /api/admin/test
-     */
-    static postAdminTestJWT(req, res, next) {
+    async postAdminTestJWT(req: Request, res: Response, next: NextFunction) {
         try {
-            const JWT_TOKEN = req.headers.authorization.split(' ')[1];
-            const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET);
-            const admin = Users.getByID(decoded.admin_id);
+            const JWT_TOKEN = req.headers.authorization?.split(' ')[1];
+
+            const decoded = jwt.verify(
+                JWT_TOKEN as string,
+                process.env.JWT_SECRET as string
+            );
+
+            const admin = await Users.getById(decoded.user_id);
 
             return res.json({
                 admin: {
-                    name: admin.name,
-                    email: admin.email,
+                    name: admin?.name,
+                    email: admin?.email,
                     JWT_created_at: DateTime.getDateTime(decoded.iat),
                     JWT_expires_at: DateTime.getDateTime(decoded.exp),
                 },
@@ -91,7 +90,7 @@ class APIAdminController {
         }
     }
 
-    static verifyAdminAPIRequestUsingJWT(req) {
+    async verifyAdminAPIRequestUsingJWT(req: Request, res: Response) {
         if (
             !req.headers.authorization ||
             !req.headers.authorization.startsWith('Bearer') ||
@@ -104,17 +103,20 @@ class APIAdminController {
         }
 
         const JWT_TOKEN = req.headers.authorization.split(' ')[1];
-        const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET);
+        const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET as string);
 
-        if (!Users.verifyIfAdminByID(decoded.admin_id)) {
-            return res.status(422).json({
-                message: 'This JWT Token is Inválid!',
+        const user = await Users.getById(decoded.user_id);
+
+        return user?.admin
+            ? user
+            : res.status(422).json({
+                error: 'This JWT Token is Inválid!',
             });
-        }
+    }
 
-        const admin = Users.getUserByID(decoded.admin_id);
-        return admin;
+    async getUsersRegistred(req: Request, res: Response) {
+        return res.json(await Users.getAll());
     }
 }
 
-export default APIAdminController;
+export default new APIAdminController();

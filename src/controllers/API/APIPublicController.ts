@@ -30,7 +30,7 @@ class APIPublicController {
     async getPublicBlogByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { blog_id } = req.params;
-            return res.json(await Blog.getByID(blog_id));
+            return res.json(await Blog.getById(blog_id));
         } catch (err) {
             next(err);
         }

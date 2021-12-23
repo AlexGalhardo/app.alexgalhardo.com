@@ -19,7 +19,7 @@ class TVShows {
         return prisma.tvshow.count();
     }
 
-    getByID(tvshow_id: string) {
+    getById(tvshow_id: string) {
         return prisma.tvshow.findUnique({
             where: {
                 id: tvshow_id,

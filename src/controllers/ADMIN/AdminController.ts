@@ -4,16 +4,12 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  * http://localhost:3000/admin
- * http://localhost:3000/admin/blog
- * http://localhost:3000/admin/games
- * http://localhost:3000/admin/books
  */
 
-import Blog from '../../models/JSON/Blog';
-import Books from '../../models/JSON/Books';
-import Games from '../../models/JSON/Games';
+import Blog from '../../models/Blog';
+import Books from '../../models/Books';
+import Games from '../../models/Games';
 
 class AdminController {
     static getViewCreateBlogPost(req, res) {
@@ -111,12 +107,6 @@ class AdminController {
         const { blog_id } = req.params;
 
         if (Blog.delete(parseInt(blog_id))) {
-            /* return res.render("pages/admin/createGame", {
-	flash: {
-		type: "success",
-		message: `blog_id: ${blog_id} deleted with success!`
-	}
-}) */
             return res.redirect('/admin/create/blogPost');
         }
         return res.redirect(`/admin/update/blogPost/${blog_id}`);
@@ -248,10 +238,10 @@ class AdminController {
         console.log(Games.delete(parseInt(game_id)));
         if (Games.delete(parseInt(game_id))) {
             /* return res.render("pages/admin/createGame", {
-	flash: {
-		type: "success",
-		message: `GAME_ID: ${game_id} deleted with success!`
-	}
+    flash: {
+        type: "success",
+        message: `GAME_ID: ${game_id} deleted with success!`
+    }
 }) */
             return res.redirect('/admin/create/game');
         }
@@ -376,10 +366,10 @@ class AdminController {
 
         if (Books.delete(parseInt(book_id))) {
             /* return res.render("pages/admin/createGame", {
-	flash: {
-		type: "success",
-		message: `book_id: ${book_id} deleted with success!`
-	}
+    flash: {
+        type: "success",
+        message: `book_id: ${book_id} deleted with success!`
+    }
 }) */
             return res.redirect('/admin/create/book');
         }

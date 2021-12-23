@@ -4,20 +4,13 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  *  http://localhost:3000/api/admin/game
  */
 
-// helpers
 import DateTime from '../../helpers/DateTime';
-
-// MODEL
 import Games from '../../models/JSON/Games';
 
 class APIAdminGameController {
-    /**
-     * http://localhost:3000/api/admin/game/create
-     */
     static async postCreateGame(req, res) {
         const {
             title,
@@ -56,9 +49,6 @@ class APIAdminGameController {
         return res.json({ error: 'Game NOT Created!' });
     }
 
-    /**
-     * http://localhost:3000/api/admin/game/patch/:game_id
-     */
     static async patchGame(req, res, next) {
         try {
             const { game_id } = req.params;
@@ -119,4 +109,4 @@ class APIAdminGameController {
     }
 }
 
-export default APIAdminGameController;
+export default new APIAdminGameController();

@@ -4,7 +4,6 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- * ADMIN ROUTES
  * http://localhost:3000/admin
  */
 
@@ -14,14 +13,13 @@ import AdminController from '../controllers/ADMIN/AdminController';
 
 const router = express.Router();
 
-// ---------------------- MIDDLEWARES
 const isAdmin = (req, res, next) => {
     if ((SESSION_USER && !SESSION_USER.admin) || !SESSION_USER)
         return res.redirect('/');
     next();
 };
 
-router
+export default router
     .get('/create/blogPost', isAdmin, AdminController.getViewCreateBlogPost)
     .post('/create/blogPost', isAdmin, AdminController.postCreateBlogPost)
 
@@ -57,5 +55,3 @@ router
     .post('/update/book/:book_id', isAdmin, AdminController.postUpdateBook)
 
     .post('/delete/book/:book_id', isAdmin, AdminController.postDeleteBook);
-
-export default router;

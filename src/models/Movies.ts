@@ -19,7 +19,7 @@ class Movies {
         return prisma.movie.count();
     }
 
-    getByID(movie_id: string) {
+    getById(movie_id: string) {
         return prisma.movie.findUnique({
             where: {
                 id: movie_id,

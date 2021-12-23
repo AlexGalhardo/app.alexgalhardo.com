@@ -10,14 +10,14 @@
 import bcrypt from 'bcryptjs';
 
 class Bcrypt {
-    static cryptPassword(password) {
+    static crypt(password: string) {
         return bcrypt
             .genSalt(12)
             .then((salt) => bcrypt.hash(password, salt))
             .then((hash) => hash);
     }
 
-    static comparePassword(password, hashPassword) {
+    static compare(password: string, hashPassword: string) {
         return bcrypt.compare(password, hashPassword).then((resp) => resp);
     }
 }

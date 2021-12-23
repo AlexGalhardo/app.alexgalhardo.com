@@ -4,7 +4,6 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- * PROFILE ROUTES
  * http://localhost:3000/profile
  */
 
@@ -12,16 +11,12 @@ import csrf from 'csurf';
 import express from 'express';
 import multer from 'multer';
 
-// CONTROLLER
 import ProfileController from '../controllers/ProfileController';
-
-// INIT ROUTER
 
 const csrfProtection = csrf({ cookie: true });
 
 const router = express.Router();
 
-// ------- MIDDLEWARES
 const userIsNotLoggedIn = (req, res, next) => {
     if (!req.session.userID) {
         req.flash('warning', 'You need to login first');
@@ -55,7 +50,7 @@ const upload = multer({
     limits: { fieldSize: 1000000 }, // 1MB
 });
 
-router
+export default router
     .get(
         '/',
         userIsNotLoggedIn,
@@ -114,5 +109,3 @@ router
         userIsNotLoggedIn,
         ProfileController.cancelStripeSubscriptionRenewAtPeriodEnd
     );
-
-export default router;
