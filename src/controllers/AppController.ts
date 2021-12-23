@@ -4,28 +4,19 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  * http://localhost:3000/
  */
 
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-// HELPERS
-import Stripe from 'stripe';
-
 import Header from '../helpers/Header';
 import NodeMailer from '../helpers/NodeMailer';
 import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
-
-// MODELS
 import Books from '../models/Books';
 import Games from '../models/Games';
 import Movies from '../models/Movies';
 import TVShows from '../models/TVShows';
-
-// STRIPE
-const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 class AppController {
     static async getViewHome(req: Request, res: Response) {
@@ -49,10 +40,12 @@ class AppController {
         });
     }
 
-    static async getViewBooks(req, res) {
+    static async getViewBooks(req: Request, res: Response) {
         const book = await Books.getRandom();
         const totalGames = await Games.getTotal();
         const totalBooks = await Books.getTotal();
+        const totalMovies = await Movies.getTotal();
+        const totalTVShows = await TVShows.getTotal();
 
         return res.render('pages/books', {
             flash_success: req.flash('success'),
@@ -60,13 +53,57 @@ class AppController {
             book,
             totalGames,
             totalBooks,
+            totalMovies,
+            totalTVShows,
             user: SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.books(),
         });
     }
 
-    static getViewProjects(req, res) {
+    static async getViewMovies(req: Request, res: Response) {
+        const movie = await Movies.getRandom();
+        const totalGames = await Games.getTotal();
+        const totalBooks = await Books.getTotal();
+        const totalMovies = await Movies.getTotal();
+        const totalTVShows = await TVShows.getTotal();
+
+        return res.render('pages/movies', {
+            flash_success: req.flash('success'),
+            flash_warning: req.flash('warning'),
+            movie,
+            totalGames,
+            totalBooks,
+            totalMovies,
+            totalTVShows,
+            user: SESSION_USER,
+            app_url: process.env.APP_URL,
+            header: Header.books(),
+        });
+    }
+
+    static async getViewTVShows(req: Request, res: Response) {
+        const tvshow = await TVShows.getRandom();
+        const totalGames = await Games.getTotal();
+        const totalBooks = await Books.getTotal();
+        const totalMovies = await Movies.getTotal();
+        const totalTVShows = await TVShows.getTotal();
+
+        return res.render('pages/tvshows', {
+            flash_success: req.flash('success'),
+            flash_warning: req.flash('warning'),
+            tvshow,
+            totalGames,
+            totalBooks,
+            totalMovies,
+            totalTVShows,
+            user: SESSION_USER,
+            app_url: process.env.APP_URL,
+            header: Header.books(),
+        });
+    }
+
+    static getViewProjects(req: Request, res: Response) {
         res.render('pages/projects', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -75,7 +112,7 @@ class AppController {
         });
     }
 
-    static getViewBank(req, res) {
+    static getViewBank(req: Request, res: Response) {
         res.render('pages/bank', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -84,7 +121,7 @@ class AppController {
         });
     }
 
-    static getViewToDo(req, res) {
+    static getViewToDo(req: Request, res: Response) {
         res.render('pages/toDo', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -93,7 +130,7 @@ class AppController {
         });
     }
 
-    static getViewContact(req, res) {
+    static getViewContact(req: Request, res: Response) {
         res.render('pages/contact', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -104,7 +141,7 @@ class AppController {
         });
     }
 
-    static async postContact(req, res) {
+    static async postContact(req: Request, res: Response) {
         try {
             const errors = validationResult(req);
 
@@ -137,21 +174,21 @@ class AppController {
         }
     }
 
-    static getViewAbout(req, res) {
+    static getViewAbout(req: Request, res: Response) {
         return res.render('pages/about', {
             user: SESSION_USER,
             header: Header.about(),
         });
     }
 
-    static getViewPrivacy(req, res) {
+    static getViewPrivacy(req: Request, res: Response) {
         return res.render('pages/privacy', {
             user: SESSION_USER,
             header: Header.privacy(),
         });
     }
 
-    static async getSearchGameTitle(req, res) {
+    static async getSearchGameTitle(req: Request, res: Response) {
         const searchGameTitle = req.query.title;
 
         if (!searchGameTitle) {
@@ -187,7 +224,7 @@ class AppController {
         });
     }
 
-    static async getSearchBookTitle(req, res) {
+    static async getSearchBookTitle(req: Request, res: Response) {
         const searchBookTitle = req.query.title;
 
         if (!searchBookTitle) {

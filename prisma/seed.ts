@@ -600,11 +600,11 @@ const main = async () => {
             {
                 title: 'Duna',
                 year_release: 2021,
-                image: 'https://m.media-amazon.com/images/I/51Sn8PEXwcL.jpg',
+                image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5NXSklXo0qyIYkgV94XAgMIckC.jpg',
                 tmdb_link:
-                    'https://www.themoviedb.org/movie/438631-dune?language=pt-BR',
-                tmdb_rating: 95,
-                resume: 'Em um futuro distante, planetas são comandados por casas nobres que fazem parte de um império feudal intergalático. Paul Atreides é um jovem cuja família toma o controle do planeta deserto Arrakis, também conhecido como Duna. A única fonte da especiaria Melange, a substância mais importante do cosmos, Arrakis se mostra ser um planeta nem um pouco fácil de governar.',
+                    'https://www.themoviedb.org/movie/438631-dune?language=en-US',
+                tmdb_rating: 79,
+                resume: `Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential-only those who can conquer their fear will survive.`,
                 genres: 'Action, Adventure',
                 duration: '2h 15min',
             },

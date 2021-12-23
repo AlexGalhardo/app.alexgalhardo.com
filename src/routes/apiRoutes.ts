@@ -98,22 +98,6 @@ router
         APIAdminBlogController.deleteBlogPost
     )
 
-    .post(
-        '/admin/games/create',
-        authenticateAdmin,
-        APIAdminGameController.postCreateGame
-    )
-    .patch(
-        '/admin/games/patch/:game_id',
-        authenticateAdmin,
-        APIAdminGameController.patchGame
-    )
-    .delete(
-        '/admin/games/delete/:game_id',
-        authenticateAdmin,
-        APIAdminGameController.deleteGame
-    )
-
     .get('/admin/books/listAll', APIAdminBookController.getAllBooks)
     .post(
         '/admin/books/create',

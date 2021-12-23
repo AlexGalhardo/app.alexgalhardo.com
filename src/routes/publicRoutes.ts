@@ -69,6 +69,8 @@ router
     .get('/bank', AppController.getViewBank)
     .get('/toDo', AppController.getViewToDo)
     .get('/books', AppController.getViewBooks)
+    .get('/movies', AppController.getViewMovies)
+    .get('/tvshows', AppController.getViewTVShows)
     .get('/about', AppController.getViewAbout)
 
     .get('/contact', csrfProtection, AppController.getViewContact)
