@@ -2,17 +2,30 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default class Books {
-  static async getRandom() {
-    const totalGames = await prisma.book.count();
-    const skip = Math.floor(Math.random() * totalGames);
-    return await prisma.book.findMany({
-      take: 1,
-      skip,
-    });
-  }
+class Books {
+    getAll() {
+        return prisma.book.findMany();
+    }
 
-  static async getTotal() {
-    return await prisma.book.count();
-  }
+    async getRandom() {
+        const skip = Math.floor(Math.random() * (await prisma.book.count()));
+        return prisma.book.findMany({
+            take: 1,
+            skip,
+        });
+    }
+
+    getTotal() {
+        return prisma.book.count();
+    }
+
+    getByID(book_id: string) {
+        return prisma.book.findUnique({
+            where: {
+                id: book_id,
+            },
+        });
+    }
 }
+
+export default new Books();

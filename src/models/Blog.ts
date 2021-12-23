@@ -2,17 +2,30 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default class Blog {
-  static async getRandom() {
-    const totalBlogPosts = await prisma.blog.count();
-    const skip = Math.floor(Math.random() * totalBlogPosts);
-    return await prisma.blog.findMany({
-      take: 1,
-      skip,
-    });
-  }
+class Blog {
+    getAll() {
+        return prisma.blog.findMany();
+    }
 
-  static async getTotal() {
-    return await prisma.blog.count();
-  }
+    async getRandom() {
+        const skip = Math.floor(Math.random() * (await prisma.blog.count()));
+        return prisma.blog.findMany({
+            take: 1,
+            skip,
+        });
+    }
+
+    getTotal() {
+        return prisma.blog.count();
+    }
+
+    getByID(blog_id: string) {
+        return prisma.blog.findUnique({
+            where: {
+                id: blog_id,
+            },
+        });
+    }
 }
+
+export default new Blog();

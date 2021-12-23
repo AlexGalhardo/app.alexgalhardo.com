@@ -8,14 +8,14 @@ datasource db {
 }
 
 model User {
-  id                                 String   @id @default(uuid())
+  id                                 String    @id @default(uuid())
   name                               String
-  email                              String   @unique
-  confirmed_email                    Boolean  @default(false)
+  email                              String    @unique
+  confirmed_email                    Boolean   @default(false)
   confirm_email_token                String?
   password                           String
   reset_password_token               String?
-  admin                              Boolean  @default(false)
+  admin                              Boolean   @default(false)
   avatar                             String?
   document                           String?
   phone                              String?
@@ -40,29 +40,29 @@ model User {
   stripe_currently_subscription_name String?
   stripe_subscription_start          String?
   stripe_subscription_end            String?
-  stripe_cancel_at_period_end        Boolean  @default(false)
-  createdAt                          DateTime @default(now())
-  updatedAt                          DateTime @updatedAt
+  stripe_cancel_at_period_end        Boolean?
+  createdAt                          DateTime  @default(now())
+  updatedAt                          DateTime?
 
   @@map("users")
 }
 
 model Blog {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   title     String
   resume    String
   image     String
   category  String
   body      String
   slug      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
 
   @@map("blog")
 }
 
 model Game {
-  id           String   @id @default(uuid())
+  id           String    @id @default(uuid())
   title        String
   year_release Int
   price        Int
@@ -74,14 +74,14 @@ model Game {
   developer    String
   genres       String
   amazon_link  String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime?
 
   @@map("games")
 }
 
 model Book {
-  id           String   @id @default(uuid())
+  id           String    @id @default(uuid())
   title        String
   year_release Int
   price        Int
@@ -91,14 +91,14 @@ model Book {
   pages        Int
   genres       String
   author       String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime?
 
   @@map("books")
 }
 
 model Movie {
-  id           String   @id @default(uuid())
+  id           String    @id @default(uuid())
   title        String
   year_release Int
   image        String
@@ -107,14 +107,14 @@ model Movie {
   resume       String
   duration     String
   genres       String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime?
 
   @@map("movies")
 }
 
 model Tvshow {
-  id           String   @id @default(uuid())
+  id           String    @id @default(uuid())
   title        String
   year_release Int
   image        String
@@ -123,8 +123,8 @@ model Tvshow {
   resume       String
   duration     String
   genres       String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime?
 
 
   @@map("tv_shows")

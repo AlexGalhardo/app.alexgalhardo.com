@@ -2,6 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-interface IUser { }
+class Users { }
 
-export default class Users implements IUser { }
+export default new Users();
