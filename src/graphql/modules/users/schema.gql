@@ -1,5 +1,5 @@
 type User {
-	id: ID!
+  id: ID!
   name: String!
   email: String!
   confirmed_email: Boolean!
@@ -32,8 +32,24 @@ type User {
   stripe_subscription_start: String!
   stripe_subscription_end: String!
   stripe_cancel_at_period_end: Boolean!
-  createdAt: String!
-  updatedAt: String!
+  created_at: String!
+  updated_at: String!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+  password: String!
+  document: String!
+  phone: String!
+  birth_date: String!
+  address_zipcode: String!
+  address_street: String!
+  address_street_number: String!
+  address_neighborhood: String!
+  address_city: String!
+  address_state: String!
+  address_country: String!
 }
 
 type Blog {
@@ -44,12 +60,20 @@ type Blog {
   category: String!
   body:  String!
   slug:  String!
-  createdAt: String!
-  updatedAt: String!
+  created_at: String!
+  updated_at: String!
+}
+
+input BlogInput {
+  title: String!
+  resume: String!
+  image: String!
+  category: String!
+  body:  String!
 }
 
 type Game {
-	id:	ID! 
+  id:	ID! 
   title: String!
   year_release: Int!
   price: Int!
@@ -61,55 +85,99 @@ type Game {
   developer: String!
   genres: String!
   amazon_link: String!
-  createdAt: String!
-  updatedAt: String!
+  created_at: String!
+  updated_at: String!
 }
 
-type Book {
-	id:	ID! 
+input GameInput {
   title: String!
   year_release: Int!
   price: Int!
   resume: String!
   image: String!
-  pages: String!
+  igdb_link: String
+  igdb_rating: Float!
+  platforms: String!
+  developer: String!
   genres: String!
   amazon_link: String!
-  createdAt: String!
-  updatedAt: String!
+}
+
+type Book {
+  id:	ID! 
+  title: String!
+  year_release: Int!
+  price: Int!
+  author: String!
+  resume: String!
+  image: String!
+  pages: Int!
+  genres: String!
+  amazon_link: String!
+  created_at: String!
+  updated_at: String!
+}
+
+input BookInput {
+  title: String!
+  year_release: Int!
+  price: Int!
+  author: String!
+  resume: String!
+  image: String!
+  pages: Int!
+  genres: String!
+  amazon_link: String!
 }
 
 type Movie {
-	id:	ID! 
+  id:	ID! 
   title: String!
   year_release: Int!
   image: String!
   tmdb_link: String!
-  tmdb_rating: String!
+  tmdb_rating: Int!
   resume: String!
   duration: String!
   genres: String!
-  createdAt: String!
-  updatedAt: String!
+  created_at: String!
+  updated_at: String!
+}
+
+input MovieInput {
+  title: String!
+  year_release: Int!
+  image: String!
+  tmdb_link: String!
+  tmdb_rating: Int!
+  resume: String!
+  duration: String!
+  genres: String!
 }
 
 type TVShow {
-	id:	ID! 
+  id:	ID! 
   title: String!
   year_release: Int!
   image: String!
   tmdb_link: String!
-  tmdb_rating: String!
+  tmdb_rating: Int!
   resume: String!
   duration: String!
   genres: String!
-  createdAt: String!
-  updatedAt: String!
+  created_at: String!
+  updated_at: String!
 }
 
-input UserInput {
-	name: String
-	email: String
+input TVShowInput {
+  title: String!
+  year_release: Int!
+  image: String!
+  tmdb_link: String!
+  tmdb_rating: Int!
+  resume: String!
+  duration: String!
+  genres: String!
 }
 
 type Query {
@@ -123,11 +191,10 @@ type Query {
 }
 
 type Mutation {
-	createUser(data: UserInput!): User!
-	updateUser(id: ID, data: UserInput!): User!
-	deleteUser(id: ID!): Boolean
-}
-
-type Subscription {
-	userAdded: User!
+    createUser(data: UserInput!): User!
+    createBlog(data: BlogInput!): Blog!
+	createGame(data: GameInput!): Game!
+    createBook(data: BookInput!): Book!
+    createMovie(data: MovieInput!): Movie!
+    createTVShow(data: TVShowInput!): TVShow!
 }

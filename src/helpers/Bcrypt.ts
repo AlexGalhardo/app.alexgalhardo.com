@@ -10,7 +10,7 @@
 import bcrypt from 'bcryptjs';
 
 class Bcrypt {
-    static crypt(password: string) {
+    static hash(password: string) {
         return bcrypt
             .genSalt(12)
             .then((salt) => bcrypt.hash(password, salt))

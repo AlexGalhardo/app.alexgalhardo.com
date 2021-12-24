@@ -82,3 +82,37 @@ query {
 	}
 }
 
+query tvshows {
+  tvshows {
+    id
+    title
+    image
+    genres
+    duration
+    year_release
+    tmdb_link
+    tmdb_rating
+    image
+    resume
+    created_at
+    __typename
+  }
+}
+
+query movies {
+  movies {
+    id
+    title
+    image
+    genres
+    duration
+    year_release
+    tmdb_link
+    tmdb_rating
+    image
+    resume
+    created_at
+    __typename
+  }
+}
+
