@@ -18,6 +18,7 @@ import swaggerUI from 'swagger-ui-express';
 import AppController from '../controllers/AppController';
 import AuthController from '../controllers/AuthController';
 import BlogController from '../controllers/BlogController';
+import CriptoBOTController from '../controllers/CriptoBOTController';
 import PlansController from '../controllers/PlansController';
 import ShopController from '../controllers/ShopController';
 import docs from '../docs/index';
@@ -69,6 +70,7 @@ router
     .get('/movies', AppController.getViewMovies)
     .get('/tvshows', AppController.getViewTVShows)
     .get('/about', AppController.getViewAbout)
+    .get('/criptoBOT', AppController.getViewCriptoBOT)
 
     .get('/contact', csrfProtection, AppController.getViewContact)
     .post('/contact', csrfProtection, AppController.postContact)
@@ -107,6 +109,8 @@ router
 
     .get('/shop', ShopController.getViewShop)
     .post('/shop', ShopController.postShopPayLog)
+
+    .post('/criptoBOT/:side/:symbol/:quantity', CriptoBOTController.postBinance)
 
     .get('/plans', PlansController.getViewPlans)
 

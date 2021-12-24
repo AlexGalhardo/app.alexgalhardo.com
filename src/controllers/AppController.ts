@@ -130,6 +130,13 @@ class AppController {
         });
     }
 
+    static getViewCriptoBOT(req, res) {
+        return res.render('pages/criptoBOT', {
+            user: SESSION_USER,
+            header: Header.criptoBOT(),
+        });
+    }
+
     static getViewContact(req: Request, res: Response) {
         res.render('pages/contact', {
             flash_success: req.flash('success'),
@@ -145,13 +152,8 @@ class AppController {
         try {
             const errors = validationResult(req);
 
-            if (!req.recaptcha.error) {
-                if (!errors.isEmpty()) {
-                    req.flash('warning', `${errors.array()[0].msg}`);
-                    return res.redirect('/contact');
-                }
-            } else {
-                req.flash('warning', `Invalid Recaptcha!`);
+            if (!errors.isEmpty()) {
+                req.flash('warning', `${errors.array()[0].msg}`);
                 return res.redirect('/contact');
             }
 

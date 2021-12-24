@@ -86,7 +86,7 @@ class Users {
                 },
                 data: {
                     email: userObject.new_email,
-                    password: await Bcrypt.crypt(userObject.new_password),
+                    password: await Bcrypt.hash(userObject.new_password),
                     document: userObject.document,
                     phone: userObject.phone,
                     birth_date: userObject.birth_date,

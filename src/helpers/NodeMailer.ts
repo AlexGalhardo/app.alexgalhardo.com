@@ -13,12 +13,11 @@ import handlebars from 'handlebars';
 import path from 'path';
 import randomToken from 'rand-token';
 
-// Config
-import { MailTrap } from '../config/smtp';
-import Users from '../models/JSON/Users';
+import MailTrap from '../config/smtp';
+import Users from '../models/Users';
 
 class NodeMailer {
-    static async sendContact(contactObject) {
+    async sendContact(contactObject) {
         const filePath = path.join(__dirname, '../views/emails/contact.html');
 
         const source = fs.readFileSync(filePath, 'utf-8').toString();
@@ -45,7 +44,7 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    static async sendShopTransaction(shopTransactionObject) {
+    async sendShopTransaction(shopTransactionObject) {
         const filePath = path.join(
             __dirname,
             '../views/emails/shop_transaction.html'
@@ -86,7 +85,7 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    static async sendSubscriptionTransaction(subsTransactionObject) {
+    async sendSubscriptionTransaction(subsTransactionObject) {
         const filePath = path.join(
             __dirname,
             '../views/emails/subscription_transaction.html'
@@ -119,7 +118,7 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    static async sendConfirmEmailLink(email) {
+    async sendConfirmEmailLink(email: string) {
         const confirm_email_token = randomToken.generate(24);
 
         const confirmEmailLinkURL = `${process.env.APP_URL}/confirmEmail/${email}/${confirm_email_token}`;
@@ -150,7 +149,7 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    static async sendForgetPasswordLink(email, reset_password_token) {
+    async sendForgetPasswordLink(email: string, reset_password_token: string) {
         const resetPasswordLinkURL = `${process.env.APP_URL}/resetPassword/${email}/${reset_password_token}`;
 
         const filePath = path.join(
@@ -179,4 +178,4 @@ class NodeMailer {
     }
 }
 
-export default NodeMailer;
+export default new NodeMailer();

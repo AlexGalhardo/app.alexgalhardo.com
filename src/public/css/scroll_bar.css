@@ -1,6 +1,3 @@
-/**
-* Progress Scrolling Bar
-*/
 .progress-container {
   width: 100%;
   height: 5px;
@@ -8,12 +5,10 @@
 
 .progress-bar {
   height: 5px;
-  background-color: #9309AF !important;
+  background-color: #0b07fc !important;
   width: 0%;
   position: fixed;
   top: 0;
   z-index: 999999;
 }
-/**
-  * End Progress Bar ********************
-  */
+

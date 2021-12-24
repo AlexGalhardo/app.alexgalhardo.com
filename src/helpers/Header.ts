@@ -33,8 +33,10 @@ class Header {
 
     static privacy() {
         return {
-            title: 'Privacy - Galhardo APP',
+            title: 'Privacy and Terms of Use - Galhardo APP',
             navbar_privacy_active: true,
+            scroll_bar_div,
+            scroll_bar_script,
         };
     }
 
@@ -51,7 +53,6 @@ class Header {
     static bank() {
         return {
             title: 'Bank - Galhardo APP',
-            navbar_bank_active: true,
             app_money_css: `<link rel="stylesheet" href="/css/app_money.css">`,
             scroll_bar_div,
             scroll_bar_script,
@@ -61,7 +62,6 @@ class Header {
     static toDo() {
         return {
             title: 'To Do - Galhardo APP',
-            navbar_toDo_active: true,
             todo_css: `<link rel="stylesheet" href="/css/todo.css">`,
             scroll_bar_div,
             scroll_bar_script,
@@ -132,8 +132,14 @@ class Header {
 
     static about() {
         return {
-            title: 'about',
+            title: 'About Galhardo APP',
             navbar_about_active: true,
+        };
+    }
+
+    static criptoBOT() {
+        return {
+            title: 'Cripto BOT',
         };
     }
 }
