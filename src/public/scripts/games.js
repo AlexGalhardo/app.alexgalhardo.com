@@ -9,6 +9,9 @@ async function recommendOtherGame() {
         document.querySelector('#game_id').value = object[0].id;
         document.querySelector('#game_image').src = object[0].image;
         document.querySelector('#game_title').innerHTML = object[0].title;
+        document.querySelector('#game_price').innerHTML = parseFloat(
+            object[0].price / 100
+        ).toFixed(2);
         document.querySelector('#game_year_release').innerHTML =
             object[0].year_release;
         document.querySelector('#game_resume').innerHTML = object[0].resume;

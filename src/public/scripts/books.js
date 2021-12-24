@@ -8,6 +8,9 @@ async function recommendOtherBook() {
         document.getElementById('book_id').value = object[0].id;
         document.getElementById('book_image').src = object[0].image;
         document.getElementById('book_title').innerHTML = object[0].title;
+        document.getElementById('book_price').innerHTML = parseFloat(
+            object[0].price / 100
+        ).toFixed(2);
         document.getElementById('book_year_release').innerHTML =
             object[0].year_release;
         document.getElementById('book_resume').innerHTML = object[0].resume;

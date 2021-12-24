@@ -26,6 +26,17 @@ class Games {
             },
         });
     }
+
+    async searchTitle(gameTitle: string) {
+        return prisma.game.findMany({
+            where: {
+                title: {
+                    contains: gameTitle,
+                    mode: 'insensitive',
+                },
+            },
+        });
+    }
 }
 
 export default new Games();

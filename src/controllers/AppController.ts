@@ -25,6 +25,7 @@ class AppController {
         const totalBooks = await Books.getTotal();
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
+        game[0].price = parseFloat(game[0].price / 100).toFixed(2);
 
         return res.render('pages/home', {
             flash_success: req.flash('success'),

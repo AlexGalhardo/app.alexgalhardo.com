@@ -64,37 +64,41 @@ model Blog {
 }
 
 model Game {
-  id           String    @id @default(uuid())
-  title        String    @unique
-  year_release Int
-  price        Int
-  resume       String    @unique
-  image        String    @unique
-  igdb_link    String    @unique
-  igdb_rating  Int
-  platforms    String
-  developer    String
-  genres       String
-  amazon_link  String    @unique
-  created_at   DateTime  @default(now())
-  updated_at   DateTime?
+  id                    String    @id @default(uuid())
+  title                 String    @unique
+  year_release          Int
+  price                 Int
+  resume                String    @unique
+  image                 String    @unique
+  igdb_link             String    @unique
+  igdb_rating           Int
+  platforms             String
+  developer             String
+  genres                String
+  amazon_link           String?   @unique
+  stripe_checkout_link  String?   @unique
+  pagarme_checkout_link String?   @unique
+  created_at            DateTime  @default(now())
+  updated_at            DateTime?
 
   @@map("games")
 }
 
 model Book {
-  id           String    @id @default(uuid())
-  title        String    @unique
-  year_release Int
-  price        Int
-  image        String    @unique
-  amazon_link  String    @unique
-  resume       String    @unique
-  pages        Int
-  genres       String
-  author       String
-  created_at   DateTime  @default(now())
-  updated_at   DateTime?
+  id                    String    @id @default(uuid())
+  title                 String    @unique
+  year_release          Int
+  price                 Int
+  image                 String    @unique
+  amazon_link           String?   @unique
+  stripe_checkout_link  String?   @unique
+  pagarme_checkout_link String?   @unique
+  resume                String    @unique
+  pages                 Int
+  genres                String
+  author                String
+  created_at            DateTime  @default(now())
+  updated_at            DateTime?
 
   @@map("books")
 }

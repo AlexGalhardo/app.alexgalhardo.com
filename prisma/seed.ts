@@ -117,6 +117,19 @@ const main = async () => {
     await prisma.game.createMany({
         data: [
             {
+                title: 'God of War Ragnarök',
+                year_release: 2022,
+                price: 29990,
+                resume: `God of War: Ragnarök is the tentative title for the upcoming action-adventure game in development by Santa Monica Studio and to be published by Sony Interactive Entertainment (SIE). It is scheduled to be released in 2021 for the PlayStation 5 (PS5). It will be the ninth installment in the God of War series, the ninth chronologically, and the sequel to 2018's God of War. Loosely based on Norse mythology, the game will be set in ancient Norway and feature series protagonists Kratos, the former Greek God of War who remains the only playable character, and his young son Atreus. The game is expected to kick off the events of Ragnarök, a series of events that bring about the end of days and depict the deaths of the Norse gods in Norse mythology.`,
+                image: `https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png`,
+                igdb_link: 'https://www.igdb.com/games/god-of-war-ragnarok',
+                igdb_rating: 95,
+                platforms: 'PS4, PS5',
+                developer: 'Santa Mônica Studios',
+                genres: "Action, Third Person, Adventure, Hack and slash/Beat 'em up",
+                amazon_link: 'amazon_link_ragnarok',
+            },
+            {
                 title: 'God Of War',
                 year_release: 2018,
                 price: 5990,
