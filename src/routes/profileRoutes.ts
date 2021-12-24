@@ -8,14 +8,14 @@
  */
 
 import csrf from 'csurf';
-import express from 'express';
+import { Router } from 'express';
 import multer from 'multer';
 
 import ProfileController from '../controllers/ProfileController';
 
-const csrfProtection = csrf({ cookie: true });
+// const // csrfProtection = csrf({ cookie: true });
 
-const router = express.Router();
+const router = Router();
 
 const userIsNotLoggedIn = (req, res, next) => {
     if (!req.session.userID) {
@@ -25,50 +25,25 @@ const userIsNotLoggedIn = (req, res, next) => {
     next();
 };
 
-const storageConfig = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './tmp');
-    },
-    filename: (req, file, cb) => {
-        const randomName = Math.floor(Math.random() * 99999);
-        cb(null, `${randomName + Date.now()}.jpg`);
-    },
-});
-
-const upload = multer({
-    dest: './tmp',
-    // storage: multer.memoryStorage(), // salvar na memória ram
-    // storage: storageConfig // salvar em uma pasta temporária
-    fileFilter: (req, file, cb) => {
-        // cb(null, false); // não aceito nada
-        // cb(null, true) // aceito qualquer tipo de arquvio
-
-        const allowed = ['image/jpg', 'image/jpeg', 'image/png'];
-
-        cb(null, allowed.includes(file.mimetype));
-    },
-    limits: { fieldSize: 1000000 }, // 1MB
-});
-
 export default router
     .get(
         '/',
         userIsNotLoggedIn,
-        csrfProtection,
+        // csrfProtection,
         ProfileController.getViewProfile
     )
 
     .post(
         '/',
         userIsNotLoggedIn,
-        csrfProtection,
+        // csrfProtection,
         ProfileController.updateProfile
     )
 
     .post(
         '/avatar',
         userIsNotLoggedIn,
-        upload.single('avatar'),
+        // upload.single('avatar'),
         ProfileController.updateProfileAvatar
     )
 
@@ -96,7 +71,7 @@ export default router
         ProfileController.getViewSubscriptionTransactionByID
     )
 
-    .get('/logout', userIsNotLoggedIn, ProfileController.getLogout)
+    .get('/logout', userIsNotLoggedIn, ProfileController.logout)
 
     .get(
         '/delete/stripeCard/:stripe_card_id',

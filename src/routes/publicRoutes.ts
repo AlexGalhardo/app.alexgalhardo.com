@@ -10,11 +10,8 @@
 
 import csrf from 'csurf';
 import dotenv from 'dotenv';
+import { Router } from 'express';
 
-// INIT ROUTER
-import express from 'express';
-
-// VIEWS CONTROLLERS
 // import Recaptcha from 'express-recaptcha';
 import swaggerUI from 'swagger-ui-express';
 
@@ -28,7 +25,7 @@ import docs from '../docs/index';
 dotenv.config();
 
 const csrfProtection = csrf({ cookie: true });
-const router = express.Router();
+const router = Router();
 
 const userIsAlreadyLoggedIn = (req, res, next) => {
     if (req.session.userID) {

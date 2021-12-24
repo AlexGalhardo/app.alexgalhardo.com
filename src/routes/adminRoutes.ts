@@ -7,15 +7,14 @@
  * http://localhost:3000/admin
  */
 
-import express from 'express';
+import { Request, Response, NextFunction, Router } from 'express';
 
 import AdminController from '../controllers/ADMIN/AdminController';
 
-const router = express.Router();
+const router = Router();
 
-const isAdmin = (req, res, next) => {
-    if ((SESSION_USER && !SESSION_USER.admin) || !SESSION_USER)
-        return res.redirect('/');
+const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+    if ((req.user && !req.user.admin) || !req.user) return res.redirect('/');
     next();
 };
 

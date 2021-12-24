@@ -4,7 +4,6 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  * ./controllers/AuthController.js
  *
  * http://localhost:3000/login
@@ -14,19 +13,16 @@
  * http://localhost:3000/confirmEmail
  */
 
-import axios from 'axios';
+import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import queryString from 'query-string';
 
-// HELPERS
 import NodeMailer from '../helpers/NodeMailer';
 import URL from '../helpers/URL';
-
-// MODELS
-import Users from '../models/JSON/Users';
+import Users from '../models/Users';
 
 class AuthController {
-    static async getViewLogin(req, res) {
+    async getViewLogin(req: Request, res: Response) {
         const facebookLoginURL = await URL.getFacebookURL();
 
         return res.render('pages/auth/login', {
@@ -35,33 +31,25 @@ class AuthController {
             FacebookLoginURL: facebookLoginURL,
             GitHubLoginURL: URL.getGitHubURL,
             GoogleLoginURL: URL.getGoogleURL,
-            captcha: res.recaptcha,
             csrfToken: req.csrfToken(),
         });
     }
 
-    static async postLogin(req, res) {
+    async postLogin(req: Request, res: Response) {
         try {
             const errors = validationResult(req);
 
-            /* if (!req.recaptcha.error) {
-                if (!errors.isEmpty()) {
-                    req.flash('warning', `${errors.array()}`);
-                    return res.redirect('/login');
-                }
-            } else {
-                req.flash('warning', `Invalid Recaptcha!`);
+            if (!errors.isEmpty()) {
+                req.flash('warning', `${errors.array()}`);
                 return res.redirect('/login');
-            } */
+            }
 
             const { email, password } = req.body;
 
-            const userObject = await Users.verifyLogin(email, password);
+            const user = await Users.login(email, password);
 
-            if (userObject) {
-                const confirmedEmail = await Users.verifyIfEmailIsConfirmed(
-                    email
-                );
+            if (user) {
+                const confirmedEmail = await Users.emailIsConfirmed(email);
 
                 if (!confirmedEmail) {
                     req.flash('warning', `You need to confirm your email!`);
@@ -72,8 +60,8 @@ class AuthController {
                 return res.redirect('/login');
             }
 
-            req.session.userID = userObject.id;
-            global.SESSION_USER = userObject;
+            req.session.userID = user.id;
+            global.SESSION_USER = user;
             req.flash(
                 'success',
                 `Welcome back, ${global.SESSION_USER.name} :D`
@@ -84,9 +72,8 @@ class AuthController {
         }
     }
 
-    static getViewRegister(req, res) {
+    getViewRegister(req: Request, res: Response) {
         return res.render('pages/auth/register', {
-            captcha: res.recaptcha,
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             csrfToken: req.csrfToken(),
@@ -94,7 +81,7 @@ class AuthController {
         });
     }
 
-    static async verifyIfConfirmEmailURLIsValid(req, res) {
+    async verifyIfConfirmEmailURLIsValid(req: Request, res: Response) {
         const { email, token } = req.params;
 
         const confirmEmailValid = await Users.verifyConfirmEmailToken(
@@ -110,11 +97,7 @@ class AuthController {
         return res.redirect('/login');
     }
 
-    /**
-     * Create user in DataBase
-     * Send Confirm Email Token Email
-     */
-    static async postRegister(req, res, next) {
+    async postRegister(req: Request, res: Response, next) {
         try {
             if (!req.recaptcha.error) {
                 const errors = validationResult(req);
@@ -161,11 +144,11 @@ class AuthController {
         }
     }
 
-    static getViewForgetPassword(req, res) {
+    getViewForgetPassword(req: Request, res: Response) {
         return res.render('pages/auth/forgetPassword');
     }
 
-    static async postForgetPassword(req, res) {
+    async postForgetPassword(req: Request, res: Response) {
         const { email } = req.body;
 
         await Users.createResetPasswordToken(email);
@@ -178,7 +161,7 @@ class AuthController {
         return res.redirect('/forgetPassword');
     }
 
-    static getViewResetPassword(req, res) {
+    getViewResetPassword(req: Request, res: Response) {
         const { email, token } = req.params;
 
         if (!email || !token) {
@@ -194,7 +177,7 @@ class AuthController {
         });
     }
 
-    static postResetPassword(req, res) {
+    postResetPassword(req: Request, res: Response) {
         const { email, new_password } = req.body;
 
         if (!Users.resetPassword(email, new_password)) {
@@ -205,13 +188,13 @@ class AuthController {
         return res.redirect('/login');
     }
 
-    static getViewResendConfirmEmailLink(req, res) {
+    getViewResendConfirmEmailLink(req: Request, res: Response) {
         return res.render('pages/auth/confirmEmail', {
             flash_success: req.flash('success'),
         });
     }
 
-    static async postSendConfirmEmailLink(req, res) {
+    async postSendConfirmEmailLink(req: Request, res: Response) {
         const { email } = req.body;
 
         const emailConfirmed = await Users.verifyIfEmailIsConfirmed(email);
@@ -227,7 +210,7 @@ class AuthController {
         return res.redirect('/confirmEmail');
     }
 
-    static async loginFacebook(req, res, next) {
+    async loginFacebook(req: Request, res: Response, next) {
         try {
             const url_query_code = req.query.code;
 
@@ -265,7 +248,7 @@ class AuthController {
         }
     }
 
-    static async loginGitHub(req, res) {
+    async loginGitHub(req: Request, res: Response) {
         const { code } = req.query;
 
         try {
@@ -315,7 +298,7 @@ class AuthController {
         }
     }
 
-    static async loginGoogle(req, res) {
+    async loginGoogle(req: Request, res: Response) {
         const { code } = req.query;
 
         try {
@@ -346,4 +329,4 @@ class AuthController {
     }
 }
 
-export default AuthController;
+export default new AuthController();

@@ -11,7 +11,7 @@ import DateTime from '../../helpers/DateTime';
 import Games from '../../models/JSON/Games';
 
 class APIAdminGameController {
-    static async postCreateGame(req, res) {
+    async postCreateGame(req, res) {
         const {
             title,
             year_release,
@@ -49,7 +49,7 @@ class APIAdminGameController {
         return res.json({ error: 'Game NOT Created!' });
     }
 
-    static async patchGame(req, res, next) {
+    async patchGame(req, res, next) {
         try {
             const { game_id } = req.params;
 
@@ -94,7 +94,7 @@ class APIAdminGameController {
     /**
      * http://localhost:3000/api/admin/game/delete/:game_id
      */
-    static async deleteGame(req, res, next) {
+    async deleteGame(req, res, next) {
         try {
             const { game_id } = req.params;
 

@@ -17,7 +17,7 @@ const main = async () => {
             {
                 email: 'admin@gmail.com',
                 name: 'ADMIN',
-                confirmed_email: false,
+                confirmed_email: true,
                 confirm_email_token: null,
                 password: await Bcrypt.crypt('admin123'),
                 reset_password_token: null,
@@ -52,7 +52,7 @@ const main = async () => {
                 name: 'TEST USER',
                 confirmed_email: false,
                 confirm_email_token: null,
-                password: await Bcrypt.crypt('admin123'),
+                password: await Bcrypt.crypt('test123'),
                 reset_password_token: null,
                 admin: false,
                 avatar: null,

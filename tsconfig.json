@@ -1,39 +1,39 @@
 {
-  "compilerOptions": {
-    "target": "es2021",
-    "module": "commonjs",
-    "rootDir": "./",
-    "baseUrl": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "paths": {
-      "@routes/*": [
-        "routes/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@models/*": [
-        "models/*"
-      ],
-      "@helpers/*": [
-        "helpers/*"
-      ],
-      "@controllers/*": [
-        "controllers/*"
-      ]
+    "compilerOptions": {
+        "target": "es2021",
+        "module": "commonjs",
+        "rootDir": "./",
+        "baseUrl": "./src",
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "paths": {
+            "@routes/*": [
+                "routes/*"
+            ],
+            "@config/*": [
+                "config/*"
+            ],
+            "@models/*": [
+                "models/*"
+            ],
+            "@helpers/*": [
+                "helpers/*"
+            ],
+            "@controllers/*": [
+                "controllers/*"
+            ]
+        },
     },
-  },
-  "exclude": [
-    "node_modules",
-  ],
+    "exclude": [
+        "node_modules",
+    ],
 }

@@ -1,3 +1,4 @@
+import Bcrypt from '@helpers/Bcrypt';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -46,6 +47,67 @@ class Users {
         });
 
         return !!emailExists;
+    }
+
+    async login(email: string, password: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+
+        return (await Bcrypt.compare(password, user?.password)) ? user : null;
+    }
+
+    async emailIsConfirmed(email: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                emailConfirmed: {
+                    email,
+                    confirmed_email: true,
+                },
+            },
+        });
+
+        return !!user;
+    }
+
+    async update(userObject) {
+        const userExist = await prisma.user.findUnique({
+            where: {
+                email: userObject.email,
+            },
+        });
+
+        if (await Bcrypt.compare(userObject.password, userExist.password)) {
+            await prisma.user.update({
+                where: {
+                    email: userExist?.email,
+                },
+                data: {
+                    email: userObject.new_email,
+                    password: await Bcrypt.crypt(userObject.new_password),
+                    document: userObject.document,
+                    phone: userObject.phone,
+                    birth_date: userObject.birth_date,
+                    address_zipcode: userObject.zipcode,
+                    address_street: userObject.street,
+                    address_street_number: userObject.street_number,
+                    address_neighborhood: userObject.neighborhood,
+                    address_city: userObject.city,
+                    address_state: userObject.state,
+                    address_country: userObject.country,
+                },
+            });
+
+            const user = await prisma.user.findUnique({
+                where: {
+                    email: userObject.new_email,
+                },
+            });
+
+            return !!user;
+        }
     }
 }
 

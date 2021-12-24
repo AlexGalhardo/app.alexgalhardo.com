@@ -4,32 +4,27 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  * http://localhost:3000/profile
  */
 
-import bodyParser from 'body-parser';
+import { Request, Response } from 'express';
 
-// HELPERS
 import Header from '../helpers/Header';
 import Upload from '../helpers/Upload';
-
-// MODELS
-import StripeModel from '../models/JSON/Stripe';
-import Users from '../models/JSON/Users';
+import StripeModel from '../models/Stripe';
+import Users from '../models/Users';
 
 class ProfileController {
-    static async getViewProfile(req, res) {
+    async getViewProfile(req: Request, res: Response) {
         return res.render('pages/profile/profile', {
             user: SESSION_USER,
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             header: Header.profile('My Profile - Galhardo APP'),
-            csrfToken: req.csrfToken(),
         });
     }
 
-    static getLogout(req, res) {
+    logout(req: Request, res: Response) {
         req.session.destroy((error) => {
             if (error) throw new Error(error);
         });
@@ -37,10 +32,7 @@ class ProfileController {
         return res.redirect('/login');
     }
 
-    /**
-     * POST /profile
-     */
-    static async updateProfile(req, res) {
+    async updateProfile(req: Request, res: Response) {
         const {
             username,
             email,
@@ -59,7 +51,7 @@ class ProfileController {
         } = req.body;
 
         const userObject = {
-            id: req.session.userID,
+            id: SESSION_USER.id,
             username,
             email,
             document,
@@ -76,26 +68,20 @@ class ProfileController {
             country,
         };
 
-        await Users.update(userObject);
+        await Users.updateProfile(userObject);
 
         req.flash('success', 'Profile Information Updated!');
         return res.redirect('/profile');
     }
 
-    /**
-     * POST /profile/avatar
-     */
-    static async updateProfileAvatar(req, res) {
+    async updateProfileAvatar(req: Request, res: Response) {
         await Upload.profileAvatar(req);
         res.redirect('/profile');
     }
 
-    /**
-     * GET /profile/shop/transactions
-     */
-    static async getViewMyShopTransactions(req, res) {
+    async getViewMyShopTransactions(req: Request, res: Response) {
         const shopTransactions = await StripeModel.getShopTransactionsByUserID(
-            req.session.userID
+            SESSION_USER.id
         );
 
         return res.render('pages/profile/my_shop_transactions', {
@@ -105,10 +91,7 @@ class ProfileController {
         });
     }
 
-    /**
-     * GET /profile/shop/transaction/:shop_transaction_id
-     */
-    static async getViewShopTransactionByID(req, res) {
+    async getViewShopTransactionByID(req: Request, res: Response) {
         const { shop_transaction_id } = req.params;
 
         const shopTransaction = await StripeModel.getShopTransactionByID(
@@ -122,12 +105,9 @@ class ProfileController {
         });
     }
 
-    /**
-     * GET /profile/subscriptions/transactions
-     */
-    static async getViewMySubscriptionsTransactions(req, res) {
+    async getViewMySubscriptionsTransactions(req: Request, res: Response) {
         const subsTransactions = await StripeModel.getSubsTransactionsByUserID(
-            req.session.userID
+            SESSION_USER.id
         );
 
         return res.render('pages/profile/my_subs_transactions', {
@@ -139,10 +119,7 @@ class ProfileController {
         });
     }
 
-    /**
-     * GET /profile/subscription/transaction/:subs_transaction_id
-     */
-    static async getViewSubscriptionTransactionByID(req, res) {
+    async getViewSubscriptionTransactionByID(req: Request, res: Response) {
         const { subs_transaction_id } = req.params;
 
         const subsTransaction = await StripeModel.getSubsTransactionByID(
@@ -156,10 +133,7 @@ class ProfileController {
         });
     }
 
-    /**
-     * GET /profile/delete/stripeCard/:stripe_card_id
-     */
-    static async deleteStripeCard(req, res) {
+    async deleteStripeCard(req: Request, res: Response) {
         const { stripe_card_id } = req.params;
 
         await StripeModel.deleteStripeCard(SESSION_USER.id, stripe_card_id);
@@ -168,10 +142,10 @@ class ProfileController {
         return res.redirect('/profile');
     }
 
-    /**
-     * GET /profile/cancel/subscription/:stripe_currently_subscription_id
-     */
-    static async cancelStripeSubscriptionRenewAtPeriodEnd(req, res) {
+    async cancelStripeSubscriptionRenewAtPeriodEnd(
+        req: Request,
+        res: Response
+    ) {
         const { stripe_currently_subscription_id } = req.params;
 
         await StripeModel.cancelStripeSubscriptionRenewAtPeriodEnd(
@@ -184,4 +158,4 @@ class ProfileController {
     }
 }
 
-export default ProfileController;
+export default new ProfileController();

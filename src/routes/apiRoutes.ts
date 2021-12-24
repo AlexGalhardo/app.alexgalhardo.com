@@ -8,7 +8,7 @@
  * http://localhost:3000/api
  */
 
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, Router } from 'express';
 import jwt from 'jsonwebtoken';
 
 import APIAdminBlogController from '../controllers/API/APIAdminBlogController';
@@ -20,7 +20,7 @@ import APIProfileController from '../controllers/API/APIProfileController';
 import APIPublicController from '../controllers/API/APIPublicController';
 import Users from '../models/Users';
 
-const router = express.Router();
+const router = Router();
 
 const authenticateAdmin = (req: Request, res: Response, next: NextFunction) => {
     if (
@@ -45,7 +45,7 @@ const authenticateAdmin = (req: Request, res: Response, next: NextFunction) => {
     return next();
 };
 
-router
+export default router
     .get('/', APIController.getWelcomeToAPI)
     .get('/public', APIController.getPublicEndpoints)
     .get('/admin', APIController.getAdminEndpoints)
@@ -70,8 +70,8 @@ router
     .get('/public/tvshows/random', APIPublicController.getPublicRandomTVShow)
     .get('/public/tvshows/:tvshow_id', APIPublicController.getPublicTVShowByID)
 
-    .post('/profile/login', APIProfileController.postProfileLogin)
-    .patch('/profile/patch', APIProfileController.updateProfile)
+    .post('/profile/login', APIProfileController.postLogin)
+    .patch('/profile/patch', APIProfileController.patchProfile)
     .delete('/profile/delete', APIProfileController.deleteProfile)
 
     .post('/admin/login', APIAdminController.postAdminLogin)
@@ -114,5 +114,3 @@ router
         authenticateAdmin,
         APIAdminBookController.deleteBook
     );
-
-export default router;

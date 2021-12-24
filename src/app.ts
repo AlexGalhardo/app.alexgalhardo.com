@@ -7,22 +7,22 @@
  * ./app.js
  */
 
-// MODULES
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import flash from 'connect-flash';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import session from 'express-session';
 import helmet from 'helmet';
 import { MulterError } from 'multer';
 import mustache from 'mustache-express';
 import path from 'path';
 
-import morgan from './config/morgan';
-import PinoLog from './config/pino';
+// import morgan from './config/morgan';
+// eslint-disable-next-line import-helpers/order-imports
+// import PinoLog from './config/pino';
 
 // ROUTES
 import adminRoutes from './routes/adminRoutes';
@@ -35,7 +35,6 @@ import 'express-async-errors';
 
 dotenv.config();
 
-// GLOBALS
 global.APP_ROOT_PATH = path.resolve(__dirname);
 global.SESSION_USER = null;
 
@@ -56,7 +55,7 @@ const app = express();
 // and using a reverse-proxy like nginx
 // need to defined this middleware before any routes
 if (process.env.NODE_ENV === 'production') {
-    app.use((req, res, next) => {
+    app.use((req: Request, res: Response, next) => {
         if ((req.headers['x-forwarded-proto'] || '').endsWith('http')) {
             res.redirect(`https://${req.hostname}${req.url}`);
         } else {
@@ -70,9 +69,9 @@ app.use(cookieParser());
 
 // LOGS
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pinoHttp = require('pino-http')({ logger: PinoLog });
+// const pinoHttp = require('pino-http')({ logger: PinoLog });
 
-app.use(morgan);
+// app.use(morgan);
 
 // Secure HTTP Headers Responses & Requests
 app.use(
@@ -130,14 +129,14 @@ app.use('/test', testRoutes);
 app.use(publicRoutes);
 
 // ERROR 404
-app.use((req, res) => {
+app.use((req: Request, res: Response) => {
     return res.render('pages/404', {
-        user: SESSION_USER,
+        user: req.user,
     });
 });
 
 // HANDLING SERVER ERRORS
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response) => {
     res.status(500);
 
     if (err.code === 'EBADCSRFTOKEN')

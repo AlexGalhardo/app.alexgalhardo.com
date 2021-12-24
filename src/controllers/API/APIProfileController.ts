@@ -4,101 +4,93 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  *  http://localhost:3000/api/profile
  */
 
-import bodyParser from 'body-parser';
+import { Request, Response, NextFunction } from 'express';
 
-// MODEL
-import Users from '../../models/JSON/Users';
+import Users from '../../models/Users';
 
 class APIProfileController {
-	static async postProfileLogin(req, res, next) {
-		try {
-			const { email, password } = req.body;
+    // eslint-disable-next-line consistent-return
+    async postLogin(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { email, password } = req.body;
+            return res.json(await Users.login(email, password));
+        } catch (err) {
+            next(err);
+        }
+    }
 
-			const user = await Users.verifyLogin(email, password);
+    async patchProfile(req: Request, res: Response, next: NextFunction) {
+        try {
+            const {
+                name,
+                email,
+                new_email,
+                password,
+                new_password,
+                document,
+                phone,
+                birth_date,
+                zipcode,
+                street,
+                street_number,
+                neighborhood,
+                city,
+                state,
+                country,
+            } = req.body;
 
-			return res.json({
-				user,
-			});
-		} catch (err) {
-			next(err);
-		}
-	}
+            const userObject = {
+                name,
+                email,
+                new_email,
+                password,
+                new_password,
+                document,
+                phone,
+                birth_date,
+                zipcode,
+                street,
+                street_number,
+                neighborhood,
+                city,
+                state,
+                country,
+            };
 
-	static async updateProfile(req, res, next) {
-		try {
-			const {
-				name,
-				email,
-				new_email,
-				password,
-				new_password,
-				document,
-				phone,
-				birth_date,
-				zipcode,
-				street,
-				street_number,
-				neighborhood,
-				city,
-				state,
-				country,
-			} = req.body;
+            const user = await Users.update(userObject);
 
-			const userObject = {
-				name,
-				email,
-				new_email,
-				password,
-				new_password,
-				document,
-				phone,
-				birth_date,
-				zipcode,
-				street,
-				street_number,
-				neighborhood,
-				city,
-				state,
-				country,
-			};
+            return user
+                ? res.json({ user })
+                : res.json({
+                    error: 'Something went wrong',
+                });
+        } catch (err) {
+            next(err);
+        }
+    }
 
-			const user = await Users.update(userObject);
-			if (user) {
-				return res.json({
-					user,
-				});
-			}
-			return res.json({
-				error: 'Some error found. User not found or password is invalid!',
-			});
-		} catch (err) {
-			next(err);
-		}
-	}
+    async deleteProfile(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { email, password } = req.body;
 
-	static async deleteProfile(req, res, next) {
-		try {
-			const { email, password } = req.body;
+            const profileDeleted = await Users.delete(email, password);
 
-			const profileDeleted = await Users.delete(email, password);
+            if (profileDeleted) {
+                return res.json({
+                    status: `Profile ${email} deleted!`,
+                });
+            }
 
-			if (profileDeleted) {
-				return res.json({
-					status: `Profile ${email} deleted!`,
-				});
-			}
-
-			return res.json({
-				status: 'Profile NOT deleted! Some error occurred!',
-			});
-		} catch (err) {
-			next(err);
-		}
-	}
+            return res.json({
+                status: 'Profile NOT deleted! Some error occurred!',
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
-export default APIProfileController;
+export default new APIProfileController();

@@ -365,16 +365,10 @@ class AdminController {
         const { book_id } = req.params;
 
         if (Books.delete(parseInt(book_id))) {
-            /* return res.render("pages/admin/createGame", {
-    flash: {
-        type: "success",
-        message: `book_id: ${book_id} deleted with success!`
-    }
-}) */
             return res.redirect('/admin/create/book');
         }
         return res.redirect(`/admin/update/book/${book_id}`);
     }
 }
 
-module.exports = AdminController;
+export default AdminController;
