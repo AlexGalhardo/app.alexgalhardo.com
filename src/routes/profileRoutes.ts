@@ -7,17 +7,13 @@
  * http://localhost:3000/profile
  */
 
-import csrf from 'csurf';
-import { Router } from 'express';
-import multer from 'multer';
+import { Router, Request, Response, NextFunction } from 'express';
 
 import ProfileController from '../controllers/ProfileController';
 
-// const // csrfProtection = csrf({ cookie: true });
-
 const router = Router();
 
-const userIsNotLoggedIn = (req, res, next) => {
+const userIsNotLoggedIn = (req: Request, res: Response, next: NextFunction) => {
     if (!req.session.userID) {
         req.flash('warning', 'You need to login first');
         return res.redirect('/login');
@@ -46,6 +42,12 @@ export default router
         // upload.single('avatar'),
         ProfileController.updateProfileAvatar
     )
+
+    /* .get(
+        '/shopCart/game/:game_id',
+        userIsNotLoggedIn,
+        ProfileController.getAddShopCartGame
+    ) */
 
     .get(
         '/shop/transactions',

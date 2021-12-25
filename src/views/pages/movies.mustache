@@ -50,17 +50,23 @@
                         <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">
-                                <a target="_blank" id="amazon_link" style="text-decoration:none;" href="{{amazon_link}}" class="card-link">
-                                    <span id="movie_title" class="fw-bold">{{title}}</span>
-                                    (<span id="movie_year_release" class="text-muted">{{year_release}}</span>)
-                                </a>
+                            <a target="_blank" id="tmdb_link" style="text-decoration:none;" href="{{amazon_link}}" class="fs-3 card-link text-decoration-none">
+                                <span id="movie_title" class="fw-bold">{{title}}</span>
+                                (<span id="movie_year_release" class="text-muted">{{year_release}}</span>)
+                            </a>
+
+                            <h3 class="fw-bold text-warning">⭐
+                                <span id="movie_tmdb_rating">
+                                    {{tmdb_rating}}
+                                </span>
                             </h3>
                         </div>
 
                         <p class="card-text" id="movie_resume">{{resume}}</p>
 
                         <ul class="mt-3">
+
+                            <li class=""><b><a onclick="return false;" target="_blank" href="#"><i class="bi bi-link-45deg"></i>Justc Watch Link</a></b></li>
 
                             <li><b>Genres:</b> <small id="movie_genres">{{genres}}</small></li>
 

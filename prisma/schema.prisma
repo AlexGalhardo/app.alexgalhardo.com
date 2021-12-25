@@ -25,11 +25,12 @@ model User {
   facebook_id                        String?
   address_zipcode                    String?
   address_street                     String?
-  address_street_number              String?
+  address_street_number              Int?
   address_neighborhood               String?
   address_city                       String?
   address_state                      String?
   address_country                    String?
+  shop_cart_itens                    String?
   stripe_customer_id                 String?
   stripe_card_id                     String?
   stripe_card_brand                  String?
@@ -104,34 +105,35 @@ model Book {
 }
 
 model Movie {
-  id           String    @id @default(uuid())
-  title        String    @unique
-  year_release Int
-  image        String    @unique
-  tmdb_link    String    @unique
-  tmdb_rating  Float
-  resume       String    @unique
-  duration     String
-  genres       String
-  created_at   DateTime  @default(now())
-  updated_at   DateTime?
+  id             String    @id @default(uuid())
+  title          String    @unique
+  year_release   Int
+  image          String    @unique
+  tmdb_link      String    @unique
+  tmdb_rating    Float
+  justwatch_link String?   @unique
+  resume         String    @unique
+  duration       String
+  genres         String
+  created_at     DateTime  @default(now())
+  updated_at     DateTime?
 
   @@map("movies")
 }
 
 model Tvshow {
-  id           String    @id @default(uuid())
-  title        String    @unique
-  year_release Int
-  image        String    @unique
-  tmdb_link    String    @unique
-  tmdb_rating  Float
-  resume       String    @unique
-  duration     String
-  genres       String
-  created_at   DateTime  @default(now())
-  updated_at   DateTime?
-
+  id             String    @id @default(uuid())
+  title          String    @unique
+  year_release   Int
+  image          String    @unique
+  tmdb_link      String    @unique
+  tmdb_rating    Float
+  justwatch_link String?   @unique
+  resume         String    @unique
+  duration       String
+  genres         String
+  created_at     DateTime  @default(now())
+  updated_at     DateTime?
 
   @@map("tv_shows")
 }
@@ -141,19 +143,19 @@ model StripeShopTransaction {
   transaction_id                 String   @unique
   total_amount                   Float
   card_id                        String
-  brand                          String
-  exp_month                      Int
-  exp_year                       Int
-  last4                          Int
+  card_brand                     String
+  card_exp_month                 Int
+  card_exp_year                  Int
+  card_last4                     Int
   currency                       String
   paid                           Boolean
   products_amount                Float
   products                       String
-  customer_id                    String
-  stripe_id                      String
-  customer_email                 String
-  customer_phone                 String
-  customer_name                  String
+  stripe_customer_id             String
+  user_id                        String
+  user_email                     String
+  user_phone                     String
+  user_name                      String
   shipping_address_zipcode       String
   shipping_address_street        String
   shipping_address_street_number Int
@@ -161,10 +163,9 @@ model StripeShopTransaction {
   shipping_address_city          String
   shipping_address_state         String
   shipping_address_country       String
-  carrier                        String
-  fee                            Int
+  shipping_carrier               String
+  shipping_fee                   Int
   created_at                     DateTime @default(now())
-
 
   @@map("stripe_shop_transactions")
 }
@@ -174,21 +175,21 @@ model StripeSubscriptionTransaction {
   created_at           DateTime @default(now())
   transaction_id       String
   status               String
+  user_id              String
+  user_email           String
+  user_name            String
+  stripe_customer_id   String
   card_id              String
   card_brand           String
   card_exp_month       Int
   card_exp_year        Int
   card_last4           String
   plan_id              String
-  name                 String
-  amount               Int
+  plan_name            String
+  plan_amount          Int
   current_period_start String
   current_period_end   String
   cancel_at_period_end Boolean
-  customer_id          String
-  customer_stripe_id   String
-  customer_email       String
-  customer_name        String
 
   @@map("stripe_subscriptions_transactions")
 }

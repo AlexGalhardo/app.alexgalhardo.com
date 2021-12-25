@@ -11,7 +11,7 @@ import { Request, Response } from 'express';
 
 import Header from '../helpers/Header';
 import Upload from '../helpers/Upload';
-import StripeModel from '../models/Stripe';
+import StripeModel from '../models/StripeModel';
 import Users from '../models/Users';
 
 class ProfileController {
@@ -78,6 +78,11 @@ class ProfileController {
         await Upload.profileAvatar(req);
         res.redirect('/profile');
     }
+
+    /* async getAddShopCartGame(req, res) {
+        const { game_id } = req.params;
+        await Users.shopCartAddGame(game_id);
+    } */
 
     async getViewMyShopTransactions(req: Request, res: Response) {
         const shopTransactions = await StripeModel.getShopTransactionsByUserID(

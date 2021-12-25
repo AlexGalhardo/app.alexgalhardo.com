@@ -5,23 +5,19 @@
  * https://github.com/AlexGalhardo
  */
 
-// HELPERS
 import Stripe from 'stripe';
 
 import DateTime from '../helpers/DateTime';
 import Header from '../helpers/Header';
 import NodeMailer from '../helpers/NodeMailer';
 import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
+import StripeModel from '../models/StripeModel';
+import Users from '../models/Users';
 
-// MODELS
-import StripeModel from '../models/JSON/Stripe';
-import Users from '../models/JSON/Users';
-
-// Stripe
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 class ShopController {
-    static getViewShop(req, res) {
+    getViewShop(req, res) {
         return res.render('pages/shop/shop_checkout', {
             user: SESSION_USER,
             flash_warning: req.flash('warning'),
@@ -30,7 +26,7 @@ class ShopController {
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
-        if (!SESSION_USER.stripe.customer_id) {
+        if (!SESSION_USER.stripe_customer_id) {
             const customer = await stripe.customers.create({
                 description: 'Customer created in Subscription checkout!',
                 email: SESSION_USER.email,
@@ -54,7 +50,7 @@ class ShopController {
             });
 
             const card = await stripe.customers.createSource(
-                SESSION_USER.stripe.customer_id,
+                SESSION_USER.stripe_customer_id,
                 { source: cardToken.id }
             );
 
@@ -75,18 +71,9 @@ class ShopController {
         return cardToken.id;
     }
 
-    /**
-     * POST /shop/payLog
-     * Verify if user is already a stripe customer
-     * verify if user already has a stripe credit card registred
-     */
-    static async postShopPayLog(req, res) {
+    async postShopPayLog(req, res) {
         try {
             const {
-                quantityOranges,
-                quantityGrapes,
-                quantityApples,
-                quantityBananas,
                 customer_email,
                 customer_name,
                 customer_phone,
@@ -96,14 +83,7 @@ class ShopController {
                 customer_neighborhood,
                 customer_city,
                 customer_state,
-                shipping_country,
-                shipping_carrier,
                 shipping_fee,
-                total_shop_amount,
-                card_number,
-                card_exp_month,
-                card_exp_year,
-                card_cvc,
             } = req.body;
 
             const validPassword = await Users.verifyPassword(
@@ -111,10 +91,10 @@ class ShopController {
                 confirm_password
             );
 
-            if (!validPassword) {
+            /* if (!validPassword) {
                 req.flash('warning', 'Invalid Password!');
                 return res.redirect(`/shop`);
-            }
+            } */
 
             await ShopController.verifyIfUserIsAlreadyAStripeCustomer();
 
@@ -125,29 +105,21 @@ class ShopController {
 
             const products = [
                 {
-                    quantity: quantityOranges,
-                    name: 'Oranges',
-                    total: parseFloat(quantityOranges * 0.49).toFixed(2),
+                    name: 'God Of War Ragnarok',
+                    total: 5990,
                 },
                 {
-                    quantity: quantityGrapes,
-                    name: 'Grapes',
-                    total: parseFloat(quantityGrapes * 0.99).toFixed(2),
+                    name: 'Horizon Forbidden West',
+                    total: 5990,
                 },
                 {
-                    quantity: quantityApples,
-                    name: 'Apples',
-                    total: parseFloat(quantityApples * 1.99).toFixed(2),
-                },
-                {
-                    quantity: quantityBananas,
-                    name: 'Bananas',
-                    total: parseFloat(quantityBananas * 2.99).toFixed(2),
+                    name: 'Elden Ring',
+                    total: 5990,
                 },
             ];
 
             const shopCardCharge = await stripe.charges.create({
-                amount: parseInt(total_shop_amount * 100),
+                amount: 17970,
                 currency: 'usd',
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
@@ -156,38 +128,30 @@ class ShopController {
 
             const shopTransactionObject = {
                 transaction_id: shopCardCharge.id,
-                total_amount: parseFloat(total_shop_amount).toFixed(2),
-                payment_method: {
-                    card_id: shopCardCharge.source.id,
-                    brand: shopCardCharge.source.brand,
-                    exp_month: shopCardCharge.source.exp_month,
-                    exp_year: shopCardCharge.source.exp_year,
-                    last4: shopCardCharge.source.last4,
-                },
+                total_amount: 17970,
+                card_id: shopCardCharge.source.id,
+                card_brand: shopCardCharge.source.brand,
+                card_exp_month: shopCardCharge.source.exp_month,
+                card_exp_year: shopCardCharge.source.exp_year,
+                card_last4: shopCardCharge.source.last4,
                 currency: shopCardCharge.currency,
                 paid: shopCardCharge.paid,
-                products_amount: (
-                    parseFloat(total_shop_amount) - parseFloat(shipping_fee)
-                ).toFixed(2),
+                products_amount: 17970,
                 products,
-                customer: {
-                    id: req.session.userID,
-                    stripe_id: SESSION_USER.stripe.customer_id,
-                    email: customer_email,
-                    phone: customer_phone,
-                    name: customer_name,
-                },
-                shipping: {
-                    address_zipcode: zipcode,
-                    address_street: customer_street,
-                    address_street_number: 42,
-                    address_neighborhood: customer_neighborhood,
-                    address_city: customer_city,
-                    address_state: customer_state,
-                    address_country: 'Brazil',
-                    carrier: 'Correios',
-                    fee: parseFloat(shipping_fee).toFixed(2),
-                },
+                stripe_customer_id: SESSION_USER.stripe_customer_id,
+                user_id: SESSION_USER.id,
+                user_email: customer_email,
+                user_phone: customer_phone,
+                user_name: customer_name,
+                shipping_address_zipcode: zipcode,
+                shipping_address_street: customer_street,
+                shipping_address_street_number: 42,
+                shipping_address_neighborhood: customer_neighborhood,
+                shipping_address_city: customer_city,
+                shipping_address_state: customer_state,
+                shipping_address_country: 'Brazil',
+                shipping_carrier: 'Correios',
+                shipping_fee: parseFloat(shipping_fee).toFixed(2),
                 created_at: DateTime.getNow(),
             };
 
@@ -207,4 +171,4 @@ class ShopController {
     }
 }
 
-export default ShopController;
+export default new ShopController();

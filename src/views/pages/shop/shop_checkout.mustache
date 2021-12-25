@@ -23,45 +23,45 @@
                     </div>
                 {{/flash}}
 
-                <!-- START COL-LG-3 -->
-                <div class="col-lg-3 mb-3">
-                    
+                <div class="col-lg-4 mb-3">
+
                     <ul class="list-group text-center">
-                        
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <input name="quantityOranges" class="form-control w-25" type="number" min="1" max="10" step="1" value="1" id="quantityOranges">
-                            Oranges  
-                            <b>$<span id="priceOranges">0.49</span></b>
+                            <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png">
+                            <small>God Of War Ragnarok</small>
+                            <b>$ <span>59.90</span></b>
+                            <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
+                                <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
                         </li>
-                          
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <input name="quantityGrapes" class="form-control w-25" type="number" min="1" max="10" step="1" value="1" id="quantityGrapes">
-                            Grapes  
-                            <b>$<span id="priceGrapes">0.99</span></b>
+                            <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.png">
+                            <small>Horizon Forbidden West</small>
+                            <b>$ <span>59.90</span></b>
+                            <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
+                                <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
                         </li>
-                          
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <input name="quantityApples" class="form-control w-25" type="number" min="1" max="10" step="1" value="1" id="quantityApples">
-                            Apples  
-                            <b>$<span id="priceApples">1.99</span></b>
-                        </li>
-                          
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <input name="quantityBananas" class="form-control w-25" type="number" min="1" max="10" step="1" value="1" id="quantityBananas">
-                            Bananas
-                            <b>$<span id="priceBananas">2.99</span></b>
+                            <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co391c.png">
+                            <small>Elden Ring</small>
+                            <b>$ <span>59.90</span></b>
+                            <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
+                                <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-warning">
-                            <b>TOTAL</b>  
-                            <b>$ <span id="total_shop_cart">6.46</span></b>
+                            <b>TOTAL</b>
+                            <b>$ <span id="total_shop_cart">179.70</span></b>
                         </li>
-                    
+
                     </ul>
 
                 </div>
-                <!-- END COL-LG-3 -->  
-
 
                 <!-- START COL-LG-4 -->
                 <div class="col-lg-4">
@@ -143,7 +143,7 @@
 
 
                         <!-- SHIPPING FEE -->
-                        <label for="shipping_fee" class="col-sm-5 col-form-label">Shipping Fee R$</label>
+                        <label for="shipping_fee" class="col-sm-5 col-form-label">Shipping Fee $</label>
                         <div class="col-sm-7 mb-3">
                             <!-- SHIPMENT_PRICE -->
                             <input type="text" class="form-control" value="0" name="shipping_fee" id="shipping_fee" required onkeydown="return false;">
@@ -246,7 +246,7 @@
             
                     <div>
                         <button type="submit" class="fw-bold btn btn-outline-success btn-block shadow w-100">
-                            Pay $ <span id="button_pay">6.46</span>
+                            Pay $ <span id="button_pay_price">179.70</span> <i class="bi bi-check2-circle"></i>
                         </button>
                     </div>
 
