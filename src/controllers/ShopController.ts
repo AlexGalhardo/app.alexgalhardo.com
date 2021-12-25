@@ -5,6 +5,8 @@
  * https://github.com/AlexGalhardo
  */
 
+import { Request, Response } from 'express';
+import { NextFunction } from 'express-serve-static-core';
 import Stripe from 'stripe';
 
 import DateTime from '../helpers/DateTime';
@@ -17,7 +19,7 @@ import Users from '../models/Users';
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 class ShopController {
-    getViewShop(req, res) {
+    getViewShop(req: Request, res: Response) {
         return res.render('pages/shop/shop_checkout', {
             user: SESSION_USER,
             flash_warning: req.flash('warning'),
@@ -35,43 +37,35 @@ class ShopController {
         }
     }
 
-    static async verifyIfUserAlreadyHasAStripeCardRegistred(req) {
+    static async verifyIfUserAlreadyHasAStripeCardRegistred(req: Request) {
         const { card_number, card_exp_year, card_exp_month, card_cvc } =
             req.body;
 
-        if (!SESSION_USER.stripe.card_id) {
+        const customerCard = {
+            number: card_number,
+            exp_month: card_exp_month,
+            exp_year: card_exp_year,
+            cvc: card_cvc,
+        };
+
+        if (SESSION_USER.stripe_card_id === null) {
             const cardToken = await stripe.tokens.create({
-                card: {
-                    number: card_number,
-                    exp_month: card_exp_month,
-                    exp_year: card_exp_year,
-                    cvc: card_cvc,
-                },
+                card: customerCard,
             });
 
-            const card = await stripe.customers.createSource(
-                SESSION_USER.stripe_customer_id,
-                { source: cardToken.id }
-            );
-
-            await Users.createStripeCard(SESSION_USER.id, cardToken.id, card);
+            await Users.createStripeCard(SESSION_USER.id, customerCard);
 
             return cardToken.id;
         }
 
         const cardToken = await stripe.tokens.create({
-            card: {
-                number: card_number,
-                exp_month: card_exp_month,
-                exp_year: card_exp_year,
-                cvc: card_cvc,
-            },
+            card: customerCard,
         });
 
         return cardToken.id;
     }
 
-    async postShopPayLog(req, res) {
+    async postShopPayLog(req: Request, res: Response, next: NextFunction) {
         try {
             const {
                 customer_email,
@@ -86,12 +80,12 @@ class ShopController {
                 shipping_fee,
             } = req.body;
 
-            const validPassword = await Users.verifyPassword(
+            /* const validPassword = await Users.verifyPassword(
                 SESSION_USER.id,
                 confirm_password
             );
 
-            /* if (!validPassword) {
+            if (!validPassword) {
                 req.flash('warning', 'Invalid Password!');
                 return res.redirect(`/shop`);
             } */
@@ -105,14 +99,17 @@ class ShopController {
 
             const products = [
                 {
+                    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png',
                     name: 'God Of War Ragnarok',
                     total: 5990,
                 },
                 {
+                    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.png',
                     name: 'Horizon Forbidden West',
                     total: 5990,
                 },
                 {
+                    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co391c.png',
                     name: 'Elden Ring',
                     total: 5990,
                 },
@@ -133,7 +130,7 @@ class ShopController {
                 card_brand: shopCardCharge.source.brand,
                 card_exp_month: shopCardCharge.source.exp_month,
                 card_exp_year: shopCardCharge.source.exp_year,
-                card_last4: shopCardCharge.source.last4,
+                card_last4: parseInt(shopCardCharge.source.last4),
                 currency: shopCardCharge.currency,
                 paid: shopCardCharge.paid,
                 products_amount: 17970,
@@ -151,7 +148,7 @@ class ShopController {
                 shipping_address_state: customer_state,
                 shipping_address_country: 'Brazil',
                 shipping_carrier: 'Correios',
-                shipping_fee: parseFloat(shipping_fee).toFixed(2),
+                shipping_fee: parseInt(shipping_fee),
                 created_at: DateTime.getNow(),
             };
 
@@ -166,7 +163,7 @@ class ShopController {
                 header: Header.shop(),
             });
         } catch (error) {
-            throw new Error(error);
+            next(error);
         }
     }
 }

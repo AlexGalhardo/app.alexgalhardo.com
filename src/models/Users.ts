@@ -109,6 +109,53 @@ class Users {
             return !!user;
         }
     }
+
+    async createStripeCustomer(user_id: string, stripe_customer_id: string) {
+        await prisma.user.update({
+            where: {
+                id: user_id,
+            },
+            data: {
+                stripe_customer_id,
+            },
+        });
+    }
+
+    async createStripeCard(user_id: string, customerCard) {
+        await prisma.user.update({
+            where: {
+                id: user_id,
+            },
+            data: {
+                stripe_card_number: customerCard.number,
+                stripe_card_exp_month: customerCard.card_exp_month,
+                stripe_card_exp_year: customerCard.exp_year,
+            },
+        });
+    }
+
+    async createStripeSubscription(
+        user_id: string,
+        planName: string,
+        subscriptionObject
+    ) {
+        await prisma.user.update({
+            where: {
+                id: user_id,
+            },
+            data: {
+                stripe_currently_subscription_id:
+                    subscriptionObject.transaction_id,
+                stripe_currently_subscription_name:
+                    subscriptionObject.plan_name,
+                stripe_subscription_start:
+                    subscriptionObject.current_period_start,
+                stripe_subscription_end: subscriptionObject.current_period_end,
+                stripe_cancel_at_period_end:
+                    subscriptionObject.cancel_at_period_end,
+            },
+        });
+    }
 }
 
 export default new Users();

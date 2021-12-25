@@ -7,7 +7,7 @@
  * http://localhost:3000/
  */
 
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
 import Header from '../helpers/Header';
@@ -150,7 +150,7 @@ class AppController {
         });
     }
 
-    static async postContact(req: Request, res: Response) {
+    static async postContact(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
@@ -174,7 +174,7 @@ class AppController {
             req.flash('success', 'Message Send!');
             return res.redirect('/contact');
         } catch (error) {
-            throw new Error(error);
+            next(error);
         }
     }
 

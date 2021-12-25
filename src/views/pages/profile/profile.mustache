@@ -7,7 +7,6 @@
         <!-- ROW -->
         <div class="row">
 
-
             {{#flash_success}}
                 <div class="text-center alert alert-success" role="alert">
                     <b>{{flash_success}}</b>
@@ -19,7 +18,6 @@
                     <b>{{flash_warning}}</b>
                 </div>
             {{/flash_warning}}
-
 
 
             <div class="col-sm-4">
@@ -90,32 +88,32 @@
             <div class="col-lg-4">
 
                 <div class="form-floating mb-3">
-                    <input class="mb-2 form-control" name="stripe_customer_id" type="text" value="{{stripe.customer_id}}" readonly>
+                    <input class="mb-2 form-control" name="stripe_customer_id" type="text" value="{{stripe_customer_id}}" readonly>
                     <label for="name">STRIPE_CUSTOMER_ID</label>
                 </div>
 
                 <hr>
 
                 <div class="form-floating mb-3">
-                      <input id="stripe_card_id" name="stripe_card_id" class="mb-2 form-control" type="text" value="{{stripe.card_id}}" readonly>
+                      <input id="stripe_card_id" name="stripe_card_id" class="mb-2 form-control" type="text" value="{{stripe_card_id}}" readonly>
                       <label for="stripe_card_id">STRIPE_CARD_ID</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input id="stripe_card_last_4_digits" name="stripe_card_last_4_digits" class="mb-2 form-control" type="text" value="{{stripe.card_last4}}" readonly>
+                      <input id="stripe_card_last_4_digits" name="stripe_card_last_4_digits" class="mb-2 form-control" type="text" value="{{stripe_card_last4}}" readonly>
                       <label for="stripe_card_last_4_digits">STRIPE_CARD_LAST_4_DIGITS</label>
                 </div>
 
                 <div class="row g-2 mb-2">
                   <div class="col-md">
                     <div class="form-floating">
-                      <input type="text" class="form-control" name="card_exp_year" id="card_exp_month" value="{{stripe.card_exp_month}}" readonly>
+                      <input type="text" class="form-control" name="card_exp_year" id="card_exp_month" value="{{stripe_card_exp_month}}" readonly>
                       <label for="card_exp_month">CARD_EXP_MONTH</label>
                     </div>
                   </div>
                   <div class="col-md">
                     <div class="form-floating">
-                      <input type="text" class="form-control" name="card_exp_year" id="card_exp_year" value="{{stripe.card_exp_year}}" readonly>
+                      <input type="text" class="form-control" name="card_exp_year" id="card_exp_year" value="{{stripe_card_exp_year}}" readonly>
                       <label for="card_exp_year">CARD_EXP_YEAR</label>
                     </div>
                   </div>
@@ -133,27 +131,27 @@
                 <hr>
 
                 <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" type="text" value="{{stripe.currently_subscription_name}}" readonly>
+                      <input class="mb-2 form-control" type="text" value="{{stripe_currently_subscription_name}}" readonly>
                       <label for="name">CURRENTLY_PLAN</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" type="text" value="{{stripe.currently_subscription_id}}" readonly>
+                      <input class="mb-2 form-control" type="text" value="{{stripe_currently_subscription_id}}" readonly>
                       <label for="name">CURRENTLY_SUBSCRIPTION_ID</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="CANCEL_AT_PERIOD_END" type="text" value="{{stripe.cancel_at_period_end}}" readonly>
+                      <input class="mb-2 form-control" name="CANCEL_AT_PERIOD_END" type="text" value="{{stripe_cancel_at_period_end}}" readonly>
                       <label for="name">CANCEL_AT_PERIOD_END</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="SUBSCRIPTION_START_DATE_TIME" type="text" value="{{stripe.subscription_start}}" readonly>
+                      <input class="mb-2 form-control" name="SUBSCRIPTION_START_DATE_TIME" type="text" value="{{stripe_subscription_start}}" readonly>
                       <label for="name">SUBSCRIPTION_START_DATE_TIME</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="SUBSCRIPTION_END_DATE_TIME" type="text" value="{{stripe.subscription_end}}" readonly>
+                      <input class="mb-2 form-control" name="SUBSCRIPTION_END_DATE_TIME" type="text" value="{{stripe_subscription_end}}" readonly>
                       <label for="name">SUBSCRIPTION_END_DATE_TIME</label>
                 </div>
 

@@ -10,14 +10,15 @@
  * bot
  */
 
-import dotenv from 'dotenv';
 import https from 'https';
 
 import DateTime from './DateTime';
 
-dotenv.config();
-
 class TelegramBOTLogger {
+    private token: string;
+    private channelName: string;
+    private baseUrl: string;
+
     constructor(token, channelName) {
         this.isThereToken(token);
         this.isThereChannel(channelName);
@@ -93,21 +94,21 @@ class TelegramBOTLogger {
         <b>PAID: </b> ${shopTransactionObject.paid}
         <b>AMOUNT: $</b> ${shopTransactionObject.total_amount}
         <b>GATEWAY: </b> Stripe
-        <b>PAYMENT_METHOD: </b> ${shopTransactionObject.payment_method.card_id}
+        <b>PAYMENT_METHOD: </b> ${shopTransactionObject.card_id}
         ---------------------------------------
-        <b>CUSTOMER_EMAIL:</b> ${shopTransactionObject.customer.email}
-        <b>CUSTOMER_ID:</b> ${shopTransactionObject.customer.id}
-        <b>CUSTOMER_STRIPE_ID:</b> ${shopTransactionObject.customer.stripe_id}
+        <b>CUSTOMER_EMAIL:</b> ${shopTransactionObject.user_email}
+        <b>CUSTOMER_ID:</b> ${shopTransactionObject.user_id}
+        <b>CUSTOMER_STRIPE_ID:</b> ${shopTransactionObject.stripe_customer_id}
         ---------------------------------------
         <b>PRODUCTS:</b> ${JSON.stringify(shopTransactionObject.products)}
         ---------------------------------------
-        <b>SHIPPING_ZIPCODE: </b> ${shopTransactionObject.shipping.address_zipcode
+        <b>SHIPPING_ZIPCODE: </b> ${shopTransactionObject.shipping_address_zipcode
             }
-        <b>SHIPPING_STREET:</b> ${shopTransactionObject.shipping.address_street}
-        <b>SHIPPING_NEIGHBORHOOD:</b> ${shopTransactionObject.shipping.address_neighborhood
+        <b>SHIPPING_STREET:</b> ${shopTransactionObject.shipping_address_street}
+        <b>SHIPPING_NEIGHBORHOOD:</b> ${shopTransactionObject.shipping_address_neighborhood
             }
-        <b>SHIPPING_CITY:</b> ${shopTransactionObject.shipping.address_city}
-        <b>SHIPPING_STATE:</b> ${shopTransactionObject.shipping.address_state}
+        <b>SHIPPING_CITY:</b> ${shopTransactionObject.shipping_address_city}
+        <b>SHIPPING_STATE:</b> ${shopTransactionObject.shipping_address_state}
         <b>SHIPPING_COUNTRY:</b> BRAZIL
         `;
 
@@ -137,10 +138,10 @@ class TelegramBOTLogger {
         <b>PLAN_NAME:</b> ${subsTransactionObject.plan.name}
         <b>PLAN_AMOUNT:</b> ${subsTransactionObject.plan.amount}
         ---------------------------------------------
-        <b>CUSTOMER_ID:</b> ${subsTransactionObject.customer.id}
-        <b>CUSTOMER_STRIPE_ID:</b> ${subsTransactionObject.customer.stripe_id}
-        <b>CUSTOMER_EMAIL:</b> ${subsTransactionObject.customer.email}
-        <b>CUSTOMER_NAME:</b> ${subsTransactionObject.customer.name}
+        <b>CUSTOMER_ID:</b> ${subsTransactionObject.user_id}
+        <b>CUSTOMER_STRIPE_ID:</b> ${subsTransactionObject.stripe_customer_id}
+        <b>CUSTOMER_EMAIL:</b> ${subsTransactionObject.user_email}
+        <b>CUSTOMER_NAME:</b> ${subsTransactionObject.user_name}
         `;
 
         const message = `${emoji} SUBSCRIPTION TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;

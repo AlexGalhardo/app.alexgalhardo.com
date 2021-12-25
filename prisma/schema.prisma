@@ -20,9 +20,9 @@ model User {
   document                           String?
   phone                              String?
   birth_date                         String?
-  google_id                          String?
-  github_id                          String?
-  facebook_id                        String?
+  google_id                          String?   @unique
+  github_id                          String?   @unique
+  facebook_id                        String?   @unique
   address_zipcode                    String?
   address_street                     String?
   address_street_number              Int?
@@ -31,13 +31,14 @@ model User {
   address_state                      String?
   address_country                    String?
   shop_cart_itens                    String?
-  stripe_customer_id                 String?
-  stripe_card_id                     String?
+  stripe_customer_id                 String?   @unique
+  stripe_card_id                     String?   @unique
+  stripe_card_number                 String?   @unique
   stripe_card_brand                  String?
-  stripe_card_last4                  String?
-  stripe_card_exp_month              String?
-  stripe_card_exp_year               String?
-  stripe_currently_subscription_id   String?
+  stripe_card_last4                  Int?
+  stripe_card_exp_month              Int?
+  stripe_card_exp_year               Int?
+  stripe_currently_subscription_id   String?   @unique
   stripe_currently_subscription_name String?
   stripe_subscription_start          String?
   stripe_subscription_end            String?

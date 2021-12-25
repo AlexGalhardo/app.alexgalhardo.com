@@ -18,8 +18,7 @@
 		                
 		                <li class="list-group-item d-flex justify-content-between align-items-center">
 		                    
-		                    <input name="quantityOranges" class="form-control w-25" type="number" min="1" step="1" 
-		                    	value="{{quantity}}" id="quantityOranges" readonly>
+		                    <img class="h-25 w-25" src="{{image}}">
 		                    
 		                    {{name}}
 		                    
@@ -35,7 +34,7 @@
 
 	                <li class="list-group-item d-flex justify-content-between align-items-center">
 	                    Shipping Fee  
-	                    <b>$ <span>{{shopTransactionObject.shipping.fee}}</span></b>
+	                    <b>$ <span>{{shopTransactionObject.shipping_fee}}</span></b>
 	                </li>
 
 	                <li class="list-group-item d-flex justify-content-between align-items-center bg-warning">
@@ -47,32 +46,29 @@
 
 	        </div>
 
-
-
 			<div class="col-lg-4">
     			<ul class="list-group list-group-flush text-start">
                     <li class="list-group-item"><b>CHARGE_ID:</b> {{shopTransactionObject.transaction_id}}</li>
                     <li class="list-group-item"><b>CURRENCY:</b> {{shopTransactionObject.currency}}</li>
                     <li class="list-group-item"><b>AMOUNT:</b> {{shopTransactionObject.total_amount}}</li>
                     <li class="list-group-item"><b>PAID:</b> {{shopTransactionObject.paid}}</li>
-                    <li class="list-group-item"><b>PAYMENT_METHOD:</b> {{shopTransactionObject.payment_method.card_id}}</li>
+                    <li class="list-group-item"><b>STRIPE_CARD_ID:</b> {{shopTransactionObject.card_id}}</li>
                     <li class="list-group-item"><b>CREATED_AT:</b> {{shopTransactionObject.created_at}}</li>
                 </ul>
 	        </div>
 
-
 	        <div class="col-lg-4">
     			<ul class="list-group list-group-flush text-start">
-                    <li class="list-group-item"><b>Customer:</b> {{shopTransactionObject.customer.name}}</li>
-                    <li class="list-group-item"><b>Phone:</b> {{shopTransactionObject.customer.phone}}</li>
-                    <li class="list-group-item"><b>Email:</b> {{shopTransactionObject.customer.email}}</li>
-                    <li class="list-group-item"><b>Shipping ZipCode:</b> {{shopTransactionObject.shipping.address_zipcode}}</li>
-                    <li class="list-group-item"><b>Shipping Street:</b> {{shopTransactionObject.shipping.address_street}}</li>
-                    <li class="list-group-item"><b>Shipping Neighborhood:</b> {{shopTransactionObject.shipping.address_neighborhood}}</li>
-                    <li class="list-group-item"><b>Shipping City:</b> {{shopTransactionObject.shipping.address_city}}</li>
-                    <li class="list-group-item"><b>Shipping State:</b> {{shopTransactionObject.shipping.address_state}}</li>
-                    <li class="list-group-item"><b>Shipping Country:</b> {{shopTransactionObject.shipping.address_country}}</li>
-                    <li class="list-group-item"><b>Shipping Carrier:</b> {{shopTransactionObject.shipping.carrier}}</li>
+                    <li class="list-group-item"><b>Customer:</b> {{shopTransactionObject.user_name}}</li>
+                    <li class="list-group-item"><b>Phone:</b> {{shopTransactionObject.user_phone}}</li>
+                    <li class="list-group-item"><b>Email:</b> {{shopTransactionObject.user_email}}</li>
+                    <li class="list-group-item"><b>Shipping ZipCode:</b> {{shopTransactionObject.shipping_address_zipcode}}</li>
+                    <li class="list-group-item"><b>Shipping Street:</b> {{shopTransactionObject.shipping_address_street}}</li>
+                    <li class="list-group-item"><b>Shipping Neighborhood:</b> {{shopTransactionObject.shipping_address_neighborhood}}</li>
+                    <li class="list-group-item"><b>Shipping City:</b> {{shopTransactionObject.shipping_address_city}}</li>
+                    <li class="list-group-item"><b>Shipping State:</b> {{shopTransactionObject.shipping_address_state}}</li>
+                    <li class="list-group-item"><b>Shipping Country:</b> {{shopTransactionObject.shipping_address_country}}</li>
+                    <li class="list-group-item"><b>Shipping Carrier:</b> {{shopTransactionObject.shipping_carrier}}</li>
                 </ul>
 	        </div>
 

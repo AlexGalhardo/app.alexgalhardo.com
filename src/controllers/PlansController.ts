@@ -4,27 +4,23 @@
  * aleexgvieira@gmail.com
  * https://github.com/AlexGalhardo
  *
- *
  * http://localhost:3000/plans
  */
 
-// HELPERS
+import { Request, Response, NextFunction } from 'express';
 import Stripe from 'stripe';
 
 import DateTime from '../helpers/DateTime';
 import Header from '../helpers/Header';
 import NodeMailer from '../helpers/NodeMailer';
 import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
+import StripeModel from '../models/StripeModel';
+import Users from '../models/Users';
 
-// MODELS
-import StripeModel from '../models/JSON/Stripe';
-import Users from '../models/JSON/Users';
-
-// STRIPE
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 class PlansController {
-    static getViewPlans(req, res) {
+    getViewPlans(req: Request, res: Response) {
         return res.render('pages/plans/plans', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -32,7 +28,7 @@ class PlansController {
         });
     }
 
-    static getViewPlanStarterCheckout(req, res) {
+    getViewPlanStarterCheckout(req: Request, res: Response) {
         return res.render('pages/plans/starter_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -40,7 +36,7 @@ class PlansController {
         });
     }
 
-    static getViewPlanProCheckout(req, res) {
+    getViewPlanProCheckout(req: Request, res: Response) {
         return res.render('pages/plans/pro_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -48,7 +44,7 @@ class PlansController {
         });
     }
 
-    static getViewPlanPremiumCheckout(req, res) {
+    getViewPlanPremiumCheckout(req: Request, res: Response) {
         return res.render('pages/plans/premium_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -114,7 +110,7 @@ class PlansController {
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
-        if (!SESSION_USER.stripe.customer_id) {
+        if (!SESSION_USER.stripe_customer_id) {
             const stripeCustomer = await stripe.customers.create({
                 description: 'Customer created in Subscription checkout!',
                 email: SESSION_USER.email,
@@ -125,11 +121,11 @@ class PlansController {
             );
             return stripeCustomer.id;
         }
-        return SESSION_USER.stripe.customer_id;
+        return SESSION_USER.stripe_customer_id;
     }
 
-    static async verifyIfUserAlreadyHasAStripeCardRegistred(req) {
-        if (!SESSION_USER.stripe.card_id) {
+    static async verifyIfUserAlreadyHasAStripeCardRegistred(req: Request) {
+        if (!SESSION_USER.stripe_card_id) {
             const { card_number, card_exp_year, card_exp_month, card_cvc } =
                 req.body;
 
@@ -143,25 +139,24 @@ class PlansController {
             });
 
             const card = await stripe.customers.createSource(
-                SESSION_USER.stripe.customer_id,
+                SESSION_USER.stripe_customer_id,
                 { source: cardToken.id }
             );
 
             const stripeCard = await Users.createStripeCard(
                 SESSION_USER.id,
-                cardToken.id,
                 card
             );
             return stripeCard;
         }
 
         return {
-            card_token_id: SESSION_USER.stripe.card_token_id,
-            card_id: SESSION_USER.stripe.card_id,
-            card_brand: SESSION_USER.stripe.card_brand,
-            card_last4: SESSION_USER.stripe.card_last4,
-            card_exp_month: SESSION_USER.stripe.card_exp_month,
-            card_exp_year: SESSION_USER.stripe.card_exp_year,
+            card_token_id: SESSION_USER.stripe_card_token_id,
+            card_id: SESSION_USER.stripe_card_id,
+            card_brand: SESSION_USER.stripe_card_brand,
+            card_last4: SESSION_USER.stripe_card_last4,
+            card_exp_month: SESSION_USER.stripe_card_exp_month,
+            card_exp_year: SESSION_USER.stripe_card_exp_year,
         };
     }
 
@@ -202,17 +197,11 @@ class PlansController {
         return subscription;
     }
 
-    /**
-     * POST /plan/<plan_name>/checkout
-     * Verify if user is already a stripe customer
-     * verify if user already has a stripe credit card registred
-     * Verify if user is not already registred in other plan
-     */
-    static async postSubscription(req, res) {
+    async postSubscription(req: Request, res: Response, next: NextFunction) {
         try {
             const { plan_name, confirm_password } = req.body;
 
-            const validPassword = await Users.verifyPassword(
+            /* const validPassword = await Users.verifyPassword(
                 SESSION_USER.id,
                 confirm_password
             );
@@ -222,7 +211,7 @@ class PlansController {
                 return res.redirect(
                     `/plan/${plan_name.toLowerCase()}/checkout`
                 );
-            }
+            } */
 
             const stripeCustomerID =
                 await PlansController.verifyIfUserIsAlreadyAStripeCustomer();
@@ -243,28 +232,21 @@ class PlansController {
                 created_at: DateTime.getNow(),
                 transaction_id: subscription.id,
                 status: subscription.status,
-                payment_method: {
-                    card_id: stripeCard.card_id,
-                    card_brand: stripeCard.card_brand,
-                    card_exp_month: stripeCard.card_exp_month,
-                    card_exp_year: stripeCard.card_exp_year,
-                    card_last4: stripeCard.card_last4,
-                },
-                plan: {
-                    id: stripePlan.id,
-                    name: stripePlan.name,
-                    amount: stripePlan.amount,
-                    current_period_start: subscription.current_period_start,
-                    current_period_end: subscription.current_period_end,
-                    cancel_at_period_end: subscription.cancel_at_period_end,
-                },
-                customer: {
-                    id: SESSION_USER.id,
-                    stripe_id: SESSION_USER.stripe.customer_id,
-                    email: SESSION_USER.email,
-                    name: SESSION_USER.name,
-                },
-                stripe_request_response: JSON.stringify(subscription),
+                card_id: stripeCard.card_id,
+                card_brand: stripeCard.card_brand,
+                card_exp_month: stripeCard.card_exp_month,
+                card_exp_year: stripeCard.card_exp_year,
+                card_last4: stripeCard.card_last4,
+                stripe_plan_id: stripePlan.id,
+                plan_name: stripePlan.name,
+                amount: stripePlan.amount,
+                current_period_start: subscription.current_period_start,
+                current_period_end: subscription.current_period_end,
+                cancel_at_period_end: subscription.cancel_at_period_end,
+                stripe_customer_id: SESSION_USER.stripe.customer_id,
+                user_id: SESSION_USER.id,
+                user_email: SESSION_USER.email,
+                user_name: SESSION_USER.name,
             };
 
             await Users.createStripeSubscription(
@@ -291,9 +273,9 @@ class PlansController {
                 divPlanBanner: PlansController.getSubscriptionBanner(plan_name),
             });
         } catch (error) {
-            throw new Error(error);
+            next(error);
         }
     }
 }
 
-export default PlansController;
+export default new PlansController();

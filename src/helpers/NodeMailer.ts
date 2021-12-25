@@ -56,20 +56,21 @@ class NodeMailer {
 
         const replacements = {
             transaction_id: shopTransactionObject.transaction_id,
-            payment_method: shopTransactionObject.payment_method.card_id,
+            payment_method: shopTransactionObject.card_id,
             paid: shopTransactionObject.paid,
             products: JSON.stringify(shopTransactionObject.products),
             total_products: shopTransactionObject.products_amount,
-            shipping_fee: shopTransactionObject.shipping.fee,
+            shipping_fee: shopTransactionObject.shipping_fee,
             amount: shopTransactionObject.total_amount,
-            shipping: {
-                zipcode: shopTransactionObject.shipping.address_zipcode,
-                street: shopTransactionObject.shipping.address_street,
-                neighborhood:
-                    shopTransactionObject.shipping.address_neighborhood,
-                city: shopTransactionObject.shipping.address_city,
-                state: shopTransactionObject.shipping.address_state,
-            },
+            shipping_address_zipcode:
+                shopTransactionObject.shipping_address_zipcode,
+            shipping_address_street:
+                shopTransactionObject.shipping_address_street,
+            shipping_address_neighborhood:
+                shopTransactionObject.shipping_address_neighborhood,
+            shipping_address_city: shopTransactionObject.shipping_address_city,
+            shipping_address_state:
+                shopTransactionObject.shipping_address_state,
             created_at: shopTransactionObject.created_at,
         };
 
@@ -99,7 +100,7 @@ class NodeMailer {
             transaction_id: subsTransactionObject.transaction_id,
             status: subsTransactionObject.status,
             plan_name: subsTransactionObject.plan.name,
-            amount: parseFloat(subsTransactionObject.plan.amount / 100),
+            amount: parseFloat(subsTransactionObject.plan_amount / 100),
             payment_method: subsTransactionObject.payment_method,
             current_period_start: subsTransactionObject.current_period_start,
             current_period_end: subsTransactionObject.current_period_end,
