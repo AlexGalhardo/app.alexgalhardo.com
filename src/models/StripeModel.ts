@@ -46,17 +46,22 @@ class StripeModel {
     async createSubscriptionTransaction(subscriptionTransactionObject) {
         await prisma.stripeSubscriptionTransaction.create({
             data: {
-                created_at: subscriptionTransactionObject.created_at,
                 transaction_id: subscriptionTransactionObject.transaction_id,
                 status: subscriptionTransactionObject.status,
                 card_id: subscriptionTransactionObject.card_id,
                 card_brand: subscriptionTransactionObject.card_brand,
-                card_exp_month: subscriptionTransactionObject.card_exp_month,
-                card_exp_year: subscriptionTransactionObject.card_exp_year,
-                card_last4: subscriptionTransactionObject.card_last4,
+                card_exp_month: parseInt(
+                    subscriptionTransactionObject.card_exp_month
+                ),
+                card_exp_year: parseInt(
+                    subscriptionTransactionObject.card_exp_year
+                ),
+                card_last4: parseInt(subscriptionTransactionObject.card_last4),
                 plan_id: subscriptionTransactionObject.stripe_plan_id,
                 plan_name: subscriptionTransactionObject.plan_name,
-                plan_amount: subscriptionTransactionObject.amount,
+                plan_amount: parseInt(
+                    subscriptionTransactionObject.plan_amount
+                ),
                 current_period_start:
                     subscriptionTransactionObject.current_period_start,
                 current_period_end:

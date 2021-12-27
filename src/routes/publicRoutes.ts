@@ -10,7 +10,7 @@
 
 import csrf from 'csurf';
 import dotenv from 'dotenv';
-import { Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 
 // import Recaptcha from 'express-recaptcha';
 import swaggerUI from 'swagger-ui-express';
@@ -28,7 +28,11 @@ dotenv.config();
 const csrfProtection = csrf({ cookie: true });
 const router = Router();
 
-const userIsAlreadyLoggedIn = (req, res, next) => {
+const userIsAlreadyLoggedIn = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     if (req.session.userID) {
         req.flash('warning', 'You need to logout first');
         return res.redirect('/');
@@ -36,7 +40,7 @@ const userIsAlreadyLoggedIn = (req, res, next) => {
     next();
 };
 
-const userIsNotLoggedIn = (req, res, next) => {
+const userIsNotLoggedIn = (req: Request, res: Response, next: NextFunction) => {
     if (!req.session.userID) {
         req.flash('warning', 'You need to login first');
         return res.redirect('/login');
@@ -44,7 +48,11 @@ const userIsNotLoggedIn = (req, res, next) => {
     next();
 };
 
-const verifyIfUserHasActiveSubscription = (req, res, next) => {
+const verifyIfUserHasActiveSubscription = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     if (SESSION_USER.stripe_currently_subscription_name !== 'FREE') {
         req.flash(
             'warning',
@@ -113,18 +121,6 @@ router
     .post('/criptoBOT/:side/:symbol/:quantity', CriptoBOTController.postBinance)
 
     .get('/plans', PlansController.getViewPlans)
-
-    .get(
-        '/plan/starter/checkout',
-        userIsNotLoggedIn,
-        verifyIfUserHasActiveSubscription,
-        PlansController.getViewPlanStarterCheckout
-    )
-    .post(
-        '/plan/starter/checkout',
-        userIsNotLoggedIn,
-        PlansController.postSubscription
-    )
 
     .get(
         '/plan/pro/checkout',

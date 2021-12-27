@@ -5,6 +5,7 @@
  * https://github.com/AlexGalhardo
  */
 
+import { CustomerProfiles } from 'aws-sdk';
 import { Request, Response } from 'express';
 import { NextFunction } from 'express-serve-static-core';
 import Stripe from 'stripe';
@@ -34,7 +35,9 @@ class ShopController {
                 email: SESSION_USER.email,
             });
             await Users.createStripeCustomer(SESSION_USER.id, customer.id);
+            return customer.id;
         }
+        return SESSION_USER.stripe_customer_id;
     }
 
     static async verifyIfUserAlreadyHasAStripeCardRegistred(req: Request) {
@@ -48,12 +51,16 @@ class ShopController {
             cvc: card_cvc,
         };
 
-        if (SESSION_USER.stripe_card_id === null) {
+        if (!SESSION_USER.stripe_card_id) {
             const cardToken = await stripe.tokens.create({
                 card: customerCard,
             });
 
-            await Users.createStripeCard(SESSION_USER.id, customerCard);
+            await Users.createStripeCard(
+                SESSION_USER.id,
+                cardToken,
+                card_number
+            );
 
             return cardToken.id;
         }
@@ -90,7 +97,8 @@ class ShopController {
                 return res.redirect(`/shop`);
             } */
 
-            await ShopController.verifyIfUserIsAlreadyAStripeCustomer();
+            const stripeCustomerID =
+                await ShopController.verifyIfUserIsAlreadyAStripeCustomer();
 
             const stripeCardTokenID =
                 await ShopController.verifyIfUserAlreadyHasAStripeCardRegistred(
@@ -101,22 +109,23 @@ class ShopController {
                 {
                     image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png',
                     name: 'God Of War Ragnarok',
-                    total: 5990,
+                    total: 59.9,
                 },
                 {
                     image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.png',
                     name: 'Horizon Forbidden West',
-                    total: 5990,
+                    total: 59.9,
                 },
                 {
                     image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co391c.png',
                     name: 'Elden Ring',
-                    total: 5990,
+                    total: 59.9,
                 },
             ];
 
             const shopCardCharge = await stripe.charges.create({
-                amount: 17970,
+                amount:
+                    179.7 + parseFloat((shipping_fee * 100) / 100).toFixed(2),
                 currency: 'usd',
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
@@ -125,7 +134,7 @@ class ShopController {
 
             const shopTransactionObject = {
                 transaction_id: shopCardCharge.id,
-                total_amount: 17970,
+                total_amount: 179.7,
                 card_id: shopCardCharge.source.id,
                 card_brand: shopCardCharge.source.brand,
                 card_exp_month: shopCardCharge.source.exp_month,
@@ -135,7 +144,7 @@ class ShopController {
                 paid: shopCardCharge.paid,
                 products_amount: 17970,
                 products,
-                stripe_customer_id: SESSION_USER.stripe_customer_id,
+                stripe_customer_id: stripeCustomerID,
                 user_id: SESSION_USER.id,
                 user_email: customer_email,
                 user_phone: customer_phone,
@@ -148,7 +157,7 @@ class ShopController {
                 shipping_address_state: customer_state,
                 shipping_address_country: 'Brazil',
                 shipping_carrier: 'Correios',
-                shipping_fee: parseInt(shipping_fee),
+                shipping_fee,
                 created_at: DateTime.getNow(),
             };
 

@@ -16,8 +16,6 @@
             </div>
         {{/flash_warning}}
 
-
-
 		<div class="row">
 
             <div class="col-lg-6">
@@ -30,17 +28,17 @@
         		{{#subsTransactionObject}}
         			<ul class="list-group list-group-flush text-start">
                         <li class="list-group-item"><b>TRANSACTION_ID:</b> {{transaction_id}}</li>
-                        <li class="list-group-item"><b>PAYMENT_METHOD:</b> {{payment_method.card_id}}</li>
-                        <li class="list-group-item"><b>CARD_BRAND:</b> {{payment_method.card_brand}}</li>
-                        <li class="list-group-item"><b>CARD_LAST4:</b> {{payment_method.card_last4}}</li>
-                        <li class="list-group-item"><b>CARD_EXP_MONTH:</b> {{payment_method.card_exp_month}}</li>
-                        <li class="list-group-item"><b>CARD_EXP_YEAR:</b> {{payment_method.card_exp_year}}</li>
+                        <li class="list-group-item"><b>PAYMENT_METHOD:</b> {{card_id}}</li>
+                        <li class="list-group-item"><b>CARD_BRAND:</b> {{card_brand}}</li>
+                        <li class="list-group-item"><b>CARD_LAST4:</b> {{card_last4}}</li>
+                        <li class="list-group-item"><b>CARD_EXP_MONTH:</b> {{card_exp_month}}</li>
+                        <li class="list-group-item"><b>CARD_EXP_YEAR:</b> {{card_exp_year}}</li>
                         <li class="list-group-item"><b>SUBSCRIPTION_STATUS:</b> {{status}}</li>
-                        <li class="list-group-item"><b>CUSTOMER_STRIPE_ID:</b> {{customer.stripe_id}}</li>
+                        <li class="list-group-item"><b>CUSTOMER_STRIPE_ID:</b> {{stripe_customer_id}}</li>
                         <li class="list-group-item"><b>CUSTOMER_EMAIL:</b> {{user.email}}</li>
-                        <li class="list-group-item"><b>CURRENT_PERIOD_START:</b> {{plan.current_period_start}}</li>
-                        <li class="list-group-item"><b>CURRENT_PERIOD_END:</b> {{plan.current_period_end}}</li>
-                        <li class="list-group-item"><b>CREATED:</b> {{created_at}}</li>
+                        <li class="list-group-item"><b>CURRENT_PERIOD_START:</b> {{current_period_start}}</li>
+                        <li class="list-group-item"><b>CURRENT_PERIOD_END:</b> {{current_period_end}}</li>
+                        <li class="list-group-item"><b>CREATED:</b> {{createdAt}}</li>
                     </ul>
         		{{/subsTransactionObject}}
 	        </div>
@@ -48,8 +46,5 @@
 	    </div>
 
 	</div>
-
-    <script src="../../scripts/navbar_apis.js"></script>
-    <script src="../../scripts/privacy.js"></script>
 
 {{>partials/footer}}

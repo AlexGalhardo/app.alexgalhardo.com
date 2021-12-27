@@ -111,7 +111,7 @@ model Movie {
   year_release   Int
   image          String    @unique
   tmdb_link      String    @unique
-  tmdb_rating    Float
+  tmdb_rating    Int
   justwatch_link String?   @unique
   resume         String    @unique
   duration       String
@@ -128,7 +128,7 @@ model Tvshow {
   year_release   Int
   image          String    @unique
   tmdb_link      String    @unique
-  tmdb_rating    Float
+  tmdb_rating    Int
   justwatch_link String?   @unique
   resume         String    @unique
   duration       String
@@ -165,7 +165,7 @@ model StripeShopTransaction {
   shipping_address_state         String
   shipping_address_country       String
   shipping_carrier               String
-  shipping_fee                   Int
+  shipping_fee                   Float
   created_at                     DateTime @default(now())
 
   @@map("stripe_shop_transactions")
@@ -184,7 +184,7 @@ model StripeSubscriptionTransaction {
   card_brand           String
   card_exp_month       Int
   card_exp_year        Int
-  card_last4           String
+  card_last4           Int
   plan_id              String
   plan_name            String
   plan_amount          Int

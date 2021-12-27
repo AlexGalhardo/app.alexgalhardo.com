@@ -99,9 +99,15 @@ class NodeMailer {
         const replacements = {
             transaction_id: subsTransactionObject.transaction_id,
             status: subsTransactionObject.status,
-            plan_name: subsTransactionObject.plan.name,
-            amount: parseFloat(subsTransactionObject.plan_amount / 100),
-            payment_method: subsTransactionObject.payment_method,
+            plan_name: subsTransactionObject.plan_name,
+            amount: parseFloat(subsTransactionObject.plan_amount / 100).toFixed(
+                2
+            ),
+            card_id: subsTransactionObject.card_id,
+            card_brand: subsTransactionObject.card_brand,
+            card_exp_month: subsTransactionObject.card_exp_month,
+            card_exp_year: subsTransactionObject.card_exp_year,
+            card_last4: subsTransactionObject.card_last4,
             current_period_start: subsTransactionObject.current_period_start,
             current_period_end: subsTransactionObject.current_period_end,
             created_at: subsTransactionObject.created_at,

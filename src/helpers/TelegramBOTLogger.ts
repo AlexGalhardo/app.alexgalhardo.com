@@ -130,13 +130,10 @@ class TelegramBOTLogger {
         <b>TRANSACTION_ID:</b> ${subsTransactionObject.transaction_id}
         <b>STATUS: </b> ${subsTransactionObject.status}
         ---------------------------------------------
-        <b>CURRENT_PERIOD_START: </b> ${subsTransactionObject.plan.current_period_start}
-        <b>CURRENT_PERIOD_END:</b> ${subsTransactionObject.plan.current_period_end}
-        <b>CANCEL_AT_PERIOD_END:</b> ${subsTransactionObject.plan.cancel_at_period_end}
+        <b>PLAN_NAME:</b> ${subsTransactionObject.plan_name}
+        <b>PLAN_AMOUNT:</b> ${subsTransactionObject.plan_amount}
         ---------------------------------------------
-        <b>PLAN_ID:</b> ${subsTransactionObject.plan.id}
-        <b>PLAN_NAME:</b> ${subsTransactionObject.plan.name}
-        <b>PLAN_AMOUNT:</b> ${subsTransactionObject.plan.amount}
+        <b>CARD_ID:</b> ${subsTransactionObject.card_id}
         ---------------------------------------------
         <b>CUSTOMER_ID:</b> ${subsTransactionObject.user_id}
         <b>CUSTOMER_STRIPE_ID:</b> ${subsTransactionObject.stripe_customer_id}

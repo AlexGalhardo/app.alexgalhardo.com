@@ -2,7 +2,7 @@
 
     {{#user}}
 
-    <div class="container col-lg-7 mt-2">
+    <div class="container col-lg-6 mt-3">
 
         <div class="row">
 
@@ -21,22 +21,25 @@
                     <div class="col-lg-6">
 
                         <div class="card mb-4 rounded-3 shadow-sm text-center">
-                            <div class="card-header py-3 bg-danger">
-                                <h4 class="my-0 fw-normal">PRO</h4>
+                            <div class="card-header py-3 bg-warning">
+                                <h4 class="my-0 fw-bold text-white">
+                                    <i class="bi bi-award"></i>
+                                    PRO
+                                </h4>
                             </div>
                             <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$2.99<small class="text-muted fw-light">/month</small></h1>
+                                <h1 class="card-title pricing-card-title">$1.99<small class="text-muted fw-light">/month</small></h1>
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li>✔️ Site Ilimited Recomendations</li>
-                                    <li>✔️ Get Recommendations in Email</li>
-                                    <li>❌ Get Recommendations in Telegram</li>
+                                    <li>✔️ Get Recommendations in your Email</li>
+                                    <li>❌ Get Recommendations in your Telegram</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="email" name="customer_email" class="form-control" id="customer_email" required autofocus value="{{email}}" readonly>
-                            <label for="customer_email">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" required autofocus value="{{email}}" readonly>
+                            <label for="email">Email</label>
                         </div>
 
                         <!-- CONFIRM PASSWORD -->
@@ -49,8 +52,6 @@
                         <br>
 
                     </div>
-                    <!-- END COL LG 5 -->
-
 
 
                     <div class="col-lg-6">
@@ -69,7 +70,7 @@
                             <div class="row g-2 mb-2">
                               <div class="col-md">
                                 <div class="form-floating">
-                                  <input type="text" class="form-control" name="card_exp_year" id="card_exp_month" value="{{stripe.card_exp_month}}" readonly>
+                                  <input type="text" class="form-control" name="card_exp_month" id="card_exp_month" value="{{stripe.card_exp_month}}" readonly>
                                   <label for="card_exp_month">CARD_EXP_MONTH</label>
                                 </div>
                               </div>
@@ -119,16 +120,16 @@
                                         <h6 class="text-muted small">CVV
                                             <i class="fa fa-question-circle d-inline"></i>
                                         </h6>
-                                        <input type="text" name="card_cvc" required class="form-control" placeholder="Code CVV" value="314">
+                                        <input type="text" name="card_cvc" id="card_cvc" required class="form-control" placeholder="Code CVV" value="314">
                                     </div>
                                 </div>
                             </div>
 
                             {{/user.stripe.card_id}}
-
+                            
                             <div>
                                 <button type="submit" class="mt-1 mb-1 btn btn-outline-success btn-block shadow w-100">
-                                    <span class="fw-bold">Pay $ 2.99/Month</span>
+                                    <span class="fw-bold">Pay $ 1.99/Month</span>
                                 </button>
                             </div>
 
