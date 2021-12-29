@@ -14,7 +14,7 @@ import AdminController from '../controllers/ADMIN/AdminController';
 const router = Router();
 
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-    if ((req.user && !req.user.admin) || !req.user) return res.redirect('/');
+    if (!SESSION_USER || !SESSION_USER.admin) return res.redirect('/');
     next();
 };
 

@@ -7,18 +7,20 @@
  * http://localhost:3000/admin
  */
 
+import { Request, Response } from 'express';
+
 import Blog from '../../models/Blog';
 import Books from '../../models/Books';
 import Games from '../../models/Games';
 
 class AdminController {
-    static getViewCreateBlogPost(req, res) {
+    static getViewCreateBlogPost(req: Request, res: Response) {
         res.render('pages/admin/createBlogPost', {
             user: SESSION_USER,
         });
     }
 
-    static postCreateBlogPost(req, res) {
+    static postCreateBlogPost(req: Request, res: Response) {
         const { blog_title, blog_category, blog_body } = req.body;
 
         const blogPostObject = {
@@ -49,7 +51,7 @@ class AdminController {
         });
     }
 
-    static getViewUpdateBlogPost(req, res) {
+    static getViewUpdateBlogPost(req: Request, res: Response) {
         const { blog_id } = req.params;
         const blogPost = Blog.getByID(blog_id);
 
@@ -59,7 +61,7 @@ class AdminController {
         });
     }
 
-    static postUpdateBlogPost(req, res) {
+    static postUpdateBlogPost(req: Request, res: Response) {
         const {
             blog_id,
             blog_title,
@@ -103,7 +105,7 @@ class AdminController {
         });
     }
 
-    static postDeleteBlogPost(req, res) {
+    static postDeleteBlogPost(req: Request, res: Response) {
         const { blog_id } = req.params;
 
         if (Blog.delete(parseInt(blog_id))) {
@@ -112,13 +114,13 @@ class AdminController {
         return res.redirect(`/admin/update/blogPost/${blog_id}`);
     }
 
-    static getViewCreateGame(req, res) {
+    static getViewCreateGame(req: Request, res: Response) {
         res.render('pages/admin/createGame', {
             user: SESSION_USER,
         });
     }
 
-    static postCreateGame(req, res) {
+    static postCreateGame(req: Request, res: Response) {
         const {
             game_title,
             game_year_release,
@@ -169,20 +171,23 @@ class AdminController {
         });
     }
 
-    static getViewUpdateGame(req, res) {
+    static async getViewUpdateGame(req: Request, res: Response) {
         const { game_id } = req.params;
-        const game = Games.getByID(game_id);
+        const game = await Games.getById(game_id);
 
         res.render('pages/admin/updateGame', {
+            flash_success: req.flash('success'),
+            flash_warning: req.flash('warning'),
             game,
             user: SESSION_USER,
         });
     }
 
-    static postUpdateGame(req, res) {
+    static async postUpdateGame(req: Request, res: Response) {
         const {
             game_id,
             game_title,
+            game_price,
             game_year_release,
             game_platforms,
             game_genres,
@@ -195,8 +200,9 @@ class AdminController {
         } = req.body;
 
         const gameObject = {
-            id: parseInt(game_id),
+            id: game_id,
             title: game_title,
+            price: game_price,
             year_release: game_year_release,
             platforms: game_platforms,
             genres: game_genres,
@@ -208,53 +214,33 @@ class AdminController {
             resume: game_resume,
         };
 
-        console.log('gameObject é', gameObject);
-
-        const game = Games.updateByID(gameObject);
+        const game = await Games.update(gameObject);
 
         if (!game) {
-            return res.render('pages/admin/updateGame', {
-                flash: {
-                    type: 'warning',
-                    message: 'Error: game not updated!',
-                },
-                game,
-                user: SESSION_USER,
-            });
+            req.flash('warning', `Error: game not updated!`);
+            return res.redirect(`/admin/update/game/${game_id}`);
         }
 
-        return res.render('pages/admin/updateGame', {
-            flash: {
-                type: 'success',
-                message: 'Game UPDATED!',
-            },
-            game,
-            user: SESSION_USER,
-        });
+        req.flash('success', `SUCCESS: Game Updated!`);
+        return res.redirect(`/admin/update/game/${game_id}`);
     }
 
-    static postDeleteGame(req, res) {
+    static postDeleteGame(req: Request, res: Response) {
         const { game_id } = req.params;
         console.log(Games.delete(parseInt(game_id)));
         if (Games.delete(parseInt(game_id))) {
-            /* return res.render("pages/admin/createGame", {
-    flash: {
-        type: "success",
-        message: `GAME_ID: ${game_id} deleted with success!`
-    }
-}) */
             return res.redirect('/admin/create/game');
         }
         return res.redirect(`/admin/update/game/${game_id}`);
     }
 
-    static getViewCreateBook(req, res) {
+    static getViewCreateBook(req: Request, res: Response) {
         res.render('pages/admin/createBook', {
             user: SESSION_USER,
         });
     }
 
-    static postCreateBook(req, res) {
+    static postCreateBook(req: Request, res: Response) {
         const {
             book_title,
             book_year_release,
@@ -301,7 +287,7 @@ class AdminController {
         });
     }
 
-    static getViewUpdateBook(req, res) {
+    static getViewUpdateBook(req: Request, res: Response) {
         const { book_id } = req.params;
         const book = Books.getByID(book_id);
 
@@ -311,7 +297,7 @@ class AdminController {
         });
     }
 
-    static postUpdateBook(req, res) {
+    static postUpdateBook(req: Request, res: Response) {
         const {
             book_id,
             book_title,
@@ -361,7 +347,7 @@ class AdminController {
         });
     }
 
-    static postDeleteBook(req, res) {
+    static postDeleteBook(req: Request, res: Response) {
         const { book_id } = req.params;
 
         if (Books.delete(parseInt(book_id))) {

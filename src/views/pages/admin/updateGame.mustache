@@ -12,22 +12,23 @@
 
 	        	<div class="mb-3 row">
 
-	        		{{#flash}}
-			            <div class="text-center alert alert-{{type}}" role="alert" class="mb-3">
-			                <b>{{message}}</b>
-			            </div>
-			        {{/flash}}
+	        		{{#flash_success}}
+                        <div class="text-center alert alert-success" role="alert">
+                            <b>{{flash_success}}</b>
+                        </div>
+                    {{/flash_success}}
+
+                    {{#flash_warning}}
+                        <div class="text-center alert alert-warning" role="alert">
+                            <b>{{flash_warning}}</b>
+                        </div>
+                    {{/flash_warning}}
 
 			        <div class="col-lg-6">
 
 			        	<div class="form-floating mb-3">
-						  	<input type="number" min="1" class="form-control" name="game_id" id="game_id" value="{{id}}" required onkeydown="return false;">
+						  	<input type="text" class="form-control" name="game_id" id="game_id" value="{{id}}" required onkeydown="return false;">
 						  	<label for="game_id">GAME_ID</label>
-						</div>
-
-					    <div class="form-floating mb-3">
-						  	<input type="text" class="form-control" id="updated_at" value="{{updated_at}}" readonly>
-						  	<label for="updated_at">GAME_UPDATED_AT</label>
 						</div>
 					    
 					    <div class="form-floating mb-3">
@@ -35,8 +36,13 @@
 						  	<label for="game_title">GAME_TITLE</label>
 						</div>
 
+                        <div class="form-floating mb-3">
+						  	<input type="number" step="1" min="100" max="100000" class="form-control" id="game_price" name="game_price" value="{{price}}" required>
+						  	<label for="game_price">GAME_PRICE</label>
+						</div>
+
 						<div class="form-floating mb-3">
-						  	<input type="number" max="2021" class="form-control" id="game_year_release" name="game_year_release" value="{{year_release}}" required>
+						  	<input type="number" step="1" min="1980" max="2030" class="form-control" id="game_year_release" name="game_year_release" value="{{year_release}}" required>
 						  	<label for="game_year_release">GAME_YEAR_RELEASE</label>
 						</div>
 
@@ -71,7 +77,7 @@
 						</div>
 
 						<div class="form-floating mb-3">
-						  	<input type="text" class="form-control" name="game_igdb_rating" id="game_igdb_rating" value="{{igdb_rating}}" required>
+						  	<input type="number" min="0" max="100" step="1" class="form-control" id="game_igdb_rating" name="game_igdb_rating" value="{{igdb_rating}}" required>
 						  	<label for="game_igdb_rating">GAME_IGDB_RATING</label>
 						</div>
 
@@ -108,4 +114,3 @@
 
     {{/user.admin}}
 
-{{>partials/footer}}

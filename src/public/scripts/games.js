@@ -23,5 +23,8 @@ async function recommendOtherGame() {
         document.querySelector('#game_igdb_link').href = object[0].igdb_link;
         document.querySelector('#game_igdb_rating').innerHTML =
             object[0].igdb_rating;
+        document.querySelector(
+            '#game_admin_update_link'
+        ).href = `/admin/update/game/${object[0].id}`;
     });
 }

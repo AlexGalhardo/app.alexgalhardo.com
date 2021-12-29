@@ -2,6 +2,21 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+type gameObject = {
+    id: string;
+    title: string;
+    price: number;
+    year_release: number;
+    platforms: string;
+    genres: string;
+    developer: string;
+    image: string;
+    igdb_link: string;
+    igdb_rating: number;
+    amazon_link: string;
+    resume: string;
+};
+
 class Games {
     getAll() {
         return prisma.game.findMany();
@@ -27,13 +42,35 @@ class Games {
         });
     }
 
-    async searchTitle(gameTitle: string) {
+    searchTitle(gameTitle: string) {
         return prisma.game.findMany({
             where: {
                 title: {
                     contains: gameTitle,
                     mode: 'insensitive',
                 },
+            },
+        });
+    }
+
+    update(gameObject: gameObject) {
+        return prisma.game.update({
+            where: {
+                id: gameObject.id,
+            },
+            data: {
+                id: gameObject.id,
+                title: gameObject.title,
+                price: parseInt(gameObject.price),
+                year_release: parseInt(gameObject.year_release),
+                platforms: gameObject.platforms,
+                genres: gameObject.genres,
+                developer: gameObject.developer,
+                image: gameObject.image,
+                igdb_link: gameObject.igdb_link,
+                igdb_rating: parseInt(gameObject.igdb_rating),
+                amazon_link: gameObject.amazon_link,
+                resume: gameObject.resume,
             },
         });
     }

@@ -40,7 +40,7 @@
                     <!--<button class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mt-2 shadow"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">{{price}}</span>]</button>-->
 
                     {{#user.admin}}
-                        <a href="/admin/update/game/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow-sm">
+                        <a id="game_admin_update_link" href="/admin/update/game/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow-sm">
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Game</a>
                     {{/user.admin}}
