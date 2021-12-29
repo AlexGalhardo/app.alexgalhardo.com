@@ -53,4 +53,33 @@ export default router
     .get('/update/book/:book_id', isAdmin, AdminController.getViewUpdateBook)
     .post('/update/book/:book_id', isAdmin, AdminController.postUpdateBook)
 
-    .post('/delete/book/:book_id', isAdmin, AdminController.postDeleteBook);
+    .post('/delete/book/:book_id', isAdmin, AdminController.postDeleteBook)
+
+    .get('/create/movie', isAdmin, AdminController.getViewCreateMovie)
+    .post('/create/movie', isAdmin, AdminController.postCreateMovie)
+
+    .get('/update/movie/:movie_id', isAdmin, AdminController.getViewUpdateMovie)
+    .post('/update/movie/:movie_id', isAdmin, AdminController.postUpdateMovie)
+
+    .post('/delete/movie/:movie_id', isAdmin, AdminController.postDeleteMovie)
+
+    .get('/create/tvshow', isAdmin, AdminController.getViewCreateTVShow)
+    .post('/create/tvshow', isAdmin, AdminController.postCreateTVShow)
+
+    .get(
+        '/update/tvshow/:tvshow_id',
+        isAdmin,
+        AdminController.getViewUpdateTVShow
+    )
+
+    .post(
+        '/update/tvshow/:tvshow_id',
+        isAdmin,
+        AdminController.postUpdateTVShow
+    )
+
+    .post(
+        '/delete/tvshow/:tvshow_id',
+        isAdmin,
+        AdminController.postDeleteTVShow
+    );

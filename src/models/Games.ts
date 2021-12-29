@@ -53,6 +53,24 @@ class Games {
         });
     }
 
+    create(gameObject: gameObject) {
+        return prisma.game.create({
+            data: {
+                title: gameObject.title,
+                price: parseInt(gameObject.price),
+                year_release: parseInt(gameObject.year_release),
+                platforms: gameObject.platforms,
+                genres: gameObject.genres,
+                developer: gameObject.developer,
+                image: gameObject.image,
+                igdb_link: gameObject.igdb_link,
+                igdb_rating: parseInt(gameObject.igdb_rating),
+                amazon_link: gameObject.amazon_link,
+                resume: gameObject.resume,
+            },
+        });
+    }
+
     update(gameObject: gameObject) {
         return prisma.game.update({
             where: {
@@ -71,6 +89,15 @@ class Games {
                 igdb_rating: parseInt(gameObject.igdb_rating),
                 amazon_link: gameObject.amazon_link,
                 resume: gameObject.resume,
+                updated_at: new Date(),
+            },
+        });
+    }
+
+    delete(game_id: string) {
+        return prisma.game.delete({
+            where: {
+                id: game_id,
             },
         });
     }

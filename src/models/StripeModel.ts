@@ -1,10 +1,59 @@
+/* eslint-disable radix */
 import Bcrypt from '@helpers/Bcrypt';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+type shopTransactionObject = {
+    transaction_id: string;
+    total_amount: number;
+    card_id: string;
+    card_brand: string;
+    card_exp_month: number;
+    card_exp_year: number;
+    card_last4: number;
+    currency: string;
+    paid: boolean;
+    products_amount: number;
+    products: string;
+    stripe_customer_id: string;
+    user_id: string;
+    user_email: string;
+    user_phone: string;
+    user_name: string;
+    shipping_address_zipcode: string;
+    shipping_address_street: string;
+    shipping_address_street_number: number;
+    shipping_address_neighborhood: string;
+    shipping_address_city: string;
+    shipping_address_state: string;
+    shipping_address_country: string;
+    shipping_carrier: string;
+    shipping_fee: number;
+};
+
+type subscriptionTransactionObject = {
+    transaction_id: string;
+    status: string;
+    card_id: string;
+    card_brand: string;
+    card_exp_month: number;
+    card_exp_year: number;
+    card_last4: number;
+    plan_id: string;
+    plan_name: string;
+    plan_amount: number;
+    current_period_start: string;
+    current_period_end: string;
+    cancel_at_period_end: boolean;
+    stripe_customer_id: string;
+    user_id: string;
+    user_email: string;
+    user_name: string;
+};
+
 class StripeModel {
-    async createShopTransaction(shopTransactionObject) {
+    async createShopTransaction(shopTransactionObject: shopTransactionObject) {
         await prisma.stripeShopTransaction.create({
             data: {
                 transaction_id: shopTransactionObject.transaction_id,
@@ -43,7 +92,9 @@ class StripeModel {
         });
     }
 
-    async createSubscriptionTransaction(subscriptionTransactionObject) {
+    async createSubscriptionTransaction(
+        subscriptionTransactionObject: subscriptionTransactionObject
+    ) {
         await prisma.stripeSubscriptionTransaction.create({
             data: {
                 transaction_id: subscriptionTransactionObject.transaction_id,
