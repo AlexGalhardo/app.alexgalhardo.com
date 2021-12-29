@@ -3,9 +3,9 @@ import request from 'supertest';
 
 import app from '../../../app';
 
-describe('TESTING GET PUBLIC TV SHOWS ENDPOINTS...', () => {
-    it('should return all tvshows', async () => {
-        const response = await request(app).get('/api/public/tvshows');
+describe('TESTING GET PUBLIC MOVIES ENDPOINTS...', () => {
+    it('should return all movies', async () => {
+        const response = await request(app).get('/api/public/movies');
 
         expect(response.body[0]).toHaveProperty('tmdb_link');
         expect(response.body[0]).toHaveProperty('tmdb_rating');
@@ -19,8 +19,8 @@ describe('TESTING GET PUBLIC TV SHOWS ENDPOINTS...', () => {
         expect(response.ok).toBeTruthy();
     });
 
-    it('should return a random tv show', async () => {
-        const response = await request(app).get('/api/public/tvshows/random');
+    it('should return a random movie', async () => {
+        const response = await request(app).get('/api/public/movies/random');
 
         expect(response.body[0]).toHaveProperty('tmdb_link');
         expect(response.body[0]).toHaveProperty('tmdb_rating');
@@ -34,11 +34,11 @@ describe('TESTING GET PUBLIC TV SHOWS ENDPOINTS...', () => {
         expect(response.ok).toBeTruthy();
     });
 
-    it('should return a tvshow by id', async () => {
-        const tvshow = await request(app).get('/api/public/tvshows/random');
+    it('should return a movie by id', async () => {
+        const movie = await request(app).get('/api/public/movies/random');
 
         const response = await request(app).get(
-            `/api/public/tvshows/${tvshow.body[0].id}`
+            `/api/public/movies/${movie.body[0].id}`
         );
 
         expect(response.body).toHaveProperty('tmdb_link');

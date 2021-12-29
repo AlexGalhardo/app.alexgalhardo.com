@@ -3,13 +3,12 @@ import request from 'supertest';
 
 import app from '../../../app';
 
-describe('TESTING GET PUBLIC TV SHOWS ENDPOINTS...', () => {
-    it('should return all tvshows', async () => {
-        const response = await request(app).get('/api/public/tvshows');
+describe('TESTING GET PUBLIC BOOKS ENDPOINTS...', () => {
+    it('should return all books', async () => {
+        const response = await request(app).get('/api/public/books');
 
-        expect(response.body[0]).toHaveProperty('tmdb_link');
-        expect(response.body[0]).toHaveProperty('tmdb_rating');
-        expect(response.body[0]).toHaveProperty('duration');
+        expect(response.body[0]).toHaveProperty('pages');
+        expect(response.body[0]).toHaveProperty('author');
         expect(response.statusCode).toBe(200);
         expect(response.type).toBe('application/json');
         expect(response.status).toBe(200);
@@ -19,12 +18,11 @@ describe('TESTING GET PUBLIC TV SHOWS ENDPOINTS...', () => {
         expect(response.ok).toBeTruthy();
     });
 
-    it('should return a random tv show', async () => {
-        const response = await request(app).get('/api/public/tvshows/random');
+    it('should return a random book', async () => {
+        const response = await request(app).get('/api/public/books/random');
 
-        expect(response.body[0]).toHaveProperty('tmdb_link');
-        expect(response.body[0]).toHaveProperty('tmdb_rating');
-        expect(response.body[0]).toHaveProperty('duration');
+        expect(response.body[0]).toHaveProperty('pages');
+        expect(response.body[0]).toHaveProperty('author');
         expect(response.statusCode).toBe(200);
         expect(response.type).toBe('application/json');
         expect(response.status).toBe(200);
@@ -34,16 +32,15 @@ describe('TESTING GET PUBLIC TV SHOWS ENDPOINTS...', () => {
         expect(response.ok).toBeTruthy();
     });
 
-    it('should return a tvshow by id', async () => {
-        const tvshow = await request(app).get('/api/public/tvshows/random');
-
+    it('should return a book by id', async () => {
+        const book = await request(app).get(`/api/public/books/random`);
         const response = await request(app).get(
-            `/api/public/tvshows/${tvshow.body[0].id}`
+            `/api/public/books/${book.body[0].id}`
         );
 
-        expect(response.body).toHaveProperty('tmdb_link');
-        expect(response.body).toHaveProperty('tmdb_rating');
-        expect(response.body).toHaveProperty('duration');
+        expect(response.body).toHaveProperty('pages');
+        expect(response.body).toHaveProperty('author');
+        expect(response.body).toHaveProperty('id');
         expect(response.statusCode).toBe(200);
         expect(response.type).toBe('application/json');
         expect(response.status).toBe(200);
