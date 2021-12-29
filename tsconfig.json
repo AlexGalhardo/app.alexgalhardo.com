@@ -1,39 +1,45 @@
 {
     "compilerOptions": {
-        "target": "es2021",
+        "target": "es2020",
         "module": "commonjs",
-        "rootDir": "./",
-        "baseUrl": "./src",
+        "lib": [
+            "es6",
+            "esnext.asynciterable"
+        ],
+        "allowJs": true,
         "outDir": "./dist",
+        "rootDir": "./src",
+        "removeComments": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/@types"
+        ],
         "esModuleInterop": true,
+        "resolveJsonModule": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true,
-        "strict": true,
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": true,
+        "baseUrl": ".",
         "paths": {
-            "@routes/*": [
-                "routes/*"
-            ],
-            "@config/*": [
-                "config/*"
+            "@controllers/*": [
+                "./src/controllers/*"
             ],
             "@models/*": [
-                "models/*"
+                "./src/models/*"
+            ],
+            "@views/*": [
+                "./src/views/*"
+            ],
+            "@config/*": [
+                "./src/config/*"
             ],
             "@helpers/*": [
-                "helpers/*"
-            ],
-            "@controllers/*": [
-                "controllers/*"
+                "./src/helpers/*"
             ]
-        },
+        }
     },
-    "exclude": [
-        "node_modules",
-    ],
+    "include": [
+        "src/**/*"
+    ]
 }

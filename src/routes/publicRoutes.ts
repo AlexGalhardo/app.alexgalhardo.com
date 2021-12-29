@@ -11,17 +11,21 @@
 import csrf from 'csurf';
 import dotenv from 'dotenv';
 import { Router, Request, Response, NextFunction } from 'express';
-
 // import Recaptcha from 'express-recaptcha';
 import swaggerUI from 'swagger-ui-express';
 
 import AppController from '../controllers/AppController';
 import AuthController from '../controllers/AuthController';
 import BlogController from '../controllers/BlogController';
+import BooksController from '../controllers/BooksController';
+import ContactController from '../controllers/ContactController';
 import CriptoBOTController from '../controllers/CriptoBOTController';
+import GamesController from '../controllers/GamesController';
+import MoviesController from '../controllers/MoviesController';
 import PlansController from '../controllers/PlansController';
 import ShopController from '../controllers/ShopController';
-import docs from '../docs/index';
+import TVShowsController from '../controllers/TVShowsController';
+// import docs from '../docs/index';
 
 dotenv.config();
 
@@ -63,30 +67,34 @@ const verifyIfUserHasActiveSubscription = (
     next();
 };
 
-router.use(
+/* router.use(
     '/api-docs',
     swaggerUI.serve,
     swaggerUI.setup(docs, { explorer: true })
-);
+); */
 
 router
-    .get('/', AppController.getViewHome)
     .get('/projects', AppController.getViewProjects)
     .get('/bank', AppController.getViewBank)
     .get('/toDo', AppController.getViewToDo)
-    .get('/books', AppController.getViewBooks)
-    .get('/movies', AppController.getViewMovies)
-    .get('/tvshows', AppController.getViewTVShows)
     .get('/about', AppController.getViewAbout)
-    .get('/criptoBOT', AppController.getViewCriptoBOT)
 
-    .get('/contact', csrfProtection, AppController.getViewContact)
-    .post('/contact', csrfProtection, AppController.postContact)
+    .get('/', GamesController.getViewGames)
+    .get('/books', BooksController.getViewBooks)
+    .get('/movies', MoviesController.getViewMovies)
+    .get('/tvshows', TVShowsController.getViewTVShows)
+
+    .get('/criptoBOT', CriptoBOTController.getViewCriptoBOT)
+
+    .get('/contact', csrfProtection, ContactController.getViewContact)
+    .post('/contact', csrfProtection, ContactController.postContact)
 
     .get('/privacy', AppController.getViewPrivacy)
 
-    .get('/searchGame', AppController.getSearchGameTitle)
-    .get('/searchBook', AppController.getSearchBookTitle)
+    .get('/searchGame', GamesController.getSearchGameTitle)
+    .get('/searchBook', BooksController.getSearchBookTitle)
+    // .get('/searchMovie', GamesController.getSearchMovieTitle)
+    // .get('/searchTVShow', BooksController.getSearchTVShowTitle)
 
     .get('/blog', BlogController.getViewBlog)
     .get('/blog/search', BlogController.getSearchBlogTitle)

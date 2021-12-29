@@ -13,7 +13,7 @@
  * http://localhost:3000/confirmEmail
  */
 
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import queryString from 'query-string';
 
@@ -35,7 +35,7 @@ class AuthController {
         });
     }
 
-    async postLogin(req: Request, res: Response) {
+    async postLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
@@ -62,13 +62,10 @@ class AuthController {
 
             req.session.userID = user.id;
             global.SESSION_USER = user;
-            req.flash(
-                'success',
-                `Welcome back, ${global.SESSION_USER.name} :D`
-            );
+            req.flash('success', `Welcome back, ${user.name} :D`);
             return res.redirect('/');
         } catch (error) {
-            throw new Error(error);
+            next(error);
         }
     }
 

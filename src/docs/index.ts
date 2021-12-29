@@ -1,11 +1,11 @@
-const basicInfo = require('./basicInfo')
-const servers = require('./servers')
-const components = require('./components')
-const tags = require('./tags')
+import basicInfo from './basicInfo'
+import servers from './servers'
+import components from './components'
+import tags from './tags'
 
-const endpoints = require('./endpoints')
+import endpoints from './endpoints'
 
-module.exports = {
+export {
     ...basicInfo,
     ...servers,
     ...components,

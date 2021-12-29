@@ -39,12 +39,10 @@ global.APP_ROOT_PATH = path.resolve(__dirname);
 global.SESSION_USER = null;
 
 // eslint-disable-next-line no-unused-expressions
-process.env.APP_DATABASE === 'JSON'
+/* process.env.APP_DATABASE === 'JSON'
     ? console.log('USING DATABASE: JSON')
     : console.log('USING PRISMA ORM with POSTGRESQL');
-
-// LocalHost HTTPS | Need to change .env APP_URL to https
-// const app = require("https-localhost")()
+    */
 
 // LocalHost HTTP
 const app = express();
@@ -86,7 +84,7 @@ app.use(compression());
 // STATUS MONITOR
 // http://localhost:3000/status
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-app.use(require('express-status-monitor')());
+// app.use(require('express-status-monitor')());
 
 // CORS
 app.use(cors());

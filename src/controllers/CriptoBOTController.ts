@@ -19,7 +19,14 @@ import { Request, Response } from 'express';
 import querystring from 'querystring';
 
 class CriptoBOTController {
-    static postBinance(req: Request, res: Response) {
+    getViewCriptoBOT(req, res) {
+        return res.render('pages/criptoBOT', {
+            user: SESSION_USER,
+            header: Header.criptoBOT(),
+        });
+    }
+
+    postBinance(req: Request, res: Response) {
         const { side, symbol, quantity } = req.params;
 
         const data = {
@@ -61,4 +68,4 @@ class CriptoBOTController {
     }
 }
 
-module.exports = CriptoBOTController;
+export default new CriptoBOTController();

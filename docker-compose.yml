@@ -23,6 +23,9 @@
 
 # sudo kill -9 `sudo lsof -t -i:3000`
 # sudo kill -9 $(sudo lsof -t -i:3000)
+# sudo docker system prune
+# sudo docker system prune -af
+# https://stackoverflow.com/questions/50142049/enospc-no-space-left-on-device-nodejs
 
 version: '3'
 

@@ -14,49 +14,49 @@ const deleteProfile = require('./profile/delete-Profile')
 const postAdminLogin = require('./admin/post-AdminLogin')
 const postAdminTest = require('./admin/post-AdminTest')
 
-module.exports = {
+export {
     paths:{
-        '/api/public/games': {
+    '/api/public/games': {
             ...getGames
-        },
-        '/api/public/games/{game_id}': {
+    },
+    '/api/public/games/{game_id}': {
             ...getGameByID
-        },
-        '/api/public/books': {
+    },
+    '/api/public/books': {
             ...getBooks
-        },
-        '/api/public/books/{book_id}': {
+    },
+    '/api/public/books/{book_id}': {
             ...getBookByID
-        },
-        '/api/public/blog': {
+    },
+    '/api/public/blog': {
             ...getBlogPosts
-        },
-        '/api/public/blog/{blog_id}': {
+    },
+    '/api/public/blog/{blog_id}': {
             ...getBlogPostByID
-        },
-        '/api/profile/login': {
+    },
+    '/api/profile/login': {
             ...profileLogin
-        },
-        '/api/profile/patch': {
+    },
+    '/api/profile/patch': {
             ...patchProfile
-        },
-        '/api/profile/delete': {
+    },
+    '/api/profile/delete': {
             ...deleteProfile
-        },
-        '/api/admin/login': {
+    },
+    '/api/admin/login': {
             ...postAdminLogin
-        },
-        '/api/admin/test': {
+    },
+    '/api/admin/test': {
             ...postAdminTest
-        },
-        /*'/todos':{
-            ...getTodos,
-            ...createTodo
-        },
-        '/todos/{id}':{
-            ...getTodo,
-            ...updateTodo,
-            ...deleteTodo
-        }*/
-    }
+    },
+    /*'/todos':{
+        ...getTodos,
+        ...createTodo
+    },
+    '/todos/{id}':{
+        ...getTodo,
+        ...updateTodo,
+        ...deleteTodo
+    }*/
+}
 }

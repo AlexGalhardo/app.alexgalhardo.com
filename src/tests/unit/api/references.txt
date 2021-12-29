@@ -1,0 +1,34 @@
+toBe()
+toEqual()
+toHaveLength()
+toBeGreaterThan(15)
+toBeGreaterThanOrEqual(15)
+toBeLessThan()
+toBeLessThanOrEqual()
+toHaveProperty('email');
+toBeUndefined();
+not.toBeUndefined();
+not.toBeNull();
+toBeTruthy()
+
+toMatch(/regexaqui/);
+toThrow(new Errror('Não divide por 0'))
+
+it.only()
+
+execute essa função antes de cada teste
+beforeEach(() => {})
+
+execute essa função depois de cada teste
+afterEach(() => {})
+
+execute antes de qualquer teste
+beforeAll(() => {})
+
+execute depois de todos os testes
+afterAll(() => {})
+
+response.body.error
+expect(response.body.error).toBeUndefined()
+expect(response.body.list.length).toBeGreaterThanOrEqual(1)
+expect(response.body.list).toContain(email)
