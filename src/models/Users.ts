@@ -155,6 +155,49 @@ class Users {
             },
         });
     }
+
+    async addGameToShopCart(game_id: string) {
+        let userShopCartItems = prisma.user.findUnique({
+            where: {
+                id: SESSION_USER.id,
+            },
+            select: {
+                shop_cart_itens,
+            },
+        });
+
+        if (!userShopCartItems) {
+            const game = prisma.game.findUnique({
+                where: {
+                    id: game_id,
+                },
+                select: {
+                    image,
+                    title,
+                    price,
+                },
+            });
+
+            const shopCartItens = [];
+
+            shopCartItens.push(game);
+
+            await prisma.user.update({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                data: {
+                    shop_cart_itens: JSON.stringify(shopCartItens),
+                },
+            });
+
+            return true;
+        }
+
+        userShopCartItems = JSON.parse(userShopCartItems);
+        console.log('userShopCartItems => ', userShopCartItems);
+        return false;
+    }
 }
 
 export default new Users();

@@ -8,7 +8,7 @@
  */
 
 import DateTime from '../../helpers/DateTime';
-import Games from '../../models/JSON/Games';
+import Games from '../../models/Games';
 
 class APIAdminGameController {
     async postCreateGame(req, res) {
@@ -91,9 +91,6 @@ class APIAdminGameController {
         }
     }
 
-    /**
-     * http://localhost:3000/api/admin/game/delete/:game_id
-     */
     async deleteGame(req, res, next) {
         try {
             const { game_id } = req.params;

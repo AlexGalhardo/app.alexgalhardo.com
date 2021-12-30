@@ -51,6 +51,13 @@ model User {
   @@map("users")
 }
 
+model Newsletter {
+  email      String   @unique
+  created_at DateTime @default(now())
+
+  @@map("newsletter")
+}
+
 model Blog {
   id         String    @id @default(uuid())
   title      String    @unique

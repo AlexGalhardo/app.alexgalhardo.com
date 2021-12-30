@@ -9,15 +9,53 @@
  *  http://localhost:3000/api/public
  */
 
+import Blog from '@models/Blog';
+import Books from '@models/Books';
+import Games from '@models/Games';
+import Movies from '@models/Movies';
+import Newsletter from '@models/Newsletter';
+import TVShows from '@models/TVShows';
+import Users from '@models/Users';
 import { Request, Response, NextFunction } from 'express';
 
-import Blog from '../../models/Blog';
-import Books from '../../models/Books';
-import Games from '../../models/Games';
-import Movies from '../../models/Movies';
-import TVShows from '../../models/TVShows';
-
 class APIPublicController {
+    async getNewsletter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { email } = req.params;
+            if (await Newsletter.addEmail(email)) {
+                return res.json({
+                    added_email_to_newsletter: true,
+                });
+            }
+            return res.json({
+                added_email_to_newsletter: false,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async addGameToCart(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { game_id } = req.params;
+            if (!SESSION_USER) {
+                return res.json({
+                    error: 'User not logged in',
+                });
+            }
+
+            if (await Users.addGameToShopCart(game_id)) {
+                return res.json({
+                    added_game_to_shop_cart: true,
+                });
+            }
+            return res.json({
+                added_game_to_shop_cart: false,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
     /** ********* BLOG *********** */
     async getPublicBlog(req: Request, res: Response, next: NextFunction) {
         try {

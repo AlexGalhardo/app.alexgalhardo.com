@@ -4,9 +4,6 @@
 
       	<div class="row">
 
-            <input type="text" id="user_id" hidden value="{{user.id}}" readonly>
-            <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
-
             {{^games}}
                 {{^game}}
                     <div class="text-center alert alert-warning" role="alert" class="mb-3">
@@ -33,14 +30,16 @@
             {{#game}}
                 <input id="game_id" name="game_id" type="hidden" value="{{id}}">
 
+                <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
+
                 <div class="col-lg-3 text-center">
 
                     <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="game_image">
 
-                    <!--<button class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mt-2 shadow"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">{{price}}</span>]</button>-->
+                    <button onclick="addGameToCart()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">{{price}}</span>]</button>
 
                     {{#user.admin}}
-                        <a id="game_admin_update_link" href="/admin/update/game/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow-sm">
+                        <a id="game_admin_update_link" href="/admin/update/game/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Game</a>
                     {{/user.admin}}
