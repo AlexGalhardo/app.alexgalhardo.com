@@ -130,9 +130,10 @@ class ProfileController {
     async getViewSubscriptionTransactionByID(req: Request, res: Response) {
         const { subs_transaction_id } = req.params;
 
-        const subsTransaction = await StripeModel.getSubsTransactionByID(
-            subs_transaction_id
-        );
+        const subsTransaction =
+            await StripeModel.getSubscriptionTransactionById(
+                subs_transaction_id
+            );
 
         return res.render('pages/profile/sub_transaction', {
             user: SESSION_USER,
