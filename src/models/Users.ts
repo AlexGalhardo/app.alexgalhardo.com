@@ -307,12 +307,15 @@ class Users {
             });
 
             shop_cart_itens = JSON.parse(shop_cart_itens);
-            shop_cart_itens.forEach(
-                (item) => (item.price = Number.toFloat(item.price))
-            );
-            return shop_cart_itens;
+            if (shop_cart_itens && shop_cart_itens.length > 0) {
+                shop_cart_itens.forEach(
+                    (item) => (item.price = Number.toFloat(item.price))
+                );
+                return shop_cart_itens;
+            }
+            return null;
         }
-        return [];
+        return null;
     }
 
     async getShopCartTotalAmount(): Array {
@@ -327,15 +330,29 @@ class Users {
             });
 
             shop_cart_itens = JSON.parse(shop_cart_itens);
+            if (shop_cart_itens && shop_cart_itens.length > 0) {
+                const shopCartTotalAmount = shop_cart_itens.reduce(
+                    (sum, { price }) => sum + price,
+                    0
+                );
 
-            const shopCartTotalAmount = shop_cart_itens.reduce(
-                (sum, { price }) => sum + price,
-                0
-            );
+                return Number.toFloat(shopCartTotalAmount);
+            }
 
-            return Number.toFloat(shopCartTotalAmount);
+            return 0;
         }
         return 0;
+    }
+
+    async removeAllShopCartItens(): void {
+        await prisma.user.update({
+            where: {
+                id: SESSION_USER.id,
+            },
+            data: {
+                shop_cart_itens: null,
+            },
+        });
     }
 }
 

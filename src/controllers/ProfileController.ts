@@ -85,7 +85,7 @@ class ProfileController {
     } */
 
     async getViewMyShopTransactions(req: Request, res: Response) {
-        const shopTransactions = await StripeModel.getShopTransactionsByUserID(
+        const shopTransactions = await StripeModel.getShopTransactionsByUserId(
             SESSION_USER.id
         );
 
@@ -99,9 +99,11 @@ class ProfileController {
     async getViewShopTransactionByID(req: Request, res: Response) {
         const { shop_transaction_id } = req.params;
 
-        const shopTransaction = await StripeModel.getShopTransactionByID(
+        const shopTransaction = await StripeModel.getShopTransactionById(
             shop_transaction_id
         );
+
+        shopTransaction.products = JSON.parse(shopTransaction.products);
 
         return res.render('pages/profile/shop_transaction', {
             user: SESSION_USER,
@@ -111,9 +113,10 @@ class ProfileController {
     }
 
     async getViewMySubscriptionsTransactions(req: Request, res: Response) {
-        const subsTransactions = await StripeModel.getSubsTransactionsByUserID(
-            SESSION_USER.id
-        );
+        const subsTransactions =
+            await StripeModel.getSubscriptionsTransactionsByUserId(
+                SESSION_USER.id
+            );
 
         return res.render('pages/profile/my_subs_transactions', {
             user: SESSION_USER,

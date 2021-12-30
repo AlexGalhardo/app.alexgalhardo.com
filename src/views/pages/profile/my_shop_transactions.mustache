@@ -16,7 +16,7 @@
                         <th scope="col">PAID</th>
                         <th scope="col">TRANSACTION_ID</th>
                         <th scope="col">AMOUNT</th>
-                        <th scope="col">PAYMENT_METHOD</th>
+                        <th scope="col">CARD_ID</th>
                         <th scope="col">CREATED AT</th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                             <td class="fw-bold text-white bg-{{#paid}}success{{/paid}}{{^paid}}danger{{/paid}}">{{paid}}</td>
                             <td>{{transaction_id}}</td>
                             <td>$ {{total_amount}}</td>
-                            <td>{{payment_method.card_id}}</td>
+                            <td>{{card_id}}</td>
                             <td>{{created_at}}</td>
                         </tr>
                     {{/shopTransactions}}

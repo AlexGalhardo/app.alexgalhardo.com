@@ -22,6 +22,11 @@ class ShopController {
         const shopCartTotalAmount = await Users.getShopCartTotalAmount();
         const totalItensShopCart = await Users.getTotalItensShopCart();
 
+        if (!shopCartItens || !totalItensShopCart) {
+            req.flash('warning', 'Add at least 1 product to your shop cart!');
+            return res.redirect('/');
+        }
+
         return res.render('pages/shop/shop_checkout', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -164,6 +169,8 @@ class ShopController {
             await StripeModel.createShopTransaction(shopTransactionObject);
             await NodeMailer.sendShopTransaction(shopTransactionObject);
             await TelegramBOTLogger.logShopTransaction(shopTransactionObject);
+
+            await Users.removeAllShopCartItens();
 
             return res.render('pages/shop/shopPayLog', {
                 flash_success: 'Shop Transaction Created with Success!',

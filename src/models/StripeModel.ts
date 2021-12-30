@@ -94,6 +94,29 @@ class StripeModel {
         });
     }
 
+    async getShopTransactionsByUserId(userId: string) {
+        return prisma.stripeShopTransaction.findMany({
+            where: {
+                user_id: userId,
+            },
+            select: {
+                created_at: true,
+                transaction_id: true,
+                total_amount: true,
+                paid: true,
+                card_id: true,
+            },
+        });
+    }
+
+    async getShopTransactionById(transactionId: string) {
+        return prisma.stripeShopTransaction.findUnique({
+            where: {
+                transaction_id: transactionId,
+            },
+        });
+    }
+
     async createSubscriptionTransaction(
         subscriptionTransactionObject: subscriptionTransactionObject
     ) {
@@ -128,6 +151,18 @@ class StripeModel {
                 user_name: subscriptionTransactionObject.user_name,
             },
         });
+    }
+
+    async getSubscriptionsTransactionsByUserId(user_id: string) {
+        return prisma.stripeSubscriptionTransaction.findMany({
+            where: {
+                user_id,
+            },
+        });
+    }
+
+    async getSubscriptionTransactionById(transactionId: string) {
+        return 1;
     }
 }
 
