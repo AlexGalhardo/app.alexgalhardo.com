@@ -57,7 +57,9 @@ class StripeModel {
         await prisma.stripeShopTransaction.create({
             data: {
                 transaction_id: shopTransactionObject.transaction_id,
-                total_amount: shopTransactionObject.total_amount,
+                total_amount: parseInt(
+                    shopTransactionObject.total_amount * 100
+                ),
                 card_id: shopTransactionObject.card_id,
                 card_brand: shopTransactionObject.card_brand,
                 card_exp_month: shopTransactionObject.card_exp_month,
@@ -87,7 +89,7 @@ class StripeModel {
                 shipping_address_country:
                     shopTransactionObject.shipping_address_country,
                 shipping_carrier: shopTransactionObject.shipping_carrier,
-                shipping_fee: shopTransactionObject.shipping_fee,
+                shipping_fee: parseInt(shopTransactionObject.shipping_fee),
             },
         });
     }

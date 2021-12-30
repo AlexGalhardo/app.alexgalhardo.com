@@ -105,11 +105,6 @@ class ShopController {
                 shipping_fee,
             } = req.body;
 
-            console.log('confirm password => ', confirm_password);
-            console.log(
-                await Users.verifyPassword(SESSION_USER.id, confirm_password)
-            );
-
             if (
                 !(await Users.verifyPassword(SESSION_USER.id, confirm_password))
             ) {
@@ -128,7 +123,7 @@ class ShopController {
             const products = await Users.getShopCartItens();
 
             const shopCardCharge = await stripe.charges.create({
-                amount: parseInt((total_shop_amount + shipping_fee) * 100),
+                amount: parseInt(total_shop_amount + shipping_fee * 100),
                 currency: 'usd',
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
@@ -137,7 +132,9 @@ class ShopController {
 
             const shopTransactionObject = {
                 transaction_id: shopCardCharge.id,
-                total_amount: 179.7,
+                total_amount: parseFloat(
+                    parseFloat(total_shop_amount) + parseFloat(shipping_fee)
+                ).toFixed(2),
                 card_id: shopCardCharge.source.id,
                 card_brand: shopCardCharge.source.brand,
                 card_exp_month: shopCardCharge.source.exp_month,
@@ -145,7 +142,7 @@ class ShopController {
                 card_last4: parseInt(shopCardCharge.source.last4),
                 currency: shopCardCharge.currency,
                 paid: shopCardCharge.paid,
-                products_amount: 17970,
+                products_amount: parseFloat(total_shop_amount),
                 products,
                 stripe_customer_id: stripeCustomerID,
                 user_id: SESSION_USER.id,
@@ -160,8 +157,8 @@ class ShopController {
                 shipping_address_state: customer_state,
                 shipping_address_country: 'Brazil',
                 shipping_carrier: 'Correios',
-                shipping_fee,
-                created_at: DateTime.getNow(),
+                shipping_fee: parseFloat(shipping_fee).toFixed(2),
+                created_at: new Date(),
             };
 
             await StripeModel.createShopTransaction(shopTransactionObject);

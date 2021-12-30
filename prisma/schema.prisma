@@ -149,7 +149,7 @@ model Tvshow {
 model StripeShopTransaction {
   id                             String   @id @default(uuid())
   transaction_id                 String   @unique
-  total_amount                   Float
+  total_amount                   Int
   card_id                        String
   card_brand                     String
   card_exp_month                 Int
@@ -172,7 +172,7 @@ model StripeShopTransaction {
   shipping_address_state         String
   shipping_address_country       String
   shipping_carrier               String
-  shipping_fee                   Float
+  shipping_fee                   Int
   created_at                     DateTime @default(now())
 
   @@map("stripe_shop_transactions")

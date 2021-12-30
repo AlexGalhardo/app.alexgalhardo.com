@@ -166,17 +166,12 @@ class PlansController {
         try {
             const { plan_name, confirm_password } = req.body;
 
-            /* const validPassword = await Users.verifyPassword(
-                SESSION_USER.id,
-                confirm_password
-            );
-
-            if (!validPassword) {
+            if (
+                !(await Users.verifyPassword(SESSION_USER.id, confirm_password))
+            ) {
                 req.flash('warning', 'Invalid Password!');
-                return res.redirect(
-                    `/plan/${plan_name.toLowerCase()}/checkout`
-                );
-            } */
+                return res.redirect(`/shop`);
+            }
 
             await PlansController.verifyIfUserIsAlreadyAStripeCustomer();
 
@@ -210,7 +205,7 @@ class PlansController {
                 user_id: SESSION_USER.id,
                 user_email: SESSION_USER.email,
                 user_name: SESSION_USER.name,
-                createdAt: DateTime.getNow(),
+                createdAt: new Date(),
             };
 
             await Users.createStripeSubscription(
