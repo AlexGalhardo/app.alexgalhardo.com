@@ -208,7 +208,20 @@
                             </div>
                         {{/user}}
 
-                        <a href="/shop" class="shadow-sm fw-bold fs-5 btn ms-2 btn-outline-success {{^user}}disabled{{/user}}" type="submit"><i class="bi bi-cart"></i> My Cart [3]</a>
+                        <a href="/shop" 
+                            class="shadow-sm fw-bold fs-5 btn ms-2 btn-outline-success {{^user}}disabled{{/user}}" 
+                            type="submit">
+                            <i class="bi bi-cart"></i> 
+                            My Cart 
+                            [
+                                {{#user}}
+                                    {{totalItensShopCart}}
+                                {{/user}}
+                                {{^user}}
+                                    0
+                                {{/user}}
+                            ]
+                        </a>
 
 
                 </div>

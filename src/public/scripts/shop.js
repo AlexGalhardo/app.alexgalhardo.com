@@ -28,11 +28,14 @@ document
         const shipping_deadline = shippingJson[0].PrazoEntrega;
 
         document.querySelector('#shipping_carrier').value = 'Correios';
-        document.querySelector('#shipping_fee').value = shipping_fee + 29.9;
+        document.querySelector('#shipping_fee').value = shipping_fee || 20;
         document.querySelector('#shipping_deadline').value =
-            shipping_deadline + 3;
+            shipping_deadline || 3;
+
+        const total_shop_amount =
+            document.querySelector('#total_shop_amount').value;
 
         document.querySelector('#button_pay_price').innerHTML = parseFloat(
-            179.7 + 29.9
-        );
+            parseFloat(total_shop_amount) + parseFloat(shipping_fee)
+        ).toFixed(2);
     });

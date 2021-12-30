@@ -56,6 +56,7 @@ class APIPublicController {
             next(err);
         }
     }
+
     /** ********* BLOG *********** */
     async getPublicBlog(req: Request, res: Response, next: NextFunction) {
         try {

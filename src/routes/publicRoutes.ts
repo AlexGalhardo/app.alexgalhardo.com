@@ -123,8 +123,9 @@ router
         return res.redirect('/');
     })
 
-    .get('/shop', ShopController.getViewShop)
-    .post('/shop', ShopController.postShopPayLog)
+    .get('/shop', userIsNotLoggedIn, ShopController.getViewShop)
+    .post('/shop', userIsNotLoggedIn, ShopController.postShopPayLog)
+    .post('/removeCart/:item_id', ShopController.removeCartItem)
 
     .post('/criptoBOT/:side/:symbol/:quantity', CriptoBOTController.postBinance)
 

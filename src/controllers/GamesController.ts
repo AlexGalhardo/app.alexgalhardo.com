@@ -7,13 +7,14 @@
  * http://localhost:3000/
  */
 
+import Header from '@helpers/Header';
+import Number from '@helpers/Number';
+import Books from '@models/Books';
+import Games from '@models/Games';
+import Movies from '@models/Movies';
+import TVShows from '@models/TVShows';
+import Users from '@models/Users';
 import { Request, Response } from 'express';
-
-import Header from '../helpers/Header';
-import Books from '../models/Books';
-import Games from '../models/Games';
-import Movies from '../models/Movies';
-import TVShows from '../models/TVShows';
 
 class GamesController {
     async getViewGames(req: Request, res: Response) {
@@ -22,7 +23,8 @@ class GamesController {
         const totalBooks = await Books.getTotal();
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
-        game[0].price = parseFloat(game[0].price / 100).toFixed(2);
+        const totalItensShopCart = await Users.getTotalItensShopCart();
+        game[0].price = Number.toFloat(game[0].price);
 
         return res.render('pages/games', {
             flash_success: req.flash('success'),
@@ -32,6 +34,7 @@ class GamesController {
             totalBooks,
             totalMovies,
             totalTVShows,
+            totalItensShopCart,
             user: SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.games(),

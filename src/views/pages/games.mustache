@@ -29,6 +29,7 @@
 
             {{#game}}
                 <input id="game_id" name="game_id" type="hidden" value="{{id}}">
+                <input id="game_price_value" name="game_price_value" type="hidden" value="{{price}}">
 
                 <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
 
@@ -36,7 +37,7 @@
 
                     <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="game_image">
 
-                    <button onclick="addGameToCart()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">{{price}}</span>]</button>
+                    <button onclick="addGameToCart()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">{{price}}</span>]</button>
 
                     {{#user.admin}}
                         <a id="game_admin_update_link" href="/admin/update/game/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">

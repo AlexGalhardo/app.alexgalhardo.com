@@ -1,33 +1,43 @@
 {{>partials/header}}
 
+    {{#user}}
+
 	<div class="container col-lg-12 mt-3 mb-3 mx-auto">
-
-        {{^user}}
-            <div class="text-center alert alert-warning mb-5" role="alert" class="mb-3">
-                <h2 class="fw-bold">You must be loged in to use shop!</h2>
-            </div>
-        {{/user}}
-        
-
-        {{#user}}
 
         <form id="formCreditCard" action="/shop" method="POST">
 
-            <input type="text" value="6.46" id="total_shop_amount" name="total_shop_amount" hidden onkeydown="return false;">
+            <input type="text" value="{{shopCartTotalAmount}}" id="total_shop_amount" name="total_shop_amount" hidden onkeydown="return false;">
 
           	<div class="row">
 
-                {{#flash}}
-                    <div class="text-center alert alert-{{type}}" role="alert" class="mb-3">
-                        <b class="fw-bold">{{message}}</b>
+                {{#flash_success}}
+                    <div class="text-center alert alert-success" role="alert">
+                        <b>{{flash_success}}</b>
                     </div>
-                {{/flash}}
+                {{/flash_success}}
+
+                {{#flash_warning}}
+                    <div class="text-center alert alert-warning" role="alert">
+                        <b>{{flash_warning}}</b>
+                    </div>
+                {{/flash_warning}}
 
                 <div class="col-lg-4 mb-3">
 
                     <ul class="list-group text-center">
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{#shopCartItens}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <img class="h-25 w-25" src="{{image}}">
+                                <small>{{title}}</small>
+                                <b>$ <span>{{price}}</span></b>
+                                <form action="/removeCart/{{id}}" method="POST">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </li>
+                        {{/shopCartItens}}
+
+                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">
                             <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png">
                             <small>God Of War Ragnarok</small>
                             <b>$ <span>59.90</span></b>
@@ -52,11 +62,11 @@
                             <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
                                 <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                             </form>
-                        </li>
+                        </li>-->
 
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-warning">
                             <b>TOTAL</b>
-                            <b>$ <span id="total_shop_cart">179.70</span></b>
+                            <b>$ <span id="total_shop_cart">{{shopCartTotalAmount}}</span></b>
                         </li>
 
                     </ul>
@@ -66,40 +76,27 @@
                 <!-- START COL-LG-4 -->
                 <div class="col-lg-4">
 
-                    {{#flash_warning}}
-                        <div class="text-center alert alert-warning" role="alert">
-                            <b>{{flash_warning}}</b>
-                        </div>
-                    {{/flash_warning}}
-
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="customer_name" id="customer_name" value="{{name}}" required onkeydown="return false;">
+                      <input type="text" class="form-control" name="customer_name" id="customer_name" value="{{name}}" readonly>
                       <label for="customer_name">NAME</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="email" class="form-control" name="customer_email" id="customer_email" value="{{email}}" required onkeydown="return false;">
+                      <input type="email" class="form-control" name="customer_email" id="customer_email" value="{{email}}" readonly>
                       <label for="customer_email">EMAIL</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="text" minlength="11" maxlength="11" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" class="form-control" id="document" name="document" value="{{document}}" required onkeydown="return false;">
+                      <input type="text" minlength="11" maxlength="11" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" class="form-control" id="document" name="document" value="{{document}}" readonly>
                       <label for="document">DOCUMENT</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" id="customer_phone" type="text" name="customer_phone" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" minlength="11" maxlength="11" value="{{phone}}" required onkeydown="return false;">
+                      <input class="mb-2 form-control" id="customer_phone" type="text" name="customer_phone" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" minlength="11" maxlength="11" value="{{phone}}" readonly>
                       <label for="customer_phone">TELEGRAM_NUMBER</label>
                     </div>
 
-
-                    <div class="form-floating mb-3">
-                      <input type="password" class="form-control" id="confirm_password" name="confirm_password" required minlength="6">
-                      <label for="confirm_password">CONFIRM_PASSWORD</label>
-                    </div>
-
-
-                    <br>
+                    <hr>
 
                     <div class="form-floating mb-3">
                           <input class="mb-2 form-control" id="zipcode" type="text" name="zipcode" pattern= "\d{5}-?\d{3}"  value="" required>
@@ -145,7 +142,7 @@
                         <!-- SHIPPING FEE -->
                         <label for="shipping_fee" class="col-sm-5 col-form-label">Shipping Fee $</label>
                         <div class="col-sm-7 mb-3">
-                            <!-- SHIPMENT_PRICE -->
+                            <!-- SHIPMENT_FEE -->
                             <input type="text" class="form-control" value="0" name="shipping_fee" id="shipping_fee" required onkeydown="return false;">
                         </div>
                         
@@ -243,10 +240,17 @@
                     </div>
 
                     {{/user.stripe.card_token_id}}
+
+                    <hr>
+
+                    <div class="form-floating mb-3">
+                      <input type="password" value="admin123" class="form-control" id="confirm_password" name="confirm_password" required minlength="6">
+                      <label for="confirm_password">CONFIRM_YOUR_PASSWORD</label>
+                    </div>
             
                     <div>
                         <button type="submit" class="fw-bold btn btn-outline-success btn-block shadow w-100">
-                            Pay $ <span id="button_pay_price">179.70</span> <i class="bi bi-check2-circle"></i>
+                            Pay $ <span id="button_pay_price">{{shopCartTotalAmount}}</span> <i class="bi bi-check2-circle"></i>
                         </button>
                     </div>
 

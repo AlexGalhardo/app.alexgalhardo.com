@@ -1,4 +1,5 @@
 import Bcrypt from '@helpers/Bcrypt';
+import Number from '@helpers/Number';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -57,6 +58,16 @@ class Users {
         });
 
         return (await Bcrypt.compare(password, user?.password)) ? user : null;
+    }
+
+    async verifyPassword(user_id: string, password: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: user_id,
+            },
+        });
+
+        return !!(await Bcrypt.compare(password, user?.password));
     }
 
     async emailIsConfirmed(email: string) {
@@ -156,28 +167,31 @@ class Users {
         });
     }
 
-    async addGameToShopCart(game_id: string) {
-        let userShopCartItems = prisma.user.findUnique({
+    async addGameToShopCart(game_id: string): boolean {
+        let { shop_cart_itens } = await prisma.user.findUnique({
             where: {
                 id: SESSION_USER.id,
             },
             select: {
-                shop_cart_itens,
+                shop_cart_itens: true,
             },
         });
 
-        if (!userShopCartItems) {
-            const game = prisma.game.findUnique({
-                where: {
-                    id: game_id,
-                },
-                select: {
-                    image,
-                    title,
-                    price,
-                },
-            });
+        // console.log('shop_cart_itens =>', shop_cart_itens);
 
+        const game = await prisma.game.findUnique({
+            where: {
+                id: game_id,
+            },
+            select: {
+                id: true,
+                image: true,
+                title: true,
+                price: true,
+            },
+        });
+
+        if (!shop_cart_itens) {
             const shopCartItens = [];
 
             shopCartItens.push(game);
@@ -194,9 +208,134 @@ class Users {
             return true;
         }
 
-        userShopCartItems = JSON.parse(userShopCartItems);
-        console.log('userShopCartItems => ', userShopCartItems);
+        shop_cart_itens = JSON.parse(shop_cart_itens);
+
+        // game already in cart, remove
+        if (shop_cart_itens.some((game) => game.id === game_id)) {
+            const indexToRemove = shop_cart_itens.findIndex(function (game) {
+                return game.id === game_id;
+            });
+
+            shop_cart_itens.splice(indexToRemove, 1);
+
+            await prisma.user.update({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                data: {
+                    shop_cart_itens: JSON.stringify(shop_cart_itens),
+                },
+            });
+
+            return false;
+        }
+
+        // game not in cart, add
+        shop_cart_itens.push(game);
+        await prisma.user.update({
+            where: {
+                id: SESSION_USER.id,
+            },
+            data: {
+                shop_cart_itens: JSON.stringify(shop_cart_itens),
+            },
+        });
+        return true;
+    }
+
+    async removeShopCartItem(item_id: string): boolean {
+        let { shop_cart_itens } = await prisma.user.findUnique({
+            where: {
+                id: SESSION_USER.id,
+            },
+            select: {
+                shop_cart_itens: true,
+            },
+        });
+
+        shop_cart_itens = JSON.parse(shop_cart_itens);
+
+        // game already in cart, remove
+        if (shop_cart_itens.some((item) => item.id === item_id)) {
+            const indexToRemove = shop_cart_itens.findIndex(function (item) {
+                return item.id === item_id;
+            });
+
+            shop_cart_itens.splice(indexToRemove, 1);
+
+            await prisma.user.update({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                data: {
+                    shop_cart_itens: JSON.stringify(shop_cart_itens),
+                },
+            });
+
+            return true;
+        }
+
         return false;
+    }
+
+    async getTotalItensShopCart(): number {
+        if (SESSION_USER) {
+            let { shop_cart_itens } = await prisma.user.findUnique({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                select: {
+                    shop_cart_itens: true,
+                },
+            });
+
+            shop_cart_itens = JSON.parse(shop_cart_itens);
+            return shop_cart_itens?.length || 0;
+        }
+        return 0;
+    }
+
+    async getShopCartItens(): Array {
+        if (SESSION_USER) {
+            let { shop_cart_itens } = await prisma.user.findUnique({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                select: {
+                    shop_cart_itens: true,
+                },
+            });
+
+            shop_cart_itens = JSON.parse(shop_cart_itens);
+            shop_cart_itens.forEach(
+                (item) => (item.price = Number.toFloat(item.price))
+            );
+            return shop_cart_itens;
+        }
+        return [];
+    }
+
+    async getShopCartTotalAmount(): Array {
+        if (SESSION_USER) {
+            let { shop_cart_itens } = await prisma.user.findUnique({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                select: {
+                    shop_cart_itens: true,
+                },
+            });
+
+            shop_cart_itens = JSON.parse(shop_cart_itens);
+
+            const shopCartTotalAmount = shop_cart_itens.reduce(
+                (sum, { price }) => sum + price,
+                0
+            );
+
+            return Number.toFloat(shopCartTotalAmount);
+        }
+        return 0;
     }
 }
 

@@ -5,27 +5,44 @@
  * https://github.com/AlexGalhardo
  */
 
-import { CustomerProfiles } from 'aws-sdk';
-import { Request, Response } from 'express';
-import { NextFunction } from 'express-serve-static-core';
+import DateTime from '@helpers/DateTime';
+import Header from '@helpers/Header';
+import NodeMailer from '@helpers/NodeMailer';
+import TelegramBOTLogger from '@helpers/TelegramBOTLogger';
+import StripeModel from '@models/StripeModel';
+import Users from '@models/Users';
+import { Request, Response, NextFunction } from 'express';
 import Stripe from 'stripe';
-
-import DateTime from '../helpers/DateTime';
-import Header from '../helpers/Header';
-import NodeMailer from '../helpers/NodeMailer';
-import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
-import StripeModel from '../models/StripeModel';
-import Users from '../models/Users';
 
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 class ShopController {
-    getViewShop(req: Request, res: Response) {
+    async getViewShop(req: Request, res: Response) {
+        const shopCartItens = await Users.getShopCartItens();
+        const shopCartTotalAmount = await Users.getShopCartTotalAmount();
+        const totalItensShopCart = await Users.getTotalItensShopCart();
+
         return res.render('pages/shop/shop_checkout', {
-            user: SESSION_USER,
+            flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
+            shopCartItens,
+            shopCartTotalAmount,
+            totalItensShopCart,
+            user: SESSION_USER,
             header: Header.shop(),
         });
+    }
+
+    async removeCartItem(req: Request, res: Response) {
+        const { item_id } = req.params;
+
+        if (await Users.removeShopCartItem(item_id)) {
+            req.flash('success', `Item removed from your cart!`);
+            return res.redirect('/shop');
+        }
+
+        req.flash('warning', `Some error ocurred`);
+        return res.redirect('/shop');
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
@@ -75,6 +92,7 @@ class ShopController {
     async postShopPayLog(req: Request, res: Response, next: NextFunction) {
         try {
             const {
+                total_shop_amount,
                 customer_email,
                 customer_name,
                 customer_phone,
@@ -87,15 +105,17 @@ class ShopController {
                 shipping_fee,
             } = req.body;
 
-            /* const validPassword = await Users.verifyPassword(
-                SESSION_USER.id,
-                confirm_password
+            console.log('confirm password => ', confirm_password);
+            console.log(
+                await Users.verifyPassword(SESSION_USER.id, confirm_password)
             );
 
-            if (!validPassword) {
+            if (
+                !(await Users.verifyPassword(SESSION_USER.id, confirm_password))
+            ) {
                 req.flash('warning', 'Invalid Password!');
                 return res.redirect(`/shop`);
-            } */
+            }
 
             const stripeCustomerID =
                 await ShopController.verifyIfUserIsAlreadyAStripeCustomer();
@@ -105,27 +125,10 @@ class ShopController {
                     req
                 );
 
-            const products = [
-                {
-                    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png',
-                    name: 'God Of War Ragnarok',
-                    total: 59.9,
-                },
-                {
-                    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.png',
-                    name: 'Horizon Forbidden West',
-                    total: 59.9,
-                },
-                {
-                    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co391c.png',
-                    name: 'Elden Ring',
-                    total: 59.9,
-                },
-            ];
+            const products = await Users.getShopCartItens();
 
             const shopCardCharge = await stripe.charges.create({
-                amount:
-                    179.7 + parseFloat((shipping_fee * 100) / 100).toFixed(2),
+                amount: parseInt((total_shop_amount + shipping_fee) * 100),
                 currency: 'usd',
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
