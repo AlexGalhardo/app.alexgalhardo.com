@@ -24,10 +24,33 @@ class Games {
 
     async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.game.count()));
-        return prisma.game.findMany({
+        const game = await prisma.game.findMany({
             take: 1,
             skip,
         });
+
+        if (SESSION_USER) {
+            let { shop_cart_itens } = await prisma.user.findUnique({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                select: {
+                    shop_cart_itens: true,
+                },
+            });
+
+            shop_cart_itens = JSON.parse(shop_cart_itens);
+
+            game[0].inLoggedUserCart = await shop_cart_itens.some(
+                (item) => item.id === game[0].id
+            );
+
+            return game[0];
+        }
+
+        game[0].inLoggedUserCart = false;
+
+        return game[0];
     }
 
     getTotal() {

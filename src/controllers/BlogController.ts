@@ -7,14 +7,16 @@
  * http://localhost:3000/blog
  */
 
+import { Request, Response } from 'express';
 import pagination from 'pagination';
 
 import DateTime from '../helpers/DateTime';
 import Header from '../helpers/Header';
+// import Blog from '../models/Blog';
 import Blog from '../models/JSON/Blog';
 
 class BlogController {
-    async getViewBlog(req, res) {
+    async getViewBlog(req: Request, res: Response) {
         const totalBlogPosts = await Blog.getTotal();
         const blogPostsPerPage = 4;
 
@@ -39,7 +41,7 @@ class BlogController {
         });
     }
 
-    getSearchBlogTitle(req, res) {
+    getSearchBlogTitle(req: Request, res: Response) {
         const blogPosts = Blog.getAll();
         const searchBlogTitle = req.query.blogTitle;
 
@@ -64,10 +66,10 @@ class BlogController {
         });
     }
 
-    getViewBlogPost(req, res) {
+    async getViewBlogPost(req: Request, res: Response) {
         const { slug } = req.params;
 
-        const blogPost = Blog.getBySlug(slug);
+        const blogPost = await Blog.getBySlug(slug);
 
         res.render('pages/blog/blogPost', {
             user: SESSION_USER,
@@ -129,7 +131,7 @@ class BlogController {
         }).render();
     }
 
-    async postBlogComment(req, res) {
+    async postBlogComment(req: Request, res: Response) {
         const { slug } = req.params;
         const { blog_comment } = req.body;
 
@@ -154,7 +156,7 @@ class BlogController {
         return res.redirect(`/ blog / ${slug} `);
     }
 
-    async getDeleteBlogCommentByCommentID(req, res) {
+    async getDeleteBlogCommentByCommentID(req: Request, res: Response) {
         const { slug, comment_id } = req.params;
 
         let blogPost = await Blog.deleteCommentByID(slug, comment_id);

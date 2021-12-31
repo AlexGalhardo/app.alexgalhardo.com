@@ -40,17 +40,17 @@ class APIPublicController {
             const { game_id } = req.params;
             if (!SESSION_USER) {
                 return res.json({
-                    error: 'User not logged in',
+                    inLoggedUserCart: false,
                 });
             }
 
             if (await Users.addGameToShopCart(game_id)) {
                 return res.json({
-                    added_game_to_shop_cart: true,
+                    inLoggedUserCart: true,
                 });
             }
             return res.json({
-                added_game_to_shop_cart: false,
+                inLoggedUserCart: false,
             });
         } catch (err) {
             next(err);

@@ -24,7 +24,7 @@ class GamesController {
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
         const totalItensShopCart = await Users.getTotalItensShopCart();
-        game[0].price = Number.toFloat(game[0].price);
+        game.price = Number.toFloat(game.price);
 
         return res.render('pages/games', {
             flash_success: req.flash('success'),
