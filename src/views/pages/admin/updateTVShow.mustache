@@ -72,8 +72,8 @@
 						</div>
 
                         <div class="form-floating mb-3">
-						  	<input type="number" min="1" max="100" step="1" class="form-control" name="movie_tmdb_rating" id="movie_tmdb_rating" value="{{tmdb_link}}" required>
-						  	<label for="movie_tmdb_rating">MOVIE_TMDB_RATING</label>
+						  	<input type="number" min="1" max="100" step="1" class="form-control" name="tvshow_tmdb_rating" id="tvshow_tmdb_rating" value="{{tmdb_link}}" required>
+						  	<label for="tvshow_tmdb_rating">TVSHOW_TMDB_RATING</label>
 						</div>
 
 						<div class="form-floating mb-3">
@@ -90,14 +90,14 @@
 				</div>
 
 				<button type="submit" class="mb-5 w-25 btn btn-outline-primary shadow">
-	        		Update Game
+	        		Update TVShow
 	        	</button>
 
 			</form>
 
 			<form action="/admin/delete/tvshow/{{id}}" method="POST">
 				<button type="submit" class="mb-3 w-25 btn btn-sm btn-outline-danger shadow">
-	        		Delete Game
+	        		Delete TVShow
 	        	</button>
 			</form>
 

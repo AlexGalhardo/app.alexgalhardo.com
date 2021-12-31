@@ -460,7 +460,7 @@ class AdminController {
 
     static async getViewUpdateTVShow(req: Request, res: Response) {
         const { tvshow_id } = req.params;
-        const tvshow = await Movies.getById(tvshow_id);
+        const tvshow = await TVShows.getById(tvshow_id);
 
         return res.render('pages/admin/updateTVShow', {
             flash_success: req.flash('success'),

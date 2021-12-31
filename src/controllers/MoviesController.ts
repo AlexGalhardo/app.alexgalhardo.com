@@ -33,7 +33,43 @@ class MoviesController {
             totalTVShows,
             user: SESSION_USER,
             app_url: process.env.APP_URL,
-            header: Header.books(),
+            header: Header.movies(),
+        });
+    }
+
+    async getSearchMovieTitle(req: Request, res: Response) {
+        const searchMovieTitle = req.query.title;
+
+        if (!searchMovieTitle) {
+            return res.redirect('/');
+        }
+
+        const searchedMovies = await Movies.searchTitle(searchMovieTitle);
+
+        if (!searchedMovies.length) {
+            req.flash(
+                'warning',
+                `No movies found from search: ${searchMovieTitle}! Recommending a Random Movie`
+            );
+            return res.redirect('/');
+        }
+
+        if (searchedMovies.length > 1) {
+            searchedMovies[0].firstMovie = true;
+            return res.render('pages/movies', {
+                flash_success: `${searchedMovies.length
+                    } Games Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
+                movies: searchedMovies,
+                user: SESSION_USER,
+                header: Header.movies(),
+            });
+        }
+
+        return res.render('pages/movies', {
+            flash_success: `1 Game Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
+            movie: searchedMovies[0],
+            user: SESSION_USER,
+            header: Header.movies(),
         });
     }
 }

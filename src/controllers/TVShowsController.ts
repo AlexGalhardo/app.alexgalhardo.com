@@ -36,6 +36,42 @@ class TVShowsController {
             header: Header.books(),
         });
     }
+
+    async getSearchTVShowTitle(req: Request, res: Response) {
+        const searchTVShowTitle = req.query.title;
+
+        if (!searchTVShowTitle) {
+            return res.redirect('/');
+        }
+
+        const searchTVShows = await TVShows.searchTitle(searchTVShowTitle);
+
+        if (!searchTVShows.length) {
+            req.flash(
+                'warning',
+                `No tvshows found from search: ${searchTVShowTitle}! Recommending a Random TVShow`
+            );
+            return res.redirect('/');
+        }
+
+        if (searchTVShows.length > 1) {
+            searchTVShows[0].firstTVShow = true;
+            return res.render('pages/tvshows', {
+                flash_success: `${searchTVShows.length
+                    } TVShows Found From Search Title: ${searchTVShowTitle.toUpperCase()}`,
+                tvshows: searchTVShows,
+                user: SESSION_USER,
+                header: Header.tvshows(),
+            });
+        }
+
+        return res.render('pages/tvshows', {
+            flash_success: `1 TVShow Found From Search Title: ${searchTVShowTitle.toUpperCase()}`,
+            tvshow: searchTVShows[0],
+            user: SESSION_USER,
+            header: Header.tvshows(),
+        });
+    }
 }
 
 export default new TVShowsController();

@@ -37,10 +37,9 @@
                     {{#user.admin}}
                         <a href="/admin/update/movie/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">
                         <i class="bi bi-unlock-fill"></i>
-                        Edit This Book</a>
+                        Edit This Movie</a>
                     {{/user.admin}}
                 </div>
-
 
 
                 <div class="col-lg-6">
@@ -50,7 +49,7 @@
                         <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="tmdb_link" style="text-decoration:none;" href="{{amazon_link}}" class="fs-3 card-link text-decoration-none">
+                            <a target="_blank" id="tmdb_link" style="text-decoration:none;" href="{{tmdb_link}}" class="fs-3 card-link text-decoration-none">
                                 <span id="movie_title" class="fw-bold">{{title}}</span>
                                 (<span id="movie_year_release" class="text-muted">{{year_release}}</span>)
                             </a>

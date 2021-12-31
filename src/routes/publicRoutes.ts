@@ -93,20 +93,20 @@ router
 
     .get('/searchGame', GamesController.getSearchGameTitle)
     .get('/searchBook', BooksController.getSearchBookTitle)
-    // .get('/searchMovie', GamesController.getSearchMovieTitle)
-    // .get('/searchTVShow', BooksController.getSearchTVShowTitle)
+    .get('/searchMovie', MoviesController.getSearchMovieTitle)
+    .get('/searchTVShow', TVShowsController.getSearchTVShowTitle)
 
     .get('/blog', BlogController.getViewBlog)
     .get('/blog/search', BlogController.getSearchBlogTitle)
     .get('/blog/page/:page', BlogController.getViewBlog)
 
     .get('/blog/:slug', BlogController.getViewBlogPost)
-    .post('/blog/:slug', BlogController.postBlogComment)
+    // .post('/blog/:slug', BlogController.postBlogComment)
 
-    .get(
-        '/blog/:slug/deleteComment/:comment_id',
-        BlogController.getDeleteBlogCommentByCommentID
-    )
+    // .get(
+    //     '/blog/:slug/deleteComment/:comment_id',
+    //     BlogController.getDeleteBlogCommentByCommentID
+    // )
 
     .get('/newsletter-confirm-email', (req, res) => {
         req.flash(

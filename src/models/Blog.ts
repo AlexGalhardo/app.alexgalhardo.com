@@ -87,6 +87,23 @@ class Blog {
             },
         });
     }
+
+    getPostsByPageLimit(page: number, blogPostsPerPage: number) {
+        const offset = parseInt(page * blogPostsPerPage - blogPostsPerPage);
+        const getUntil = parseInt(page * blogPostsPerPage);
+        return prisma.blog.findMany({
+            skip: offset,
+            take: getUntil,
+        });
+    }
+
+    getBySlug(slug: string) {
+        return prisma.blog.findUnique({
+            where: {
+                slug,
+            },
+        });
+    }
 }
 
 export default new Blog();

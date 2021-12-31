@@ -31,6 +31,22 @@ class Header {
         };
     }
 
+    static movies() {
+        return {
+            title: 'Movies - Galhardo APP',
+            scroll_bar_div,
+            scroll_bar_script,
+        };
+    }
+
+    static tvshows() {
+        return {
+            title: 'TVShows - Galhardo APP',
+            scroll_bar_div,
+            scroll_bar_script,
+        };
+    }
+
     static privacy() {
         return {
             title: 'Privacy and Terms of Use - Galhardo APP',

@@ -29,7 +29,7 @@ class Games {
             skip,
         });
 
-        if (SESSION_USER) {
+        if (SESSION_USER && SESSION_USER.shop_cart_itens) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
                     id: SESSION_USER.id,
@@ -41,11 +41,12 @@ class Games {
 
             shop_cart_itens = JSON.parse(shop_cart_itens);
 
-            game[0].inLoggedUserCart = await shop_cart_itens.some(
-                (item) => item.id === game[0].id
-            );
-
-            return game[0];
+            if (shop_cart_itens.length) {
+                game[0].inLoggedUserCart = await shop_cart_itens.some(
+                    (item) => item.id === game[0].id
+                );
+                return game[0];
+            }
         }
 
         game[0].inLoggedUserCart = false;

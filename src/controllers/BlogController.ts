@@ -10,10 +10,9 @@
 import { Request, Response } from 'express';
 import pagination from 'pagination';
 
-import DateTime from '../helpers/DateTime';
 import Header from '../helpers/Header';
-// import Blog from '../models/Blog';
-import Blog from '../models/JSON/Blog';
+import Blog from '../models/Blog';
+// import Blog from '../models/JSON/Blog';
 
 class BlogController {
     async getViewBlog(req: Request, res: Response) {
@@ -41,8 +40,8 @@ class BlogController {
         });
     }
 
-    getSearchBlogTitle(req: Request, res: Response) {
-        const blogPosts = Blog.getAll();
+    async getSearchBlogTitle(req: Request, res: Response) {
+        const blogPosts = await Blog.getAll();
         const searchBlogTitle = req.query.blogTitle;
 
         if (!searchBlogTitle) {
@@ -131,7 +130,7 @@ class BlogController {
         }).render();
     }
 
-    async postBlogComment(req: Request, res: Response) {
+    /* async postBlogComment(req: Request, res: Response) {
         const { slug } = req.params;
         const { blog_comment } = req.body;
 
@@ -169,7 +168,7 @@ class BlogController {
 
         req.flash('success', 'Comment Deleted!');
         return res.redirect(`/ blog / ${slug} `);
-    }
+    } */
 }
 
 export default new BlogController();

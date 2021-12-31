@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import faker from 'faker/locale/pt_BR';
 import slugify from 'slugify';
 
 import Bcrypt from '../src/helpers/Bcrypt';
@@ -11,6 +12,7 @@ const main = async () => {
     await prisma.book.deleteMany({});
     await prisma.movie.deleteMany({});
     await prisma.tvshow.deleteMany({});
+    await prisma.blog.deleteMany({});
 
     await prisma.user.createMany({
         data: [
@@ -91,24 +93,50 @@ const main = async () => {
                 resume: 'blog resume 1',
                 image: 'https://picsum.photos/id/1/230/230',
                 category: 'Software',
-                slug: slugify('Why Simpsons Is So Succesfull?'),
+                slug: slugify('Why Simpsons Is So Succesfull?', {
+                    lower: true,
+                }),
                 body: "<p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\r\n\r\n<img src='https://observatoriodocinema.uol.com.br/wp-content/uploads/2020/05/Os-Simpsons.jpg' class='w-100 image-fluid'>\r\n\r\n<p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<p>",
             },
             {
                 title: 'Awesome Blog Post 2',
-                resume: 'blog resume 2',
+                resume: faker.lorem.text(),
                 image: 'https://picsum.photos/id/2/230/230',
                 category: 'Software',
-                slug: slugify('Awesome Blog Post 2'),
-                body: '<p>scrambled it to make a type specimen book What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industryscrambled it to make a type specimen book What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>',
+                slug: slugify('Awesome Blog Post 2', { lower: true }),
+                body: faker.lorem.paragraphs(),
             },
             {
                 title: 'Some Blog Post 3',
-                resume: 'blog resume 3',
+                resume: faker.lorem.text(),
                 image: 'https://picsum.photos/id/3/230/230',
                 category: 'Software',
-                slug: slugify('Some Blog Post 3'),
-                body: "<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>",
+                slug: slugify('Some Blog Post 3', { lower: true }),
+                body: faker.lorem.paragraphs(),
+            },
+            {
+                title: 'Some Blog Post 4',
+                resume: faker.lorem.text(),
+                image: 'https://picsum.photos/id/4/230/230',
+                category: 'Software',
+                slug: slugify('Some Blog Post 4', { lower: true }),
+                body: faker.lorem.paragraphs(),
+            },
+            {
+                title: 'Some Blog Post 5',
+                resume: faker.lorem.text(),
+                image: 'https://picsum.photos/id/5/230/230',
+                category: 'Software',
+                slug: slugify('Some Blog Post 5', { lower: true }),
+                body: faker.lorem.paragraphs(),
+            },
+            {
+                title: 'Some Blog Post 6',
+                resume: faker.lorem.text(),
+                image: 'https://picsum.photos/id/6/230/230',
+                category: 'Software',
+                slug: slugify('Some Blog Post 6', { lower: true }),
+                body: faker.lorem.paragraphs(),
             },
         ],
         skipDuplicates: true,

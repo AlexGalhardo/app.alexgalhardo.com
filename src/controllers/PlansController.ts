@@ -95,7 +95,10 @@ class PlansController {
         return SESSION_USER.stripe_customer_id;
     }
 
-    static async verifyIfUserAlreadyHasAStripeCardRegistred(req: Request) {
+    static async verifyIfUserAlreadyHasAStripeCardRegistred(
+        req: Request,
+        stripeCustomerId: string
+    ) {
         const { card_number, card_exp_year, card_exp_month, card_cvc } =
             req.body;
 
@@ -117,11 +120,19 @@ class PlansController {
                 card_number
             );
 
+            await stripe.customers.createSource(stripeCustomerId, {
+                source: cardToken.id,
+            });
+
             return cardToken;
         }
 
         const cardToken = await stripe.tokens.create({
             card: customerCard,
+        });
+
+        await stripe.customers.createSource(stripeCustomerId, {
+            source: cardToken.id,
         });
 
         return cardToken;
@@ -173,14 +184,21 @@ class PlansController {
                 return res.redirect(`/shop`);
             }
 
-            await PlansController.verifyIfUserIsAlreadyAStripeCustomer();
+            const stripeCustomerId =
+                await PlansController.verifyIfUserIsAlreadyAStripeCustomer();
 
             const stripeCard =
                 await PlansController.verifyIfUserAlreadyHasAStripeCardRegistred(
-                    req
+                    req,
+                    stripeCustomerId
                 );
 
             const stripePlan = await PlansController.getStripePlan()[plan_name];
+
+            const paymentMethod = await stripe.paymentMethods.attach(
+                'pm_1KCpzO2eZvKYlo2Cl26ytNHe',
+                { customer: 'cus_AJ6y20bjkOOayM' }
+            );
 
             const subscription = await PlansController.createStripeSubscription(
                 SESSION_USER.stripe_customer_id,

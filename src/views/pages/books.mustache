@@ -4,7 +4,6 @@
 
       	<div class="row">
 
-            <input type="text" id="user_id" hidden value="{{user.id}}" readonly>
             <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
 
             {{^books}}
@@ -68,6 +67,8 @@
 
                             <li class=""><b><a target="_blank" href="#"><i class="bi bi-link-45deg"></i> PagarMe Checkout</a></b></li>
 
+                            <li class=""><b><a onclick="return false;" target="_blank" href="#"><i class="bi bi-link-45deg"></i> Buy with PIX</a></b></li>
+
                             <li><b>Author:</b></small> <small id="book_author">{{author}}</small></li>
 
                             <li><b>Genres:</b> <small id="book_genres">{{genres}}</small></li>
@@ -113,7 +114,7 @@
 
                     <button class="mt-3 w-100 btn btn-outline-primary shadow mb-3" onclick="recommendOtherBook()">
                             <i class="bi bi-play-fill"></i>
-                            Recommend Other
+                            Recommend Other Book
                     </button>
 
                     {{^user}}
