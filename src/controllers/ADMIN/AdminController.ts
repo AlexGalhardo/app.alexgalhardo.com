@@ -18,6 +18,8 @@ class AdminController {
     /** ******* BLOG ************** */
     static getViewCreateBlogPost(req: Request, res: Response) {
         return res.render('pages/admin/createBlogPost', {
+            flash_success: req.flash('success'),
+            flash_warning: req.flash('warning'),
             user: SESSION_USER,
         });
     }
@@ -43,11 +45,11 @@ class AdminController {
 
         if (!blogPost) {
             req.flash('warning', `ERROR: Blog Post Not Created!`);
-            return res.redirect(`/admin/create/blog`);
+            return res.redirect(`/admin/create/blogPost`);
         }
 
-        req.flash('success', `SUCCESSs: Blog Post Created!`);
-        return res.redirect(`/admin/update/blog/${blogPost.id}`);
+        req.flash('success', `SUCCESS: Blog Post Created!`);
+        return res.redirect(`/admin/update/blogPost/${blogPost.id}`);
     }
 
     static async getViewUpdateBlogPost(req: Request, res: Response) {
@@ -85,19 +87,21 @@ class AdminController {
 
         if (!blogPost) {
             req.flash('warning', `ERROR: Blog Post Not Updated!`);
-            return res.redirect(`/admin/update/blog/${blogPost.id}`);
+            return res.redirect(`/admin/update/blogPost/${blogPost.id}`);
         }
 
-        req.flash('success', `SUCCESSs: Blog Post Updated!`);
-        return res.redirect(`/admin/update/blog/${blogPost.id}`);
+        req.flash('success', `SUCCESS: Blog Post Updated!`);
+        return res.redirect(`/admin/update/blogPost/${blogPost.id}`);
     }
 
     static async postDeleteBlogPost(req: Request, res: Response) {
         const { blog_id } = req.params;
 
         if (await Blog.delete(blog_id)) {
+            req.flash('success', `Blog Post Deleted!`);
             return res.redirect('/admin/create/blogPost');
         }
+        req.flash('warning', `Something went wrong!`);
         return res.redirect(`/admin/update/blogPost/${blog_id}`);
     }
 

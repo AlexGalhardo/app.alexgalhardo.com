@@ -22,6 +22,7 @@ import ContactController from '../controllers/ContactController';
 import CriptoBOTController from '../controllers/CriptoBOTController';
 import GamesController from '../controllers/GamesController';
 import MoviesController from '../controllers/MoviesController';
+import PagarMeController from '../controllers/PagarMeController';
 import PlansController from '../controllers/PlansController';
 import ShopController from '../controllers/ShopController';
 import TVShowsController from '../controllers/TVShowsController';
@@ -217,6 +218,12 @@ router
         userIsAlreadyLoggedIn,
         AuthController.loginFacebook
     )
-    .get('/google/callback', userIsAlreadyLoggedIn, AuthController.loginGoogle);
+    .get('/google/callback', userIsAlreadyLoggedIn, AuthController.loginGoogle)
+
+    .get(
+        '/checkout/pagarme/game/:game_id',
+        // userIsNotLoggedIn,
+        PagarMeController.checkoutGame
+    );
 
 export default router;

@@ -47,6 +47,14 @@ class Header {
         };
     }
 
+    static criptoBOT() {
+        return {
+            title: 'CriptoBOT - Galhardo APP',
+            scroll_bar_div,
+            scroll_bar_script,
+        };
+    }
+
     static privacy() {
         return {
             title: 'Privacy and Terms of Use - Galhardo APP',

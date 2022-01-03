@@ -46,6 +46,9 @@ model User {
   created_at                         DateTime  @default(now())
   updated_at                         DateTime?
 
+  StripeShopTransaction         StripeShopTransaction[]
+  StripeSubscriptionTransaction StripeSubscriptionTransaction[]
+
   @@unique(fields: [id, admin], name: "isAdmin")
   @@unique(fields: [email, confirmed_email], name: "emailConfirmed")
   @@map("users")
@@ -161,6 +164,7 @@ model StripeShopTransaction {
   products                       String
   stripe_customer_id             String
   user_id                        String
+  user                           User     @relation(fields: [user_id], references: [id])
   user_email                     String
   user_phone                     String
   user_name                      String
@@ -184,6 +188,7 @@ model StripeSubscriptionTransaction {
   transaction_id       String
   status               String
   user_id              String
+  user                 User     @relation(fields: [user_id], references: [id])
   user_email           String
   user_name            String
   stripe_customer_id   String

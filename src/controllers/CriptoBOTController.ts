@@ -18,6 +18,8 @@ import crypto from 'crypto';
 import { Request, Response } from 'express';
 import querystring from 'querystring';
 
+import Header from '../helpers/Header';
+
 class CriptoBOTController {
     getViewCriptoBOT(req, res) {
         return res.render('pages/criptoBOT', {

@@ -214,12 +214,14 @@
                             <i class="bi bi-cart"></i> 
                             My Cart 
                             [
-                                {{#user}}
-                                    {{totalItensShopCart}}
-                                {{/user}}
-                                {{^user}}
-                                    0
-                                {{/user}}
+                                <span id="total_shopCart_itens">
+                                    {{#user}}
+                                        {{totalItensShopCart}}
+                                    {{/user}}
+                                    {{^user}}
+                                        0
+                                    {{/user}}
+                                </span>
                             ]
                         </a>
 

@@ -27,11 +27,7 @@ export default router
         isAdmin,
         AdminController.getViewUpdateBlogPost
     )
-    .post(
-        '/update/blogPost/:blog_id',
-        isAdmin,
-        AdminController.postUpdateBlogPost
-    )
+    .post('/update/blogPost/:blog_id', isAdmin, AdminController.postUpdateBlogPost)
 
     .post(
         '/delete/blogPost/:blog_id',

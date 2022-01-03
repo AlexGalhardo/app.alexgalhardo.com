@@ -7,6 +7,8 @@ const gamePriceValue = document.querySelector('#game_price_value').value;
 
 const buttonAddGameToCart = document.querySelector('#button_add_game_to_cart');
 
+const totalShopCartItens = document.querySelector('#total_shopCart_itens');
+
 async function recommendOtherGame() {
     const response = await fetch(`${app_url}/api/public/games/random`);
     const object = await response.json();
@@ -39,6 +41,10 @@ async function recommendOtherGame() {
         buttonAddGameToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">${gamePriceValue}</span>]`;
     }
 
+    document.querySelector(
+        '#link_pagarme_checkout'
+    ).href = `/checkout/pagarme/game/${object.id}`;
+
     document.querySelector('#game_price').innerHTML = parseFloat(
         object.price / 100
     ).toFixed(2);
@@ -61,5 +67,10 @@ async function addGameToCart() {
         buttonAddGameToCart.classList.remove('btn-outline-success');
         buttonAddGameToCart.classList.add('btn-success');
         buttonAddGameToCart.innerHTML = `Added To Cart!`;
+        totalShopCartItens.innerHTML =
+            parseInt(totalShopCartItens.innerHTML) + 1;
+    } else {
+        totalShopCartItens.innerHTML =
+            parseInt(totalShopCartItens.innerHTML) - 1;
     }
 }
