@@ -318,7 +318,7 @@ class Users {
         return null;
     }
 
-    async getShopCartTotalAmount(): Array {
+    async getShopCartTotalAmount(): Promise<number> {
         if (SESSION_USER) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
@@ -330,6 +330,7 @@ class Users {
             });
 
             shop_cart_itens = JSON.parse(shop_cart_itens);
+
             if (shop_cart_itens && shop_cart_itens.length > 0) {
                 const shopCartTotalAmount = shop_cart_itens.reduce(
                     (sum, { price }) => sum + price,
@@ -344,13 +345,35 @@ class Users {
         return 0;
     }
 
-    async removeAllShopCartItens(): void {
+    async removeAllShopCartItens(): Promise<void> {
         await prisma.user.update({
             where: {
                 id: SESSION_USER.id,
             },
             data: {
                 shop_cart_itens: null,
+            },
+        });
+    }
+
+    async createResetPasswordToken(email: string, resetPasswordToken: string) {
+        await prisma.user.update({
+            where: {
+                email,
+            },
+            data: {
+                reset_password_token: resetPasswordToken,
+            },
+        });
+    }
+
+    async resetPasswordTokenIsValid(email: string, resetPasswordToken: string) {
+        return prisma.user.findUnique({
+            where: {
+                resetPasswordTokenIsValid: {
+                    email,
+                    reset_password_token: resetPasswordToken,
+                },
             },
         });
     }

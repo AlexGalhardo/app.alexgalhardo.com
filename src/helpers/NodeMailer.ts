@@ -156,8 +156,8 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    async sendForgetPasswordLink(email: string, reset_password_token: string) {
-        const resetPasswordLinkURL = `${process.env.APP_URL}/resetPassword/${email}/${reset_password_token}`;
+    async sendForgetPasswordLink(email: string, resetPasswordToken: string) {
+        const resetPasswordLinkURL = `${process.env.APP_URL}/resetPassword/${email}/${resetPasswordToken}`;
 
         const filePath = path.join(
             __dirname,

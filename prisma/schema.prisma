@@ -49,6 +49,7 @@ model User {
   StripeShopTransaction         StripeShopTransaction[]
   StripeSubscriptionTransaction StripeSubscriptionTransaction[]
 
+  @@unique(fields: [email, reset_password_token], name: "resetPasswordTokenIsValid")
   @@unique(fields: [id, admin], name: "isAdmin")
   @@unique(fields: [email, confirmed_email], name: "emailConfirmed")
   @@map("users")

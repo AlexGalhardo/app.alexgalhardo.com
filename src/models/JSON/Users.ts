@@ -8,7 +8,6 @@
  */
 
 import fs from 'fs-extra';
-import randomToken from 'rand-token';
 import uuid from 'uuid';
 
 import database from '../../config/jsonDatabase';
@@ -227,14 +226,11 @@ class Users {
         }
     }
 
-    static createResetPasswordToken(email) {
+    static createResetPasswordToken(email, resetPasswordToken) {
         try {
-            const reset_password_token = randomToken.generate(24);
-
             for (let i = 0; i < database.users.length; i++) {
                 if (database.users[i].email === email) {
-                    database.users[i].reset_password_token =
-                        reset_password_token;
+                    database.users[i].reset_password_token = resetPasswordToken;
                     Users.save(database);
                     return;
                 }

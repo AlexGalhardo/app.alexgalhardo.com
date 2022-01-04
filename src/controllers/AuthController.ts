@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /**
  * GALHARDO APP | https://galhardoapp.com
  * Created By © Alex Galhardo  | August 2021-Present
@@ -16,6 +17,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import queryString from 'query-string';
+import randomToken from 'rand-token';
 
 import NodeMailer from '../helpers/NodeMailer';
 import URL from '../helpers/URL';
@@ -148,8 +150,10 @@ class AuthController {
     async postForgetPassword(req: Request, res: Response) {
         const { email } = req.body;
 
-        await Users.createResetPasswordToken(email);
-        await NodeMailer.sendForgetPasswordLink(email);
+        const resetPasswordToken = randomToken.generate(24);
+
+        await Users.createResetPasswordToken(email, resetPasswordToken);
+        await NodeMailer.sendForgetPasswordLink(email, resetPasswordToken);
 
         req.flash(
             'success',

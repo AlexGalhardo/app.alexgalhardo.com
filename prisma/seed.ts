@@ -147,7 +147,7 @@ const main = async () => {
             {
                 title: 'God of War Ragnarök',
                 year_release: 2022,
-                price: 29990,
+                price: 6990,
                 resume: `God of War: Ragnarök is the tentative title for the upcoming action-adventure game in development by Santa Monica Studio and to be published by Sony Interactive Entertainment (SIE). It is scheduled to be released in 2021 for the PlayStation 5 (PS5). It will be the ninth installment in the God of War series, the ninth chronologically, and the sequel to 2018's God of War. Loosely based on Norse mythology, the game will be set in ancient Norway and feature series protagonists Kratos, the former Greek God of War who remains the only playable character, and his young son Atreus. The game is expected to kick off the events of Ragnarök, a series of events that bring about the end of days and depict the deaths of the Norse gods in Norse mythology.`,
                 image: `https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png`,
                 igdb_link: 'https://www.igdb.com/games/god-of-war-ragnarok',
@@ -160,7 +160,7 @@ const main = async () => {
             {
                 title: 'God Of War',
                 year_release: 2018,
-                price: 5990,
+                price: 2990,
                 resume: `It is a new beginning for Kratos. Living as a man, outside the shadow of the gods, he seeks solitude in the unfamiliar lands of Norse mythology. With new purpose and his son at his side, Kratos must fight for survival as powerful forces threaten to disrupt the new life he has created...`,
                 image: `https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg`,
                 igdb_link: 'https://www.igdb.com/games/god-of-war--1',
@@ -173,7 +173,7 @@ const main = async () => {
             {
                 title: 'Ghost Of Tsushima',
                 year_release: 2020,
-                price: 19990,
+                price: 5990,
                 resume: 'The year is 1274. Samurai warriors are the legendary defenders of Japan — until the fearsome Mongol Empire invades the island of Tsushima, wreaking havoc and conquering the local population. As one of the last surviving samurai, you rise from the ashes to fight back. But, honorable tactics won’t lead you to victory. You must move beyond your samurai traditions to forge a new way of fighting — the way of the Ghost — as you wage an unconventional war for the freedom of Japan.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2crj.jpg',
                 igdb_link: 'https://www.igdb.com/games/ghost-of-tsushima',
@@ -186,7 +186,7 @@ const main = async () => {
             {
                 title: "Marvel's SpiderMan",
                 year_release: 2018,
-                price: 12990,
+                price: 3990,
                 resume: 'Starring the worlds most iconic Super Hero, Spider-Man features the acrobatic abilities, improvisation and web-slinging that the wall-crawler is famous for, while also introducing elements never-before-seen in a Spider-Man game. From traversing with parkour and utilizing the environment, to new combat and blockbuster set pieces, its Spider-Man unlike any you’ve played before.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r77.jpg',
                 igdb_link: 'https://www.igdb.com/games/marvels-spider-man',
@@ -199,7 +199,7 @@ const main = async () => {
             {
                 title: "Uncharted 4: A Thief's End",
                 year_release: 2016,
-                price: 5990,
+                price: 1990,
                 resume: "Several years after his last adventure, retired fortune hunter, Nathan Drake, is forced back into the world of thieves. With the stakes much more personal, Drake embarks on a globe-trotting journey in pursuit of a historical conspiracy behind a fabled pirate treasure. His greatest adventure will test his physical limits, his resolve, and ultimately what he's willing to sacrifice to save the ones he loves.",
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7h.jpg',
                 igdb_link:
@@ -213,7 +213,7 @@ const main = async () => {
             {
                 title: 'Uncharted: The Lost Legacy',
                 year_release: 2017,
-                price: 8990,
+                price: 2990,
                 resume: `From the critically acclaimed developer, Naughty Dog, comes the first standalone adventure in the Uncharted series. Fan-favorite character, Chloe Frazer, must enlist the aid of renowned mercenary Nadine Ross from Uncharted 4: A Thiefs End in order to recover a fabled ancient Indian artifact and keep it out of the hands of a ruthless war profiteer. Together, theyll venture deep into the mountains of India in search of the legendary artifact. Along the way, theyll learn to work together to unearth the mystery of the artifact, fight their way through fierce opposition, and prevent the region from falling into chaos.`,
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tp9.jpg',
                 igdb_link:
@@ -266,7 +266,7 @@ const main = async () => {
             {
                 title: 'The Last of Us Part II',
                 year_release: 2020,
-                price: 9990,
+                price: 5990,
                 resume: 'Set 5 years after the events of The Last of Us, we see the return of Joel and Ellie. Driven by hatred, Ellie sets out for Seattle to serve justice. However, she begins to wonder what justice really means.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r0o.jpg',
                 igdb_link: 'https://www.igdb.com/games/the-last-of-us-part-ii',
@@ -279,7 +279,7 @@ const main = async () => {
             {
                 title: 'The Last of Us',
                 year_release: 2013,
-                price: 8990,
+                price: 2990,
                 resume: 'A third person shooter/stealth/survival hybrid, in which twenty years after the outbreak of a parasitic fungus which takes over the neural functions of humans, Joel, a Texan with a tragic familial past, finds himself responsible with smuggling a fourteen year old girl named Ellie to a militia group called the Fireflies, while avoiding strict and deadly authorities, infected fungal hosts and other violent survivors.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg',
                 igdb_link: 'https://www.igdb.com/games/the-last-of-us',
@@ -292,7 +292,7 @@ const main = async () => {
             {
                 title: 'Hades',
                 year_release: 2020,
-                price: 7990,
+                price: 2990,
                 resume: 'A rogue-lite hack and slash dungeon crawler in which Zagreus, son of Hades the Greek god of the dead, attempts to escape his home and his oppressive father by fighting the souls of the dead through the various layers of the ever-shifting underworld, while getting to know and forging relationships with its inhabitants.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co39vc.jpg',
                 igdb_link: 'https://www.igdb.com/games/hades--1',
@@ -305,7 +305,7 @@ const main = async () => {
             {
                 title: 'Detroit: Become Human',
                 year_release: 2018,
-                price: 6990,
+                price: 1990,
                 resume: 'Detroit: Become Human is an neo-noir thriller. The plot revolves around three androids: Kara, who escapes the factory she was made in to explore her newfound sentience; Connor, whose job it is to hunt down deviant androids like Kara; and Markus, who devotes himself to releasing the androids from servitude. The characters may survive or perish depending on the choices that are made, which serve to shape the story as customised by the player.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2md2.png',
                 igdb_link: 'https://www.igdb.com/games/detroit-become-human--1',
@@ -318,7 +318,7 @@ const main = async () => {
             {
                 title: 'Shadow of the Colossus',
                 year_release: 2018,
-                price: 5990,
+                price: 1990,
                 resume: 'Tales speak of an ancient land where creatures the size of mountains, roam the majestic landscape. Bound to the land, these creatures hold a key to a mystical power of revival - a power you must obtain to waken a loved one. Shadow of the Colossus is a majestic journey through ancient lands to seek out and destroy gigantic mythical beasts. With your trusty horse at your side, explore the spacious lands and unearth each Colossi. Armed with your wits, a sword and a bow, use cunning and strategy to topple each behemoth. A remake of the critically-claimed game of the same title. Also from the minds that brought you The Last Guardian & ICO',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co272w.png',
                 igdb_link:
@@ -332,7 +332,7 @@ const main = async () => {
             {
                 title: 'Gran Turismo Sport',
                 year_release: 2018,
-                price: 4990,
+                price: 1990,
                 resume: 'Welcome to the future of motorsports – the definitive motor racing experience is back and better than ever only on PlayStation 4. Gran Turismo Sport is the world’s first racing experience to be built from the ground up to bring global, online competitions sanctioned by the highest governing body of international motorsports, the FIA (Federation International Automobile). Create your legacy as you represent and compete for your home country or favorite manufacturer.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1pd4.png',
                 igdb_link: 'https://www.igdb.com/games/gran-turismo-sport',
@@ -358,7 +358,7 @@ const main = async () => {
             {
                 title: 'Final Fantasy 7 Remake',
                 year_release: 2020,
-                price: 2990,
+                price: 5990,
                 resume: 'A spectacular re-imagining of one of the most visionary games ever, FINAL FANTASY VII REMAKE rebuilds and expands the legendary RPG for today. The first game in this project is set in the eclectic city of Midgar and presents a fully standalone gaming experience.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1qxr.png',
                 igdb_link:
@@ -372,7 +372,7 @@ const main = async () => {
             {
                 title: 'Death Stranding',
                 year_release: 2019,
-                price: 990,
+                price: 4990,
                 resume: 'Action & exploration third person game set in a post-apocalyptic open world.Developed by Kojima Productions and published first on PS4 by Sony Interactive and later on PC by 505 Games.',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co316v.png',
                 igdb_link: 'https://www.igdb.com/games/death-stranding',
@@ -431,24 +431,24 @@ const main = async () => {
             {
                 title: '21 Lessons for the 21st Century',
                 year_release: 2018,
+                price: 2990,
                 image: 'https://m.media-amazon.com/images/I/41+uVWlucWL.jpg',
                 amazon_link:
                     'https://www.amazon.com/Lessons-21st-Century-Yuval-Harari-ebook/dp/B079WM7KLS/ref=sr_1_1?crid=165V6E4JEUXKV&dchild=1&keywords=yuval+harari&qid=1632431324&s=digital-text&sprefix=yuval+ha%2Cdigital-text%2C288&sr=1-1',
                 resume: 'How do computers and robots change the meaning of being human? How do we deal with the epidemic of fake news? Are nations and religions still relevant? What should we teach our children? Yuval Noah Harari’s 21 Lessons for the 21st Century is a probing and visionary investigation into today’s most urgent issues as we move into the uncharted territory of the future. As technology advances faster than our understanding of it, hacking becomes a tactic of war, and the world feels more polarized than ever, Harari addresses the challenge of navigating life in the face of constant and disorienting change and raises the important questions we need to ask ourselves in order to survive.',
                 pages: 355,
-                price: 2990,
                 genres: 'Historic',
                 author: 'Yuval Harari',
             },
             {
                 title: 'Homo Deus: A Brief History of Tomorrow',
                 year_release: 2016,
+                price: 3990,
                 image: 'https://m.media-amazon.com/images/I/4193zapM4cL._SY346_.jpg',
                 amazon_link:
                     'https://www.amazon.com.br/gp/product/B01LXCJTO4/ref=dbs_a_def_rwt_bibl_vppi_i0',
                 resume: 'Yuval Noah Harari, author of the critically-acclaimed New York Times bestseller and international phenomenon Sapiens, returns with an equally original, compelling, and provocative book, turning his focus toward humanity’s future, and our quest to upgrade humans into gods. Over the past century humankind has managed to do the impossible and rein in famine, plague, and war. This may seem hard to accept, but, as Harari explains in his trademark style—thorough, yet riveting—famine, plague and war have been transformed from incomprehensible and uncontrollable forces of nature into manageable challenges. For the first time ever, more people die from eating too much than from eating too little; more people die from old age than from infectious diseases; and more people commit suicide than are killed by soldiers, terrorists and criminals put together. The average American is a thousand times more likely to die from binging at McDonalds than from being blown up by Al Qaeda.',
                 pages: 464,
-                price: 3990,
                 genres: 'Historic',
                 author: 'Yuval Noah Harari ',
             },
@@ -551,7 +551,7 @@ const main = async () => {
             {
                 title: 'Einstein: His Life and Universe',
                 year_release: 2020,
-                price: 3990,
+                price: 3590,
                 image: 'https://m.media-amazon.com/images/I/510RQE9G+AL.jpg',
                 amazon_link:
                     'https://www.amazon.com/Einstein-Life-Universe-Walter-Isaacson-ebook/dp/B000PC0S0K/ref=sr_1_1?crid=1SVNXRWCK9N0J&dchild=1&keywords=einstein&qid=1632431547&s=digital-text&sprefix=einstein%2Cdigital-text%2C306&sr=1-1',
@@ -563,7 +563,7 @@ const main = async () => {
             {
                 title: 'Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future',
                 year_release: 2015,
-                price: 3990,
+                price: 2790,
                 image: 'https://m.media-amazon.com/images/I/51tw6UjHpDL._SY346_.jpg',
                 amazon_link:
                     'https://www.amazon.com/Elon-Musk-SpaceX-Fantastic-Future-ebook/dp/B00KVI76ZS/ref=sr_1_1?crid=1L76QFVRLPXOW&dchild=1&keywords=elon+musk&qid=1632431662&s=digital-text&sprefix=elon+musk%2Cdigital-text%2C303&sr=1-1',
@@ -575,7 +575,7 @@ const main = async () => {
             {
                 title: "Alice's Adventures in Wonderland",
                 year_release: 1865,
-                price: 2990,
+                price: 2490,
                 image: 'https://m.media-amazon.com/images/I/51HFDCO5f4L.jpg',
                 amazon_link:
                     'https://www.amazon.com/Alices-Adventures-Wonderland-Lewis-Carroll-ebook/dp/B09DJNGYJZ/ref=sr_1_2?crid=1U7MZJ195HFXT&dchild=1&keywords=alice+in+wonderland&qid=1632431725&s=digital-text&sprefix=alice+in%2Cdigital-text%2C309&sr=1-2',
@@ -587,7 +587,7 @@ const main = async () => {
             {
                 title: "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses",
                 year_release: 2011,
-                price: 2990,
+                price: 3190,
                 image: 'https://m.media-amazon.com/images/I/51N-u8AsmdL.jpg',
                 amazon_link:
                     'https://www.amazon.com/Lean-Startup-Entrepreneurs-Continuous-Innovation-ebook/dp/B004J4XGN6/ref=sr_1_1?crid=1F9VTKTRXNCT7&dchild=1&keywords=lean+startup&qid=1632431932&s=digital-text&sprefix=lean+st%2Cdigital-text%2C302&sr=1-1',
@@ -599,7 +599,7 @@ const main = async () => {
             {
                 title: 'I, Robot',
                 year_release: 1982,
-                price: 2990,
+                price: 1990,
                 image: 'https://m.media-amazon.com/images/I/41ED86iNFkL.jpg',
                 amazon_link:
                     'https://www.amazon.com/I-Robot-Book-1-ebook/dp/B000FC1PW0/ref=sr_1_2?crid=37Q92VPCQTPHH&dchild=1&keywords=isaac+asimov&qid=1632432064&s=digital-text&sprefix=isaac+asi%2Cdigital-text%2C305&sr=1-2',
@@ -611,7 +611,7 @@ const main = async () => {
             {
                 title: "The Hitchhiker's Guide to the Galaxy",
                 year_release: 2007,
-                price: 2990,
+                price: 990,
                 image: 'https://m.media-amazon.com/images/I/51vfuNNWMTS.jpg',
                 amazon_link:
                     'https://www.amazon.com/Hitchhikers-Guide-Galaxy-Douglas-Adams-ebook/dp/B000XUBC2C/ref=sr_1_1?dchild=1&keywords=The+Hitchhiker%27s+Guide+to+the+Galaxy&qid=1632432113&s=digital-text&sr=1-1',
