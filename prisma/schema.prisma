@@ -40,8 +40,8 @@ model User {
   stripe_card_exp_year               Int?
   stripe_currently_subscription_id   String?   @unique
   stripe_currently_subscription_name String?
-  stripe_subscription_start          String?
-  stripe_subscription_end            String?
+  stripe_subscription_start          DateTime?
+  stripe_subscription_end            DateTime?
   stripe_cancel_at_period_end        Boolean?
   created_at                         DateTime  @default(now())
   updated_at                         DateTime?
@@ -202,8 +202,8 @@ model StripeSubscriptionTransaction {
   plan_id              String
   plan_name            String
   plan_amount          Int
-  current_period_start String
-  current_period_end   String
+  current_period_start DateTime
+  current_period_end   DateTime
   cancel_at_period_end Boolean
 
   @@map("stripe_subscriptions_transactions")

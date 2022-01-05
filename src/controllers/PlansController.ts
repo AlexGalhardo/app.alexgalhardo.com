@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /**
  * GALHARDO APP
  * Created By © Alex Galhardo  | August 2021-Present
@@ -162,14 +163,6 @@ class PlansController {
             items: [{ price: planId }],
         });
 
-        subscription.created = DateTime.getDateTime(subscription.created);
-        subscription.current_period_end = DateTime.getDateTime(
-            subscription.current_period_end
-        );
-        subscription.current_period_start = DateTime.getDateTime(
-            subscription.current_period_start
-        );
-
         return subscription;
     }
 
@@ -195,13 +188,8 @@ class PlansController {
 
             const stripePlan = await PlansController.getStripePlan()[plan_name];
 
-            const paymentMethod = await stripe.paymentMethods.attach(
-                'pm_1KCpzO2eZvKYlo2Cl26ytNHe',
-                { customer: 'cus_AJ6y20bjkOOayM' }
-            );
-
             const subscription = await PlansController.createStripeSubscription(
-                SESSION_USER.stripe_customer_id,
+                stripeCustomerId,
                 stripePlan.id
             );
 
@@ -216,10 +204,14 @@ class PlansController {
                 stripe_plan_id: stripePlan.id,
                 plan_name: stripePlan.name,
                 plan_amount: stripePlan.amount,
-                current_period_start: subscription.current_period_start,
-                current_period_end: subscription.current_period_end,
+                current_period_start: new Date(
+                    subscription.current_period_start * 1000
+                ),
+                current_period_end: new Date(
+                    subscription.current_period_end * 1000
+                ),
                 cancel_at_period_end: subscription.cancel_at_period_end,
-                stripe_customer_id: SESSION_USER.stripe_customer_id,
+                stripe_customer_id: stripeCustomerId,
                 user_id: SESSION_USER.id,
                 user_email: SESSION_USER.email,
                 user_name: SESSION_USER.name,
@@ -241,7 +233,7 @@ class PlansController {
                 subsTransactionObject
             );
 
-            res.render('pages/plans/planPayLog', {
+            return res.render('pages/plans/planPayLog', {
                 flash_success: 'Subscription Created with Success!',
                 subsTransactionObject,
                 user: SESSION_USER,
