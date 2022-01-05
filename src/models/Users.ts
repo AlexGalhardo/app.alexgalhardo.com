@@ -356,6 +356,14 @@ class Users {
         });
     }
 
+    async emailExists(email: string) {
+        return prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+    }
+
     async createResetPasswordToken(email: string, resetPasswordToken: string) {
         await prisma.user.update({
             where: {
@@ -367,7 +375,7 @@ class Users {
         });
     }
 
-    async resetPasswordTokenIsValid(email: string, resetPasswordToken: string) {
+    resetPasswordTokenIsValid(email: string, resetPasswordToken: string) {
         return prisma.user.findUnique({
             where: {
                 resetPasswordTokenIsValid: {
@@ -376,6 +384,66 @@ class Users {
                 },
             },
         });
+    }
+
+    async resetPassword(email: string, newPassword: string) {
+        return prisma.user.update({
+            where: {
+                email,
+            },
+            data: {
+                password: await Bcrypt.hash(newPassword),
+                reset_password_token: null,
+            },
+        });
+    }
+
+    verifyIfEmailIsConfirmed(email: string) {
+        return prisma.user.findUnique({
+            where: {
+                emailConfirmed: {
+                    email,
+                    confirmed_email: true,
+                },
+            },
+        });
+    }
+
+    async createConfirmEmailToken(email: string, confirmEmailToken: string) {
+        await prisma.user.update({
+            where: {
+                email,
+            },
+            data: {
+                confirm_email_token: confirmEmailToken,
+            },
+        });
+    }
+
+    async verifyConfirmEmailToken(email: string, confirmEmailToken: string) {
+        if (await this.emailExists(email)) {
+            if (
+                await prisma.user.findUnique({
+                    where: {
+                        confirmEmailTokenIsValid: {
+                            email,
+                            confirm_email_token: confirmEmailToken,
+                        },
+                    },
+                })
+            ) {
+                return prisma.user.update({
+                    where: {
+                        email,
+                    },
+                    data: {
+                        confirm_email_token: null,
+                        confirmed_email: true,
+                    },
+                });
+            }
+        }
+        return false;
     }
 }
 

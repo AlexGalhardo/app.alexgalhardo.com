@@ -80,22 +80,6 @@ class AuthController {
         });
     }
 
-    async verifyIfConfirmEmailURLIsValid(req: Request, res: Response) {
-        const { email, token } = req.params;
-
-        const confirmEmailValid = await Users.verifyConfirmEmailToken(
-            email,
-            token
-        );
-
-        if (confirmEmailValid) {
-            req.flash('success', 'Email confirmed!');
-            return res.redirect('/login');
-        }
-
-        return res.redirect('/login');
-    }
-
     async postRegister(req: Request, res: Response, next) {
         try {
             if (!req.recaptcha.error) {
@@ -144,7 +128,10 @@ class AuthController {
     }
 
     getViewForgetPassword(req: Request, res: Response) {
-        return res.render('pages/auth/forgetPassword');
+        return res.render('pages/auth/forgetPassword', {
+            flash_success: req.flash('success'),
+            flash_warning: req.flash('warning'),
+        });
     }
 
     async postForgetPassword(req: Request, res: Response) {
@@ -152,8 +139,10 @@ class AuthController {
 
         const resetPasswordToken = randomToken.generate(24);
 
-        await Users.createResetPasswordToken(email, resetPasswordToken);
-        await NodeMailer.sendForgetPasswordLink(email, resetPasswordToken);
+        if (await Users.emailExists(email)) {
+            await Users.createResetPasswordToken(email, resetPasswordToken);
+            await NodeMailer.sendForgetPasswordLink(email, resetPasswordToken);
+        }
 
         req.flash(
             'success',
@@ -162,30 +151,36 @@ class AuthController {
         return res.redirect('/forgetPassword');
     }
 
-    getViewResetPassword(req: Request, res: Response) {
+    async sendToForgetPassword(req: Request, res: Response) {
+        return res.redirect('/forgetPassword');
+    }
+
+    async getViewResetPassword(req: Request, res: Response) {
         const { email, token } = req.params;
 
         if (!email || !token) {
             return res.redirect('/forgetPassword');
         }
 
-        if (!Users.resetPasswordTokenIsValid(email, token)) {
+        if (!(await Users.resetPasswordTokenIsValid(email, token))) {
             return res.redirect('/forgetPassword');
         }
 
         return res.render('pages/auth/resetPassword', {
             email,
+            flash_success: req.flash('success'),
+            flash_warning: req.flash('warning'),
         });
     }
 
-    postResetPassword(req: Request, res: Response) {
+    async postResetPassword(req: Request, res: Response) {
         const { email, new_password } = req.body;
 
-        if (!Users.resetPassword(email, new_password)) {
+        if (!(await Users.resetPassword(email, new_password))) {
             return res.redirect('/forgetPassword');
         }
 
-        req.flash('success', 'You updated your password!');
+        req.flash('success', 'Password updated successfull!');
         return res.redirect('/login');
     }
 
@@ -198,9 +193,7 @@ class AuthController {
     async postSendConfirmEmailLink(req: Request, res: Response) {
         const { email } = req.body;
 
-        const emailConfirmed = await Users.verifyIfEmailIsConfirmed(email);
-
-        if (!emailConfirmed) {
+        if (!(await Users.verifyIfEmailIsConfirmed(email))) {
             await NodeMailer.sendConfirmEmailLink(email);
         }
 
@@ -209,6 +202,17 @@ class AuthController {
             "If this email is registred and not confirmed yet, we'll send a link to confirm this email!"
         );
         return res.redirect('/confirmEmail');
+    }
+
+    async getVerifyIfConfirmEmailURLIsValid(req: Request, res: Response) {
+        const { email, token } = req.params;
+
+        if (await Users.verifyConfirmEmailToken(email, token)) {
+            req.flash('success', 'Email confirmed!');
+            return res.redirect('/login');
+        }
+
+        return res.redirect('/login');
     }
 
     async loginFacebook(req: Request, res: Response, next) {

@@ -126,9 +126,9 @@ class NodeMailer {
     }
 
     async sendConfirmEmailLink(email: string) {
-        const confirm_email_token = randomToken.generate(24);
+        const confirmEmailToken = randomToken.generate(24);
 
-        const confirmEmailLinkURL = `${process.env.APP_URL}/confirmEmail/${email}/${confirm_email_token}`;
+        const confirmEmailLinkURL = `${process.env.APP_URL}/confirmEmail/${email}/${confirmEmailToken}`;
 
         const filePath = path.join(
             __dirname,
@@ -145,7 +145,8 @@ class NodeMailer {
 
         const htmlBody = template(replacements);
 
-        await Users.createConfirmEmailToken(email, confirm_email_token);
+        await Users.createConfirmEmailToken(email, confirmEmailToken);
+
         await MailTrap.sendMail({
             from: process.env.APP_EMAIL,
             to: email,

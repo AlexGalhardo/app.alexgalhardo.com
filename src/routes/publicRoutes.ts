@@ -195,7 +195,7 @@ router
 
     .get(
         '/confirmEmail/:email/:token',
-        AuthController.verifyIfConfirmEmailURLIsValid
+        AuthController.getVerifyIfConfirmEmailURLIsValid
     )
 
     .get('/confirmEmail', AuthController.getViewResendConfirmEmailLink)
@@ -206,6 +206,19 @@ router
         userIsAlreadyLoggedIn,
         AuthController.getViewResetPassword
     )
+
+    .get(
+        '/resetPassword/:any',
+        userIsAlreadyLoggedIn,
+        AuthController.sendToForgetPassword
+    )
+
+    .get(
+        '/resetPassword',
+        userIsAlreadyLoggedIn,
+        AuthController.sendToForgetPassword
+    )
+
     .post(
         '/resetPassword',
         userIsAlreadyLoggedIn,
