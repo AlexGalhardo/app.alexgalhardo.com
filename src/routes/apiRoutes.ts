@@ -50,6 +50,11 @@ export default router
     .get('/public', APIController.getPublicEndpoints)
     .get('/admin', APIController.getAdminEndpoints)
 
+    .get(
+        '/public/email/:email',
+        APIPublicController.verifyIfEmailIsAlreadyRegistred
+    )
+
     .get('/public/blog', APIPublicController.getPublicBlog)
     .get('/public/blog/random', APIPublicController.getPublicBlogRandom)
     .get('/public/blog/:blog_id', APIPublicController.getPublicBlogByID)

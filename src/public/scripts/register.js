@@ -2,7 +2,7 @@ const checkbox = document.querySelector('#checkbox_policy');
 const btn = document.querySelector('#button_register');
 const password = document.querySelector('#password');
 const confirm_password = document.querySelector('#confirm_password');
-const name = document.querySelector('#username').value;
+const username = document.querySelector('#username').value;
 const emailValue = document.querySelector('#email').value;
 const form = document.querySelector('#form_register');
 const app_url = document.querySelector('#app_url').value;
@@ -14,8 +14,11 @@ let validName = true;
 btn.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    if (name.length < 4) {
-        document.querySelector('#alert_name').innerHTML = 'Invalid name!';
+    console.log('hello world', username);
+
+    if (username.length < 4) {
+        document.querySelector('#alert_name').innerHTML =
+            'Name must have at least 4 characters';
         validName = false;
     } else {
         document.querySelector('#alert_name').innerHTML = '';
@@ -68,7 +71,11 @@ btn.addEventListener('click', async (e) => {
         document.querySelector('#alert_checkbox').innerHTML = '';
     }
 
-    if (validName && validEmail && validPassword && checkbox.checked) {
+    /* if (validName && validEmail && validPassword && checkbox.checked) {
+        form.submit();
+    } */
+
+    if (checkbox.checked) {
         form.submit();
     }
 });

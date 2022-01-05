@@ -19,6 +19,26 @@ import Users from '@models/Users';
 import { Request, Response, NextFunction } from 'express';
 
 class APIPublicController {
+    async verifyIfEmailIsAlreadyRegistred(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const { email } = req.params;
+            if (await Users.emailExists(email)) {
+                return res.json({
+                    emailRegistred: true,
+                });
+            }
+            return res.json({
+                emailRegistred: false,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
     async getNewsletter(req: Request, res: Response, next: NextFunction) {
         try {
             const { email } = req.params;

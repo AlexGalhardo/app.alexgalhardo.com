@@ -4,6 +4,31 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+type inputCreateUser = {
+    username: string;
+    email: string;
+    password: string;
+    confirm_password: string;
+    github_id: string;
+    facebook_id: string;
+    google_id: string;
+};
+
+type inputUpdateUser = {
+    email: string;
+    password: string;
+    document: string;
+    phone: string;
+    birth_date: string;
+    address_zipcode: string;
+    address_street: string;
+    address_street_number: string;
+    address_neighborhood: string;
+    address_city: string;
+    address_state: string;
+    address_country: string;
+};
+
 class Users {
     getAll() {
         return prisma.user.findMany();
@@ -83,7 +108,7 @@ class Users {
         return !!user;
     }
 
-    async update(userObject) {
+    async update(userObject: inputUpdateUser) {
         const userExist = await prisma.user.findUnique({
             where: {
                 email: userObject.email,
@@ -119,6 +144,21 @@ class Users {
 
             return !!user;
         }
+        return false;
+    }
+
+    async create(userObject: inputCreateUser, confirmEmailToken: string) {
+        return prisma.user.create({
+            data: {
+                name: userObject.username,
+                email: userObject.email,
+                password: await Bcrypt.hash(userObject.password),
+                github_id: userObject.github_id,
+                facebook_id: userObject.facebook_id,
+                google_id: userObject.google_id,
+                confirm_email_token: confirmEmailToken,
+            },
+        });
     }
 
     async createStripeCustomer(user_id: string, stripe_customer_id: string) {

@@ -125,9 +125,7 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    async sendConfirmEmailLink(email: string) {
-        const confirmEmailToken = randomToken.generate(24);
-
+    async sendConfirmEmailLink(email: string, confirmEmailToken: string) {
         const confirmEmailLinkURL = `${process.env.APP_URL}/confirmEmail/${email}/${confirmEmailToken}`;
 
         const filePath = path.join(

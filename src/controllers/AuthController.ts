@@ -82,7 +82,7 @@ class AuthController {
 
     async postRegister(req: Request, res: Response, next) {
         try {
-            if (!req.recaptcha.error) {
+            /* if (!req.recaptcha.error) {
                 const errors = validationResult(req);
 
                 if (!errors.isEmpty()) {
@@ -91,6 +91,11 @@ class AuthController {
                 }
             } else {
                 req.flash('warning', 'Invalid Recaptcha!');
+                return res.redirect('/register');
+            } */
+
+            if (!errors.isEmpty()) {
+                req.flash('warning', errors.array()[0].msg);
                 return res.redirect('/register');
             }
 
@@ -104,18 +109,21 @@ class AuthController {
                 google_id,
             } = req.body;
 
+            const confirmEmailToken = randomToken.generate(24);
+
             const userObject = {
                 username,
                 email,
                 password,
+                confirm_password,
                 github_id,
                 facebook_id,
                 google_id,
-                confirm_email_token,
+                confirmEmailToken,
             };
 
-            await Users.create(userObject);
-            await NodeMailer.sendConfirmEmailLink(email);
+            await Users.create(userObject, confirmEmailToken);
+            await NodeMailer.sendConfirmEmailLink(email, confirmEmailToken);
 
             req.flash(
                 'success',
@@ -193,8 +201,10 @@ class AuthController {
     async postSendConfirmEmailLink(req: Request, res: Response) {
         const { email } = req.body;
 
+        const confirmEmailToken = randomToken.generate(24);
+
         if (!(await Users.verifyIfEmailIsConfirmed(email))) {
-            await NodeMailer.sendConfirmEmailLink(email);
+            await NodeMailer.sendConfirmEmailLink(email, confirmEmailToken);
         }
 
         req.flash(
