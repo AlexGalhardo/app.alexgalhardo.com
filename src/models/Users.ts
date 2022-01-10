@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import Bcrypt from '@helpers/Bcrypt';
 import Number from '@helpers/Number';
 import { PrismaClient } from '@prisma/client';
@@ -15,8 +16,10 @@ type inputCreateUser = {
 };
 
 type inputUpdateUser = {
+    id: string;
     email: string;
-    password: string;
+    older_password: string;
+    new_password: string;
     document: string;
     phone: string;
     birth_date: string;
@@ -82,6 +85,8 @@ class Users {
             },
         });
 
+        if (!user) return false;
+
         return (await Bcrypt.compare(password, user?.password)) ? user : null;
     }
 
@@ -111,34 +116,48 @@ class Users {
     async update(userObject: inputUpdateUser) {
         const userExist = await prisma.user.findUnique({
             where: {
-                email: userObject.email,
+                id: userObject.id,
             },
         });
 
-        if (await Bcrypt.compare(userObject.password, userExist.password)) {
+        if (
+            await Bcrypt.compare(userObject.older_password, userExist.password)
+        ) {
             await prisma.user.update({
                 where: {
-                    email: userExist?.email,
+                    id: userExist?.id,
                 },
                 data: {
-                    email: userObject.new_email,
-                    password: await Bcrypt.hash(userObject.new_password),
-                    document: userObject.document,
-                    phone: userObject.phone,
-                    birth_date: userObject.birth_date,
-                    address_zipcode: userObject.zipcode,
-                    address_street: userObject.street,
-                    address_street_number: userObject.street_number,
-                    address_neighborhood: userObject.neighborhood,
-                    address_city: userObject.city,
-                    address_state: userObject.state,
-                    address_country: userObject.country,
+                    email: userObject.email
+                        ? userObject.email
+                        : userExist.email,
+                    password: userObject.new_password
+                        ? await Bcrypt.hash(userObject.new_password)
+                        : userExist.password,
+                    document: userObject.document
+                        ? userObject.document
+                        : userExist.document,
+                    phone: userObject.phone
+                        ? userObject.phone
+                        : userExist.phone,
+                    birth_date: userObject.birth_date
+                        ? userObject.birth_date
+                        : userExist.birth_date,
+                    address_zipcode: userObject.address_zipcode,
+                    address_street: userObject.address_street,
+                    address_street_number: parseInt(
+                        userObject.address_street_number
+                    ),
+                    address_neighborhood: userObject.address_neighborhood,
+                    address_city: userObject.address_city,
+                    address_state: userObject.address_state,
+                    address_country: userObject.address_country,
                 },
             });
 
             const user = await prisma.user.findUnique({
                 where: {
-                    email: userObject.new_email,
+                    email: userObject.email,
                 },
             });
 
@@ -157,6 +176,7 @@ class Users {
                 facebook_id: userObject.facebook_id,
                 google_id: userObject.google_id,
                 confirm_email_token: confirmEmailToken,
+                avatar: 'https://milvus.online/wp-content/uploads/2017/05/avatar-default.jpg',
             },
         });
     }

@@ -3,9 +3,10 @@
 const buttonUpdateProfile = document.querySelector('#button_update_profile');
 const formUpdateProfile = document.querySelector('#form_update_profile');
 
-const name = document.querySelector('#name');
-const email = document.querySelector('#email');
-const newPassword = document.querySelector('#new_password');
+const nameValue = document.querySelector('#name').value;
+const emailValue = document.querySelector('#email').value;
+const newPassword = document.querySelector('#new_password').value;
+const app_url = document.querySelector('#app_url').value;
 
 let validName = true;
 let validEmail = true;
@@ -14,7 +15,7 @@ let validPassword = true;
 buttonUpdateProfile.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    if (name.value.length < 4) {
+    if (nameValue.length < 4) {
         document.querySelector('#alert_name').innerHTML = 'Invalid name';
         validName = false;
     } else {
@@ -23,20 +24,22 @@ buttonUpdateProfile.addEventListener('click', async (e) => {
     }
 
     // verify email
-    const response = await fetch(
-        `https://galhardoapp.com/api/public/email/${email.value}`
-    );
-    const json = await response.json();
+    if (emailValue) {
+        const response = await fetch(
+            `${app_url}/api/public/email/${emailValue}`
+        );
+        const json = await response.json();
 
-    if (
-        (email.value.length >= 8 && !json.emailRegistred) ||
-        email.value === 'admin@gmail.com'
-    ) {
-        document.querySelector('#alert_email').innerHTML = '';
-        validEmail = true;
-    } else {
-        document.querySelector('#alert_email').innerHTML = 'Invalid email!';
-        validEmail = false;
+        const validEmailRegex =
+            /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+
+        if (emailValue.match(validEmailRegex) && !json.emailRegistred) {
+            document.querySelector('#alert_email').innerHTML = '';
+            validEmail = true;
+        } else {
+            document.querySelector('#alert_email').innerHTML = 'Invalid email!';
+            validEmail = false;
+        }
     }
 
     // verify password
@@ -49,7 +52,7 @@ buttonUpdateProfile.addEventListener('click', async (e) => {
         validPassword = true;
     }
 
-    if (validName && validEmail && validPassword) {
+    if (validName && validPassword) {
         formUpdateProfile.submit();
     }
 });
@@ -59,7 +62,6 @@ document
     .addEventListener('change', async function (e) {
         const zipcode = e.target.value;
 
-        // CEP DATA
         const responseCEP = await fetch(
             `https://galhardo-correios.herokuapp.com/cep/${zipcode}`
         );

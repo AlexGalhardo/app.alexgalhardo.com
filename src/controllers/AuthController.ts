@@ -94,6 +94,8 @@ class AuthController {
                 return res.redirect('/register');
             } */
 
+            const errors = validationResult(req);
+
             if (!errors.isEmpty()) {
                 req.flash('warning', errors.array()[0].msg);
                 return res.redirect('/register');
@@ -129,7 +131,7 @@ class AuthController {
                 'success',
                 'Account Created! Confirm your email by clicking the link send to your email inbox!'
             );
-            return res.redirect('/register');
+            return res.redirect('/login');
         } catch (error) {
             throw new Error(error);
         }

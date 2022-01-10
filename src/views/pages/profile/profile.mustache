@@ -44,17 +44,17 @@
                 <hr>
 
                 <div class="form-floating mb-3">
-                      <input placeholder="Digit your username" class="mb-2 form-control" name="created_at" type="text" value="{{created_at}}" readonly>
+                      <input class="mb-2 form-control" name="created_at" type="text" value="{{created_at}}" readonly>
                       <label for="name">CREATED_AT</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input placeholder="Digit your username" class="mb-2 form-control" name="updated_at" type="text" value="{{updated_at}}" readonly>
-                      <label for="name">UPDATED_AT</label>
+                      <input class="mb-2 form-control" name="updated_at" type="text" value="{{updated_at}}" readonly>
+                      <label for="name">LAST_UPDATED_AT</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                      <input placeholder="Digit your username" class="mb-2 form-control" name="admin" type="text" value="{{admin}}" readonly>
+                      <input class="mb-2 form-control" name="admin" type="text" value="{{admin}}" readonly>
                       <label for="admin">ADMIN</label>
                 </div>
 
@@ -173,6 +173,7 @@
 
                 <form action="/profile" class="form" method="POST" id="form_update_profile">
 
+                    <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
                     <small><span id="alert_name" class="fw-bold text-danger"></span></small>
@@ -185,8 +186,8 @@
                     <small><span id="alert_email" class="fw-bold text-danger"></span></small>
 
                     <div class="form-floating mb-3">
-                      <input type="email" class="form-control" name="email" id="email" value="{{email}}" {{#user.admin}} disabled {{/user.admin}}>
-                      <label for="floatingInput">EMAIL</label>
+                      <input type="email" class="form-control" name="email" id="email" value="{{email}}" readonly>
+                      <label for="email">EMAIL</label>
                     </div>
 
                     <div class="form-floating mb-3">
@@ -195,7 +196,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" id="phone" type="text" name="phone" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" minlength="11" maxlength="11" placeholder="Digit your cellphone" value="{{phone}}" required>
+                      <input class="mb-2 form-control" id="phone" type="text" name="phone" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" minlength="11" maxlength="11" value="{{phone}}" required>
                       <label for="phone">TELEGRAM_NUMBER</label>
                     </div>
 
@@ -208,7 +209,7 @@
                     <hr>
 
                     <div class="form-floating mb-3">
-                      <input type="password" class="form-control" id="older_password" name="older_password">
+                      <input type="password" class="form-control" id="older_password" name="older_password" required>
                       <label for="older_password">OLDER_PASSWORD</label>
                     </div>
 
@@ -222,32 +223,32 @@
                     <hr>
 
                     <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" id="zipcode" type="text" name="zipcode" pattern= "\d{5}-?\d{3}"  value="{{address.zipcode}}" required>
+                      <input class="mb-2 form-control" id="zipcode" type="text" name="zipcode" pattern= "\d{5}-?\d{3}"  value="{{address_zipcode}}" required>
                       <label for="zipcode">ZIPCODE</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="email" class="form-control" name="street" id="street" value="{{address.street}}" onkeydown="return false;" required>
+                      <input type="text" class="form-control" name="street" id="street" value="{{address_street}}" onkeydown="return false;" required>
                       <label for="street">STREET</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" type="number" min='1' max='9999' name="street_number" id="street_number" placeholder="Digit your street number" value="{{address.street_number}}" required>
+                      <input class="mb-2 form-control" type="number" step="1" min="1" max="9999" name="street_number" id="street_number" value="{{address_street_number}}" required>
                       <label for="street_number">STREET_NUMBER</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="text" class="mb-2 form-control" id="neighborhood" name="neighborhood" placeholder="Neighborhood" value="{{address.neighborhood}}" onkeydown="return false;" required>
+                      <input type="text" class="mb-2 form-control" id="neighborhood" name="neighborhood" value="{{address_neighborhood}}" onkeydown="return false;" required>
                       <label for="neighborhood">NEIGHBORHOOD</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="text" class="mb-2 form-control" id="city" name="city" placeholder="City" value="{{address.city}}" onkeydown="return false;" required>
+                      <input type="text" class="mb-2 form-control" id="city" name="city" value="{{address_city}}" onkeydown="return false;" required>
                       <label for="city">CITY</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="text" class="mb-2 form-control" id="state" name="state" placeholder="State" value="{{address.state}}" onkeydown="return false;" required>
+                      <input type="text" class="mb-2 form-control" id="state" name="state" value="{{address_state}}" onkeydown="return false;" required>
                       <label for="state">STATE</label>
                     </div>
 

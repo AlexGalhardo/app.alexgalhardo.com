@@ -75,9 +75,11 @@ btn.addEventListener('click', async (e) => {
         form.submit();
     } */
 
-    if (checkbox.checked) {
+    /* if (checkbox.checked) {
         form.submit();
-    }
+    } */
+
+    form.submit();
 });
 
 // verify google recaptcha

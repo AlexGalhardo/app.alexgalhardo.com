@@ -50,6 +50,8 @@ class ProfileController {
             country,
         } = req.body;
 
+        console.log('street number é =>', street_number);
+
         const userObject = {
             id: SESSION_USER.id,
             username,
@@ -59,18 +61,21 @@ class ProfileController {
             birth_date,
             older_password,
             new_password,
-            zipcode,
-            street,
-            street_number,
-            neighborhood,
-            state,
-            city,
-            country,
+            address_zipcode: zipcode,
+            address_street: street,
+            address_street_number: street_number,
+            address_neighborhood: neighborhood,
+            address_state: state,
+            address_city: city,
+            address_country: country,
         };
 
-        await Users.updateProfile(userObject);
+        if (await Users.update(userObject)) {
+            req.flash('success', 'Profile Information Updated!');
+            return res.redirect('/profile');
+        }
 
-        req.flash('success', 'Profile Information Updated!');
+        req.flash('warning', 'Something went wrong');
         return res.redirect('/profile');
     }
 

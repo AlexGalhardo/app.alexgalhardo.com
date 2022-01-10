@@ -155,6 +155,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Santa Mônica Studios',
                 genres: "Action, Third Person, Adventure, Hack and slash/Beat 'em up",
+                stock: 42,
                 amazon_link: 'amazon_link_ragnarok',
             },
             {
@@ -168,6 +169,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Santa Mônica Studios',
                 genres: "Action, Third Person, Adventure, Hack and slash/Beat 'em up",
+                stock: 42,
                 amazon_link: 'amazon_link_1',
             },
             {
@@ -181,6 +183,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Sucker Punch Productions',
                 genres: "Action, Third Person, Drama, Open world, Stealth, Adventure, Hack and slash/Beat 'em up",
+                stock: 42,
                 amazon_link: 'amazon_link_2',
             },
             {
@@ -194,6 +197,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Insomniac Games',
                 genres: "Action, Third Person, Drama, Open world, Stealth, Adventure, Hack and slash/Beat 'em up",
+                stock: 42,
                 amazon_link: 'amazon_link_3',
             },
             {
@@ -208,6 +212,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Naughty Dog',
                 genres: 'SinglePlayer, Action, Drama, Stealth, Adventure',
+                stock: 42,
                 amazon_link: 'amazon_link_4',
             },
             {
@@ -222,6 +227,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Naughty Dog',
                 genres: 'SinglePlayer, Third Person, Action, Drama, Stealth, Adventure',
+                stock: 42,
                 amazon_link: 'amazon_link_5',
             },
             {
@@ -235,6 +241,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'FromSoftware',
                 genres: 'SinglePlayer, Third Person, RPG, Action, Adventure',
+                stock: 42,
                 amazon_link: 'amazon_link_6',
             },
             {
@@ -248,6 +255,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Atlus',
                 genres: 'SinglePlayer, Third Person, RPG, Turn-Based, Adventure',
+                stock: 42,
                 amazon_link: 'amazon_link_7',
             },
             {
@@ -261,6 +269,7 @@ const main = async () => {
                 platforms: 'PS3, PS4',
                 developer: 'Santa Mônica Studios',
                 genres: "SinglePlayer, Third Person, Adventure, Hack and slash/Beat 'em up",
+                stock: 42,
                 amazon_link: 'amazon_link_god3',
             },
             {
@@ -274,6 +283,7 @@ const main = async () => {
                 platforms: 'PS3, PS4',
                 developer: 'Naughty Dog',
                 genres: 'SinglePlayer, Third Person, Shooter, Adventure',
+                stock: 42,
                 amazon_link: 'amazon_link_thelast',
             },
             {
@@ -287,6 +297,7 @@ const main = async () => {
                 platforms: 'PS3, PS4',
                 developer: 'Naughty Dog',
                 genres: 'SinglePlayer, Third Person, Shooter, Adventure',
+                stock: 42,
                 amazon_link: 'amazon_link',
             },
             {
@@ -300,6 +311,7 @@ const main = async () => {
                 platforms: 'PC, XboxOne Series S|X, PS4, PS5',
                 developer: 'Supergiant Games',
                 genres: "Adventure, Hack and slash/Beat 'em up, Indie, Role-playing (RPG)",
+                stock: 42,
                 amazon_link: 'link da amazon',
             },
             {
@@ -313,6 +325,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Quantic Dream',
                 genres: 'Adventure, Puzzle',
+                stock: 42,
                 amazon_link: 'mais umlink',
             },
             {
@@ -327,6 +340,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Bluepoint Games',
                 genres: 'Single Player, Adventure, Platform',
+                stock: 42,
                 amazon_link: 'algumlink',
             },
             {
@@ -340,6 +354,7 @@ const main = async () => {
                 platforms: 'PS4, PS5',
                 developer: 'Bluepoint Games',
                 genres: 'Single/Multiplayer Player, Simulation, Race',
+                stock: 42,
                 amazon_link: 'somelink',
             },
             {
@@ -353,6 +368,7 @@ const main = async () => {
                 platforms: 'PS4, PS5, PC',
                 developer: 'Guerrilla Games',
                 genres: 'Single Player, Adventure, Platform, Third Person',
+                stock: 42,
                 amazon_link: 'herelink',
             },
             {
@@ -367,6 +383,7 @@ const main = async () => {
                 platforms: 'PS4, PS5, PC',
                 developer: 'Square Enix',
                 genres: 'Single Player, Adventure, RPG, Third Person',
+                stock: 42,
                 amazon_link: 'linkhere',
             },
             {
@@ -380,6 +397,7 @@ const main = async () => {
                 platforms: 'PS4, PS5, PC',
                 developer: 'Kojima Productions',
                 genres: 'Single Player, Adventure, Third Person',
+                stock: 42,
                 amazon_link: 'amazon_linkkk',
             },
             {
@@ -394,6 +412,7 @@ const main = async () => {
                 platforms: 'PS4, PS5, PC',
                 developer: 'Konami',
                 genres: 'Single Player, Adventure, Action, Shooter, Third Person',
+                stock: 42,
                 amazon_link: 'amazon_link_here',
             },
             {
@@ -408,6 +427,7 @@ const main = async () => {
                 platforms: 'PS4',
                 developer: 'Naughty Dog',
                 genres: 'Single Player, Adventure, Action, Shooter, Third Person',
+                stock: 42,
                 amazon_link: 'amazon_link_heree',
             },
         ],
@@ -426,6 +446,7 @@ const main = async () => {
                 resume: 'From a renowned historian comes a groundbreaking narrative of humanity’s creation and evolution—a #1 international bestseller—that explores the ways in which biology and history have defined us and enhanced our understanding of what it means to be “human.” One hundred thousand years ago, at least six different species of humans inhabited Earth. Yet today there is only one—homo sapiens. What happened to the others? And what may happen to us? Most books about the history of humanity pursue either a historical or a biological approach, but Dr. Yuval Noah Harari breaks the mold with this highly original book that begins about 70,000 years ago with the appearance of modern cognition. From examining the role evolving humans have played in the global ecosystem to charting the rise of empires, Sapiens integrates history and science to reconsider accepted narratives, connect past developments with contemporary concerns, and examine specific events within the context of larger ideas.',
                 pages: 464,
                 genres: 'Historic',
+                stock: 42,
                 author: 'Yuval Noah Harari ',
             },
             {
@@ -438,6 +459,7 @@ const main = async () => {
                 resume: 'How do computers and robots change the meaning of being human? How do we deal with the epidemic of fake news? Are nations and religions still relevant? What should we teach our children? Yuval Noah Harari’s 21 Lessons for the 21st Century is a probing and visionary investigation into today’s most urgent issues as we move into the uncharted territory of the future. As technology advances faster than our understanding of it, hacking becomes a tactic of war, and the world feels more polarized than ever, Harari addresses the challenge of navigating life in the face of constant and disorienting change and raises the important questions we need to ask ourselves in order to survive.',
                 pages: 355,
                 genres: 'Historic',
+                stock: 42,
                 author: 'Yuval Harari',
             },
             {
@@ -450,6 +472,7 @@ const main = async () => {
                 resume: 'Yuval Noah Harari, author of the critically-acclaimed New York Times bestseller and international phenomenon Sapiens, returns with an equally original, compelling, and provocative book, turning his focus toward humanity’s future, and our quest to upgrade humans into gods. Over the past century humankind has managed to do the impossible and rein in famine, plague, and war. This may seem hard to accept, but, as Harari explains in his trademark style—thorough, yet riveting—famine, plague and war have been transformed from incomprehensible and uncontrollable forces of nature into manageable challenges. For the first time ever, more people die from eating too much than from eating too little; more people die from old age than from infectious diseases; and more people commit suicide than are killed by soldiers, terrorists and criminals put together. The average American is a thousand times more likely to die from binging at McDonalds than from being blown up by Al Qaeda.',
                 pages: 464,
                 genres: 'Historic',
+                stock: 42,
                 author: 'Yuval Noah Harari ',
             },
             {
@@ -462,6 +485,7 @@ const main = async () => {
                 resume: 'The bestselling author of Leonardo da Vinci and Steve Jobs returns with a gripping account of how Nobel Prize winner Jennifer Doudna and her colleagues launched a revolution that will allow us to cure diseases, fend off viruses, and have healthier babies. When Jennifer Doudna was in sixth grade, she came home one day to find that her dad had left a paperback titled The Double Helix on her bed. She put it aside, thinking it was one of those detective tales she loved. When she read it on a rainy Saturday, she discovered she was right, in a way. As she sped through the pages, she became enthralled by the intense drama behind the competition to discover the code of life.',
                 pages: 256,
                 genres: 'Biography',
+                stock: 42,
                 author: 'Walter Isaacson',
             },
             {
@@ -474,6 +498,7 @@ const main = async () => {
                 resume: 'Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way. Noted software expert Robert C. Martin presents a revolutionary paradigm with Clean Code: A Handbook of Agile Software Craftsmanship. Martin has teamed up with his colleagues from Object Mentor to distill their best agile practice of cleaning code “on the fly” into a book that will instill within you the values of a software craftsman and make you a better programmer–but only if you work at it.',
                 pages: 425,
                 genres: 'Software',
+                stock: 42,
                 author: 'Robert C. Martin',
             },
             {
@@ -486,6 +511,7 @@ const main = async () => {
                 resume: 'Domain-Driven Design fills that need. This is not a book about specific technologies. It offers readers a systematic approach to domain-driven design, presenting an extensive set of design best practices, experience-based techniques, and fundamental principles that facilitate the development of software projects facing complex domains. Intertwining design and development practice, this book incorporates numerous examples based on actual projects to illustrate the application of domain-driven design to real-world software development.',
                 pages: 528,
                 genres: 'Software',
+                stock: 42,
                 author: 'Eric Evans',
             },
             {
@@ -498,6 +524,7 @@ const main = async () => {
                 resume: 'Dale Carnegie’s rock-solid, time-tested advice has carried countless people up the ladder of success in their business and personal lives. One of the most groundbreaking and timeless bestsellers of all time, How to Win Friends & Influence People will teach you: -Six ways to make people like you -Twelve ways to win people to your way of thinking -Nine ways to change people without arousing resentment. And much more! Achieve your maximum potential—a must-read for the twenty-first century with more than 15 million copies sold!',
                 pages: 254,
                 genres: 'Personal Development',
+                stock: 42,
                 author: 'Dale Carnegie',
             },
             {
@@ -510,6 +537,7 @@ const main = async () => {
                 resume: "Art of War is almost certainly the most famous study of strategy ever written and has had an extraordinary influence on the history of warfare. The principles Sun-tzu expounded were utilized brilliantly by such great Asian war leaders as Mao Tse-tung, Giap, and Yamamoto. First translated two hundred years ago by a French missionary, Sun-tzu's Art of War has been credited with influencing Napoleon, the German General Staff, and even the planning for Desert Storm. Many Japanese companies make this book required reading for their key executives. And increasingly, Western businesspeople and others are turning to the Art of War for inspiration and advice on how to succeed in competitive situations of all kinds.",
                 pages: 160,
                 genres: 'Strategic',
+                stock: 42,
                 author: 'Sun Tzu',
             },
             {
@@ -522,6 +550,7 @@ const main = async () => {
                 resume: 'Based on more than forty interviews with Steve Jobs conducted over two years—as well as interviews with more than 100 family members, friends, adversaries, competitors, and colleagues—Walter Isaacson has written a riveting story of the roller-coaster life and searingly intense personality of a creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies, music, phones, tablet computing, and digital publishing. Isaacson’s portrait touched millions of readers. At a time when America is seeking ways to sustain its innovative edge, Jobs stands as the ultimate icon of inventiveness and applied imagination. He knew that the best way to create value in the twenty-first century was to connect creativity with technology. He built a company where leaps of the imagination were combined with remarkable feats of engineering.',
                 pages: 256,
                 genres: 'Biography',
+                stock: 42,
                 author: 'Walter Isaacson',
             },
             {
@@ -534,6 +563,7 @@ const main = async () => {
                 resume: 'Based on thousands of pages from Leonardo da Vinci’s astonishing notebooks and new discoveries about his life and work, Walter Isaacson “deftly reveals an intimate Leonardo” (San Francisco Chronicle) in a narrative that connects his art to his science. He shows how Leonardo’s genius was based on skills we can improve in ourselves, such as passionate curiosity, careful observation, and an imagination so playful that it flirted with fantasy. He produced the two most famous paintings in history, The Last Supper and the Mona Lisa. With a passion that sometimes became obsessive, he pursued innovative studies of anatomy, fossils, birds, the heart, flying machines, botany, geology, and weaponry. He explored the math of optics, showed how light rays strike the cornea, and produced illusions of changing perspectives in The Last Supper. His ability to stand at the crossroads of the humanities and the sciences, made iconic by his drawing of Vitruvian Man, made him history’s most creative genius.',
                 pages: 256,
                 genres: 'Biography',
+                stock: 42,
                 author: 'Walter Isaacson',
             },
             {
@@ -546,6 +576,7 @@ const main = async () => {
                 resume: 'Benjamin Franklin is the founding father who winks at us, the one who seems made of flesh rather than marble. In a sweeping narrative that follows Franklin’s life from Boston to Philadelphia to London and Paris and back, Walter Isaacson chronicles the adventures of the runaway apprentice who became, over the course of his eighty-four-year life, America’s best writer, inventor, media baron, scientist, diplomat, and business strategist, as well as one of its most practical and ingenious political leaders. He explores the wit behind Poor Richard’s Almanac and the wisdom behind the Declaration of Independence, the new nation’s alliance with France, the treaty that ended the Revolution, and the compromises that created a near-perfect Constitution.',
                 pages: 256,
                 genres: 'Biography',
+                stock: 42,
                 author: 'Walter Isaacson',
             },
             {
@@ -558,6 +589,7 @@ const main = async () => {
                 resume: 'How did his mind work? What made him a genius? Isaacson’s biography shows how his scientific imagination sprang from the rebellious nature of his personality. His fascinating story is a testament to the connection between creativity and freedom. Based on newly released personal letters of Einstein, this book explores how an imaginative, impertinent patent clerk—a struggling father in a difficult marriage who couldn’t get a teaching job or a doctorate—became the mind reader of the creator of the cosmos, the locksmith of the mysteries of the atom, and the universe. His success came from questioning conventional wisdom and marveling at mysteries that struck others as mundane. This led him to embrace a morality and politics based on respect for free minds, free spirits, and free individuals. These traits are just as vital for this new century of globalization, in which our success will depend on our creativity, as they were for the beginning of the last century, when Einstein helped usher in the modern age.',
                 pages: 705,
                 genres: 'Biography',
+                stock: 42,
                 author: 'Walter Isaacson',
             },
             {
@@ -570,6 +602,7 @@ const main = async () => {
                 resume: "In Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future, veteran technology journalist Ashlee Vance provides the first inside look into the extraordinary life and times of Silicon Valley's most audacious entrepreneur. Written with exclusive access to Musk, his family and friends, the book traces the entrepreneur's journey from a rough upbringing in South Africa to the pinnacle of the global business world. Vance spent over 40 hours in conversation with Musk and interviewed close to 300 people to tell the tumultuous stories of Musk's world-changing companies: PayPal, Tesla Motors, SpaceX and SolarCity, and to characterize a man who has renewed American industry and sparked new levels of innovation while making plenty of enemies along the way.",
                 pages: 705,
                 genres: 'Biography',
+                stock: 42,
                 author: 'Walter Isaacson',
             },
             {
@@ -582,6 +615,7 @@ const main = async () => {
                 resume: 'In Alice in Wonderland looking for a pastime, Alice will discover a whole new world and its bizarre inhabitants. In Through the Looking-Glass, six months after the visit to Wonderland, crossing a mirror, Alice is once again involved in unlikely adventures.',
                 pages: 95,
                 genres: 'Fantasy, Fiction',
+                stock: 42,
                 author: 'Lewis Carroll',
             },
             {
@@ -594,6 +628,7 @@ const main = async () => {
                 resume: 'Most startups fail. But many of those failures are preventable. The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched. Eric Ries defines a startup as an organization dedicated to creating something new under conditions of extreme uncertainty. This is just as true for one person in a garage or a group of seasoned professionals in a Fortune 500 boardroom. What they have in common is a mission to penetrate that fog of uncertainty to discover a successful path to a sustainable business. The Lean Startup approach fosters companies that are both more capital efficient and that leverage human creativity more effectively. Inspired by lessons from lean manufacturing, it relies on “validated learning,” rapid scientific experimentation, as well as a number of counter-intuitive practices that shorten product development cycles, measure actual progress without resorting to vanity metrics, and learn what customers really want. It enables a company to shift directions with agility, altering plans inch by inch, minute by minute.',
                 pages: 92,
                 genres: 'Bussiness',
+                stock: 42,
                 author: 'Eric Reis',
             },
             {
@@ -606,6 +641,7 @@ const main = async () => {
                 resume: 'I, Robot, the first and most widely read book in Asimov’s Robot series, forever changed the world’s perception of artificial intelligence. Here are stories of robots gone mad, of mind-reading robots, and robots with a sense of humor. Of robot politicians, and robots who secretly run the world—all told with the dramatic blend of science fact and science fiction that has become Asimov’s trademark. The Three Laws of Robotics: 1) A robot may not injure a human being or, through inaction, allow a human being to come to harm. 2) A robot must obey orders given to it by human beings except where such orders would conflict with the First Law. 3) A robot must protect its own existence as long as such protection does not conflict with the First or Second Law.',
                 pages: 92,
                 genres: 'Science Fiction',
+                stock: 42,
                 author: 'Isaac Asimov',
             },
             {
@@ -618,6 +654,7 @@ const main = async () => {
                 resume: 'It’s an ordinary Thursday morning for Arthur Dent . . . until his house gets demolished. The Earth follows shortly after to make way for a new hyperspace express route, and Arthur’s best friend has just announced that he’s an alien. After that, things get much, much worse. With just a towel, a small yellow fish, and a book, Arthur has to navigate through a very hostile universe in the company of a gang of unreliable aliens. Luckily the fish is quite good at languages. And the book is The Hitchhiker’s Guide to the Galaxy . . . which helpfully has the words DON’T PANIC inscribed in large, friendly letters on its cover. Douglas Adams’s mega-selling pop-culture classic sends logic into orbit, plays havoc with both time and physics, offers up pithy commentary on such things as ballpoint pens, potted plants, and digital watches . . . and, most important, reveals the ultimate answer to life, the universe, and everything.',
                 pages: 103,
                 genres: 'Science Fiction',
+                stock: 42,
                 author: 'Douglas Adams',
             },
             {
@@ -630,6 +667,7 @@ const main = async () => {
                 resume: 'For twelve thousand years the Galactic Empire has ruled supreme. Now it is dying. But only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future—to a dark age of ignorance, barbarism, and warfare that will last thirty thousand years. To preserve knowledge and save humankind, Seldon gathers the best minds in the Empire—both scientists and scholars—and brings them to a bleak planet at the edge of the galaxy to serve as a beacon of hope for future generations. He calls his sanctuary the Foundation. The Foundation novels of Isaac Asimov are among the most influential in the history of science fiction, celebrated for their unique blend of breathtaking action, daring ideas, and extensive worldbuilding. In Foundation, Asimov has written a timely and timeless novel of the best—and worst—that lies in humanity, and the power of even a few courageous souls to shine a light in a universe of darkness.',
                 pages: 255,
                 genres: 'Science Fiction',
+                stock: 42,
                 author: 'Isaac Asimov',
             },
         ],

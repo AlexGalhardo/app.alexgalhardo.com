@@ -4,7 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // provider = "sqlite"
+  url      = env("PG_DATABASE_URL")
 }
 
 model User {
@@ -89,6 +90,7 @@ model Game {
   platforms             String
   developer             String
   genres                String
+  stock                 Int
   amazon_link           String?   @unique
   stripe_checkout_link  String?   @unique
   pagarme_checkout_link String?   @unique
@@ -104,13 +106,14 @@ model Book {
   year_release          Int
   price                 Int
   image                 String    @unique
-  amazon_link           String?   @unique
-  stripe_checkout_link  String?   @unique
-  pagarme_checkout_link String?   @unique
   resume                String    @unique
   pages                 Int
   genres                String
   author                String
+  stock                 Int
+  amazon_link           String?   @unique
+  stripe_checkout_link  String?   @unique
+  pagarme_checkout_link String?   @unique
   created_at            DateTime  @default(now())
   updated_at            DateTime?
 

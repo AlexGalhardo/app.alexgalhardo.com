@@ -5,3 +5,6 @@
 - npx prisma generate
 - npx prisma db seed
 - npx prisma studio
+- npx prisma migrate dev --name initialize
+
+- https://www.freecodecamp.org/news/build-nodejs-database-using-prisma-orm/
