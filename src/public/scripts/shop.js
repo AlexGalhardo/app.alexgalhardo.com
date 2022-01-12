@@ -24,6 +24,8 @@ document
         );
         const shippingJson = await responseShipping.json();
 
+        console.log(shippingJson);
+
         const shipping_fee = parseFloat(shippingJson[0].Valor);
         const shipping_deadline = shippingJson[0].PrazoEntrega;
 
