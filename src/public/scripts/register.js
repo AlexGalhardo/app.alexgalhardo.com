@@ -71,15 +71,13 @@ btn.addEventListener('click', async (e) => {
         document.querySelector('#alert_checkbox').innerHTML = '';
     }
 
-    /* if (validName && validEmail && validPassword && checkbox.checked) {
+    if (validName && validEmail && validPassword && checkbox.checked) {
         form.submit();
-    } */
+    }
 
     /* if (checkbox.checked) {
         form.submit();
     } */
-
-    form.submit();
 });
 
 // verify google recaptcha
