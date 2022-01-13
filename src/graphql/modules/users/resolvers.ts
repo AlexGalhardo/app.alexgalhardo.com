@@ -1,6 +1,7 @@
-import Bcrypt from '@helpers/Bcrypt';
 import { PrismaClient } from '@prisma/client';
 import slugify from 'slugify';
+
+import Bcrypt from '../../../helpers/Bcrypt';
 
 const prisma = new PrismaClient();
 
