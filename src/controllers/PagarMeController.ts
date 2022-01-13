@@ -1,6 +1,7 @@
-import Games from '@models/Games';
 import { Request, Response } from 'express';
 import pagarme from 'pagarme';
+
+import Games from '../models/Games';
 
 class PagarMeController {
     async checkoutGame(req: Request, res: Response) {

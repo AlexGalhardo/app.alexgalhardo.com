@@ -1,13 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * API ROUTES
- * http://localhost:3000/api
- */
-
 import { Request, Response, NextFunction, Router } from 'express';
 import jwt from 'jsonwebtoken';
 

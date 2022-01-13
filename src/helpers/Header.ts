@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./helpers/Header.js
- */
-
 const scroll_bar_div = `
             <div class="progress-container">
                 <div class="progress-bar" id="myBar"></div>

@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./helpers/Bcrypt.js
- */
-
 import bcrypt from 'bcryptjs';
 
 class Bcrypt {

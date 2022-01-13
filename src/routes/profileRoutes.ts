@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/profile
- */
-
 import { Router, Request, Response, NextFunction } from 'express';
 
 import ProfileController from '../controllers/ProfileController';

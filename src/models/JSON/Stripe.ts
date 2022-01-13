@@ -1,17 +1,6 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./models/JSON/Stripe.js
- */
-
 import fs from 'fs-extra';
 
 import database from '../../config/jsonDatabase';
-
-// Helpers
 import DateTime from '../../helpers/DateTime';
 
 class Stripe {

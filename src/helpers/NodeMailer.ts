@@ -1,13 +1,3 @@
-/**
- * GALHARDO APP | https://galhardoapp.com
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *
- * ./helpers/NodeMailer.js
- */
-
 import fs from 'fs-extra';
 import handlebars from 'handlebars';
 import path from 'path';

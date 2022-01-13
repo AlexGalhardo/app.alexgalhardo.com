@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./helpers/DateTime.js
- */
-
 class DateTime {
     getDateTime(timestamp: number) {
         const date = new Date(timestamp * 1000).toLocaleDateString(

@@ -1,5 +1,6 @@
 logs/
 dev.txt
+src/logs/all-logs.log
 
 package-lock.json
 

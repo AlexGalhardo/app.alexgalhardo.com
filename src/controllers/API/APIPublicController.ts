@@ -1,22 +1,13 @@
 /* eslint-disable consistent-return */
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *
- *  http://localhost:3000/api/public
- */
-
-import Blog from '@models/Blog';
-import Books from '@models/Books';
-import Games from '@models/Games';
-import Movies from '@models/Movies';
-import Newsletter from '@models/Newsletter';
-import TVShows from '@models/TVShows';
-import Users from '@models/Users';
 import { Request, Response, NextFunction } from 'express';
+
+import Blog from '../../models/Blog';
+import Books from '../../models/Books';
+import Games from '../../models/Games';
+import Movies from '../../models/Movies';
+import Newsletter from '../../models/Newsletter';
+import TVShows from '../../models/TVShows';
+import Users from '../../models/Users';
 
 class APIPublicController {
     async verifyIfEmailIsAlreadyRegistred(

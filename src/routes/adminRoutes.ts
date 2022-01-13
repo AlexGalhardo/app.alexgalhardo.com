@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/admin
- */
-
 import { Request, Response, NextFunction, Router } from 'express';
 
 import AdminController from '../controllers/ADMIN/AdminController';
@@ -27,7 +18,11 @@ export default router
         isAdmin,
         AdminController.getViewUpdateBlogPost
     )
-    .post('/update/blogPost/:blog_id', isAdmin, AdminController.postUpdateBlogPost)
+    .post(
+        '/update/blogPost/:blog_id',
+        isAdmin,
+        AdminController.postUpdateBlogPost
+    )
 
     .post(
         '/delete/blogPost/:blog_id',

@@ -1,18 +1,8 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *  http://localhost:3000/api/profile
- */
-
 import { Request, Response, NextFunction } from 'express';
 
 import Users from '../../models/Users';
 
 class APIProfileController {
-    // eslint-disable-next-line consistent-return
     async postLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;

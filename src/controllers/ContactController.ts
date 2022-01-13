@@ -1,13 +1,3 @@
-/* eslint-disable consistent-return */
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/contact
- */
-
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 

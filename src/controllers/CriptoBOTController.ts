@@ -1,14 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./controllers/CriptoBOTController.js
- *
- * http://localhost:3000/criptoBOT
- */
-
 // https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md
 // https://br.tradingview.com/HTML5-stock-forex-bitcoin-charting-library/?library=cloud-widget&feature=technical-analysis-charts
 // https://testnet.binance.vision/

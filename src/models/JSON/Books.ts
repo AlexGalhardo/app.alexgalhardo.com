@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./models/JSON/Books.js
- */
-
 import fs from 'fs-extra';
 
 import database from '../../config/jsonDatabase';

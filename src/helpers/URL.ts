@@ -1,13 +1,3 @@
-/**
- * GALHARDO APP | https://galhardoapp.com
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *
- * ./helpers/URL.js
- */
-
 import facebookLogin from 'node-fb-login';
 import queryString from 'query-string';
 
