@@ -1,23 +1,7 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *
- *  http://localhost:3000/api/admin/book
- */
-
-// HELPERS
 import DateTime from '../../helpers/DateTime';
-
-// MODEL
 import Books from '../../models/JSON/Books';
 
 class APIAdminBookController {
-    /**
-     * GET http://localhost:3000/api/admin/books/listAll
-     */
     static async getAllBooks(req, res) {
         const books = await Books.getAll();
         res.json({
@@ -25,9 +9,6 @@ class APIAdminBookController {
         });
     }
 
-    /**
-     * POST http://localhost:3000/api/admin/book/create
-     */
     static async postCreateBook(req, res) {
         const {
             title,
@@ -61,9 +42,6 @@ class APIAdminBookController {
         return res.json({ error: 'Book NOT registred in DataBase!' });
     }
 
-    /**
-     * PATCH http://localhost:3000/api/admin/book/patch/:book_id
-     */
     static async patchBook(req, res, next) {
         try {
             const { book_id } = req.params;
@@ -102,9 +80,6 @@ class APIAdminBookController {
         }
     }
 
-    /**
-     * DELETE http://localhost:3000/api/admin/book/delete/:book_id
-     */
     static async deleteBook(req, res, next) {
         try {
             const { book_id } = req.params;

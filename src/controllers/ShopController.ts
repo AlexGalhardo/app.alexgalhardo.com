@@ -1,18 +1,12 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- */
-
-import DateTime from '@helpers/DateTime';
-import Header from '@helpers/Header';
-import NodeMailer from '@helpers/NodeMailer';
-import TelegramBOTLogger from '@helpers/TelegramBOTLogger';
-import StripeModel from '@models/StripeModel';
-import Users from '@models/Users';
 import { Request, Response, NextFunction } from 'express';
 import Stripe from 'stripe';
+
+import DateTime from '../helpers/DateTime';
+import Header from '../helpers/Header';
+import NodeMailer from '../helpers/NodeMailer';
+import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
+import StripeModel from '../models/StripeModel';
+import Users from '../models/Users';
 
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 

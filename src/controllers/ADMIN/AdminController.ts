@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/admin
- */
-
 import Blog from '@models/Blog';
 import Books from '@models/Books';
 import Games from '@models/Games';

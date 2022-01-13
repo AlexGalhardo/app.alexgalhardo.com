@@ -1,13 +1,3 @@
-/**
- * GALHARDO APP | https://galhardoapp.com
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *
- * ./helpers/Upload.js
- */
-
 import { unlink } from 'fs/promises';
 import multer from 'multer';
 import sharp from 'sharp';

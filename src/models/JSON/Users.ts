@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./models/JSON/Users.js
- */
-
 import fs from 'fs-extra';
 import uuid from 'uuid';
 

@@ -1,19 +1,3 @@
-/* eslint-disable consistent-return */
-/**
- * GALHARDO APP | https://galhardoapp.com
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./controllers/AuthController.js
- *
- * http://localhost:3000/login
- * http://localhost:3000/register
- * http://localhost:3000/forgetPassword
- * http://localhost:3000/resetPassword
- * http://localhost:3000/confirmEmail
- */
-
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import queryString from 'query-string';

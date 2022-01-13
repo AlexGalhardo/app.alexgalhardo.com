@@ -1,23 +1,7 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- *
- *  http://localhost:3000/api/admin/blog
- */
-
-// HELPERS
 import DateTime from '../../helpers/DateTime';
-
-// MODELS
 import Blog from '../../models/JSON/Blog';
 
 class APIAdminBlogController {
-    /**
-     * http://localhost:3000/api/admin/blog/create
-     */
     static async postCreateBlogPost(req, res, next) {
         try {
             const { title, resume, image, category, body } = req.body;
@@ -43,9 +27,6 @@ class APIAdminBlogController {
         }
     }
 
-    /**
-     * http://localhost:3000/api/admin/blog/patch/:blog_id
-     */
     static async patchBlogPost(req, res, next) {
         try {
             const { blog_id } = req.params;
@@ -72,9 +53,6 @@ class APIAdminBlogController {
         }
     }
 
-    /**
-     * http://localhost:3000/api/admin/blog/delete/:blog_id
-     */
     static async deleteBlogPost(req, res, next) {
         try {
             const { blog_id } = req.params;

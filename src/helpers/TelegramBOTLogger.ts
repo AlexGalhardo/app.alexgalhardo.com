@@ -1,14 +1,4 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./helpers/TelegramBOTLogger.js
- *
- * https://api.telegram.org/bot<telegram_token_here>/getUpdates
- * bot
- */
+// https://api.telegram.org/bot<telegram_token_here>/getUpdates
 
 import https from 'https';
 

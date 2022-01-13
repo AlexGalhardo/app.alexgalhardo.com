@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/profile
- */
-
 import { Request, Response } from 'express';
 
 import Header from '../helpers/Header';
@@ -83,11 +74,6 @@ class ProfileController {
         await Upload.profileAvatar(req);
         res.redirect('/profile');
     }
-
-    /* async getAddShopCartGame(req, res) {
-        const { game_id } = req.params;
-        await Users.shopCartAddGame(game_id);
-    } */
 
     async getViewMyShopTransactions(req: Request, res: Response) {
         const shopTransactions = await StripeModel.getShopTransactionsByUserId(

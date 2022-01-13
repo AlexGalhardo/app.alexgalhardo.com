@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/books
- */
-
 import { Request, Response } from 'express';
 
 import Header from '../helpers/Header';

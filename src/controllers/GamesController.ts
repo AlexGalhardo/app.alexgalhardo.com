@@ -1,20 +1,12 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * http://localhost:3000/
- */
-
-import Header from '@helpers/Header';
-import Number from '@helpers/Number';
-import Books from '@models/Books';
-import Games from '@models/Games';
-import Movies from '@models/Movies';
-import TVShows from '@models/TVShows';
-import Users from '@models/Users';
 import { Request, Response } from 'express';
+
+import Header from '../helpers/Header';
+import Number from '../helpers/Number';
+import Books from '../models/Books';
+import Games from '../models/Games';
+import Movies from '../models/Movies';
+import TVShows from '../models/TVShows';
+import Users from '../models/Users';
 
 class GamesController {
     async getViewGames(req: Request, res: Response) {
