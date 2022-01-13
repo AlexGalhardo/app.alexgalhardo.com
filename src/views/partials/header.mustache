@@ -215,7 +215,12 @@
                             My Cart 
                             [
                                 <span id="total_shopCart_itens">
-                                    
+                                    {{#user}}
+                                        {{totalItensShopCart}}
+                                    {{/user}}
+                                    {{^user}}
+                                        0
+                                    {{/user}}
                                 </span>
                             ]
                         </a>
