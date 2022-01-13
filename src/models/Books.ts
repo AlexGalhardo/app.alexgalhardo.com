@@ -1,5 +1,6 @@
-import DateTime from '@helpers/DateTime';
 import { PrismaClient } from '@prisma/client';
+
+import DateTime from '../helpers/DateTime';
 
 const prisma = new PrismaClient();
 

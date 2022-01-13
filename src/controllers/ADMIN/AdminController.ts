@@ -1,12 +1,12 @@
-import Blog from '@models/Blog';
-import Books from '@models/Books';
-import Games from '@models/Games';
-import Movies from '@models/Movies';
-import TVShows from '@models/TVShows';
 import { Request, Response } from 'express';
 
+import Blog from '../../models/Blog';
+import Books from '../../models/Books';
+import Games from '../../models/Games';
+import Movies from '../../models/Movies';
+import TVShows from '../../models/TVShows';
+
 class AdminController {
-    /** ******* BLOG ************** */
     static getViewCreateBlogPost(req: Request, res: Response) {
         return res.render('pages/admin/createBlogPost', {
             flash_success: req.flash('success'),

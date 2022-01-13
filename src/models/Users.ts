@@ -1,7 +1,8 @@
 /* eslint-disable radix */
-import Bcrypt from '@helpers/Bcrypt';
-import Number from '@helpers/Number';
 import { PrismaClient } from '@prisma/client';
+
+import Bcrypt from '../helpers/Bcrypt';
+import Number from '../helpers/Number';
 
 const prisma = new PrismaClient();
 
