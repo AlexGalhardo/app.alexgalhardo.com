@@ -99,7 +99,7 @@
                     <hr>
 
                     <div class="form-floating mb-3">
-                          <input class="mb-2 form-control" id="zipcode" type="text" name="zipcode" pattern= "\d{5}-?\d{3}"  value="13560290" required>
+                          <input class="mb-2 form-control" id="zipcode" type="text" name="zipcode" pattern= "\d{5}-?\d{3}"  value="" required>
                           <label for="zipcode">ZIPCODE</label>
                     </div>
 
@@ -107,27 +107,27 @@
 
                         <!-- STREET -->
                         <div class="col-sm-12 mb-2">
-                          <input type="text" class="form-control" id="customer_street" name="customer_street" placeholder="Street" value="Rua Dona Alexandrina" required onkeydown="return false;">
+                          <input type="text" class="form-control" id="customer_street" name="customer_street" placeholder="Street" value="" required onkeydown="return false;">
                         </div>
 
                         <!-- NEIGHBORHOOD -->
                         <div class="col-sm-12 mb-2">
-                          <input type="text" class="form-control" id="customer_neighborhood" name="customer_neighborhood" placeholder="Neighborhood" value="Vila Monteiro I" required onkeydown="return false;">
+                          <input type="text" class="form-control" id="customer_neighborhood" name="customer_neighborhood" placeholder="Neighborhood" value="" required onkeydown="return false;">
                         </div>
 
                         <!-- CITY -->
                         <div class="col-sm-12 mb-2">
-                          <input type="text" class="form-control" id="customer_city" name="customer_city" placeholder="City" value="São Carlos" required onkeydown="return false;">
+                          <input type="text" class="form-control" id="customer_city" name="customer_city" placeholder="City" value="" required onkeydown="return false;">
                         </div>
 
                         <!-- STATE -->
                         <div class="col-sm-12 mb-2">
-                          <input type="text" class="form-control" id="customer_state" name="customer_state" placeholder="State" value="SP" required onkeydown="return false;">
+                          <input type="text" class="form-control" id="customer_state" name="customer_state" placeholder="State" value="" required onkeydown="return false;">
                         </div>
 
                         <!-- COUNTRY -->
                         <div class="col-sm-12 mb-2">
-                          <input type="text" class="form-control" id="customer_country" name="customer_country" placeholder="Country" value="Brazil" required onkeydown="return false;">
+                          <input type="text" class="form-control" id="customer_country" name="customer_country" placeholder="Country" value="" required onkeydown="return false;">
                         </div>
 
 
@@ -135,7 +135,7 @@
                         <label for="shipping_fee" class="col-sm-5 col-form-label">Shipping Carrier</label>
                         <div class="col-sm-7 mb-3">
                             <!-- SHIPMENT_PRICE -->
-                            <input type="text" class="form-control" value="Correios" name="shipping_carrier" id="shipping_carrier" required onkeydown="return false;">
+                            <input type="text" class="form-control" value="" name="shipping_carrier" id="shipping_carrier" required onkeydown="return false;">
                         </div>
 
 
@@ -143,14 +143,14 @@
                         <label for="shipping_fee" class="col-sm-5 col-form-label">Shipping Fee $</label>
                         <div class="col-sm-7 mb-3">
                             <!-- SHIPMENT_FEE -->
-                            <input type="text" class="form-control" value="27" name="shipping_fee" id="shipping_fee" required onkeydown="return false;">
+                            <input type="text" class="form-control" value="" name="shipping_fee" id="shipping_fee" required onkeydown="return false;">
                         </div>
                         
                         <!-- SHIPPING DEADLINE -->
                         <label for="shipping_deadline" class="col-sm-5 col-form-label">Deadline (days)</label>
                         <div class="col-sm-7">
                             <!-- SHIPMENT__TIME -->
-                            <input type="text" class="form-control" value="2" name="shipping_deadline" id="shipping_deadline" required onkeydown="return false;">
+                            <input type="text" class="form-control" value="" name="shipping_deadline" id="shipping_deadline" required onkeydown="return false;">
                         </div>
 
                     </div>
@@ -204,7 +204,7 @@
                     <div id="div_credit_card"></div>
 
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" name="holder_name" id="holder_name" value="{{stripe.card_holder_name}}">
+                        <input type="text" class="form-control" name="holder_name" id="holder_name" value="">
                         <label for="holder_name">CARD_HOLDER_NAME</label>
                     </div>
 
@@ -250,8 +250,7 @@
             
                     <div>
                         <button type="submit" class="fw-bold btn btn-outline-success btn-block shadow w-100">
-                            <!--Pay $ <span id="button_pay_price">{{shopCartTotalAmount}}</span> <i class="bi bi-check2-circle"></i>-->
-                            Pay $ <span id="button_pay_price">206.60</span> <i class="bi bi-check2-circle"></i>
+                            Pay $ <span id="button_pay_price">{{shopCartTotalAmount}}</span> <i class="bi bi-check2-circle"></i>
                         </button>
                     </div>
 

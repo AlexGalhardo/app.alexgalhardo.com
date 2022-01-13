@@ -6,12 +6,12 @@
 ## Why This Project ? 
    - <b>"Talk is cheap. Show me the code." - Linus Torvalds</b>
    - First Commit: August 02, 2021
-   - I started this project using pure JavaScript and Common Modules to learn the basics about NodeJS ecossystem and back-end development
+   - I started this project using pure JavaScript and Common Modules to learn the basics about NodeJS ecosystem and back-end development
    - You can se the archived 1.0 version repository here: https://github.com/AlexGalhardo/Galhardo-APP-FirstVersion
 
 ## Live Demo
 - **Currently Version: ALPHA**
-- You can access: https://galhardoapp.com/
+- You can access: https://galhardoapp.com/ (first version for now)
 - This live demo use "MAIN" branch
 - Last updates and development tests are in "CANARY" branch
 - You can use default test inputs already in forms to try 
@@ -124,8 +124,8 @@
 - test: improve testing/tests in this commit
 
 ## Install Locally with Docker and Postgres
-- $ git clone https://github.com/AlexGalhardo/GalhardoAPP
-- $ cd GalhardoAPP/
+- $ git clone https://github.com/AlexGalhardo/Galhardo-APP
+- $ cd Galhardo-APP/
 - $ npm install
 - $ sudo docker-compose up -d
 - $ cp .env-example .env
@@ -199,6 +199,10 @@
 ![shop_3](https://user-images.githubusercontent.com/19540357/149237529-c8e230fd-6b3d-4410-9973-3743349d222d.png)
 ![shop_4](https://user-images.githubusercontent.com/19540357/149237509-c45b509c-c8dd-4383-96ad-61d50eabe8d8.png)
 ![shop_5](https://user-images.githubusercontent.com/19540357/149237516-0d8f1b4c-70b8-4678-b527-67d8628e6fb8.png)
+
+### PagarMe Checkout
+![pagarme_checkout_1](https://user-images.githubusercontent.com/19540357/149239467-bda480c3-ed93-428e-992a-568e56f65cc5.png)
+![pagarme_checkout_2](https://user-images.githubusercontent.com/19540357/149239470-d3e3d45c-133c-46c4-803c-daba7bee54d8.png)
 
 ### Subscriptions
 ![plans_1](https://user-images.githubusercontent.com/19540357/149237558-b8baa38a-9604-4ad5-93c3-d511ebf1a1f3.png)
