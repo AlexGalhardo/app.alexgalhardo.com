@@ -14,18 +14,18 @@ async function recommendOtherBook() {
     const object = await response.json();
 
     Object.entries(object).forEach(([key, value]) => {
-        document.getElementById('book_id').value = object[0].id;
-        document.getElementById('book_image').src = object[0].image;
-        document.getElementById('book_title').innerHTML = object[0].title;
-        document.getElementById('book_price').innerHTML = parseFloat(
-            object[0].price / 100
+        document.getElementById('book_id').value = object.id;
+        document.getElementById('book_image').src = object.image;
+        document.getElementById('book_title').innerHTML = object.title;
+        document.getElementById('book_price_value').value = parseFloat(
+            object.price / 100
         ).toFixed(2);
         document.getElementById('book_year_release').innerHTML =
-            object[0].year_release;
-        document.getElementById('book_resume').innerHTML = object[0].resume;
-        document.getElementById('book_author').innerHTML = object[0].author;
-        document.getElementById('book_genres').innerHTML = object[0].genres;
-        document.getElementById('book_pages').innerHTML = object[0].pages;
+            object.year_release;
+        document.getElementById('book_resume').innerHTML = object.resume;
+        document.getElementById('book_author').innerHTML = object.author;
+        document.getElementById('book_genres').innerHTML = object.genres;
+        document.getElementById('book_pages').innerHTML = object.pages;
     });
 
     if (object.inLoggedUserCart) {
@@ -35,7 +35,7 @@ async function recommendOtherBook() {
     } else {
         buttonAddBookToCart.classList.add('btn-outline-success');
         buttonAddBookToCart.classList.remove('btn-success');
-        buttonAddBookToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">${bookPriceValue}</span>]`;
+        buttonAddBookToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="book_price">${bookPriceValue}</span>]`;
     }
 
     document.querySelector(

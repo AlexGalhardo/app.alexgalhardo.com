@@ -11,10 +11,34 @@ export default class Books {
 
     static async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.book.count()));
-        return prisma.book.findMany({
+        const book = await prisma.book.findMany({
             take: 1,
             skip,
         });
+
+        if (SESSION_USER && SESSION_USER.shop_cart_itens) {
+            let { shop_cart_itens } = await prisma.user.findUnique({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                select: {
+                    shop_cart_itens: true,
+                },
+            });
+
+            shop_cart_itens = JSON.parse(shop_cart_itens);
+
+            if (shop_cart_itens.length) {
+                book[0].inLoggedUserCart = await shop_cart_itens.some(
+                    (item) => item.id === book[0].id
+                );
+                return book[0];
+            }
+        }
+
+        book[0].inLoggedUserCart = false;
+
+        return book[0];
     }
 
     static getTotal() {

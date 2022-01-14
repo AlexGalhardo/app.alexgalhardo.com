@@ -32,7 +32,6 @@
                 <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
 
                 <div class="col-lg-3 text-center">
-
                     <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="game_image">
 
                     <button onclick="addGameToCart()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">{{price}}</span>]</button>
@@ -42,7 +41,6 @@
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Game</a>
                     {{/user.admin}}
-
                 </div>
 
                 <div class="col-lg-6">

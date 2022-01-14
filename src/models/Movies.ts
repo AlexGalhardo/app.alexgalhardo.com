@@ -5,11 +5,11 @@ import { inputMovieObject } from '../helpers/InputTypes';
 const prisma = new PrismaClient();
 
 export default class Movies {
-    getAll() {
+    static getAll() {
         return prisma.movie.findMany();
     }
 
-    async getRandom() {
+    static async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.movie.count()));
         return prisma.movie.findMany({
             take: 1,
@@ -17,11 +17,11 @@ export default class Movies {
         });
     }
 
-    getTotal() {
+    static getTotal() {
         return prisma.movie.count();
     }
 
-    getById(movie_id: string) {
+    static getById(movie_id: string) {
         return prisma.movie.findUnique({
             where: {
                 id: movie_id,
@@ -29,7 +29,7 @@ export default class Movies {
         });
     }
 
-    searchTitle(movieTitle: string) {
+    static searchTitle(movieTitle: string) {
         return prisma.movie.findMany({
             where: {
                 title: {
@@ -40,7 +40,7 @@ export default class Movies {
         });
     }
 
-    create(movieObject: inputMovieObject) {
+    static create(movieObject: inputMovieObject) {
         return prisma.movie.create({
             data: {
                 title: movieObject.title,
@@ -56,7 +56,7 @@ export default class Movies {
         });
     }
 
-    update(movieObject: inputMovieObject) {
+    static update(movieObject: inputMovieObject) {
         return prisma.movie.update({
             where: {
                 id: movieObject.id,
@@ -77,7 +77,7 @@ export default class Movies {
         });
     }
 
-    delete(movie_id: string) {
+    static delete(movie_id: string) {
         return prisma.movie.delete({
             where: {
                 id: movie_id,

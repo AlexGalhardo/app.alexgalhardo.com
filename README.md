@@ -139,7 +139,7 @@
 ## DataBase
 - This projects uses 2 databases: Postgres and JSON
 - Postgres for production, and JSON for learning purposes
-- Also, this projects uses PRISMA ORM (https://www.prisma.io/) to manipulate SQL queries
+- Also, this projects uses PRISMA ORM (https://www.prisma.io/) to manipulate SQL queries, migrations and seeders
 - After installing locally, you can see/use databases in:
    - ADMINER
       - http://localhost:8080
