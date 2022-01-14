@@ -37,7 +37,7 @@
                     <button onclick="addBookToCart()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow" id="button_add_book_to_cart"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="book_price">{{price}}</span>]</button>
 
                     {{#user.admin}}
-                        <a href="/admin/update/book/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">
+                        <a id="book_admin_update_link" href="/admin/update/book/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Book</a>
                     {{/user.admin}}
@@ -66,7 +66,7 @@
 
                             <li class=""><b><a target="_blank" href="#"><i class="bi bi-link-45deg"></i> Stripe Checkout</a></b></li>
 
-                            <li class=""><b><a target="_blank" href="#"><i class="bi bi-link-45deg"></i> PagarMe Checkout</a></b></li>
+                            <li class=""><b><a target="_blank" id="link_pagarme_checkout"href="/checkout/pagarme/book/{{id}}"><i class="bi bi-link-45deg"></i> PagarMe Checkout</a></b></li>
 
                             <li class=""><b><a onclick="return false;" target="_blank" href="#"><i class="bi bi-link-45deg"></i> Buy with PIX</a></b></li>
 

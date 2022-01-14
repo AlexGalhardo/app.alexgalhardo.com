@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 
 import Header from '../helpers/Header';
+import Number from '../helpers/Number';
 import Books from '../models/Books';
 import Games from '../models/Games';
 import Movies from '../models/Movies';
 import TVShows from '../models/TVShows';
+import Users from '../models/Users';
 
 class BooksController {
     async getViewBooks(req: Request, res: Response) {
@@ -13,7 +15,8 @@ class BooksController {
         const totalBooks = await Books.getTotal();
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
-        book[0].price = parseFloat(book[0].price / 100).toFixed(2);
+        const totalItensShopCart = await Users.getTotalItensShopCart();
+        book.price = Number.toFloat(book.price);
 
         return res.render('pages/books', {
             flash_success: req.flash('success'),
@@ -23,6 +26,7 @@ class BooksController {
             totalBooks,
             totalMovies,
             totalTVShows,
+            totalItensShopCart,
             user: SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.books(),

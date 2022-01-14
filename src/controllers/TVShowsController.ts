@@ -5,6 +5,7 @@ import Books from '../models/Books';
 import Games from '../models/Games';
 import Movies from '../models/Movies';
 import TVShows from '../models/TVShows';
+import Users from '../models/Users';
 
 class TVShowsController {
     async getViewTVShows(req: Request, res: Response) {
@@ -13,6 +14,7 @@ class TVShowsController {
         const totalBooks = await Books.getTotal();
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
+        const totalItensShopCart = await Users.getTotalItensShopCart();
 
         return res.render('pages/tvshows', {
             flash_success: req.flash('success'),
@@ -22,6 +24,7 @@ class TVShowsController {
             totalBooks,
             totalMovies,
             totalTVShows,
+            totalItensShopCart,
             user: SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.books(),
