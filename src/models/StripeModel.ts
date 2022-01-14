@@ -1,58 +1,17 @@
 /* eslint-disable radix */
 import { PrismaClient } from '@prisma/client';
 
+import {
+    inputShopTransactionObject,
+    inputSubscriptionTransactionObject,
+} from '../helpers/InputTypes';
+
 const prisma = new PrismaClient();
 
-type shopTransactionObject = {
-    transaction_id: string;
-    total_amount: number;
-    card_id: string;
-    card_brand: string;
-    card_exp_month: number;
-    card_exp_year: number;
-    card_last4: number;
-    currency: string;
-    paid: boolean;
-    products_amount: number;
-    products: string;
-    stripe_customer_id: string;
-    user_id: string;
-    user_email: string;
-    user_phone: string;
-    user_name: string;
-    shipping_address_zipcode: string;
-    shipping_address_street: string;
-    shipping_address_street_number: number;
-    shipping_address_neighborhood: string;
-    shipping_address_city: string;
-    shipping_address_state: string;
-    shipping_address_country: string;
-    shipping_carrier: string;
-    shipping_fee: number;
-};
-
-type subscriptionTransactionObject = {
-    transaction_id: string;
-    status: string;
-    card_id: string;
-    card_brand: string;
-    card_exp_month: number;
-    card_exp_year: number;
-    card_last4: number;
-    plan_id: string;
-    plan_name: string;
-    plan_amount: number;
-    current_period_start: string;
-    current_period_end: string;
-    cancel_at_period_end: boolean;
-    stripe_customer_id: string;
-    user_id: string;
-    user_email: string;
-    user_name: string;
-};
-
-class StripeModel {
-    async createShopTransaction(shopTransactionObject: shopTransactionObject) {
+export default class StripeModel {
+    static async createShopTransaction(
+        shopTransactionObject: inputShopTransactionObject
+    ) {
         await prisma.stripeShopTransaction.create({
             data: {
                 transaction_id: shopTransactionObject.transaction_id,
@@ -93,7 +52,7 @@ class StripeModel {
         });
     }
 
-    async getShopTransactionsByUserId(userId: string) {
+    static async getShopTransactionsByUserId(userId: string) {
         return prisma.stripeShopTransaction.findMany({
             where: {
                 user_id: userId,
@@ -108,16 +67,16 @@ class StripeModel {
         });
     }
 
-    async getShopTransactionById(transactionId: string) {
+    static async getShopTransactionById(orderId: string) {
         return prisma.stripeShopTransaction.findUnique({
             where: {
-                transaction_id: transactionId,
+                id: orderId,
             },
         });
     }
 
-    async createSubscriptionTransaction(
-        subscriptionTransactionObject: subscriptionTransactionObject
+    static async createSubscriptionTransaction(
+        subscriptionTransactionObject: inputSubscriptionTransactionObject
     ) {
         await prisma.stripeSubscriptionTransaction.create({
             data: {
@@ -152,7 +111,7 @@ class StripeModel {
         });
     }
 
-    async getSubscriptionsTransactionsByUserId(user_id: string) {
+    static async getSubscriptionsTransactionsByUserId(user_id: string) {
         return prisma.stripeSubscriptionTransaction.findMany({
             where: {
                 user_id,
@@ -160,9 +119,11 @@ class StripeModel {
         });
     }
 
-    async getSubscriptionTransactionById(transactionId: string) {
-        return 1;
+    static async getSubscriptionTransactionById(orderId: string) {
+        return prisma.stripeSubscriptionTransaction.findUnique({
+            where: {
+                id: orderId,
+            },
+        });
     }
 }
-
-export default new StripeModel();

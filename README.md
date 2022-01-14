@@ -93,14 +93,10 @@
       - all models/services from databases
    - graphql/
       - all things relationed to graphql api
-   - logs/
-      - locally logs files with errors, requests, etc
    - tmp/ 
       - temporary locally uploaded files 
    - helpers/
       - usefull code snippets, functions, classes used in app
-   - docs/
-      - swagger api html documentation config (/api-docs)
    - controllers/
       - all the controllers used in app
    - config/
@@ -155,8 +151,8 @@
       - $ npx prisma studio
       - http://localhost:5555/
 
-## HTML Templates
-- Front is not my focus, so I'm using mainly Bootstrap5 and pure JavaScript to manipulate DOM
+## HTML Templates (Design, UI, UX)
+- Front-end development is not my focus, so I'm using mainly Bootstrap5 and pure JavaScript to manipulate DOM
 
 ## Emails
 - Using NodeMailer and MailTrap SMTP, with HTML templates
@@ -180,9 +176,8 @@
 
 ## Logs
 - This project uses 3 types of logs:
-   - Locally inside tmp/ folder (errors, requests, etc)
    - Telegram (for emails, transactions, etc)
-   - [DataDog](https://www.datadoghq.com/) (for error, analysis, performance, etc)
+   - [DataDog](https://www.datadoghq.com/) (for errors, analysis, performance, etc)
 
 ## Some Projects Images
 

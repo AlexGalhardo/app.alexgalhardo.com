@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-class Bcrypt {
+export default class Bcrypt {
     static hash(password: string) {
         return bcrypt
             .genSalt(12)
@@ -12,5 +12,3 @@ class Bcrypt {
         return bcrypt.compare(password, hashPassword).then((resp) => resp);
     }
 }
-
-export default Bcrypt;

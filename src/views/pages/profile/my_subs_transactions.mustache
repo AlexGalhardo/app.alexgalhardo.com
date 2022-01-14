@@ -22,10 +22,10 @@
                 <tbody>
                     {{#subsTransactions}}
                         <tr>
-                            <th><a href="/profile/subscription/transaction/{{transaction_id}}" class="btn btn-outline-success">VIEW</a></th>
-                            <td>{{status}}</td>
-                            <td>{{plan.name}}</td>
-                            <td>$ {{plan.amount}}</td>
+                            <th><a href="/profile/subscription/transaction/{{id}}" class="btn btn-outline-success">VIEW</a></th>
+                            <td class="fw-bold">{{status}}</td>
+                            <td>{{plan_name}}</td>
+                            <td>$ {{plan_amount}}</td>
                             <td>{{transaction_id}}</td>
                             <td>{{created_at}}</td>
                         </tr>

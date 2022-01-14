@@ -1,13 +1,17 @@
 import fs from 'fs-extra';
 import handlebars from 'handlebars';
 import path from 'path';
-import randomToken from 'rand-token';
 
 import MailTrap from '../config/smtp';
 import Users from '../models/Users';
+import {
+    inputShopTransactionObject,
+    inputSubscriptionTransactionObject,
+    inputContactObject,
+} from './InputTypes';
 
-class NodeMailer {
-    async sendContact(contactObject) {
+export default class NodeMailer {
+    static async sendContact(contactObject: inputContactObject) {
         const filePath = path.join(__dirname, '../views/emails/contact.html');
 
         const source = fs.readFileSync(filePath, 'utf-8').toString();
@@ -34,7 +38,9 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    async sendShopTransaction(shopTransactionObject) {
+    static async sendShopTransaction(
+        shopTransactionObject: inputShopTransactionObject
+    ) {
         const filePath = path.join(
             __dirname,
             '../views/emails/shop_transaction.html'
@@ -61,7 +67,7 @@ class NodeMailer {
             shipping_address_city: shopTransactionObject.shipping_address_city,
             shipping_address_state:
                 shopTransactionObject.shipping_address_state,
-            created_at: shopTransactionObject.created_at,
+            created_at: new Date(),
         };
 
         const htmlBody = template(replacements);
@@ -76,7 +82,9 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    async sendSubscriptionTransaction(subsTransactionObject) {
+    static async sendSubscriptionTransaction(
+        subsTransactionObject: inputSubscriptionTransactionObject
+    ) {
         const filePath = path.join(
             __dirname,
             '../views/emails/subscription_transaction.html'
@@ -100,7 +108,7 @@ class NodeMailer {
             card_last4: subsTransactionObject.card_last4,
             current_period_start: subsTransactionObject.current_period_start,
             current_period_end: subsTransactionObject.current_period_end,
-            created_at: subsTransactionObject.created_at,
+            created_at: new Date(),
         };
 
         const htmlBody = template(replacements);
@@ -115,7 +123,10 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    async sendConfirmEmailLink(email: string, confirmEmailToken: string) {
+    static async sendConfirmEmailLink(
+        email: string,
+        confirmEmailToken: string
+    ) {
         const confirmEmailLinkURL = `${process.env.APP_URL}/confirmEmail/${email}/${confirmEmailToken}`;
 
         const filePath = path.join(
@@ -145,7 +156,10 @@ class NodeMailer {
         MailTrap.close();
     }
 
-    async sendForgetPasswordLink(email: string, resetPasswordToken: string) {
+    static async sendForgetPasswordLink(
+        email: string,
+        resetPasswordToken: string
+    ) {
         const resetPasswordLinkURL = `${process.env.APP_URL}/resetPassword/${email}/${resetPasswordToken}`;
 
         const filePath = path.join(
@@ -173,5 +187,3 @@ class NodeMailer {
         MailTrap.close();
     }
 }
-
-export default new NodeMailer();

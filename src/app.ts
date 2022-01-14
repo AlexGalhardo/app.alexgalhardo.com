@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./app.js
- */
-
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import flash from 'connect-flash';
@@ -19,10 +10,6 @@ import helmet from 'helmet';
 import { MulterError } from 'multer';
 import mustache from 'mustache-express';
 import path from 'path';
-
-// import morgan from './config/morgan';
-// eslint-disable-next-line import-helpers/order-imports
-// import PinoLog from './config/pino';
 
 // ROUTES
 import adminRoutes from './routes/adminRoutes';
@@ -38,20 +25,10 @@ dotenv.config();
 global.APP_ROOT_PATH = path.resolve(__dirname);
 global.SESSION_USER = null;
 
-// eslint-disable-next-line no-unused-expressions
-/* process.env.APP_DATABASE === 'JSON'
-    ? console.log('USING DATABASE: JSON')
-    : console.log('USING PRISMA ORM with POSTGRESQL');
-    */
-
 // LocalHost HTTP
 const app = express();
 
-/* FORCE HTTP TO HTTPS */
-// this code will not work with https-localhost module
-// use this code in production without port defined in url (localhost:3000)
-// and using a reverse-proxy like nginx
-// need to defined this middleware before any routes
+//  FORCE HTTP TO HTTPS
 if (process.env.NODE_ENV === 'production') {
     app.use((req: Request, res: Response, next) => {
         if ((req.headers['x-forwarded-proto'] || '').endsWith('http')) {
@@ -65,12 +42,6 @@ if (process.env.NODE_ENV === 'production') {
 // CSRF
 app.use(cookieParser());
 
-// LOGS
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const pinoHttp = require('pino-http')({ logger: PinoLog });
-
-// app.use(morgan);
-
 // Secure HTTP Headers Responses & Requests
 app.use(
     helmet({
@@ -80,11 +51,6 @@ app.use(
 
 // COMPRESS HTTP RESPONSES
 app.use(compression());
-
-// STATUS MONITOR
-// http://localhost:3000/status
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// app.use(require('express-status-monitor')());
 
 // CORS
 app.use(cors());

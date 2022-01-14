@@ -2,36 +2,10 @@
 import { PrismaClient } from '@prisma/client';
 
 import Bcrypt from '../helpers/Bcrypt';
+import { inputCreateUser, inputUpdateUser } from '../helpers/InputTypes';
 import Number from '../helpers/Number';
 
 const prisma = new PrismaClient();
-
-type inputCreateUser = {
-    username: string;
-    email: string;
-    password: string;
-    confirm_password: string;
-    github_id: string;
-    facebook_id: string;
-    google_id: string;
-};
-
-type inputUpdateUser = {
-    id: string;
-    email: string;
-    older_password: string;
-    new_password: string;
-    document: string;
-    phone: string;
-    birth_date: string;
-    address_zipcode: string;
-    address_street: string;
-    address_street_number: string;
-    address_neighborhood: string;
-    address_city: string;
-    address_state: string;
-    address_country: string;
-};
 
 class Users {
     getAll() {
@@ -271,7 +245,6 @@ class Users {
 
         shop_cart_itens = JSON.parse(shop_cart_itens);
 
-        // game already in cart, remove
         if (shop_cart_itens.some((game) => game.id === game_id)) {
             const indexToRemove = shop_cart_itens.findIndex(function (game) {
                 return game.id === game_id;
@@ -291,8 +264,8 @@ class Users {
             return false;
         }
 
-        // game not in cart, add
         shop_cart_itens.push(game);
+
         await prisma.user.update({
             where: {
                 id: SESSION_USER.id,
@@ -339,7 +312,7 @@ class Users {
         return false;
     }
 
-    async getTotalItensShopCart(): number {
+    async getTotalItensShopCart(): Promise<number> {
         if (SESSION_USER) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
@@ -353,10 +326,11 @@ class Users {
             shop_cart_itens = JSON.parse(shop_cart_itens);
             return shop_cart_itens?.length || 0;
         }
+
         return 0;
     }
 
-    async getShopCartItens(): Array {
+    async getShopCartItens() {
         if (SESSION_USER) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {

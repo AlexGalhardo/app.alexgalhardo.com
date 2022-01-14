@@ -23,7 +23,7 @@
                 <tbody>
                     {{#shopTransactions}}
                         <tr>
-                            <th><a href="/profile/shop/transaction/{{transaction_id}}" target="_blank" class="btn btn-outline-success">VIEW</a></th>
+                            <th><a href="/profile/shop/transaction/{{id}}" target="_blank" class="btn btn-outline-success">VIEW</a></th>
                             <td class="fw-bold text-white bg-{{#paid}}success{{/paid}}{{^paid}}danger{{/paid}}">{{paid}}</td>
                             <td>{{transaction_id}}</td>
                             <td>$ {{total_amount}}</td>

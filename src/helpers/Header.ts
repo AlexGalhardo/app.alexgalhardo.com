@@ -5,7 +5,7 @@ const scroll_bar_div = `
 
 const scroll_bar_script = `<script src="scripts/scroll_bar.js"></script>`;
 
-class Header {
+export default class Header {
     static games() {
         return {
             title: 'Games - Galhardo APP',
@@ -151,12 +151,4 @@ class Header {
             navbar_about_active: true,
         };
     }
-
-    static criptoBOT() {
-        return {
-            title: 'Cripto BOT',
-        };
-    }
 }
-
-export default Header;

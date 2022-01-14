@@ -1,5 +1,5 @@
-class DateTime {
-    getDateTime(timestamp: number) {
+export default class DateTime {
+    static getDateTime(timestamp: number) {
         const date = new Date(timestamp * 1000).toLocaleDateString(
             process.env.LOCALE_DATE_TIME
         );
@@ -9,7 +9,7 @@ class DateTime {
         return `${date} ${time}`;
     }
 
-    getNow() {
+    static getNow() {
         const date = new Date().toLocaleDateString(
             process.env.LOCALE_DATE_TIME
         );
@@ -19,5 +19,3 @@ class DateTime {
         return `${date} ${time}`;
     }
 }
-
-export default new DateTime();

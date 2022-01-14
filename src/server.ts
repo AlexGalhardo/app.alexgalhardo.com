@@ -1,12 +1,3 @@
-/**
- * GALHARDO APP
- * Created By © Alex Galhardo  | August 2021-Present
- * aleexgvieira@gmail.com
- * https://github.com/AlexGalhardo
- *
- * ./server.js
- */
-
 import { ApolloServer } from 'apollo-server';
 
 import app from './app';
@@ -18,6 +9,7 @@ const GraphqlServer = new ApolloServer({
     resolvers,
     context: { hello: 123 },
 });
+
 GraphqlServer.listen().then(({ url }) =>
     console.log(`GraphqlServer running on => ${url}`)
 );
