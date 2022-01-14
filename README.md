@@ -217,7 +217,7 @@
 ![prisma_studio](https://user-images.githubusercontent.com/19540357/149237494-e37d20a2-4f3a-4cc9-a419-7d1b29b66727.png)
 
 ### Profile
-![profile_1](https://user-images.githubusercontent.com/19540357/149238267-ce4c2418-b99c-4689-87c4-ea3b777414b9.png)
+![profile](https://user-images.githubusercontent.com/19540357/149575662-dcc8b032-6ffe-4e9b-b99c-0c7067220be3.png)
 
 ### Mini Projects
 ![projects_1](https://user-images.githubusercontent.com/19540357/149237513-ebaa31c2-b20d-414f-be86-cf803e9c780f.png)
