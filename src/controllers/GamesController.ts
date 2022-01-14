@@ -15,7 +15,7 @@ class GamesController {
         const totalBooks = await Books.getTotal();
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
-        const totalItensShopCart = await Users.getTotalItensShopCart();
+        const totalItensShopCart = Users.getTotalItensShopCart();
         game.price = Number.toFloat(game.price);
 
         return res.render('pages/games', {

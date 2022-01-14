@@ -233,6 +233,60 @@
 ![blog_2](https://user-images.githubusercontent.com/19540357/149237532-220e58fc-0978-4dde-9018-ffc5f856f8a9.png)
 ![blog_3](https://user-images.githubusercontent.com/19540357/149237528-72e6db23-b29c-4b33-bdc2-ba212f5c2fa9.png)
 
+## Some Projects Images
+
+### Home
+![home_1](https://user-images.githubusercontent.com/19540357/149237559-affdbb69-1db7-4e0a-9392-479e173a2f34.png)
+![home_2](https://user-images.githubusercontent.com/19540357/149237549-fb2b9fa3-ec82-4545-952b-93958db3d20c.png)
+![home_3](https://user-images.githubusercontent.com/19540357/149237520-0c817b51-a883-4cc9-b1b8-8b95806c2c0b.png)
+![tv_shows](https://user-images.githubusercontent.com/19540357/149237522-ed34b3e9-3b96-49ae-805d-6e9ff0fbc79a.png)
+![update_game](https://user-images.githubusercontent.com/19540357/149237504-db369e42-2d30-448b-a157-e9db876d748b.png)
+
+### Shop
+![shop_1](https://user-images.githubusercontent.com/19540357/149237544-38e16332-9cab-4077-8fcb-623313c51103.png)
+![shop_2](https://user-images.githubusercontent.com/19540357/149237535-ee3b59ac-9b0c-4929-bbb8-898c865293c3.png)
+![shop_3](https://user-images.githubusercontent.com/19540357/149237529-c8e230fd-6b3d-4410-9973-3743349d222d.png)
+![shop_4](https://user-images.githubusercontent.com/19540357/149237509-c45b509c-c8dd-4383-96ad-61d50eabe8d8.png)
+![shop_5](https://user-images.githubusercontent.com/19540357/149237516-0d8f1b4c-70b8-4678-b527-67d8628e6fb8.png)
+
+### PagarMe Checkout
+![pagarme_checkout_1](https://user-images.githubusercontent.com/19540357/149239467-bda480c3-ed93-428e-992a-568e56f65cc5.png)
+![pagarme_checkout_2](https://user-images.githubusercontent.com/19540357/149239470-d3e3d45c-133c-46c4-803c-daba7bee54d8.png)
+
+### Subscriptions
+![plans_1](https://user-images.githubusercontent.com/19540357/149237558-b8baa38a-9604-4ad5-93c3-d511ebf1a1f3.png)
+![plan_2](https://user-images.githubusercontent.com/19540357/149237537-aea0ab9f-b763-4d51-a8b0-8bd4102b2e4d.png)
+![plan_3](https://user-images.githubusercontent.com/19540357/149237530-747e3c02-301b-4c12-bb8f-b96ee1b50ed1.png)
+![plan_4](https://user-images.githubusercontent.com/19540357/149237525-24b2952c-c5d1-4d89-8d25-da6b57dbe0b1.png)
+
+### Authentication
+![login_1](https://user-images.githubusercontent.com/19540357/149237555-e6f6c5fd-2ddd-44b1-92cb-d8c9a5328a3d.png)
+![login_2](https://user-images.githubusercontent.com/19540357/149237548-2191cee6-de83-4461-b1e3-aa1e92388fc4.png)
+![register_1](https://user-images.githubusercontent.com/19540357/149237518-a13fbdd3-46eb-4825-9b3f-f045667e5b2d.png)
+![register_2](https://user-images.githubusercontent.com/19540357/149237554-36e2803f-f391-44e6-be2f-a7a3ff37da94.png)
+![confirm_email_link](https://user-images.githubusercontent.com/19540357/149237536-b422ab82-46c5-453f-b948-43e423387663.png)
+![forget_password_1](https://user-images.githubusercontent.com/19540357/149237545-8cfa8d2d-654c-41b5-a037-f4f349144a64.png)
+
+### PRISMA Studio
+![prisma_studio](https://user-images.githubusercontent.com/19540357/149237494-e37d20a2-4f3a-4cc9-a419-7d1b29b66727.png)
+
+### Profile
+![profile_1](***REMOVED***)
+
+### Mini Projects
+![projects_1](https://user-images.githubusercontent.com/19540357/149237513-ebaa31c2-b20d-414f-be86-cf803e9c780f.png)
+![projects_2](https://user-images.githubusercontent.com/19540357/149237510-adff5f6a-1aa7-4b91-aa0b-a32873ac4bd3.png)
+![projects_3](https://user-images.githubusercontent.com/19540357/149237552-d75e9c58-c3da-4672-959a-863763bf741b.png)
+
+### Contact
+![contact_1](https://user-images.githubusercontent.com/19540357/149237514-3aff612a-2341-4173-8936-fb761641761b.png)
+![contact_2](https://user-images.githubusercontent.com/19540357/149237557-eeea744b-f225-4469-941c-115232b43ebb.png)
+
+### Blog
+![blog_1](https://user-images.githubusercontent.com/19540357/149237543-205f72e4-a7e5-49ee-9bd5-bed8300b3b11.png)
+![blog_2](https://user-images.githubusercontent.com/19540357/149237532-220e58fc-0978-4dde-9018-ffc5f856f8a9.png)
+![blog_3](https://user-images.githubusercontent.com/19540357/149237528-72e6db23-b29c-4b33-bdc2-ba212f5c2fa9.png)
+
 ## Feedbacks
 - If you have any feedback or improvements tips about this project, send a pull request or send me a email at: aleexgvieira@gmail.com
 - I really apreciate good feedbacks
