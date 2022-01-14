@@ -1,21 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 
+import { inputMovieObject } from '../helpers/InputTypes';
+
 const prisma = new PrismaClient();
 
-type movieObject = {
-    id: string;
-    title: string;
-    year_release: number;
-    image: string;
-    tmdb_link: string;
-    tmdb_rating: string;
-    justwatch_link: string;
-    resume: string;
-    duration: string;
-    genres: string;
-};
-
-class Movies {
+export default class Movies {
     getAll() {
         return prisma.movie.findMany();
     }
@@ -51,7 +40,7 @@ class Movies {
         });
     }
 
-    create(movieObject: movieObject) {
+    create(movieObject: inputMovieObject) {
         return prisma.movie.create({
             data: {
                 title: movieObject.title,
@@ -67,7 +56,7 @@ class Movies {
         });
     }
 
-    update(movieObject: movieObject) {
+    update(movieObject: inputMovieObject) {
         return prisma.movie.update({
             where: {
                 id: movieObject.id,
@@ -96,5 +85,3 @@ class Movies {
         });
     }
 }
-
-export default new Movies();

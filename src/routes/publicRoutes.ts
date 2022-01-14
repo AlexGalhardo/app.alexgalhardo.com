@@ -223,10 +223,8 @@ router
     )
     .get('/google/callback', userIsAlreadyLoggedIn, AuthController.loginGoogle)
 
-    .get(
-        '/checkout/pagarme/game/:game_id',
-        // userIsNotLoggedIn,
-        PagarMeController.checkoutGame
-    );
+    .get('/checkout/pagarme/game/:game_id', PagarMeController.checkoutGame)
+
+    .get('/checkout/pagarme/book/:book_id', PagarMeController.checkoutBook);
 
 export default router;

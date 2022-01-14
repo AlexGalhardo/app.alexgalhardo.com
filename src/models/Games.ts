@@ -1,28 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 
+import { inputGameObject } from '../helpers/InputTypes';
+
 const prisma = new PrismaClient();
 
-type gameObject = {
-    id: string;
-    title: string;
-    price: number;
-    year_release: number;
-    platforms: string;
-    genres: string;
-    developer: string;
-    image: string;
-    igdb_link: string;
-    igdb_rating: number;
-    amazon_link: string;
-    resume: string;
-};
-
-class Games {
-    getAll() {
+export default class Games {
+    static getAll() {
         return prisma.game.findMany();
     }
 
-    async getRandom() {
+    static async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.game.count()));
         const game = await prisma.game.findMany({
             take: 1,
@@ -54,11 +41,11 @@ class Games {
         return game[0];
     }
 
-    getTotal() {
+    static getTotal() {
         return prisma.game.count();
     }
 
-    getById(game_id: string) {
+    static getById(game_id: string) {
         return prisma.game.findUnique({
             where: {
                 id: game_id,
@@ -66,7 +53,7 @@ class Games {
         });
     }
 
-    searchTitle(gameTitle: string) {
+    static searchTitle(gameTitle: string) {
         return prisma.game.findMany({
             where: {
                 title: {
@@ -77,7 +64,7 @@ class Games {
         });
     }
 
-    create(gameObject: gameObject) {
+    static create(gameObject: inputGameObject) {
         return prisma.game.create({
             data: {
                 title: gameObject.title,
@@ -95,7 +82,7 @@ class Games {
         });
     }
 
-    update(gameObject: gameObject) {
+    static update(gameObject: inputGameObject) {
         return prisma.game.update({
             where: {
                 id: gameObject.id,
@@ -118,7 +105,7 @@ class Games {
         });
     }
 
-    delete(game_id: string) {
+    static delete(game_id: string) {
         return prisma.game.delete({
             where: {
                 id: game_id,
@@ -126,5 +113,3 @@ class Games {
         });
     }
 }
-
-export default new Games();

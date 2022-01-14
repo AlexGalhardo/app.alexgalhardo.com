@@ -1,29 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 
-import DateTime from '../helpers/DateTime';
+import { inputBookObject } from '../helpers/InputTypes';
 
 const prisma = new PrismaClient();
 
-type bookObject = {
-    id: string;
-    title: string;
-    year_release: number;
-    price: number;
-    image: string;
-    genres: string;
-    pages: string;
-    author: string;
-    amazon_link: string;
-    resume: string;
-    updated_at: string;
-};
-
-class Books {
-    getAll() {
+export default class Books {
+    static getAll() {
         return prisma.book.findMany();
     }
 
-    async getRandom() {
+    static async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.book.count()));
         return prisma.book.findMany({
             take: 1,
@@ -31,11 +17,11 @@ class Books {
         });
     }
 
-    getTotal() {
+    static getTotal() {
         return prisma.book.count();
     }
 
-    getById(book_id: string) {
+    static getById(book_id: string) {
         return prisma.book.findUnique({
             where: {
                 id: book_id,
@@ -43,7 +29,7 @@ class Books {
         });
     }
 
-    searchTitle(bookTitle: string) {
+    static searchTitle(bookTitle: string) {
         return prisma.book.findMany({
             where: {
                 title: {
@@ -54,7 +40,7 @@ class Books {
         });
     }
 
-    create(bookObject: bookObject) {
+    static create(bookObject: inputBookObject) {
         return prisma.book.create({
             data: {
                 title: bookObject.title,
@@ -70,7 +56,7 @@ class Books {
         });
     }
 
-    update(bookObject: bookObject) {
+    static update(bookObject: inputBookObject) {
         return prisma.book.update({
             where: {
                 id: bookObject.id,
@@ -91,7 +77,7 @@ class Books {
         });
     }
 
-    delete(book_id: string) {
+    static delete(book_id: string) {
         return prisma.book.delete({
             where: {
                 id: book_id,
@@ -99,5 +85,3 @@ class Books {
         });
     }
 }
-
-export default new Books();

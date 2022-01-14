@@ -69,8 +69,9 @@ export default router
     .patch('/profile/patch', APIProfileController.patchProfile)
     .delete('/profile/delete', APIProfileController.deleteProfile)
 
-    .get('/newsletter/:email', APIPublicController.getNewsletter)
     .get('/addCart/game/:game_id', APIPublicController.addGameToCart)
+
+    .get('/addCart/book/:book_id', APIPublicController.addBookToCart)
 
     .post('/admin/login', APIAdminController.postAdminLogin)
     .post('/admin/test', APIAdminController.postAdminTestJWT)

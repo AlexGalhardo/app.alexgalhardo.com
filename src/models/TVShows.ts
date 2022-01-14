@@ -1,26 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 
+import { inputTvShowObject } from '../helpers/InputTypes';
+
 const prisma = new PrismaClient();
 
-type tvShowObject = {
-    id: string;
-    title: string;
-    year_release: number;
-    image: string;
-    tmdb_link: string;
-    tmdb_rating: string;
-    justwatch_link: string;
-    resume: string;
-    duration: string;
-    genres: string;
-};
-
-class TVShows {
-    getAll() {
+export default class TVShows {
+    static getAll() {
         return prisma.tvshow.findMany();
     }
 
-    async getRandom() {
+    static async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.tvshow.count()));
         return prisma.tvshow.findMany({
             take: 1,
@@ -28,11 +17,11 @@ class TVShows {
         });
     }
 
-    getTotal() {
+    static getTotal() {
         return prisma.tvshow.count();
     }
 
-    getById(tvshow_id: string) {
+    static getById(tvshow_id: string) {
         return prisma.tvshow.findUnique({
             where: {
                 id: tvshow_id,
@@ -40,7 +29,7 @@ class TVShows {
         });
     }
 
-    searchTitle(tvShowTitle: string) {
+    static searchTitle(tvShowTitle: string) {
         return prisma.tvshow.findMany({
             where: {
                 title: {
@@ -51,7 +40,7 @@ class TVShows {
         });
     }
 
-    create(tvShowObject: tvShowObject) {
+    static create(tvShowObject: inputTvShowObject) {
         return prisma.tvshow.create({
             data: {
                 title: tvShowObject.title,
@@ -67,7 +56,7 @@ class TVShows {
         });
     }
 
-    update(tvShowObject: tvShowObject) {
+    static update(tvShowObject: inputTvShowObject) {
         return prisma.tvshow.update({
             where: {
                 id: tvShowObject.id,
@@ -88,7 +77,7 @@ class TVShows {
         });
     }
 
-    delete(movie_id: string) {
+    static delete(movie_id: string) {
         return prisma.tvshow.delete({
             where: {
                 id: movie_id,
@@ -96,5 +85,3 @@ class TVShows {
         });
     }
 }
-
-export default new TVShows();

@@ -7,16 +7,16 @@ import Number from '../helpers/Number';
 
 const prisma = new PrismaClient();
 
-class Users {
-    getAll() {
+export default class Users {
+    static getAll() {
         return prisma.user.findMany();
     }
 
-    getTotal() {
+    static getTotal() {
         return prisma.user.count();
     }
 
-    getById(user_id: string) {
+    static getById(user_id: string) {
         return prisma.user.findUnique({
             where: {
                 id: user_id,
@@ -24,7 +24,7 @@ class Users {
         });
     }
 
-    verifyIfAdminById(user_id: string) {
+    static verifyIfAdminById(user_id: string) {
         return prisma.user.findUnique({
             where: {
                 isAdmin: {
@@ -35,7 +35,7 @@ class Users {
         });
     }
 
-    getUserByEmail(email: string) {
+    static getUserByEmail(email: string) {
         return prisma.user.findUnique({
             where: {
                 email,
@@ -43,7 +43,7 @@ class Users {
         });
     }
 
-    emailRegistred(email: string) {
+    static emailRegistred(email: string) {
         const emailExists = prisma.user.findUnique({
             where: {
                 email,
@@ -202,7 +202,7 @@ class Users {
         });
     }
 
-    async addGameToShopCart(game_id: string): boolean {
+    async addGameToShopCart(game_id: string): Promise<boolean> {
         let { shop_cart_itens } = await prisma.user.findUnique({
             where: {
                 id: SESSION_USER.id,
@@ -277,7 +277,80 @@ class Users {
         return true;
     }
 
-    async removeShopCartItem(item_id: string): boolean {
+    async addBookToShopCart(book_id: string): Promise<boolean> {
+        let { shop_cart_itens } = await prisma.user.findUnique({
+            where: {
+                id: SESSION_USER.id,
+            },
+            select: {
+                shop_cart_itens: true,
+            },
+        });
+
+        const book = await prisma.book.findUnique({
+            where: {
+                id: book_id,
+            },
+            select: {
+                id: true,
+                image: true,
+                title: true,
+                price: true,
+            },
+        });
+
+        if (!shop_cart_itens) {
+            const shopCartItens = [];
+
+            shopCartItens.push(book);
+
+            await prisma.user.update({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                data: {
+                    shop_cart_itens: JSON.stringify(shopCartItens),
+                },
+            });
+
+            return true;
+        }
+
+        shop_cart_itens = JSON.parse(shop_cart_itens);
+
+        if (shop_cart_itens.some((book) => book.id === book_id)) {
+            const indexToRemove = shop_cart_itens.findIndex(function (book) {
+                return book.id === book_id;
+            });
+
+            shop_cart_itens.splice(indexToRemove, 1);
+
+            await prisma.user.update({
+                where: {
+                    id: SESSION_USER.id,
+                },
+                data: {
+                    shop_cart_itens: JSON.stringify(shop_cart_itens),
+                },
+            });
+
+            return false;
+        }
+
+        shop_cart_itens.push(book);
+
+        await prisma.user.update({
+            where: {
+                id: SESSION_USER.id,
+            },
+            data: {
+                shop_cart_itens: JSON.stringify(shop_cart_itens),
+            },
+        });
+        return true;
+    }
+
+    async removeShopCartItem(item_id: string): Promise<boolean> {
         let { shop_cart_itens } = await prisma.user.findUnique({
             where: {
                 id: SESSION_USER.id,
@@ -289,7 +362,6 @@ class Users {
 
         shop_cart_itens = JSON.parse(shop_cart_itens);
 
-        // game already in cart, remove
         if (shop_cart_itens.some((item) => item.id === item_id)) {
             const indexToRemove = shop_cart_itens.findIndex(function (item) {
                 return item.id === item_id;
@@ -481,5 +553,3 @@ class Users {
         return false;
     }
 }
-
-export default new Users();

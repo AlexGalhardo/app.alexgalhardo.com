@@ -25,6 +25,71 @@ export type inputUpdateUser = {
     address_country: string;
 };
 
+export type inputBookObject = {
+    id: string;
+    title: string;
+    year_release: number;
+    price: number;
+    image: string;
+    genres: string;
+    pages: string;
+    author: string;
+    amazon_link: string;
+    resume: string;
+    updated_at: string;
+};
+
+export type inputBlogObject = {
+    id: string;
+    title: string;
+    image: string;
+    category: string;
+    slug: string;
+    resume: string;
+    body: string;
+};
+
+export type inputGameObject = {
+    id: string;
+    title: string;
+    price: number;
+    year_release: number;
+    platforms: string;
+    genres: string;
+    developer: string;
+    image: string;
+    igdb_link: string;
+    igdb_rating: number;
+    amazon_link: string;
+    resume: string;
+};
+
+export type inputMovieObject = {
+    id: string;
+    title: string;
+    year_release: number;
+    image: string;
+    tmdb_link: string;
+    tmdb_rating: string;
+    justwatch_link: string;
+    resume: string;
+    duration: string;
+    genres: string;
+};
+
+export type inputTvShowObject = {
+    id: string;
+    title: string;
+    year_release: number;
+    image: string;
+    tmdb_link: string;
+    tmdb_rating: string;
+    justwatch_link: string;
+    resume: string;
+    duration: string;
+    genres: string;
+};
+
 export type inputContactObject = {
     name: string;
     email: string;

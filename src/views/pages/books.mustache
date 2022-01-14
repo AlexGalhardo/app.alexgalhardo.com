@@ -29,11 +29,12 @@
 
             {{#book}}
                 <input id="book_id" name="book_id" type="hidden" value="{{id}}">
+                <input id="book_price_value" name="book_price_value" type="hidden" value="{{price}}">
 
                 <div class="col-lg-3 text-center">
                     <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="book_image">
 
-                    <!--<button class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mt-2 shadow"><i class="bi bi-cart-plus"></i> Add To Cart [R$ <span id="book_price">{{price}}</span>]</button>-->
+                    <button onclick="addBookToCart()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow" id="button_add_book_to_cart"><i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="book_price">{{price}}</span>]</button>
 
                     {{#user.admin}}
                         <a href="/admin/update/book/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">

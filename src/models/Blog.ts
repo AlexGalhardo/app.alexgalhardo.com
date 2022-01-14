@@ -1,24 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import slugify from 'slugify';
 
+import { inputBlogObject } from '../helpers/InputTypes';
+
 const prisma = new PrismaClient();
 
-type blogObject = {
-    id: string;
-    title: string;
-    image: string;
-    category: string;
-    slug: string;
-    resume: string;
-    body: string;
-};
-
-class Blog {
-    getAll() {
+export default class Blog {
+    static getAll() {
         return prisma.blog.findMany();
     }
 
-    async getRandom() {
+    static async getRandom() {
         const skip = Math.floor(Math.random() * (await prisma.blog.count()));
         return prisma.blog.findMany({
             take: 1,
@@ -26,11 +18,11 @@ class Blog {
         });
     }
 
-    getTotal() {
+    static getTotal() {
         return prisma.blog.count();
     }
 
-    getById(blog_id: string) {
+    static getById(blog_id: string) {
         return prisma.blog.findUnique({
             where: {
                 id: blog_id,
@@ -38,7 +30,7 @@ class Blog {
         });
     }
 
-    searchTitle(blogTitle: string) {
+    static searchTitle(blogTitle: string) {
         return prisma.blog.findMany({
             where: {
                 title: {
@@ -49,7 +41,7 @@ class Blog {
         });
     }
 
-    create(blogObject: blogObject) {
+    static create(blogObject: inputBlogObject) {
         return prisma.blog.create({
             data: {
                 title: blogObject.title,
@@ -62,7 +54,7 @@ class Blog {
         });
     }
 
-    update(blogObject: blogObject) {
+    static update(blogObject: inputBlogObject) {
         return prisma.blog.update({
             where: {
                 id: blogObject.id,
@@ -80,7 +72,7 @@ class Blog {
         });
     }
 
-    delete(blog_id: string) {
+    static delete(blog_id: string) {
         return prisma.blog.delete({
             where: {
                 id: blog_id,
@@ -88,7 +80,7 @@ class Blog {
         });
     }
 
-    getPostsByPageLimit(page: number, blogPostsPerPage: number) {
+    static getPostsByPageLimit(page: number, blogPostsPerPage: number) {
         const offset = parseInt(page * blogPostsPerPage - blogPostsPerPage);
         const getUntil = parseInt(page * blogPostsPerPage);
         return prisma.blog.findMany({
@@ -97,7 +89,7 @@ class Blog {
         });
     }
 
-    getBySlug(slug: string) {
+    static getBySlug(slug: string) {
         return prisma.blog.findUnique({
             where: {
                 slug,
@@ -105,5 +97,3 @@ class Blog {
         });
     }
 }
-
-export default new Blog();

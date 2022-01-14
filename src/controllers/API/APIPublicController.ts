@@ -5,7 +5,6 @@ import Blog from '../../models/Blog';
 import Books from '../../models/Books';
 import Games from '../../models/Games';
 import Movies from '../../models/Movies';
-import Newsletter from '../../models/Newsletter';
 import TVShows from '../../models/TVShows';
 import Users from '../../models/Users';
 
@@ -30,22 +29,6 @@ class APIPublicController {
         }
     }
 
-    async getNewsletter(req: Request, res: Response, next: NextFunction) {
-        try {
-            const { email } = req.params;
-            if (await Newsletter.addEmail(email)) {
-                return res.json({
-                    added_email_to_newsletter: true,
-                });
-            }
-            return res.json({
-                added_email_to_newsletter: false,
-            });
-        } catch (err) {
-            next(err);
-        }
-    }
-
     async addGameToCart(req: Request, res: Response, next: NextFunction) {
         try {
             const { game_id } = req.params;
@@ -56,6 +39,28 @@ class APIPublicController {
             }
 
             if (await Users.addGameToShopCart(game_id)) {
+                return res.json({
+                    inLoggedUserCart: true,
+                });
+            }
+            return res.json({
+                inLoggedUserCart: false,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async addBookToCart(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { book_id } = req.params;
+            if (!SESSION_USER) {
+                return res.json({
+                    inLoggedUserCart: false,
+                });
+            }
+
+            if (await Users.addBookToShopCart(book_id)) {
                 return res.json({
                     inLoggedUserCart: true,
                 });
