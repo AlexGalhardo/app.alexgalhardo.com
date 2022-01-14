@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import Header from '../helpers/Header';
+import { inputUpdateUser } from '../helpers/InputTypes';
 import Upload from '../helpers/Upload';
 import StripeModel from '../models/StripeModel';
 import Users from '../models/Users';
@@ -41,9 +42,7 @@ class ProfileController {
             country,
         } = req.body;
 
-        console.log('street number é =>', street_number);
-
-        const userObject = {
+        const userObject: inputUpdateUser = {
             id: SESSION_USER.id,
             username,
             email,

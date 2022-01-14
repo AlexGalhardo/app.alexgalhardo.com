@@ -10,6 +10,7 @@ export type inputCreateUser = {
 
 export type inputUpdateUser = {
     id: string;
+    username: string;
     email: string;
     older_password: string;
     new_password: string;
