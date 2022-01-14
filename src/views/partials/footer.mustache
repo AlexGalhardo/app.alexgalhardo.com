@@ -7,16 +7,13 @@
                 <div class="col-lg-4 col-md-8 text-center">
                     <p class="text-muted">Get promotions and discounts in your email!</p>
                     
-                    <form action="#" method="GET">
+                    <form action="https://tinyletter.com/Galhardo-APP" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/Galhardo-APP', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
                         <div class="input-group mb-3">
-                            <input class="form-control" type="email" placeholder="Enter your email" id="email_to_add_newsletter" required>
-                            <button type="button" class="btn btn-primary fw-bold text-white shadow-sm" onclick="addEmailToNewsletter()">Lets Go!</button>
+                            <input type="text" name="email" id="tlemail"  class="form-control" placeholder="Enter your email" name="email" id="tlemail" required>
+                            <input type="hidden" value="1" name="embed"/>
+                            <button type="submit" class="btn btn-primary fw-bold text-white shadow-sm">Lets Go!</button>
                         </div>
                     </form>
-
-                    <p class="fw-bold text-danger" id="alert_danger_newsletter"></p>
-                    <p class="fw-bold text-success" id="alert_success_newsletter"></p>
-                   
                 </div>
                 <div class="col-lg-4"></div>
                 <div class="col-lg-12 text-center text-muted mt-3">

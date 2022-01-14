@@ -31,38 +31,11 @@
                                 <img class="h-25 w-25" src="{{image}}">
                                 <small>{{title}}</small>
                                 <b>$ <span>{{price}}</span></b>
-                                <form action="/removeCart/{{id}}" method="POST">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                </form>
+                                <a href="/removeCart/{{id}}" type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </li>
                         {{/shopCartItens}}
-
-                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">
-                            <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co3swk.png">
-                            <small>God Of War Ragnarok</small>
-                            <b>$ <span>59.90</span></b>
-                            <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
-                                <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                            </form>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.png">
-                            <small>Horizon Forbidden West</small>
-                            <b>$ <span>59.90</span></b>
-                            <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
-                                <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                            </form>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <img class="h-25 w-25" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co391c.png">
-                            <small>Elden Ring</small>
-                            <b>$ <span>59.90</span></b>
-                            <form action="/shopCart/delete/game/{{game_id}}/user/{{user.id}}" method="POST">
-                                <button disabled type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                            </form>
-                        </li>-->
 
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-warning">
                             <b>TOTAL</b>
@@ -73,7 +46,7 @@
 
                 </div>
 
-                <!-- START COL-LG-4 -->
+
                 <div class="col-lg-4">
 
                     <div class="form-floating mb-3">

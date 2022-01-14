@@ -116,7 +116,7 @@ router
 
     .get('/shop', userIsNotLoggedIn, ShopController.getViewShop)
     .post('/shop', userIsNotLoggedIn, ShopController.postShopPayLog)
-    .post('/removeCart/:item_id', ShopController.removeCartItem)
+    .get('/removeCart/:item_id', ShopController.removeCartItem)
 
     .post('/criptoBOT/:side/:symbol/:quantity', CriptoBOTController.postBinance)
 

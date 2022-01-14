@@ -52,17 +52,10 @@ export default class StripeModel {
         });
     }
 
-    static async getShopTransactionsByUserId(userId: string) {
+    static async getShopTransactionsByUserId(user_id: string) {
         return prisma.stripeShopTransaction.findMany({
             where: {
-                user_id: userId,
-            },
-            select: {
-                created_at: true,
-                transaction_id: true,
-                total_amount: true,
-                paid: true,
-                card_id: true,
+                user_id,
             },
         });
     }
