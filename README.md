@@ -104,7 +104,7 @@
 
 ## Development Process
 - I am using Kanban and Trello principles to develop this project
-- You can see the public trello of this project in: https://trello.com/b/6iHJ2Idy/galhardo-app-20
+- You can see the public trello of this project in: https://trello.com/b/6iHJ2Idy/galhardo-app-typescript
 
 ## GIT Branchs Semantic
 - main: branch to deploy in production

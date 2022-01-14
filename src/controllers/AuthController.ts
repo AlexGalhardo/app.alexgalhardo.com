@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import queryString from 'query-string';
@@ -227,23 +228,22 @@ class AuthController {
                 fields: ['id', 'name', 'email'],
             });
 
-            const userRegistred = await Users.verifyLoginFacebook(
+            const user = await Users.verifyLoginFacebook(
                 facebookUser.id,
                 facebookUser.email
             );
 
-            if (!userRegistred) {
+            if (!user) {
                 req.flash(
                     'warning',
                     'Create Your account Linked to Your Facebook Account'
                 );
                 return res.redirect('/register');
             }
-            req.session.userID = userRegistred.id;
-            global.SESSION_USER = userRegistred;
-            return res.redirect('/');
 
-            return res.redirect('/login');
+            req.session.userID = user.id;
+            global.SESSION_USER = user;
+            return res.redirect('/');
         } catch (error) {
             throw new Error(error);
         }
@@ -289,11 +289,10 @@ class AuthController {
                 );
                 return res.redirect('/register');
             }
+
             req.session.userID = user.id;
             global.SESSION_USER = user;
             return res.redirect('/');
-
-            return res.redirect('/login');
         } catch (error) {
             throw new Error(error);
         }
@@ -322,8 +321,6 @@ class AuthController {
             req.session.userID = userRegistred.id;
             global.SESSION_USER = userRegistred;
             return res.redirect('/');
-
-            return res.redirect('/login');
         } catch (error) {
             throw new Error(error);
         }
