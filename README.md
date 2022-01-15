@@ -106,7 +106,7 @@
 - I am using Kanban and Trello principles to develop this project
 - You can see the public trello of this project in: https://trello.com/b/6iHJ2Idy/galhardo-app-typescript
 
-## GIT Branchs Semantic
+## GIT Branchs
 - <b>main</b>: branch to deploy in production
 - <b>canary</b>: branch to develop and test lastest updates before merge to master
 - <b>adonis</b>: adonis (https://adonisjs.com/) framework version
