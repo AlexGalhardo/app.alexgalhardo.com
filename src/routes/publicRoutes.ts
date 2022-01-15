@@ -233,13 +233,27 @@ router
         AuthController.postResetPassword
     )
 
-    .get('/github/callback', userIsAlreadyLoggedIn, AuthController.loginGitHub)
+    .get(
+        '/github/callback',
+        userIsAlreadyLoggedIn,
+        csrfProtection,
+        AuthController.loginGitHub
+    )
+
     .get(
         '/facebook/callback',
         userIsAlreadyLoggedIn,
+        recaptcha.middleware.render,
+        csrfProtection,
         AuthController.loginFacebook
     )
-    .get('/google/callback', userIsAlreadyLoggedIn, AuthController.loginGoogle)
+
+    .get(
+        '/google/callback',
+        userIsAlreadyLoggedIn,
+        csrfProtection,
+        AuthController.loginGoogle
+    )
 
     .get('/checkout/pagarme/game/:game_id', PagarMeController.checkoutGame)
 

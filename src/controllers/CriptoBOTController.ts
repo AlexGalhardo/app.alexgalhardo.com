@@ -9,15 +9,15 @@ import querystring from 'querystring';
 
 import Header from '../helpers/Header';
 
-class CriptoBOTController {
-    getViewCriptoBOT(req, res) {
+export default class CriptoBOTController {
+    static getViewCriptoBOT(req, res) {
         return res.render('pages/criptoBOT', {
             user: SESSION_USER,
             header: Header.criptoBOT(),
         });
     }
 
-    postBinance(req: Request, res: Response) {
+    static postBinance(req: Request, res: Response) {
         const { side, symbol, quantity } = req.params;
 
         const data = {
@@ -58,5 +58,3 @@ class CriptoBOTController {
             });
     }
 }
-
-export default new CriptoBOTController();

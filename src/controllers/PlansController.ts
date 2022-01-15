@@ -9,8 +9,8 @@ import Users from '../models/Users';
 
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
-class PlansController {
-    getViewPlans(req: Request, res: Response) {
+export default class PlansController {
+    static getViewPlans(req: Request, res: Response) {
         return res.render('pages/plans/plans', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -18,7 +18,7 @@ class PlansController {
         });
     }
 
-    getViewPlanProCheckout(req: Request, res: Response) {
+    static getViewPlanProCheckout(req: Request, res: Response) {
         return res.render('pages/plans/pro_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -26,7 +26,7 @@ class PlansController {
         });
     }
 
-    getViewPlanPremiumCheckout(req: Request, res: Response) {
+    static getViewPlanPremiumCheckout(req: Request, res: Response) {
         return res.render('pages/plans/premium_checkout', {
             flash_warning: req.flash('warning'),
             user: SESSION_USER,
@@ -155,7 +155,11 @@ class PlansController {
         return subscription;
     }
 
-    async postSubscription(req: Request, res: Response, next: NextFunction) {
+    static async postSubscription(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const { plan_name, confirm_password } = req.body;
 
@@ -234,5 +238,3 @@ class PlansController {
         }
     }
 }
-
-export default new PlansController();

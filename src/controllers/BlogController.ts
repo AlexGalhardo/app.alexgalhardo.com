@@ -3,10 +3,9 @@ import pagination from 'pagination';
 
 import Header from '../helpers/Header';
 import Blog from '../models/Blog';
-// import Blog from '../models/JSON/Blog';
 
-class BlogController {
-    async getViewBlog(req: Request, res: Response) {
+export default class BlogController {
+    static async getViewBlog(req: Request, res: Response) {
         const totalBlogPosts = await Blog.getTotal();
         const blogPostsPerPage = 4;
 
@@ -20,7 +19,7 @@ class BlogController {
 
         res.render('pages/blog/blog', {
             blog,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             blog_active: true,
             boostrapPaginator: BlogController.getRenderBootstrapPaginator(
                 page,
@@ -31,7 +30,7 @@ class BlogController {
         });
     }
 
-    async getSearchBlogTitle(req: Request, res: Response) {
+    static async getSearchBlogTitle(req: Request, res: Response) {
         const blogPosts = await Blog.getAll();
         const searchBlogTitle = req.query.blogTitle;
 
@@ -48,7 +47,7 @@ class BlogController {
 
         const totalBlogPostsFoundFromSearch = blogTitlesSearched.length;
 
-        res.render('pages/blog/blog', {
+        return res.render('pages/blog/blog', {
             blog: blogTitlesSearched,
             searchBlogTitle,
             totalBlogPostsFoundFromSearch,
@@ -56,13 +55,13 @@ class BlogController {
         });
     }
 
-    async getViewBlogPost(req: Request, res: Response) {
+    static async getViewBlogPost(req: Request, res: Response) {
         const { slug } = req.params;
 
         const blogPost = await Blog.getBySlug(slug);
 
         res.render('pages/blog/blogPost', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             blogPost,
             header: Header.blogPost(blogPost.title),
         });
@@ -71,17 +70,10 @@ class BlogController {
     static getRenderBootstrapPaginator(
         current,
         blogPostsPerPage,
-        totalBlogPosts,
-        searchBlogTitle
+        totalBlogPosts
     ) {
-        let prelinkUrl = '/blog/';
-
-        if (false) {
-            prelinkUrl = `/ blog / search ? blogTitle = ${searchBlogTitle} `;
-        }
-
         return new pagination.TemplatePaginator({
-            prelink: prelinkUrl,
+            prelink: '/blog/',
             current,
             rowsPerPage: blogPostsPerPage,
             totalResult: totalBlogPosts,
@@ -89,13 +81,12 @@ class BlogController {
             template(result) {
                 let i;
                 let len;
-                let prelink;
                 let html = '<div><ul class="pagination">';
                 if (result.pageCount < 2) {
                     html += '</ul></div>';
                     return html;
                 }
-                prelink = this.preparePreLink(result.prelink);
+                const prelink = this.preparePreLink(result.prelink);
                 if (result.previous) {
                     html += `<li class="page-item"><a class="page-link" href="${prelink}${result.previous
                         }">${this.options.translator('PREVIOUS')}</a></li>`;
@@ -128,8 +119,8 @@ class BlogController {
         const blogComment = {
             user_id: req.session.userID,
             user_logged_can_delete: true,
-            user_name: SESSION_USER.name,
-            user_avatar: SESSION_USER.avatar,
+            user_name: global.SESSION_USER.name,
+            user_avatar: global.SESSION_USER.avatar,
             comment: blog_comment,
             created_at: DateTime.getNow(),
         };
@@ -161,5 +152,3 @@ class BlogController {
         return res.redirect(`/ blog / ${slug} `);
     } */
 }
-
-export default new BlogController();

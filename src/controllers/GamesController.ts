@@ -8,8 +8,8 @@ import Movies from '../models/Movies';
 import TVShows from '../models/TVShows';
 import Users from '../models/Users';
 
-class GamesController {
-    async getViewGames(req: Request, res: Response) {
+export default class GamesController {
+    static async getViewGames(req: Request, res: Response) {
         const game = await Games.getRandom();
         const totalGames = await Games.getTotal();
         const totalBooks = await Books.getTotal();
@@ -33,7 +33,7 @@ class GamesController {
         });
     }
 
-    async getSearchGameTitle(req: Request, res: Response) {
+    static async getSearchGameTitle(req: Request, res: Response) {
         const searchGameTitle = req.query.title;
 
         if (!searchGameTitle) {
@@ -69,5 +69,3 @@ class GamesController {
         });
     }
 }
-
-export default new GamesController();

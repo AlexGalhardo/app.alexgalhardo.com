@@ -6,8 +6,8 @@ import Upload from '../helpers/Upload';
 import StripeModel from '../models/StripeModel';
 import Users from '../models/Users';
 
-class ProfileController {
-    async getViewProfile(req: Request, res: Response) {
+export default class ProfileController {
+    static async getViewProfile(req: Request, res: Response) {
         return res.render('pages/profile/profile', {
             user: SESSION_USER,
             flash_success: req.flash('success'),
@@ -16,7 +16,7 @@ class ProfileController {
         });
     }
 
-    logout(req: Request, res: Response) {
+    static logout(req: Request, res: Response) {
         req.session.destroy((error) => {
             if (error) throw new Error(error);
         });
@@ -24,7 +24,7 @@ class ProfileController {
         return res.redirect('/login');
     }
 
-    async updateProfile(req: Request, res: Response) {
+    static async updateProfile(req: Request, res: Response) {
         const {
             username,
             email,
@@ -69,12 +69,12 @@ class ProfileController {
         return res.redirect('/profile');
     }
 
-    async updateProfileAvatar(req: Request, res: Response) {
+    static async updateProfileAvatar(req: Request, res: Response) {
         await Upload.profileAvatar(req);
         res.redirect('/profile');
     }
 
-    async getViewMyShopTransactions(req: Request, res: Response) {
+    static async getViewMyShopTransactions(req: Request, res: Response) {
         const shopTransactions = await StripeModel.getShopTransactionsByUserId(
             SESSION_USER.id
         );
@@ -86,7 +86,7 @@ class ProfileController {
         });
     }
 
-    async getViewShopTransactionByID(req: Request, res: Response) {
+    static async getViewShopTransactionByID(req: Request, res: Response) {
         const { shop_transaction_id } = req.params;
 
         const shopTransaction = await StripeModel.getShopTransactionById(
@@ -102,7 +102,10 @@ class ProfileController {
         });
     }
 
-    async getViewMySubscriptionsTransactions(req: Request, res: Response) {
+    static async getViewMySubscriptionsTransactions(
+        req: Request,
+        res: Response
+    ) {
         const subsTransactions =
             await StripeModel.getSubscriptionsTransactionsByUserId(
                 SESSION_USER.id
@@ -117,7 +120,10 @@ class ProfileController {
         });
     }
 
-    async getViewSubscriptionTransactionByID(req: Request, res: Response) {
+    static async getViewSubscriptionTransactionByID(
+        req: Request,
+        res: Response
+    ) {
         const { subs_transaction_id } = req.params;
 
         const subsTransaction =
@@ -132,7 +138,7 @@ class ProfileController {
         });
     }
 
-    async deleteStripeCard(req: Request, res: Response) {
+    static async deleteStripeCard(req: Request, res: Response) {
         const { stripe_card_id } = req.params;
 
         await StripeModel.deleteStripeCard(SESSION_USER.id, stripe_card_id);
@@ -141,7 +147,7 @@ class ProfileController {
         return res.redirect('/profile');
     }
 
-    async cancelStripeSubscriptionRenewAtPeriodEnd(
+    static async cancelStripeSubscriptionRenewAtPeriodEnd(
         req: Request,
         res: Response
     ) {
@@ -156,5 +162,3 @@ class ProfileController {
         return res.redirect('/profile');
     }
 }
-
-export default new ProfileController();

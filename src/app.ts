@@ -25,6 +25,9 @@ dotenv.config();
 global.APP_ROOT_PATH = path.resolve(__dirname);
 global.SESSION_USER = null;
 
+// LocalHost HTTPS ~ PORT 3000
+// const app = require('https-localhost')();
+
 // LocalHost HTTP
 const app = express();
 

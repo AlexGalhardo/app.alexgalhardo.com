@@ -4,8 +4,11 @@ export type inputCreateUser = {
     password: string;
     confirm_password: string;
     github_id: string;
+    github_avatar: string;
     facebook_id: string;
+    facebook_avatar: string;
     google_id: string;
+    google_avatar: string;
 };
 
 export type inputUpdateUser = {

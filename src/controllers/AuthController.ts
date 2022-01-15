@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
+import facebookLogin from 'node-fb-login';
 import queryString from 'query-string';
 import randomToken from 'rand-token';
 
+import googleLogin from '../helpers/GoogleLogin';
 import NodeMailer from '../helpers/NodeMailer';
 import URL from '../helpers/URL';
 import Users from '../models/Users';
 
-class AuthController {
-    async getViewLogin(req: Request, res: Response) {
+export default class AuthController {
+    static async getViewLogin(req: Request, res: Response) {
         const facebookLoginURL = await URL.getFacebookURL();
 
         return res.render('pages/auth/login', {
@@ -23,12 +25,17 @@ class AuthController {
         });
     }
 
-    async postLogin(req: Request, res: Response, next: NextFunction) {
+    static async postLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
-            if (!errors.isEmpty()) {
-                req.flash('warning', `${errors.array()}`);
+            if (!req.recaptcha.error) {
+                if (!errors.isEmpty()) {
+                    req.flash('warning', `${errors.array()[0].msg}`);
+                    return res.redirect('/login');
+                }
+            } else {
+                req.flash('warning', `Invalid Recaptcha!`);
                 return res.redirect('/login');
             }
 
@@ -53,38 +60,54 @@ class AuthController {
             req.flash('success', `Welcome back, ${user.name} :D`);
             return res.redirect('/');
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 
-    getViewRegister(req: Request, res: Response) {
+    static getViewRegister(req: Request, res: Response) {
+        const {
+            username,
+            email,
+            github_id,
+            github_avatar,
+            google_id,
+            google_avatar,
+            facebook_id,
+            facebook_avatar,
+        } = req.query;
+
+        let email_readonly = null;
+        if (email) email_readonly = true;
+
         return res.render('pages/auth/register', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
+            username,
+            email,
+            email_readonly,
+            github_id,
+            github_avatar,
+            facebook_id,
+            facebook_avatar,
+            google_id,
+            google_avatar,
             csrfToken: req.csrfToken(),
             captcha: res.recaptcha,
             app_url: process.env.APP_URL,
         });
     }
 
-    async postRegister(req: Request, res: Response, next) {
+    static async postRegister(req: Request, res: Response, next: NextFunction) {
         try {
-            /* if (!req.recaptcha.error) {
-                const errors = validationResult(req);
+            const errors = validationResult(req);
 
+            if (!req.recaptcha.error) {
                 if (!errors.isEmpty()) {
                     req.flash('warning', errors.array()[0].msg);
                     return res.redirect('/register');
                 }
             } else {
                 req.flash('warning', 'Invalid Recaptcha!');
-                return res.redirect('/register');
-            } */
-
-            const errors = validationResult(req);
-
-            if (!errors.isEmpty()) {
-                req.flash('warning', errors.array()[0].msg);
                 return res.redirect('/register');
             }
 
@@ -94,8 +117,11 @@ class AuthController {
                 password,
                 confirm_password,
                 github_id,
+                github_avatar,
                 facebook_id,
+                facebook_avatar,
                 google_id,
+                google_avatar,
             } = req.body;
 
             const confirmEmailToken = randomToken.generate(24);
@@ -106,8 +132,11 @@ class AuthController {
                 password,
                 confirm_password,
                 github_id,
+                github_avatar,
                 facebook_id,
+                facebook_avatar,
                 google_id,
+                google_avatar,
                 confirmEmailToken,
             };
 
@@ -120,18 +149,18 @@ class AuthController {
             );
             return res.redirect('/login');
         } catch (error) {
-            throw new Error(error);
+            return next(error);
         }
     }
 
-    getViewForgetPassword(req: Request, res: Response) {
+    static getViewForgetPassword(req: Request, res: Response) {
         return res.render('pages/auth/forgetPassword', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
         });
     }
 
-    async postForgetPassword(req: Request, res: Response) {
+    static async postForgetPassword(req: Request, res: Response) {
         const { email } = req.body;
 
         const resetPasswordToken = randomToken.generate(24);
@@ -148,11 +177,11 @@ class AuthController {
         return res.redirect('/forgetPassword');
     }
 
-    async sendToForgetPassword(req: Request, res: Response) {
+    static async sendToForgetPassword(req: Request, res: Response) {
         return res.redirect('/forgetPassword');
     }
 
-    async getViewResetPassword(req: Request, res: Response) {
+    static async getViewResetPassword(req: Request, res: Response) {
         const { email, token } = req.params;
 
         if (!email || !token) {
@@ -170,7 +199,7 @@ class AuthController {
         });
     }
 
-    async postResetPassword(req: Request, res: Response) {
+    static async postResetPassword(req: Request, res: Response) {
         const { email, new_password } = req.body;
 
         if (!(await Users.resetPassword(email, new_password))) {
@@ -181,13 +210,13 @@ class AuthController {
         return res.redirect('/login');
     }
 
-    getViewResendConfirmEmailLink(req: Request, res: Response) {
+    static getViewResendConfirmEmailLink(req: Request, res: Response) {
         return res.render('pages/auth/confirmEmail', {
             flash_success: req.flash('success'),
         });
     }
 
-    async postSendConfirmEmailLink(req: Request, res: Response) {
+    static async postSendConfirmEmailLink(req: Request, res: Response) {
         const { email } = req.body;
 
         const confirmEmailToken = randomToken.generate(24);
@@ -203,7 +232,10 @@ class AuthController {
         return res.redirect('/confirmEmail');
     }
 
-    async getVerifyIfConfirmEmailURLIsValid(req: Request, res: Response) {
+    static async getVerifyIfConfirmEmailURLIsValid(
+        req: Request,
+        res: Response
+    ) {
         const { email, token } = req.params;
 
         if (await Users.verifyConfirmEmailToken(email, token)) {
@@ -214,7 +246,11 @@ class AuthController {
         return res.redirect('/login');
     }
 
-    async loginFacebook(req: Request, res: Response, next) {
+    static async loginFacebook(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const url_query_code = req.query.code;
 
@@ -227,7 +263,7 @@ class AuthController {
 
             const facebookUser = await facebookLogin.getUserProfile({
                 accessToken: `${token.access_token}`,
-                fields: ['id', 'name', 'email'],
+                fields: ['id', 'name', 'email', 'picture'],
             });
 
             const user = await Users.verifyLoginFacebook(
@@ -240,18 +276,20 @@ class AuthController {
                     'warning',
                     'Create Your account Linked to Your Facebook Account'
                 );
-                return res.redirect('/register');
+                return res.redirect(
+                    `/register?facebook_id=${facebookUser.id}&facebook_avatar=${facebookUser.picture.data.url}&username=${facebookUser.name}&email=${facebookUser.email}`
+                );
             }
 
             req.session.userID = user.id;
             global.SESSION_USER = user;
             return res.redirect('/');
         } catch (error) {
-            throw new Error(error);
+            return next(error);
         }
     }
 
-    async loginGitHub(req: Request, res: Response) {
+    static async loginGitHub(req: Request, res: Response, next: NextFunction) {
         const { code } = req.query;
 
         try {
@@ -280,8 +318,7 @@ class AuthController {
 
             const user = await Users.verifyLoginGitHub(
                 response.data.id,
-                response.data.email,
-                response.data.avatar_url
+                response.data.email
             );
 
             if (!user) {
@@ -289,27 +326,28 @@ class AuthController {
                     'warning',
                     'Create Your account Linked to Your GitHub Account'
                 );
-                return res.redirect('/register');
+                return res.redirect(
+                    `/register?github_id=${response.data.id}&github_avatar=${response.data.avatar_url}&username=${response.data.name}&email=${response.data.email}`
+                );
             }
 
             req.session.userID = user.id;
             global.SESSION_USER = user;
             return res.redirect('/');
         } catch (error) {
-            throw new Error(error);
+            return next(error);
         }
     }
 
-    async loginGoogle(req: Request, res: Response) {
-        const { code } = req.query;
-
+    static async loginGoogle(req: Request, res: Response, next: NextFunction) {
         try {
+            const { code } = req.query;
+
             const { user } = await googleLogin.getUserProfile(`${code}`);
 
             const userRegistred = await Users.verifyLoginGoogle(
                 user.sub,
-                user.email,
-                user.picture
+                user.email
             );
 
             if (!userRegistred) {
@@ -317,16 +355,16 @@ class AuthController {
                     'warning',
                     'Create Your account Linked to Your Google Account'
                 );
-                return res.redirect('/register');
+                return res.redirect(
+                    `/register?google_id=${user.sub}&google_avatar=${user.picture}&username=${user.name}&email=${user.email}`
+                );
             }
 
             req.session.userID = userRegistred.id;
             global.SESSION_USER = userRegistred;
             return res.redirect('/');
         } catch (error) {
-            throw new Error(error);
+            return next(error);
         }
     }
 }
-
-export default new AuthController();

@@ -7,8 +7,8 @@ import Movies from '../models/Movies';
 import TVShows from '../models/TVShows';
 import Users from '../models/Users';
 
-class MoviesController {
-    async getViewMovies(req: Request, res: Response) {
+export default class MoviesController {
+    static async getViewMovies(req: Request, res: Response) {
         const movie = await Movies.getRandom();
         const totalGames = await Games.getTotal();
         const totalBooks = await Books.getTotal();
@@ -31,7 +31,7 @@ class MoviesController {
         });
     }
 
-    async getSearchMovieTitle(req: Request, res: Response) {
+    static async getSearchMovieTitle(req: Request, res: Response) {
         const searchMovieTitle = req.query.title;
 
         if (!searchMovieTitle) {
@@ -67,5 +67,3 @@ class MoviesController {
         });
     }
 }
-
-export default new MoviesController();

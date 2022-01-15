@@ -10,8 +10,8 @@ import Users from '../models/Users';
 
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
-class ShopController {
-    async getViewShop(req: Request, res: Response) {
+export default class ShopController {
+    static async getViewShop(req: Request, res: Response) {
         const shopCartItens = await Users.getShopCartItens();
         const shopCartTotalAmount = await Users.getShopCartTotalAmount();
         const totalItensShopCart = await Users.getTotalItensShopCart();
@@ -32,7 +32,7 @@ class ShopController {
         });
     }
 
-    async removeCartItem(req: Request, res: Response) {
+    static async removeCartItem(req: Request, res: Response) {
         const { item_id } = req.params;
 
         if (await Users.removeShopCartItem(item_id)) {
@@ -88,7 +88,11 @@ class ShopController {
         return cardToken.id;
     }
 
-    async postShopPayLog(req: Request, res: Response, next: NextFunction) {
+    static async postShopPayLog(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const {
                 total_shop_amount,
@@ -177,5 +181,3 @@ class ShopController {
         }
     }
 }
-
-export default new ShopController();

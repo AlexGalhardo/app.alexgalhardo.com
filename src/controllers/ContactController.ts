@@ -5,8 +5,8 @@ import Header from '../helpers/Header';
 import NodeMailer from '../helpers/NodeMailer';
 import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
 
-class ContactController {
-    getViewContact(req: Request, res: Response) {
+export default class ContactController {
+    static getViewContact(req: Request, res: Response) {
         res.render('pages/contact', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -17,12 +17,17 @@ class ContactController {
         });
     }
 
-    async postContact(req: Request, res: Response, next: NextFunction) {
+    static async postContact(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
-            if (!errors.isEmpty()) {
-                req.flash('warning', `${errors.array()[0].msg}`);
+            if (!req.recaptcha.error) {
+                if (!errors.isEmpty()) {
+                    req.flash('warning', `${errors.array()[0].msg}`);
+                    return res.redirect('/contact');
+                }
+            } else {
+                req.flash('warning', `Invalid Recaptcha!`);
                 return res.redirect('/contact');
             }
 
@@ -45,5 +50,3 @@ class ContactController {
         }
     }
 }
-
-export default new ContactController();

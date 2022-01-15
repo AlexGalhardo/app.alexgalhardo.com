@@ -1,0 +1,113 @@
+[34m
+* Datadog Agent install script v1.7.1
+[0m
+[34m
+* Installing apt-transport-https, curl and gnupg
+[0m
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [1.469 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 DEP-11 Metadata [279 kB]
+Hit:6 https://dl.google.com/linux/chrome/deb stable InRelease
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [892 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/universe i386 Packages [663 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 DEP-11 Metadata [362 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 DEP-11 Metadata [940 B]
+Get:11 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 DEP-11 Metadata [7.972 B]
+Get:12 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 DEP-11 Metadata [11,3 kB]
+Ign:13 http://packages.linuxmint.com uma InRelease
+Hit:14 http://ppa.launchpad.net/openjdk-r/ppa/ubuntu focal InRelease
+Hit:15 http://archive.canonical.com/ubuntu focal InRelease
+Hit:16 http://packages.linuxmint.com uma Release
+Hit:17 https://download.sublimetext.com apt/stable/ InRelease
+Err:19 https://download.docker.com/linux/ubuntu focal InRelease
+  Could not resolve 'download.docker.com'
+Err:20 https://apt.kubernetes.io kubernetes-xenial InRelease
+  Could not resolve 'apt.kubernetes.io'
+Err:21 https://packages.microsoft.com/repos/ms-teams stable InRelease
+  Could not resolve 'packages.microsoft.com'
+Err:22 https://apt.datadoghq.com stable InRelease
+  Could not resolve 'apt.datadoghq.com'
+Err:23 http://binaries.erlang-solutions.com/debian uma InRelease
+  Could not resolve 'binaries.erlang-solutions.com'
+Err:24 https://dbeaver.io/debs/dbeaver-ce  InRelease
+  Could not resolve 'dbeaver.io'
+Err:25 https://repo.steampowered.com/steam stable InRelease
+  Could not resolve 'repo.steampowered.com'
+Err:26 http://security.ubuntu.com/ubuntu focal-security InRelease
+  Could not resolve 'security.ubuntu.com'
+Fetched 3.908 kB in 55s (70,9 kB/s)
+Reading package lists...
+W: Failed to fetch https://download.docker.com/linux/ubuntu/dists/focal/InRelease  Could not resolve 'download.docker.com'
+W: Failed to fetch https://apt.datadoghq.com/dists/stable/InRelease  Could not resolve 'apt.datadoghq.com'
+W: Failed to fetch https://dbeaver.io/debs/dbeaver-ce/InRelease  Could not resolve 'dbeaver.io'
+W: Failed to fetch http://binaries.erlang-solutions.com/debian/dists/uma/InRelease  Could not resolve 'binaries.erlang-solutions.com'
+W: Failed to fetch https://apt.kubernetes.io/dists/kubernetes-xenial/InRelease  Could not resolve 'apt.kubernetes.io'
+W: Failed to fetch http://security.ubuntu.com/ubuntu/dists/focal-security/InRelease  Could not resolve 'security.ubuntu.com'
+W: Failed to fetch https://repo.steampowered.com/steam/dists/stable/InRelease  Could not resolve 'repo.steampowered.com'
+W: Failed to fetch https://packages.microsoft.com/repos/ms-teams/dists/stable/InRelease  Could not resolve 'packages.microsoft.com'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.68.0-1ubuntu2.7).
+gnupg is already the newest version (2.2.19-3ubuntu2.1).
+apt-transport-https is already the newest version (2.0.6).
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.4.0-91 linux-headers-5.4.0-91-generic
+  linux-image-5.4.0-91-generic linux-modules-5.4.0-91-generic
+  linux-modules-extra-5.4.0-91-generic
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[34m
+* Installing APT package sources for Datadog
+[0m
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0100  9001  100  9001    0     0   1601      0  0:00:05  0:00:05 --:--:--  1917
+gpg: key D3A80E30382E94DE: "Datadog, Inc <package@datadoghq.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  6226  100  6226    0     0  10481      0 --:--:-- --:--:-- --:--:-- 10463100  6226  100  6226    0     0  10481      0 --:--:-- --:--:-- --:--:-- 10463
+gpg: key 32637D44F14F620E: "Datadog, Inc. Master key (2020-09-08) <package+masterkey@datadoghq.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  9001  100  9001    0     0  15077      0 --:--:-- --:--:-- --:--:-- 15077
+gpg: key D3A80E30382E94DE: "Datadog, Inc <package@datadoghq.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+[34m
+* Installing the Datadog Agent package
+[0m
+Err:1 https://apt.datadoghq.com stable InRelease
+  Could not resolve 'apt.datadoghq.com'
+Reading package lists...
+W: Failed to fetch https://apt.datadoghq.com/dists/stable/InRelease  Could not resolve 'apt.datadoghq.com'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+  [33mInstalling package: datadog-agent
+[0m
+Reading package lists...
+Building dependency tree...
+Reading state information...
+W: --force-yes is deprecated, use one of the options starting with --allow instead.
+E: Unable to locate package datadog-agent
+E: Unable to locate package datadog-signing-keys
+[31mERROR
+Failed to install the Datadog package, sometimes it may be
+due to another APT source failing. See the logs above to
+determine the cause.
+If the cause is unclear, please contact Datadog support.
+*****
+
+It looks like you hit an issue when trying to install the Agent.
+
+Troubleshooting and basic usage information for the Agent are available at:
+
+    https://docs.datadoghq.com/agent/basic_agent_usage/
+[0m
+Do you want to send a failure report to Datadog (including ddagent-install.log)? (y/[n]) 

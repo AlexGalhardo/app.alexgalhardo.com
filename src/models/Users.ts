@@ -145,16 +145,25 @@ export default class Users {
         userObject: inputCreateUser,
         confirmEmailToken: string
     ) {
+        let avatar = null;
+        if (userObject.github_avatar) avatar = userObject.github_avatar;
+        if (userObject.google_avatar) avatar = userObject.google_avatar;
+        if (userObject.facebook_avatar) avatar = userObject.facebook_avatar;
+
         return prisma.user.create({
             data: {
                 name: userObject.username,
                 email: userObject.email,
                 password: await Bcrypt.hash(userObject.password),
-                github_id: userObject.github_id,
-                facebook_id: userObject.facebook_id,
-                google_id: userObject.google_id,
+                github_id: userObject.github_id
+                    ? parseInt(userObject.github_id)
+                    : null,
+                facebook_id: userObject.facebook_id
+                    ? userObject.facebook_id
+                    : null,
+                google_id: userObject.google_id ? userObject.google_id : null,
                 confirm_email_token: confirmEmailToken,
-                avatar: 'https://milvus.online/wp-content/uploads/2017/05/avatar-default.jpg',
+                avatar,
             },
         });
     }
@@ -221,8 +230,6 @@ export default class Users {
                 shop_cart_itens: true,
             },
         });
-
-        // console.log('shop_cart_itens =>', shop_cart_itens);
 
         const game = await prisma.game.findUnique({
             where: {
@@ -573,5 +580,89 @@ export default class Users {
             }
         }
         return false;
+    }
+
+    static async verifyLoginGitHub(githubId: number, email: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+
+        if (user && !user?.github_id) {
+            await prisma.user.update({
+                where: {
+                    email,
+                },
+                data: {
+                    github_id: githubId,
+                },
+            });
+        }
+
+        return prisma.user.findUnique({
+            where: {
+                githubLogin: {
+                    github_id: githubId,
+                    email,
+                },
+            },
+        });
+    }
+
+    static async verifyLoginGoogle(googleId: string, email: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+
+        if (user && !user?.google_id) {
+            await prisma.user.update({
+                where: {
+                    email,
+                },
+                data: {
+                    google_id: googleId,
+                },
+            });
+        }
+
+        return prisma.user.findUnique({
+            where: {
+                googleLogin: {
+                    google_id: googleId,
+                    email,
+                },
+            },
+        });
+    }
+
+    static async verifyLoginFacebook(facebookId: string, email: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+
+        if (user && !user?.facebook_id) {
+            await prisma.user.update({
+                where: {
+                    email,
+                },
+                data: {
+                    facebook_id: facebookId,
+                },
+            });
+        }
+
+        return prisma.user.findUnique({
+            where: {
+                facebookLogin: {
+                    facebook_id: facebookId,
+                    email,
+                },
+            },
+        });
     }
 }

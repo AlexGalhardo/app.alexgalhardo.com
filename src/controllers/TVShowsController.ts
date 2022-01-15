@@ -7,8 +7,8 @@ import Movies from '../models/Movies';
 import TVShows from '../models/TVShows';
 import Users from '../models/Users';
 
-class TVShowsController {
-    async getViewTVShows(req: Request, res: Response) {
+export default class TVShowsController {
+    static async getViewTVShows(req: Request, res: Response) {
         const tvshow = await TVShows.getRandom();
         const totalGames = await Games.getTotal();
         const totalBooks = await Books.getTotal();
@@ -31,7 +31,7 @@ class TVShowsController {
         });
     }
 
-    async getSearchTVShowTitle(req: Request, res: Response) {
+    static async getSearchTVShowTitle(req: Request, res: Response) {
         const searchTVShowTitle = req.query.title;
 
         if (!searchTVShowTitle) {
@@ -67,5 +67,3 @@ class TVShowsController {
         });
     }
 }
-
-export default new TVShowsController();
