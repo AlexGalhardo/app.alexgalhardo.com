@@ -10,6 +10,9 @@ async function recommendOtherMovie() {
         document.getElementById('movie_title').innerHTML = object[0].title;
         document.getElementById('movie_year_release').innerHTML =
             object[0].year_release;
+        document.getElementById('movie_tmdb_link').href = object[0].tmdb_link;
+        document.getElementById('movie_tmdb_rating').innerHTML =
+            object[0].tmdb_rating;
         document.getElementById('movie_resume').innerHTML = object[0].resume;
         document.getElementById('movie_duration').innerHTML =
             object[0].duration;

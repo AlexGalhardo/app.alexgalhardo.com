@@ -50,7 +50,7 @@
                         <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="tmdb_link" style="text-decoration:none;" href="{{tmdb_link}}" class="fs-3 card-link text-decoration-none">
+                            <a target="_blank" id="tvshow_tmdb_link" style="text-decoration:none;" href="{{tmdb_link}}" class="fs-3 card-link text-decoration-none">
                                 <span id="tvshow_title" class="fw-bold">{{title}}</span>
                                 (<span id="tvshow_year_release" class="text-muted">{{year_release}}</span>)
                             </a>
@@ -141,17 +141,23 @@
                         <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <h5 class="card-title">
-                                <a target="_blank" id="amazon_link" style="text-decoration:none;" href="{{amazon_link}}" class="card-link">
-                                    <span id="tvshow_title" class="fw-bold text-primary">{{title}}</span>
-                                    (<span id="tvshow_year_release" class="text-muted">{{year_release}}</span>)
-                                </a>
-                            </h5>
+                            <a target="_blank" style="text-decoration:none;" href="{{tmdb_link}}" class="fs-3 card-link text-decoration-none">
+                                <span id="tvshow_title" id="tvshow_tmdb_link" class="fw-bold">{{title}}</span>
+                                (<span id="tvshow_year_release" class="text-muted">{{year_release}}</span>)
+                            </a>
+
+                            <h3 class="fw-bold text-warning">⭐
+                                <span id="tvshow_tmdb_rating">
+                                    {{tmdb_rating}}
+                                </span>
+                            </h3>
                         </div>
 
                         <small class="card-text" id="tvshow_resume">{{resume}}</small>
 
                         <ul class="mt-3">
+
+                            <li class=""><b><a onclick="return false;" target="_blank" href="#"><i class="bi bi-link-45deg"></i>JustWatch Link</a></b></li>
 
                             <li><small><b>Genres:</b></small> <small id="tvshow_genres">{{genres}}</small></li>
 

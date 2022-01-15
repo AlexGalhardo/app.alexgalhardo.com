@@ -2,8 +2,8 @@ const checkbox = document.querySelector('#checkbox_policy');
 const btn = document.querySelector('#button_register');
 const password = document.querySelector('#password');
 const confirm_password = document.querySelector('#confirm_password');
-const username = document.querySelector('#username').value;
-const emailValue = document.querySelector('#email').value;
+const username = document.querySelector('#username');
+const email = document.querySelector('#email');
 const form = document.querySelector('#form_register');
 const app_url = document.querySelector('#app_url').value;
 
@@ -14,9 +14,7 @@ let validName = true;
 btn.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    console.log('hello world', username);
-
-    if (username.length < 4) {
+    if (username.value.length < 4) {
         document.querySelector('#alert_name').innerHTML =
             'Name must have at least 4 characters';
         validName = false;
@@ -25,17 +23,16 @@ btn.addEventListener('click', async (e) => {
         validName = true;
     }
 
-    // verify email
-    if (emailValue) {
+    if (email.value) {
         const response = await fetch(
-            `${app_url}/api/public/email/${emailValue}`
+            `${app_url}/api/public/email/${email.value}`
         );
         const json = await response.json();
 
         const validEmailRegex =
             /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 
-        if (emailValue.match(validEmailRegex) && !json.emailRegistred) {
+        if (email.value.match(validEmailRegex) && !json.emailRegistred) {
             document.querySelector('#alert_email').innerHTML = '';
             validEmail = true;
         } else {
@@ -63,7 +60,6 @@ btn.addEventListener('click', async (e) => {
         validPassword = false;
     }
 
-    // verify checkbox policy
     if (!checkbox.checked) {
         document.querySelector('#alert_checkbox').innerHTML =
             'You need to agree with our Policy!';
@@ -74,10 +70,6 @@ btn.addEventListener('click', async (e) => {
     if (validName && validEmail && validPassword && checkbox.checked) {
         form.submit();
     }
-
-    /* if (checkbox.checked) {
-        form.submit();
-    } */
 });
 
 // verify google recaptcha

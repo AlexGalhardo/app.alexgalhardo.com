@@ -10,6 +10,9 @@ async function recommendOtherTVShow() {
         document.getElementById('tvshow_title').innerHTML = object[0].title;
         document.getElementById('tvshow_year_release').innerHTML =
             object[0].year_release;
+        document.getElementById('tvshow_tmdb_link').href = object[0].tmdb_link;
+        document.getElementById('tvshow_tmdb_rating').innerHTML =
+            object[0].tmdb_rating;
         document.getElementById('tvshow_resume').innerHTML = object[0].resume;
         document.getElementById('tvshow_duration').innerHTML =
             object[0].duration;
