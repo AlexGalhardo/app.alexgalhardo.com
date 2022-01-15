@@ -108,7 +108,7 @@
 
 ## GIT Branchs Semantic
 - <b>main</b>: branch to deploy in production
-- <b>canary<b>: branch to develop and test lastest updates before merge to master
+- <b>canary</b>: branch to develop and test lastest updates before merge to master
 - <b>adonis</b>: adonis (https://adonisjs.com/) framework version
 
 ## GIT Commits Semantic
