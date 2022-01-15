@@ -107,8 +107,9 @@
 - You can see the public trello of this project in: https://trello.com/b/6iHJ2Idy/galhardo-app-typescript
 
 ## GIT Branchs Semantic
-- main: branch to deploy in production
-- canary: branch to test lastest updates before merge to master
+- <b>main</b>: branch to deploy in production
+- <b>canary<b>: branch to develop and test lastest updates before merge to master
+- <b>adonis</b>: adonis (https://adonisjs.com/) framework version
 
 ## GIT Commits Semantic
 - chore: add new chore in this commit
@@ -137,8 +138,7 @@
    - Tutorial In development
 
 ## DataBase
-- This projects uses 2 databases: Postgres and JSON
-- Postgres for production, and JSON for learning purposes
+- This projects uses mainly POSTGRES SQL (I want to add features to learn MongoDB and Redis too)
 - Also, this projects uses PRISMA ORM (https://www.prisma.io/) to manipulate SQL queries, migrations and seeders
 - After installing locally, you can see/use databases in:
    - ADMINER
