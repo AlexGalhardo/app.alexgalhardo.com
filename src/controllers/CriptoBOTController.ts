@@ -12,7 +12,7 @@ import Header from '../helpers/Header';
 export default class CriptoBOTController {
     static getViewCriptoBOT(req, res) {
         return res.render('pages/criptoBOT', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.criptoBOT(),
         });
     }

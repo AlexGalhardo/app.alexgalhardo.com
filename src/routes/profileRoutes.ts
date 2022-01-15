@@ -34,12 +34,6 @@ export default router
         ProfileController.updateProfileAvatar
     )
 
-    /* .get(
-        '/shopCart/game/:game_id',
-        userIsNotLoggedIn,
-        ProfileController.getAddShopCartGame
-    ) */
-
     .get(
         '/shop/transactions',
         userIsNotLoggedIn,

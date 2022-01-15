@@ -1,13 +1,14 @@
 import { unlink } from 'fs/promises';
 import multer from 'multer';
 import sharp from 'sharp';
+import { Request } from 'express'
 
 import multerConfig from '../config/multer';
-import Users from '../models/JSON/Users';
 
-class Upload {
-    static async profileAvatar(req) {
-        if (req.file) {
+export default class Upload {
+    static async profileAvatar(req: Request) {
+        // todo
+        /* if (req.file) {
             const filename = `${req.file.filename}.jpg`;
 
             await sharp(req.file.path)
@@ -23,8 +24,6 @@ class Upload {
             );
         } else {
             return res.status(400).json({ error: 'Invalid file type.' });
-        }
+        }*/
     }
 }
-
-export default Upload;

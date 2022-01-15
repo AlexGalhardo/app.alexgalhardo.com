@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 
 import Users from '../../models/Users';
 
-class APIProfileController {
-    async postLogin(req: Request, res: Response, next: NextFunction) {
+export default class APIProfileController {
+    static async postLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
             return res.json(await Users.login(email, password));
@@ -12,7 +12,7 @@ class APIProfileController {
         }
     }
 
-    async patchProfile(req: Request, res: Response, next: NextFunction) {
+    static async patchProfile(req: Request, res: Response, next: NextFunction) {
         try {
             const {
                 name,
@@ -62,7 +62,7 @@ class APIProfileController {
         }
     }
 
-    async deleteProfile(req: Request, res: Response, next: NextFunction) {
+    static async deleteProfile(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
 
@@ -82,5 +82,3 @@ class APIProfileController {
         }
     }
 }
-
-export default new APIProfileController();

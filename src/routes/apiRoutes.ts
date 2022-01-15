@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import jwt from 'jsonwebtoken';
 
-import APIAdminBlogController from '../controllers/API/APIAdminBlogController';
-import APIAdminBookController from '../controllers/API/APIAdminBookController';
-import APIAdminController from '../controllers/API/APIAdminController';
-import APIAdminGameController from '../controllers/API/APIAdminGameController';
+import AdminController from '../controllers/ADMIN/AdminController';
 import APIController from '../controllers/API/APIController';
 import APIProfileController from '../controllers/API/APIProfileController';
 import APIPublicController from '../controllers/API/APIPublicController';
@@ -73,43 +70,43 @@ export default router
 
     .get('/addCart/book/:book_id', APIPublicController.addBookToCart)
 
-    .post('/admin/login', APIAdminController.postAdminLogin)
-    .post('/admin/test', APIAdminController.postAdminTestJWT)
-    .get(
-        '/admin/users',
-        authenticateAdmin,
-        APIAdminController.getUsersRegistred
-    )
+/* .post('/admin/login', AdminController.postAdminLogin)
+.post('/admin/test', AdminController.postAdminTestJWT)
+.get(
+    '/admin/users',
+    authenticateAdmin,
+    AdminController.getUsersRegistred
+)
 
-    .post(
-        '/admin/blog/create',
-        authenticateAdmin,
-        APIAdminBlogController.postCreateBlogPost
-    )
-    .patch(
-        '/admin/blog/patch/:blog_id',
-        authenticateAdmin,
-        APIAdminBlogController.patchBlogPost
-    )
-    .delete(
-        '/admin/blog/delete/:blog_id',
-        authenticateAdmin,
-        APIAdminBlogController.deleteBlogPost
-    )
+.post(
+    '/admin/blog/create',
+    authenticateAdmin,
+    AdminController.postCreateBlogPost
+)
+.patch(
+    '/admin/blog/patch/:blog_id',
+    authenticateAdmin,
+    AdminController.patchBlogPost
+)
+.delete(
+    '/admin/blog/delete/:blog_id',
+    authenticateAdmin,
+    AdminController.deleteBlogPost
+)
 
-    .get('/admin/books/listAll', APIAdminBookController.getAllBooks)
-    .post(
-        '/admin/books/create',
-        authenticateAdmin,
-        APIAdminBookController.postCreateBook
-    )
-    .patch(
-        '/admin/books/patch/:book_id',
-        authenticateAdmin,
-        APIAdminBookController.patchBook
-    )
-    .delete(
-        '/admin/books/delete/:book_id',
-        authenticateAdmin,
-        APIAdminBookController.deleteBook
-    );
+.get('/admin/books/listAll', AdminController.getAllBooks)
+.post(
+    '/admin/books/create',
+    authenticateAdmin,
+    AdminController.postCreateBook
+)
+.patch(
+    '/admin/books/patch/:book_id',
+    authenticateAdmin,
+    AdminController.patchBook
+)
+.delete(
+    '/admin/books/delete/:book_id',
+    authenticateAdmin,
+    AdminController.deleteBook
+); */

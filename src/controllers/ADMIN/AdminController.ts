@@ -6,7 +6,7 @@ import Games from '../../models/Games';
 import Movies from '../../models/Movies';
 import TVShows from '../../models/TVShows';
 
-class AdminController {
+export default class AdminController {
     static getViewCreateBlogPost(req: Request, res: Response) {
         return res.render('pages/admin/createBlogPost', {
             flash_success: req.flash('success'),
@@ -514,5 +514,3 @@ class AdminController {
         return res.redirect(`/admin/update/book/${book_id}`);
     }
 }
-
-export default AdminController;

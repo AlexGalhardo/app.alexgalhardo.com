@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 
 import Header from '../helpers/Header';
 
-class AppController {
-    getViewProjects(req: Request, res: Response) {
+export default class AppController {
+    static getViewProjects(req: Request, res: Response) {
         res.render('pages/projects', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -12,7 +12,7 @@ class AppController {
         });
     }
 
-    getViewBank(req: Request, res: Response) {
+    static getViewBank(req: Request, res: Response) {
         res.render('pages/bank', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -21,7 +21,7 @@ class AppController {
         });
     }
 
-    getViewToDo(req: Request, res: Response) {
+    static getViewToDo(req: Request, res: Response) {
         res.render('pages/toDo', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
@@ -30,19 +30,17 @@ class AppController {
         });
     }
 
-    getViewAbout(req: Request, res: Response) {
+    static getViewAbout(req: Request, res: Response) {
         return res.render('pages/about', {
             user: SESSION_USER,
             header: Header.about(),
         });
     }
 
-    getViewPrivacy(req: Request, res: Response) {
+    static getViewPrivacy(req: Request, res: Response) {
         return res.render('pages/privacy', {
             user: SESSION_USER,
             header: Header.privacy(),
         });
     }
 }
-
-export default new AppController();

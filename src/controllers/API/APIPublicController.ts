@@ -8,8 +8,8 @@ import Movies from '../../models/Movies';
 import TVShows from '../../models/TVShows';
 import Users from '../../models/Users';
 
-class APIPublicController {
-    async verifyIfEmailIsAlreadyRegistred(
+export default class APIPublicController {
+    static async verifyIfEmailIsAlreadyRegistred(
         req: Request,
         res: Response,
         next: NextFunction
@@ -29,7 +29,7 @@ class APIPublicController {
         }
     }
 
-    async addGameToCart(req: Request, res: Response, next: NextFunction) {
+    static async addGameToCart(req: Request, res: Response, next: NextFunction) {
         try {
             const { game_id } = req.params;
             if (!SESSION_USER) {
@@ -51,7 +51,7 @@ class APIPublicController {
         }
     }
 
-    async addBookToCart(req: Request, res: Response, next: NextFunction) {
+    static async addBookToCart(req: Request, res: Response, next: NextFunction) {
         try {
             const { book_id } = req.params;
             if (!SESSION_USER) {
@@ -74,7 +74,7 @@ class APIPublicController {
     }
 
     /** ********* BLOG *********** */
-    async getPublicBlog(req: Request, res: Response, next: NextFunction) {
+    static async getPublicBlog(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Blog.getAll());
         } catch (err) {
@@ -82,7 +82,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicBlogByID(req: Request, res: Response, next: NextFunction) {
+    static async getPublicBlogByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { blog_id } = req.params;
             return res.json(await Blog.getById(blog_id));
@@ -91,7 +91,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicBlogRandom(req: Request, res: Response, next: NextFunction) {
+    static async getPublicBlogRandom(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Blog.getRandom());
         } catch (err) {
@@ -100,7 +100,7 @@ class APIPublicController {
     }
 
     /** ********* GAMES *********** */
-    async getPublicGames(req: Request, res: Response, next: NextFunction) {
+    static async getPublicGames(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Games.getAll());
         } catch (err) {
@@ -108,7 +108,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicGameByID(req: Request, res: Response, next: NextFunction) {
+    static async getPublicGameByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { game_id } = req.params;
             return res.json(await Games.getById(game_id));
@@ -117,7 +117,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicRandomGame(req: Request, res: Response, next: NextFunction) {
+    static async getPublicRandomGame(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Games.getRandom());
         } catch (err) {
@@ -126,7 +126,7 @@ class APIPublicController {
     }
 
     /** ********* BOOKS *********** */
-    async getPublicBooks(req: Request, res: Response, next: NextFunction) {
+    static async getPublicBooks(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Books.getAll());
         } catch (err) {
@@ -134,7 +134,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicBookByID(req: Request, res: Response, next: NextFunction) {
+    static async getPublicBookByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { book_id } = req.params;
             return res.json(await Books.getById(book_id));
@@ -143,7 +143,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicRandomBook(req: Request, res: Response, next: NextFunction) {
+    static async getPublicRandomBook(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Books.getRandom());
         } catch (err) {
@@ -152,7 +152,7 @@ class APIPublicController {
     }
 
     /** ********* MOVIES *********** */
-    async getPublicMovies(req: Request, res: Response, next: NextFunction) {
+    static async getPublicMovies(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await Movies.getAll());
         } catch (err) {
@@ -160,7 +160,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicMovieByID(req: Request, res: Response, next: NextFunction) {
+    static async getPublicMovieByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { movie_id } = req.params;
             return res.json(await Movies.getById(movie_id));
@@ -169,7 +169,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicRandomMovie(
+    static async getPublicRandomMovie(
         req: Request,
         res: Response,
         next: NextFunction
@@ -182,7 +182,7 @@ class APIPublicController {
     }
 
     /** ********* TVSHOWS *********** */
-    async getPublicTVShows(req: Request, res: Response, next: NextFunction) {
+    static async getPublicTVShows(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await TVShows.getAll());
         } catch (err) {
@@ -190,7 +190,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicTVShowByID(req: Request, res: Response, next: NextFunction) {
+    static async getPublicTVShowByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { tvshow_id } = req.params;
             return res.json(await TVShows.getById(tvshow_id));
@@ -199,7 +199,7 @@ class APIPublicController {
         }
     }
 
-    async getPublicRandomTVShow(
+    static async getPublicRandomTVShow(
         req: Request,
         res: Response,
         next: NextFunction
@@ -211,5 +211,3 @@ class APIPublicController {
         }
     }
 }
-
-export default new APIPublicController();
