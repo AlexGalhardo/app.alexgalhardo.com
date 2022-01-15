@@ -18,6 +18,7 @@ class AuthController {
             FacebookLoginURL: facebookLoginURL,
             GitHubLoginURL: URL.getGitHubURL,
             GoogleLoginURL: URL.getGoogleURL,
+            captcha: res.recaptcha,
             csrfToken: req.csrfToken(),
         });
     }
@@ -61,6 +62,7 @@ class AuthController {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             csrfToken: req.csrfToken(),
+            captcha: res.recaptcha,
             app_url: process.env.APP_URL,
         });
     }

@@ -1,8 +1,7 @@
 import csrf from 'csurf';
 import dotenv from 'dotenv';
 import { Router, Request, Response, NextFunction } from 'express';
-// import Recaptcha from 'express-recaptcha';
-import swaggerUI from 'swagger-ui-express';
+import { RecaptchaV3 } from 'express-recaptcha';
 
 import AppController from '../controllers/AppController';
 import AuthController from '../controllers/AuthController';
@@ -16,7 +15,12 @@ import PagarMeController from '../controllers/PagarMeController';
 import PlansController from '../controllers/PlansController';
 import ShopController from '../controllers/ShopController';
 import TVShowsController from '../controllers/TVShowsController';
-// import docs from '../docs/index';
+
+const recaptcha = new RecaptchaV3(
+    process.env.RECAPTCHA_ID,
+    process.env.RECAPTCHA_SECRET,
+    { callback: 'cb' }
+);
 
 dotenv.config();
 
@@ -77,8 +81,18 @@ router
 
     .get('/criptoBOT', CriptoBOTController.getViewCriptoBOT)
 
-    .get('/contact', csrfProtection, ContactController.getViewContact)
-    .post('/contact', csrfProtection, ContactController.postContact)
+    .get(
+        '/contact',
+        recaptcha.middleware.render,
+        csrfProtection,
+        ContactController.getViewContact
+    )
+    .post(
+        '/contact',
+        recaptcha.middleware.verify,
+        csrfProtection,
+        ContactController.postContact
+    )
 
     .get('/privacy', AppController.getViewPrivacy)
 
@@ -149,12 +163,14 @@ router
     .get(
         '/login',
         userIsAlreadyLoggedIn,
+        recaptcha.middleware.render,
         csrfProtection,
         AuthController.getViewLogin
     )
     .post(
         '/login',
         userIsAlreadyLoggedIn,
+        recaptcha.middleware.verify,
         csrfProtection,
         AuthController.postLogin
     )
@@ -162,12 +178,14 @@ router
     .get(
         '/register',
         userIsAlreadyLoggedIn,
+        recaptcha.middleware.render,
         csrfProtection,
         AuthController.getViewRegister
     )
     .post(
         '/register',
         userIsAlreadyLoggedIn,
+        recaptcha.middleware.verify,
         csrfProtection,
         AuthController.postRegister
     )
