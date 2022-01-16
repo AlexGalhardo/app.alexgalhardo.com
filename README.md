@@ -175,8 +175,9 @@
    - PIX 
 
 ## Logs
-- This project uses 4 types of logs:
-   - Winston => logged inside a static file ./src/logs/winston.log, for errors, exceptions, etc
+- This project uses 5 types of logs:
+   - Winston => log important events in a static file inside ./src/logs/winston.log
+   - Morgan => log http status code >= 400 errors 
    - Telegram  => for email contacts, shop and plans transactions, and important ADMIN things
    - [DataDog](https://www.datadoghq.com/) => for production analysis
    - [Sentry.io](https://sentry.io/) => por production analysis
