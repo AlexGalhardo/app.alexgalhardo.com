@@ -31,6 +31,8 @@
         "@graphql-tools/load-files": "^6.5.3",
         "@graphql-tools/merge": "^8.2.1",
         "@prisma/client": "^3.8.1",
+        "@sentry/node": "^6.16.1",
+        "@sentry/tracing": "^6.16.1",
         "apollo-server": "^3.5.0",
         "aws-sdk": "^2.973.0",
         "axios": "^0.24.0",
@@ -82,7 +84,7 @@
         "ts-jest": "^27.1.2",
         "uuid": "^8.3.2",
         "validator": "^13.6.0",
-        "winston": "^3.3.3",
+        "winston": "^3.4.0",
         "ws": "^8.2.1"
     },
     "devDependencies": {

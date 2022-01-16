@@ -224,7 +224,7 @@ export default class Users {
     static async addGameToShopCart(game_id: string): Promise<boolean> {
         let { shop_cart_itens } = await prisma.user.findUnique({
             where: {
-                id: SESSION_USER.id,
+                id: global.SESSION_USER.id,
             },
             select: {
                 shop_cart_itens: true,
@@ -250,7 +250,7 @@ export default class Users {
 
             await prisma.user.update({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 data: {
                     shop_cart_itens: JSON.stringify(shopCartItens),
@@ -271,7 +271,7 @@ export default class Users {
 
             await prisma.user.update({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 data: {
                     shop_cart_itens: JSON.stringify(shop_cart_itens),
@@ -285,7 +285,7 @@ export default class Users {
 
         await prisma.user.update({
             where: {
-                id: SESSION_USER.id,
+                id: global.SESSION_USER.id,
             },
             data: {
                 shop_cart_itens: JSON.stringify(shop_cart_itens),
@@ -297,7 +297,7 @@ export default class Users {
     static async addBookToShopCart(book_id: string): Promise<boolean> {
         let { shop_cart_itens } = await prisma.user.findUnique({
             where: {
-                id: SESSION_USER.id,
+                id: global.SESSION_USER.id,
             },
             select: {
                 shop_cart_itens: true,
@@ -323,7 +323,7 @@ export default class Users {
 
             await prisma.user.update({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 data: {
                     shop_cart_itens: JSON.stringify(shopCartItens),
@@ -344,7 +344,7 @@ export default class Users {
 
             await prisma.user.update({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 data: {
                     shop_cart_itens: JSON.stringify(shop_cart_itens),
@@ -358,7 +358,7 @@ export default class Users {
 
         await prisma.user.update({
             where: {
-                id: SESSION_USER.id,
+                id: global.SESSION_USER.id,
             },
             data: {
                 shop_cart_itens: JSON.stringify(shop_cart_itens),
@@ -370,7 +370,7 @@ export default class Users {
     static async removeShopCartItem(item_id: string): Promise<boolean> {
         let { shop_cart_itens } = await prisma.user.findUnique({
             where: {
-                id: SESSION_USER.id,
+                id: global.SESSION_USER.id,
             },
             select: {
                 shop_cart_itens: true,
@@ -388,7 +388,7 @@ export default class Users {
 
             await prisma.user.update({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 data: {
                     shop_cart_itens: JSON.stringify(shop_cart_itens),
@@ -402,10 +402,10 @@ export default class Users {
     }
 
     static async getTotalItensShopCart(): Promise<number> {
-        if (SESSION_USER) {
+        if (global.SESSION_USER) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 select: {
                     shop_cart_itens: true,
@@ -420,10 +420,10 @@ export default class Users {
     }
 
     static async getShopCartItens() {
-        if (SESSION_USER) {
+        if (global.SESSION_USER) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 select: {
                     shop_cart_itens: true,
@@ -443,10 +443,10 @@ export default class Users {
     }
 
     static async getShopCartTotalAmount(): Promise<number> {
-        if (SESSION_USER) {
+        if (global.SESSION_USER) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 select: {
                     shop_cart_itens: true,
@@ -472,7 +472,7 @@ export default class Users {
     static async removeAllShopCartItens(): Promise<void> {
         await prisma.user.update({
             where: {
-                id: SESSION_USER.id,
+                id: global.SESSION_USER.id,
             },
             data: {
                 shop_cart_itens: null,

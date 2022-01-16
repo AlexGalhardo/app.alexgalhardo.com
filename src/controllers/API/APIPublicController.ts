@@ -32,7 +32,7 @@ export default class APIPublicController {
     static async addGameToCart(req: Request, res: Response, next: NextFunction) {
         try {
             const { game_id } = req.params;
-            if (!SESSION_USER) {
+            if (!global.SESSION_USER) {
                 return res.json({
                     inLoggedUserCart: false,
                 });
@@ -54,7 +54,7 @@ export default class APIPublicController {
     static async addBookToCart(req: Request, res: Response, next: NextFunction) {
         try {
             const { book_id } = req.params;
-            if (!SESSION_USER) {
+            if (!global.SESSION_USER) {
                 return res.json({
                     inLoggedUserCart: false,
                 });

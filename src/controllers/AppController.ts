@@ -7,7 +7,7 @@ export default class AppController {
         res.render('pages/projects', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.projects(),
         });
     }
@@ -16,7 +16,7 @@ export default class AppController {
         res.render('pages/bank', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.bank(),
         });
     }
@@ -25,21 +25,21 @@ export default class AppController {
         res.render('pages/toDo', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.toDo(),
         });
     }
 
     static getViewAbout(req: Request, res: Response) {
         return res.render('pages/about', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.about(),
         });
     }
 
     static getViewPrivacy(req: Request, res: Response) {
         return res.render('pages/privacy', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.privacy(),
         });
     }

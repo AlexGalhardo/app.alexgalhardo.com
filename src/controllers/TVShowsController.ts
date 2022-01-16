@@ -25,7 +25,7 @@ export default class TVShowsController {
             totalMovies,
             totalTVShows,
             totalItensShopCart,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.books(),
         });
@@ -54,7 +54,7 @@ export default class TVShowsController {
                 flash_success: `${searchTVShows.length
                     } TVShows Found From Search Title: ${searchTVShowTitle.toUpperCase()}`,
                 tvshows: searchTVShows,
-                user: SESSION_USER,
+                user: global.SESSION_USER,
                 header: Header.tvshows(),
             });
         }
@@ -62,7 +62,7 @@ export default class TVShowsController {
         return res.render('pages/tvshows', {
             flash_success: `1 TVShow Found From Search Title: ${searchTVShowTitle.toUpperCase()}`,
             tvshow: searchTVShows[0],
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.tvshows(),
         });
     }

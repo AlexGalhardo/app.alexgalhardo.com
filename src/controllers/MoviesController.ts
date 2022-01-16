@@ -25,7 +25,7 @@ export default class MoviesController {
             totalMovies,
             totalTVShows,
             totalItensShopCart,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.movies(),
         });
@@ -54,7 +54,7 @@ export default class MoviesController {
                 flash_success: `${searchedMovies.length
                     } Games Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
                 movies: searchedMovies,
-                user: SESSION_USER,
+                user: global.SESSION_USER,
                 header: Header.movies(),
             });
         }
@@ -62,7 +62,7 @@ export default class MoviesController {
         return res.render('pages/movies', {
             flash_success: `1 Game Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
             movie: searchedMovies[0],
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.movies(),
         });
     }

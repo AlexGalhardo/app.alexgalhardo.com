@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-class APIController {
-    getWelcomeToAPI(req: Request, res: Response) {
+export default class APIController {
+    static getWelcomeToAPI(req: Request, res: Response) {
         return res.json({
             welcome: 'Welcome to GALHARDO APP API!',
             public: 'You can see PULBLIC API endpoints acessing URL: /api/public',
@@ -11,7 +11,7 @@ class APIController {
         });
     }
 
-    getPublicEndpoints(req: Request, res: Response) {
+    static getPublicEndpoints(req: Request, res: Response) {
         return res.json({
             blog: 'GET /api/public/blog',
             games: 'GET /api/public/games',
@@ -21,12 +21,10 @@ class APIController {
         });
     }
 
-    getAdminEndpoints(req: Request, res: Response) {
+    static getAdminEndpoints(req: Request, res: Response) {
         return res.json({
             message:
                 'ADMIN endpoints need JWT in Header Authorization Bearer Token to access endpoints!',
         });
     }
 }
-
-export default new APIController();

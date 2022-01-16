@@ -6,8 +6,8 @@ import Bcrypt from '../../helpers/Bcrypt';
 import DateTime from '../../helpers/DateTime';
 import Users from '../../models/Users';
 
-class APIAdminController {
-    async postAdminLogin(req: Request, res: Response, next: NextFunction) {
+export default class APIAdminController {
+    static async postAdminLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
@@ -56,7 +56,7 @@ class APIAdminController {
         }
     }
 
-    async postAdminTestJWT(req: Request, res: Response, next: NextFunction) {
+    static async postAdminTestJWT(req: Request, res: Response, next: NextFunction) {
         try {
             const JWT_TOKEN = req.headers.authorization?.split(' ')[1];
 
@@ -80,7 +80,7 @@ class APIAdminController {
         }
     }
 
-    async verifyAdminAPIRequestUsingJWT(req: Request, res: Response) {
+    static async verifyAdminAPIRequestUsingJWT(req: Request, res: Response) {
         if (
             !req.headers.authorization ||
             !req.headers.authorization.startsWith('Bearer') ||
@@ -104,9 +104,7 @@ class APIAdminController {
             });
     }
 
-    async getUsersRegistred(req: Request, res: Response) {
+    static async getUsersRegistred(req: Request, res: Response) {
         return res.json(await Users.getAll());
     }
 }
-
-export default new APIAdminController();

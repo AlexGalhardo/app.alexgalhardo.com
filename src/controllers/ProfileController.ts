@@ -9,7 +9,7 @@ import Users from '../models/Users';
 export default class ProfileController {
     static async getViewProfile(req: Request, res: Response) {
         return res.render('pages/profile/profile', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             header: Header.profile('My Profile - Galhardo APP'),
@@ -20,7 +20,7 @@ export default class ProfileController {
         req.session.destroy((error) => {
             if (error) throw new Error(error);
         });
-        SESSION_USER = null;
+        global.SESSION_USER = null;
         return res.redirect('/login');
     }
 
@@ -43,7 +43,7 @@ export default class ProfileController {
         } = req.body;
 
         const userObject: inputUpdateUser = {
-            id: SESSION_USER.id,
+            id: global.SESSION_USER.id,
             username,
             email,
             document,
@@ -76,11 +76,11 @@ export default class ProfileController {
 
     static async getViewMyShopTransactions(req: Request, res: Response) {
         const shopTransactions = await StripeModel.getShopTransactionsByUserId(
-            SESSION_USER.id
+            global.SESSION_USER.id
         );
 
         return res.render('pages/profile/my_shop_transactions', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             shopTransactions,
             header: Header.profile('My Shop Transactions - Galhardo APP'),
         });
@@ -96,7 +96,7 @@ export default class ProfileController {
         shopTransaction.products = JSON.parse(shopTransaction.products);
 
         return res.render('pages/profile/shop_transaction', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             shopTransaction,
             header: Header.profile('Shop Transaction - Galhardo APP'),
         });
@@ -108,11 +108,11 @@ export default class ProfileController {
     ) {
         const subsTransactions =
             await StripeModel.getSubscriptionsTransactionsByUserId(
-                SESSION_USER.id
+                global.SESSION_USER.id
             );
 
         return res.render('pages/profile/my_subs_transactions', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             subsTransactions,
             header: Header.profile(
                 'My Subscriptions Transactions - Galhardo APP'
@@ -132,7 +132,7 @@ export default class ProfileController {
             );
 
         return res.render('pages/profile/sub_transaction', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             subsTransaction,
             header: Header.profile('Subs Transaction - Galhardo APP'),
         });
@@ -141,7 +141,7 @@ export default class ProfileController {
     static async deleteStripeCard(req: Request, res: Response) {
         const { stripe_card_id } = req.params;
 
-        await StripeModel.deleteStripeCard(SESSION_USER.id, stripe_card_id);
+        await StripeModel.deleteStripeCard(global.SESSION_USER.id, stripe_card_id);
 
         req.flash('success', 'Stripe Card Deleted!');
         return res.redirect('/profile');
@@ -154,7 +154,7 @@ export default class ProfileController {
         const { stripe_currently_subscription_id } = req.params;
 
         await StripeModel.cancelStripeSubscriptionRenewAtPeriodEnd(
-            SESSION_USER.id,
+            global.SESSION_USER.id,
             stripe_currently_subscription_id
         );
 

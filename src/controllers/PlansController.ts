@@ -13,7 +13,7 @@ export default class PlansController {
     static getViewPlans(req: Request, res: Response) {
         return res.render('pages/plans/plans', {
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.plans('Plans - Galhardo APP'),
         });
     }
@@ -21,7 +21,7 @@ export default class PlansController {
     static getViewPlanProCheckout(req: Request, res: Response) {
         return res.render('pages/plans/pro_checkout', {
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.plans('Plan PRO - Galhardo APP'),
         });
     }
@@ -29,7 +29,7 @@ export default class PlansController {
     static getViewPlanPremiumCheckout(req: Request, res: Response) {
         return res.render('pages/plans/premium_checkout', {
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.plans('Plan PREMIUM - Galhardo APP'),
         });
     }
@@ -74,15 +74,15 @@ export default class PlansController {
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
-        if (!SESSION_USER.stripe_customer_id) {
+        if (!global.SESSION_USER.stripe_customer_id) {
             const customer = await stripe.customers.create({
                 description: 'Customer created in Subscription checkout!',
-                email: SESSION_USER.email,
+                email: global.SESSION_USER.email,
             });
-            await Users.createStripeCustomer(SESSION_USER.id, customer.id);
+            await Users.createStripeCustomer(global.SESSION_USER.id, customer.id);
             return customer.id;
         }
-        return SESSION_USER.stripe_customer_id;
+        return global.SESSION_USER.stripe_customer_id;
     }
 
     static async verifyIfUserAlreadyHasAStripeCardRegistred(
@@ -99,13 +99,13 @@ export default class PlansController {
             cvc: card_cvc,
         };
 
-        if (!SESSION_USER.stripe_card_id) {
+        if (!global.SESSION_USER.stripe_card_id) {
             const cardToken = await stripe.tokens.create({
                 card: customerCard,
             });
 
             await Users.createStripeCard(
-                SESSION_USER.id,
+                global.SESSION_USER.id,
                 cardToken,
                 card_number
             );
@@ -164,7 +164,7 @@ export default class PlansController {
             const { plan_name, confirm_password } = req.body;
 
             if (
-                !(await Users.verifyPassword(SESSION_USER.id, confirm_password))
+                !(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))
             ) {
                 req.flash('warning', 'Invalid Password!');
                 return res.redirect(`/shop`);
@@ -205,14 +205,14 @@ export default class PlansController {
                 ),
                 cancel_at_period_end: subscription.cancel_at_period_end,
                 stripe_customer_id: stripeCustomerId,
-                user_id: SESSION_USER.id,
-                user_email: SESSION_USER.email,
-                user_name: SESSION_USER.name,
+                user_id: global.SESSION_USER.id,
+                user_email: global.SESSION_USER.email,
+                user_name: global.SESSION_USER.name,
                 createdAt: new Date(),
             };
 
             await Users.createStripeSubscription(
-                SESSION_USER.id,
+                global.SESSION_USER.id,
                 subsTransactionObject
             );
 
@@ -229,7 +229,7 @@ export default class PlansController {
             return res.render('pages/plans/planPayLog', {
                 flash_success: 'Subscription Created with Success!',
                 subsTransactionObject,
-                user: SESSION_USER,
+                user: global.SESSION_USER,
                 header: Header.plans('Plan Pay Status - Galhardo APP'),
                 divPlanBanner: PlansController.getSubscriptionBanner(plan_name),
             });

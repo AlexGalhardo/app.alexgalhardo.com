@@ -175,9 +175,11 @@
    - PIX 
 
 ## Logs
-- This project uses 3 types of logs:
-   - Telegram (for emails, transactions, etc)
-   - [DataDog](https://www.datadoghq.com/) (for errors, analysis, performance, etc)
+- This project uses 4 types of logs:
+   - Winston => logged inside a static file ./src/logs/winston.log, for errors, exceptions, etc
+   - Telegram  => for email contacts, shop and plans transactions, and important ADMIN things
+   - [DataDog](https://www.datadoghq.com/) => for production analysis
+   - [Sentry.io](https://sentry.io/) => por production analysis
 
 ## Some Projects Images
 

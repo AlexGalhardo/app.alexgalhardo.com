@@ -11,7 +11,7 @@ export default class AdminController {
         return res.render('pages/admin/createBlogPost', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -51,7 +51,7 @@ export default class AdminController {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             blogPost,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -99,7 +99,7 @@ export default class AdminController {
     /** ******* GAME ************** */
     static getViewCreateGame(req: Request, res: Response) {
         return res.render('pages/admin/createGame', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -149,7 +149,7 @@ export default class AdminController {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             game,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -208,7 +208,7 @@ export default class AdminController {
     /** ******* BOOK ************** */
     static getViewCreateBook(req: Request, res: Response) {
         return res.render('pages/admin/createBook', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -255,7 +255,7 @@ export default class AdminController {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             book,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -309,7 +309,7 @@ export default class AdminController {
     /** ******* MOVIE ************** */
     static async getViewCreateMovie(req: Request, res: Response) {
         return res.render('pages/admin/createMovie', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -357,7 +357,7 @@ export default class AdminController {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             movie,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -413,7 +413,7 @@ export default class AdminController {
     /** ******* TV SHOW ************** */
     static async getViewCreateTVShow(req: Request, res: Response) {
         return res.render('pages/admin/createTVShow', {
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 
@@ -461,7 +461,7 @@ export default class AdminController {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
             tvshow,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
         });
     }
 

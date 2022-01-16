@@ -10,7 +10,7 @@ export default class ContactController {
         res.render('pages/contact', {
             flash_success: req.flash('success'),
             flash_warning: req.flash('warning'),
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.contact(),
             captcha: res.recaptcha,
             csrfToken: req.csrfToken(),

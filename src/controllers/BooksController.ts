@@ -27,7 +27,7 @@ export default class BooksController {
             totalMovies,
             totalTVShows,
             totalItensShopCart,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.books(),
         });
@@ -56,7 +56,7 @@ export default class BooksController {
                 flash_success: `${searchedBooks.length
                     } Books Found For Search Title: ${searchBookTitle.toUpperCase()}`,
                 books: searchedBooks,
-                user: SESSION_USER,
+                user: global.SESSION_USER,
                 header: Header.books(),
             });
         }
@@ -64,7 +64,7 @@ export default class BooksController {
         return res.render('pages/books', {
             flash_success: `1 Book Found From Search Title: ${searchBookTitle.toUpperCase()}`,
             book: searchedBooks[0],
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.books(),
         });
     }

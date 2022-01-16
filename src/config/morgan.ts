@@ -1,14 +1,14 @@
+import fs from 'fs-extra';
 import morgan from 'morgan';
+import path from 'path';
 
-import Logger from './winston';
-
-// eslint-disable-next-line no-multi-assign
-const stream = (morgan.StreamOptions = {
-    write: (message: unknown) => Logger.http(message),
-});
-
-const morganMiddleware = morgan(':method :url :status  :response-time ms', {
-    stream,
+const morganMiddleware = morgan(':method :url :status :response-time ms', {
+    skip(req, res) {
+        return res.statusCode < 400;
+    },
+    stream: fs.createWriteStream(path.join(__dirname, '../logs/morgan.log'), {
+        flags: 'a',
+    }),
 });
 
 export default morganMiddleware;

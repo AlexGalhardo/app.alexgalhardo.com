@@ -1,6 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 
 import app from './app';
+import Winston from './config/winston';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/typeDefs';
 
@@ -16,7 +17,9 @@ GraphqlServer.listen().then(({ url }) =>
 
 app.listen(process.env.PORT || 3000, (error: string) => {
     if (error) throw new Error(error);
-    console.log(
-        `GalhardoAPP running on =>  http://localhost:${process.env.PORT}`
+
+    Winston.log(
+        'info',
+        `Galhardo APP Server started at => ${process.env.APP_URL}`
     );
 });

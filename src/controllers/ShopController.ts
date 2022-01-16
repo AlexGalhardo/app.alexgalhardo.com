@@ -27,7 +27,7 @@ export default class ShopController {
             shopCartItens,
             shopCartTotalAmount,
             totalItensShopCart,
-            user: SESSION_USER,
+            user: global.SESSION_USER,
             header: Header.shop(),
         });
     }
@@ -45,15 +45,15 @@ export default class ShopController {
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
-        if (!SESSION_USER.stripe_customer_id) {
+        if (!global.SESSION_USER.stripe_customer_id) {
             const customer = await stripe.customers.create({
                 description: 'Customer created in Subscription checkout!',
-                email: SESSION_USER.email,
+                email: global.SESSION_USER.email,
             });
-            await Users.createStripeCustomer(SESSION_USER.id, customer.id);
+            await Users.createStripeCustomer(global.SESSION_USER.id, customer.id);
             return customer.id;
         }
-        return SESSION_USER.stripe_customer_id;
+        return global.SESSION_USER.stripe_customer_id;
     }
 
     static async verifyIfUserAlreadyHasAStripeCardRegistred(req: Request) {
@@ -67,13 +67,13 @@ export default class ShopController {
             cvc: card_cvc,
         };
 
-        if (!SESSION_USER.stripe_card_id) {
+        if (!global.SESSION_USER.stripe_card_id) {
             const cardToken = await stripe.tokens.create({
                 card: customerCard,
             });
 
             await Users.createStripeCard(
-                SESSION_USER.id,
+                global.SESSION_USER.id,
                 cardToken,
                 card_number
             );
@@ -109,7 +109,7 @@ export default class ShopController {
             } = req.body;
 
             if (
-                !(await Users.verifyPassword(SESSION_USER.id, confirm_password))
+                !(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))
             ) {
                 req.flash('warning', 'Invalid Password!');
                 return res.redirect(`/shop`);
@@ -148,7 +148,7 @@ export default class ShopController {
                 products_amount: parseFloat(total_shop_amount),
                 products,
                 stripe_customer_id: stripeCustomerID,
-                user_id: SESSION_USER.id,
+                user_id: global.SESSION_USER.id,
                 user_email: customer_email,
                 user_phone: customer_phone,
                 user_name: customer_name,
@@ -173,7 +173,7 @@ export default class ShopController {
             return res.render('pages/shop/shopPayLog', {
                 flash_success: 'Shop Transaction Created with Success!',
                 shopTransactionObject,
-                user: SESSION_USER,
+                user: global.SESSION_USER,
                 header: Header.shop(),
             });
         } catch (error) {

@@ -16,10 +16,10 @@ export default class Books {
             skip,
         });
 
-        if (SESSION_USER && SESSION_USER.shop_cart_itens) {
+        if (global.SESSION_USER && global.SESSION_USER.shop_cart_itens) {
             let { shop_cart_itens } = await prisma.user.findUnique({
                 where: {
-                    id: SESSION_USER.id,
+                    id: global.SESSION_USER.id,
                 },
                 select: {
                     shop_cart_itens: true,

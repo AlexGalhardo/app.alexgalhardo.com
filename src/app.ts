@@ -1,3 +1,6 @@
+/* eslint-disable import-helpers/order-imports */
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import flash from 'connect-flash';
@@ -10,6 +13,7 @@ import helmet from 'helmet';
 import { MulterError } from 'multer';
 import mustache from 'mustache-express';
 import path from 'path';
+import morganMiddleware from './config/morgan';
 
 // ROUTES
 import adminRoutes from './routes/adminRoutes';
@@ -22,7 +26,6 @@ import 'express-async-errors';
 
 dotenv.config();
 
-global.APP_ROOT_PATH = path.resolve(__dirname);
 global.SESSION_USER = null;
 
 // LocalHost HTTPS ~ PORT 3000
@@ -30,6 +33,43 @@ global.SESSION_USER = null;
 
 // LocalHost HTTP
 const app = express();
+
+// Morgan Log all http errors with status code >= 400
+app.use(morganMiddleware);
+
+Sentry.init({
+    dsn: 'https://2d285431e813437480ba5850b71b732c@o1118030.ingest.sentry.io/6151817',
+    integrations: [
+        // enable HTTP calls tracing
+        new Sentry.Integrations.Http({ tracing: true }),
+        // enable Express.js middleware tracing
+        new Tracing.Integrations.Express({ app }),
+    ],
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 0.8,
+});
+
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
+app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
+
+// All controllers should live here
+app.get('/test-sentry', function rootHandler(req, res) {
+    res.status(404);
+    res.end('Hello world!');
+});
+
+app.get('/debug-sentry', function mainHandler(req, res) {
+    throw new Error('My first Sentry error!');
+});
+
+// The error handler must be before any other error middleware and after all controllers
+app.use(Sentry.Handlers.errorHandler());
 
 //  FORCE HTTP TO HTTPS
 if (process.env.NODE_ENV === 'production') {
