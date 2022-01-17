@@ -7,7 +7,11 @@ import DateTime from '../../helpers/DateTime';
 import Users from '../../models/Users';
 
 export default class APIAdminController {
-    static async postAdminLogin(req: Request, res: Response, next: NextFunction) {
+    static async postAdminLogin(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const errors = validationResult(req);
 
@@ -52,11 +56,15 @@ export default class APIAdminController {
                 jwt_token: JWT_TOKEN,
             });
         } catch (err) {
-            next(err);
+            return next(err);
         }
     }
 
-    static async postAdminTestJWT(req: Request, res: Response, next: NextFunction) {
+    static async postAdminTestJWT(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const JWT_TOKEN = req.headers.authorization?.split(' ')[1];
 
@@ -76,7 +84,7 @@ export default class APIAdminController {
                 },
             });
         } catch (err) {
-            next(err);
+            return next(err);
         }
     }
 
