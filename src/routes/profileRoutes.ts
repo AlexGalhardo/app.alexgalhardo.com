@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import multer from 'multer';
 
 import ProfileController from '../controllers/ProfileController';
 
@@ -11,6 +12,20 @@ const userIsNotLoggedIn = (req: Request, res: Response, next: NextFunction) => {
     }
     next();
 };
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'src/public/uploads/avatars/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+const uploadProfileAvatar = multer({
+    dest: 'src/public/uploads/avatars/',
+    // storage,
+}).single('avatar');
 
 export default router
     .get(
@@ -30,7 +45,7 @@ export default router
     .post(
         '/avatar',
         userIsNotLoggedIn,
-        // upload.single('avatar'),
+        uploadProfileAvatar,
         ProfileController.updateProfileAvatar
     )
 

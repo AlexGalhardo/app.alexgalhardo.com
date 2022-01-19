@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import Header from '../helpers/Header';
 import { inputUpdateUser } from '../helpers/InputTypes';
@@ -69,9 +69,13 @@ export default class ProfileController {
         return res.redirect('/profile');
     }
 
-    static async updateProfileAvatar(req: Request, res: Response) {
-        await Upload.profileAvatar(req);
-        res.redirect('/profile');
+    static async updateProfileAvatar(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
+        await Upload.profileAvatar(req, res, next);
+        return res.redirect('/profile');
     }
 
     static async getViewMyShopTransactions(req: Request, res: Response) {
@@ -141,7 +145,10 @@ export default class ProfileController {
     static async deleteStripeCard(req: Request, res: Response) {
         const { stripe_card_id } = req.params;
 
-        await StripeModel.deleteStripeCard(global.SESSION_USER.id, stripe_card_id);
+        await StripeModel.deleteStripeCard(
+            global.SESSION_USER.id,
+            stripe_card_id
+        );
 
         req.flash('success', 'Stripe Card Deleted!');
         return res.redirect('/profile');

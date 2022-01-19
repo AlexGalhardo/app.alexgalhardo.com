@@ -19,7 +19,6 @@
                 </div>
             {{/flash_warning}}
 
-
             <div class="col-sm-4">
 
                 <form action="/profile/avatar"
@@ -27,13 +26,13 @@
                     enctype="multipart/form-data"
                     class="col-lg-8">
                 
-                    <img src="{{avatar}}" class="d-block mx-auto w-50 h-50 image-fluid rounded-circle" alt="avatar">
+                    <img src="/uploads/avatars/{{avatar}}" class="d-block mx-auto w-50 h-50 image-fluid rounded-circle" alt="avatar">
 
                     <br>
                     
                     <input class="form-control mb-2" type="file" id="avatar" name="avatar">
                     
-                    <button disabled class="btn btn-sm btn-outline-primary shadow" type="submit">
+                    <button class="btn btn-sm btn-outline-primary shadow" type="submit">
                         <i class="bi bi-upload"></i>  
                         Upload Avatar
                     </button>

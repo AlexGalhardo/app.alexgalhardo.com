@@ -65,6 +65,17 @@ export default class Users {
         return (await Bcrypt.compare(password, user?.password)) ? user : null;
     }
 
+    static async updateAvatarName(avatarLink: string, userId: string) {
+        return prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                avatar: avatarLink,
+            },
+        });
+    }
+
     static async verifyPassword(user_id: string, password: string) {
         const user = await prisma.user.findUnique({
             where: {
@@ -145,7 +156,7 @@ export default class Users {
         userObject: inputCreateUser,
         confirmEmailToken: string
     ) {
-        let avatar = null;
+        let avatar = 'avatar.png';
         if (userObject.github_avatar) avatar = userObject.github_avatar;
         if (userObject.google_avatar) avatar = userObject.google_avatar;
         if (userObject.facebook_avatar) avatar = userObject.facebook_avatar;

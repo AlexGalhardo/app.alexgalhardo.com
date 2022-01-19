@@ -31,9 +31,9 @@ version: '3'
 
 services:
 
-  galhardoapp_postgres:
+  galhardoapp_pg:
     image: postgres
-    container_name: galhardoapp_postgres
+    container_name: galhardoapp_pg
     environment:
       POSTGRES_PASSWORD: "root"
     ports:
@@ -43,7 +43,7 @@ services:
     networks:
       - galhardoapp_network
 
-  # POSTGRE username: postgres | password: root |server: galhardoapp_postgres
+  # POSTGRE username: postgres | password: root |server: galhardoapp_pg
   galhardoapp_adminer:
     image: adminer
     container_name: galhardoapp_adminer
