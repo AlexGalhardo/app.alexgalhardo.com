@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 
+import multerConfig from '../config/multer';
 import ProfileController from '../controllers/ProfileController';
 
 const router = Router();
@@ -27,6 +28,8 @@ const uploadProfileAvatar = multer({
     // storage,
 }).single('avatar');
 
+const uploadAvatar = multer(multerConfig).single('avatar');
+
 export default router
     .get(
         '/',
@@ -45,7 +48,8 @@ export default router
     .post(
         '/avatar',
         userIsNotLoggedIn,
-        uploadProfileAvatar,
+        // uploadProfileAvatar,
+        uploadAvatar,
         ProfileController.updateProfileAvatar
     )
 

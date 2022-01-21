@@ -7,7 +7,12 @@ import flash from 'connect-flash';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import express, { Request, Response } from 'express';
+import express, {
+    Request,
+    Response,
+    ErrorRequestHandler,
+    NextFunction,
+} from 'express';
 import session from 'express-session';
 import helmet from 'helmet';
 import { MulterError } from 'multer';
@@ -138,25 +143,31 @@ app.use(publicRoutes);
 // ERROR 404
 app.use((req: Request, res: Response) => {
     return res.render('pages/404', {
-        user: req.user,
+        user: global.SESSION_USER,
     });
 });
 
 // HANDLING SERVER ERRORS
-app.use((err: Error, req: Request, res: Response) => {
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500);
 
-    if (err.code === 'EBADCSRFTOKEN')
-        return res.json({ error: 'Invalid CSRF Token!' });
+    if (error.code === 'EBADCSRFTOKEN') {
+        req.flash('warning', 'Inválid CSRF Token!');
+        return res.redirect('/');
+    }
 
-    if (err instanceof MulterError) return res.json({ error: err.code });
+    console.log(
+        'error instanceof MulterError =>',
+        error instanceof MulterError
+    );
 
-    console.log(err);
+    if (error instanceof MulterError) {
+        req.flash('warning', 'Invalid upload file type!');
+        return res.redirect('/profile');
+    }
 
-    return res.json({
-        name: err.name,
-        message: err.message,
-    });
+    req.flash('warning', 'Something went wrong');
+    return res.redirect('/');
 });
 
 export default app;

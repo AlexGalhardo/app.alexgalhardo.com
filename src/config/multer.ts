@@ -20,28 +20,26 @@ const storageTypes = {
         },
     }),
 
-    /*
-    s3: multerS3({
+    /* s3: multerS3({
         s3: new aws.S3(),
         bucket: process.env.S3_BUCKET_NAME,
         contentType: multerS3.AUTO_CONTENT_TYPE,
-        acl: "public-read",
+        acl: 'public-read',
         key: (req, file, cb) => {
-        crypto.randomBytes(16, (err, hash) => {
-            if (err) cb(err);
+            crypto.randomBytes(16, (err, hash) => {
+                if (err) cb(err);
 
-            const fileName = `${hash.toString("hex")}-${file.originalname}`;
+                const fileName = `${hash.toString('hex')}-${file.originalname}`;
 
-            cb(null, fileName);
-        });
-        }
-    })
-    */
+                cb(null, fileName);
+            });
+        },
+    }), */
 };
 
 export default {
-    dest: path.resolve(__dirname, '..', 'public', 'uploads'),
-    storage: storageTypes[process.env.STORAGE_TYPE],
+    dest: path.resolve(__dirname, '..', 'public', 'uploads', 'avatars'),
+    storage: storageTypes[process.env.UPLOAD_STORAGE_TYPE],
     limits: {
         fileSize: 2 * 1024 * 1024,
     },
@@ -56,7 +54,7 @@ export default {
         if (allowedMimes.includes(file.mimetype)) {
             cb(null, true);
         } else {
-            cb(new Error('Invalid file type.'));
+            cb(new Error('Invalid file type.'), true);
         }
     },
 };
