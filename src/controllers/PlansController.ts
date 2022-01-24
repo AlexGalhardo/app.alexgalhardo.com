@@ -10,11 +10,11 @@ import Users from '../models/Users';
 const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
 
 export default class PlansController {
-    static getViewPlans(req: Request, res: Response) {
-        return res.render('pages/plans/plans', {
+    static getViewPricing(req: Request, res: Response) {
+        return res.render('pages/pricing/pricing', {
             flash_warning: req.flash('warning'),
             user: global.SESSION_USER,
-            header: Header.plans('Plans - Galhardo APP'),
+            header: Header.pricing('Plans - Galhardo APP'),
         });
     }
 
@@ -79,7 +79,10 @@ export default class PlansController {
                 description: 'Customer created in Subscription checkout!',
                 email: global.SESSION_USER.email,
             });
-            await Users.createStripeCustomer(global.SESSION_USER.id, customer.id);
+            await Users.createStripeCustomer(
+                global.SESSION_USER.id,
+                customer.id
+            );
             return customer.id;
         }
         return global.SESSION_USER.stripe_customer_id;
@@ -164,7 +167,10 @@ export default class PlansController {
             const { plan_name, confirm_password } = req.body;
 
             if (
-                !(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))
+                !(await Users.verifyPassword(
+                    global.SESSION_USER.id,
+                    confirm_password
+                ))
             ) {
                 req.flash('warning', 'Invalid Password!');
                 return res.redirect(`/shop`);

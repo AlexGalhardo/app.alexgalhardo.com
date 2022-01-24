@@ -134,7 +134,7 @@ router
 
     .post('/criptoBOT/:side/:symbol/:quantity', CriptoBOTController.postBinance)
 
-    .get('/plans', PlansController.getViewPlans)
+    .get('/pricing', PlansController.getViewPricing)
 
     .get(
         '/plan/pro/checkout',

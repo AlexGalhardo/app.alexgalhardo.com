@@ -92,7 +92,7 @@ export default class Header {
         };
     }
 
-    static blogPost(blogPostTitle) {
+    static blogPost(blogPostTitle: string) {
         return {
             title: blogPostTitle,
             navbar_blog_active: true,
@@ -121,18 +121,18 @@ export default class Header {
         };
     }
 
-    static plans(head_title) {
+    static pricing(headTitle: string) {
         return {
-            title: head_title,
-            navbar_plans_active: true,
+            title: headTitle,
+            navbar_pricing_active: true,
             scroll_bar_div,
             scroll_bar_script,
         };
     }
 
-    static profile(head_title) {
+    static profile(headTitle: string) {
         return {
-            title: head_title,
+            title: headTitle,
             scroll_bar_div,
             scroll_bar_script,
         };
