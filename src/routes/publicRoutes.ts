@@ -8,10 +8,8 @@ import AuthController from '../controllers/AuthController';
 import BlogController from '../controllers/BlogController';
 import BooksController from '../controllers/BooksController';
 import ContactController from '../controllers/ContactController';
-import CriptoBOTController from '../controllers/CriptoBOTController';
 import GamesController from '../controllers/GamesController';
 import MoviesController from '../controllers/MoviesController';
-import PagarMeController from '../controllers/PagarMeController';
 import PlansController from '../controllers/PlansController';
 import ShopController from '../controllers/ShopController';
 import TVShowsController from '../controllers/TVShowsController';
@@ -79,8 +77,6 @@ router
     .get('/movies', MoviesController.getViewMovies)
     .get('/tvshows', TVShowsController.getViewTVShows)
 
-    .get('/criptoBOT', CriptoBOTController.getViewCriptoBOT)
-
     .get(
         '/contact',
         recaptcha.middleware.render,
@@ -131,8 +127,6 @@ router
     .get('/shop', userIsNotLoggedIn, ShopController.getViewShop)
     .post('/shop', userIsNotLoggedIn, ShopController.postShopPayLog)
     .get('/removeCart/:item_id', ShopController.removeCartItem)
-
-    .post('/criptoBOT/:side/:symbol/:quantity', CriptoBOTController.postBinance)
 
     .get('/pricing', PlansController.getViewPricing)
 
@@ -253,10 +247,6 @@ router
         userIsAlreadyLoggedIn,
         csrfProtection,
         AuthController.loginGoogle
-    )
-
-    .get('/checkout/pagarme/game/:game_id', PagarMeController.checkoutGame)
-
-    .get('/checkout/pagarme/book/:book_id', PagarMeController.checkoutBook);
+    );
 
 export default router;

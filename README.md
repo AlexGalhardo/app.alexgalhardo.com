@@ -3,7 +3,7 @@
 <small align="center">A Simple Web App Project for Lifetime Learning</small>
 </div>
 
-## Why This Project ? 
+## Why This Project ?
    - <b>"Talk is cheap. Show me the code." - Linus Torvalds</b>
    - First Commit: August 02, 2021
    - I started this project using pure JavaScript and Common Modules to learn the basics about NodeJS ecosystem and back-end development
@@ -11,11 +11,9 @@
 
 ## Live Demo
 - **Currently Version: ALPHA**
-- You can access: https://galhardoapp.com/ (first version for now)
-- This live demo use "MAIN" branch
-- Last updates and development tests are in "CANARY" branch
-- You can use default test inputs already in forms to try 
-- Test User
+- You can access: https://galhardoapp.com/
+- This live demo use "main" branch and are deployed in Heroku
+- Test User (you can use this default inputs already in login form to login)
    - email: test@gmail.com
    - password: test123
 - **IMPORTANT:**
@@ -25,50 +23,52 @@
 ## Introduction
 ### I created this project to LEARN and PRACTICE in my spare time:
 - JavaScript, JSON, NodeJS, Express, NPM, TypeScript, DOM, Git, Bootstrap5
-- How to document a software
+- How to document a software (README.md and API)
 - Cookies Privacy
    - LGPD (http://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709.htm)
    - GPDR (https://gdpr-info.eu/)
-- NGINX (https://www.nginx.com/)
+- NGINX
    - Reverse-Proxy, Load Balancing, Cache, Response Compression
 - DevOps
-   - SSH, Ports, DNS, How to configure SSL/HTTPs in a VPS, etc
-- Docker and DataBases
-   - Postgres, Redis and MongoDB using PrismaORM
-- Payments REST APIs
-   - Stripe (https://stripe.com/docs/api)
-      - For USD Transactions
-   - PagarME (https://docs.pagar.me/docs/overview-principal)
-      - For BRL and Bank Slip (Boleto Bancário) Transactions
-   - PIX
+   - CI/CD using GithubActions, Docker, Kubernetes, Heroku, and AWS
+- DataBases
+   - Postgres, Redis and MongoDB using PrismaORM with Migrations and Seeders
+- Payments
+   - [Stripe](https://stripe.com/docs/api)
    - Subscription, Ecommerce, Shop Checkouts
    - ZipCode for Shipping Address, Fee and Deadline
 - Uploads Files
-   - S3, Images, Gifs, Videos, etc
+   - AWS S3 for Profile Avatars, Blog and Recommendations Images
 - Testing
-   - Unit, Integration, Perfomance, etc
-- Code best practices
-   - MVC, 12Factor APP, ESLint, Prettier, Design Patterns, etc
+   - Unit, Integration, Performance Tests
+- Software Engineering best practices
+   - MVC, 12Factor APP, ESLint, Prettier, Design Patterns, SOLID, etc
 - SEO
    - Google Tools, SocialMedia MetaTags, CDN, Analytics, Search Console, Sitemap, Robots.txt, etc
-- Logs
+- Logs, Observability and Monitoring
    - Console, files, telegram, etc
 - Security
-   - OWASP, CSRF, XSS, Injection, CORS, HTTP Headers, Google Recaptcha, etc
-- API 
+   - OWASP, CSRF, XSS, Injection, CORS, HTTP Headers, Google Captcha, etc
+- API
    - REST, GraphQL, JWT, Oauth2, AJAX, Bearer Token, HTML Documentation, etc
 - Others usefull things
-   - Mobile First, WebHooks, WebSockets, Regex, Charts, SMTP, Flash Messages, Pagination, Slug, UUID, Searchs, Migrations, Seeders, etc
-- Deploys
-   - CI, CD, Heroku, Git Workflows, etc
-- <b>I will be refactoring it over the years during my professional career as I develop my programming skills.</b>
+   - Mobile First, WebHooks, Regex, SMTP, Flash Messages, Pagination, Slug, UUID, Searches, etc
 
+- <b>The goal is to be be refactoring it over the years during my professional career as I develop my programming/technical skills.</b>
+## APP Features
+- Authentication (Login, SignUp, Recover Password, Resend Confirm Email Link)
+- Simple Ecommerce feature (Checkout, ShopCart, Stockout, Stripe Checkout)
+- Subscriptions (Like a software as a service)
+- Blog
+- Contact Form (SMTP using HTML templates)
+- Cookies privacy
+- Recomendations using AJAX requests
+- API REST and GraphQL, with a HTML documentation
 ## MicroServices
 - https://galhardo-correios.herokuapp.com/cep/13560290 (zipcode here)
    - To GET ZipCode/CEP Information (Correios BRAZIL)
 - https://galhardo-correios.herokuapp.com/shipping/13560290 (zipcode here)
    - To GET Shipping Deadline and Fee (Correios BRAZIL)
-
 ## Folders
 - dist/
    - build of the project when its ready to go in production
@@ -93,8 +93,8 @@
       - all models/services from databases
    - graphql/
       - all things relationed to graphql api
-   - tmp/ 
-      - temporary locally uploaded files 
+   - tmp/
+      - temporary locally uploaded files
    - helpers/
       - usefull code snippets, functions, classes used in app
    - controllers/
@@ -102,14 +102,10 @@
    - config/
       - important app configs
 
-## Development Process
-- I am using Kanban and Trello principles to develop this project
-- You can see the public trello of this project in: https://trello.com/b/6iHJ2Idy/galhardo-app-typescript
-
 ## GIT Branchs
 - <b>main</b>: branch to deploy in production
-- <b>canary</b>: branch to develop and test lastest updates before merge to master
-- <b>adonis</b>: adonis (https://adonisjs.com/) framework version
+- <b>canary</b>: branch to test latest updates before merge to master
+- <b>development</b>: branch to develop/refactor new features
 
 ## GIT Commits Semantic
 - chore: add new chore in this commit
@@ -120,26 +116,28 @@
 - style: improve code quality in this commit
 - test: improve testing/tests in this commit
 
-## Install Locally with Docker and Postgres
+## How to Install Locally using Docker
 - $ git clone https://github.com/AlexGalhardo/Galhardo-APP
 - $ cd Galhardo-APP/
 - $ npm install
 - $ sudo docker-compose up -d
 - $ cp .env-example .env
-- Edit .env file with your credentials
+   - Edit .env file with your credentials
 - $ npm run dev
-- Go to: http://localhost:3000/
-  
-## Deploy
+   - Go to: http://localhost:3000/
+
+## How to Deploy This Project
 - $ npm run build
 - Heroku
    - Tutorial In development
-- VPS
+- AWS
    - Tutorial In development
 
-## DataBase
-- This projects uses mainly POSTGRES SQL (I want to add features to learn MongoDB and Redis too)
-- Also, this projects uses PRISMA ORM (https://www.prisma.io/) to manipulate SQL queries, migrations and seeders
+## Playing with DataBase
+- Migrations
+   - Tutorial in development
+- Seedeers
+   - Tutorial in development
 - After installing locally, you can see/use databases in:
    - ADMINER
       - http://localhost:8080
@@ -151,38 +149,36 @@
       - $ npx prisma studio
       - http://localhost:5555/
 
-## HTML Templates (Design, UI, UX)
-- Front-end development is not my focus, so I'm using mainly Bootstrap5 and pure JavaScript to manipulate DOM
+## FRONT-END
+- Using Bootstrap5 and VueJS mostly in a MVC structure
+- Front-end development is not my specialty
 
 ## Emails
 - Using NodeMailer and MailTrap SMTP, with HTML templates
-
 ## Uploads
-- Locally and in AWS S3
-
+- This project can make uploads locally and in AWS S3
 ## APIs
-- This project uses 2 types of API: REST and Graphql using ApolloServer
+- This project uses 2 types of API:
+   - REST
+   - Graphql using ApolloServer
 - You can see Graphql ApolloServer Studio in: http://localhost:4000/
-- API documentation in development
+- API HTML documentation in development
+- REQUESTS:
+   - Insomnia: you can use <b>galhardoapp-insomnia-requests.json</b> file
+   - Postman: you can use <b>galhardoapp-postman-requests.json</b> file
 
 ## Payments
-- This project use 2 Payment Gateways: 
-   - PagarME for Brazil BRL Transactions (R$) 
-   - Stripe for USA USD Transactions ($)
-- Payment methods:
-   - Credit Card (PagarMe and Stripe)
-   - Bank Slip (Boleto Bancário - PagarMe)
-   - PIX 
-
-## Logs
+- This project use Stripe Payment API to make credit card transactions
+- You can generate a SANDBOX Stripe API key in their site
+## Logs, Monitoring and Observability
 - This project uses 5 types of logs:
    - Winston => log important events in a static file inside ./src/logs/winston.log
-   - Morgan => log http status code >= 400 errors 
+   - Morgan => log http status code >= 400 errors
    - Telegram  => for email contacts, shop and plans transactions, and important ADMIN things
    - [DataDog](https://www.datadoghq.com/) => for production analysis
    - [Sentry.io](https://sentry.io/) => por production analysis
 
-## Some Projects Images
+## Some Project Images
 
 ### Home
 ![home_1](https://user-images.githubusercontent.com/19540357/149237559-affdbb69-1db7-4e0a-9392-479e173a2f34.png)
@@ -197,10 +193,6 @@
 ![shop_3](https://user-images.githubusercontent.com/19540357/149237529-c8e230fd-6b3d-4410-9973-3743349d222d.png)
 ![shop_4](https://user-images.githubusercontent.com/19540357/149237509-c45b509c-c8dd-4383-96ad-61d50eabe8d8.png)
 ![shop_5](https://user-images.githubusercontent.com/19540357/149237516-0d8f1b4c-70b8-4678-b527-67d8628e6fb8.png)
-
-### PagarMe Checkout
-![pagarme_checkout_1](https://user-images.githubusercontent.com/19540357/149239467-bda480c3-ed93-428e-992a-568e56f65cc5.png)
-![pagarme_checkout_2](https://user-images.githubusercontent.com/19540357/149239470-d3e3d45c-133c-46c4-803c-daba7bee54d8.png)
 
 ### Subscriptions
 ![plans_1](https://user-images.githubusercontent.com/19540357/149237558-b8baa38a-9604-4ad5-93c3-d511ebf1a1f3.png)
@@ -221,12 +213,6 @@
 
 ### Profile
 ![profile](https://user-images.githubusercontent.com/19540357/149575662-dcc8b032-6ffe-4e9b-b99c-0c7067220be3.png)
-
-### Mini Projects
-![projects_1](https://user-images.githubusercontent.com/19540357/149237513-ebaa31c2-b20d-414f-be86-cf803e9c780f.png)
-![projects_2](https://user-images.githubusercontent.com/19540357/149237510-adff5f6a-1aa7-4b91-aa0b-a32873ac4bd3.png)
-![projects_3](https://user-images.githubusercontent.com/19540357/149237552-d75e9c58-c3da-4672-959a-863763bf741b.png)
-
 ### Contact
 ![contact_1](https://user-images.githubusercontent.com/19540357/149237514-3aff612a-2341-4173-8936-fb761641761b.png)
 ![contact_2](https://user-images.githubusercontent.com/19540357/149237557-eeea744b-f225-4469-941c-115232b43ebb.png)
@@ -235,7 +221,6 @@
 ![blog_1](https://user-images.githubusercontent.com/19540357/149237543-205f72e4-a7e5-49ee-9bd5-bed8300b3b11.png)
 ![blog_2](https://user-images.githubusercontent.com/19540357/149237532-220e58fc-0978-4dde-9018-ffc5f856f8a9.png)
 ![blog_3](https://user-images.githubusercontent.com/19540357/149237528-72e6db23-b29c-4b33-bdc2-ba212f5c2fa9.png)
-
 ## Feedbacks
 - If you have any feedback or improvements tips about this project, send a pull request or send me a email at: aleexgvieira@gmail.com
 - I really apreciate good feedbacks
