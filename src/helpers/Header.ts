@@ -38,46 +38,10 @@ export default class Header {
         };
     }
 
-    static criptoBOT() {
-        return {
-            title: 'CriptoBOT - Galhardo APP',
-            scroll_bar_div,
-            scroll_bar_script,
-        };
-    }
-
     static privacy() {
         return {
             title: 'Privacy and Terms of Use - Galhardo APP',
             navbar_privacy_active: true,
-            scroll_bar_div,
-            scroll_bar_script,
-        };
-    }
-
-    static projects() {
-        return {
-            title: 'Projects - Galhardo APP',
-            navbar_projects_active: true,
-            weather_css: `<link rel="stylesheet" href="/css/weather.css">`,
-            scroll_bar_div,
-            scroll_bar_script,
-        };
-    }
-
-    static bank() {
-        return {
-            title: 'Bank - Galhardo APP',
-            app_money_css: `<link rel="stylesheet" href="/css/app_money.css">`,
-            scroll_bar_div,
-            scroll_bar_script,
-        };
-    }
-
-    static toDo() {
-        return {
-            title: 'To Do - Galhardo APP',
-            todo_css: `<link rel="stylesheet" href="/css/todo.css">`,
             scroll_bar_div,
             scroll_bar_script,
         };

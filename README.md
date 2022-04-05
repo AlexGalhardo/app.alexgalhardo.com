@@ -57,13 +57,15 @@
 - <b>The goal is to be be refactoring it over the years during my professional career as I develop my programming/technical skills.</b>
 ## APP Features
 - Authentication (Login, SignUp, Recover Password, Resend Confirm Email Link)
-- Simple Ecommerce feature (Checkout, ShopCart, Stockout, Stripe Checkout)
+- Simple Ecommerce (Checkout, ShopCart, Stockout, Stripe Checkout)
 - Subscriptions (Like a software as a service)
 - Blog
 - Contact Form (SMTP using HTML templates)
 - Cookies privacy
 - Recomendations using AJAX requests
 - API REST and GraphQL, with a HTML documentation
+- Newsletter
+- ADMIN ACL and CRUDs
 ## MicroServices
 - https://galhardo-correios.herokuapp.com/cep/13560290 (zipcode here)
    - To GET ZipCode/CEP Information (Correios BRAZIL)
@@ -119,10 +121,15 @@
 ## How to Install Locally using Docker
 - $ git clone https://github.com/AlexGalhardo/Galhardo-APP
 - $ cd Galhardo-APP/
-- $ npm install
-- $ sudo docker-compose up -d
 - $ cp .env-example .env
    - Edit .env file with your credentials
+- $ npm install
+- $ sudo docker-compose up -d
+- See the IP Address of galhardoapp_pg docker container using:
+   - $ sudo docker inspect galhardoapp_pg
+   - Copy the IP Address (example "IPAddress": "172.26.0.3") from container and edit PG_DATABASE_URL host with this ip
+- Run Prisma Migration and Seeders:
+   - $ npm run migrate
 - $ npm run dev
    - Go to: http://localhost:3000/
 
@@ -134,10 +141,7 @@
    - Tutorial In development
 
 ## Playing with DataBase
-- Migrations
-   - Tutorial in development
-- Seedeers
-   - Tutorial in development
+- There are useful PrismaORM commands in README.md inside prisma/ folder
 - After installing locally, you can see/use databases in:
    - ADMINER
       - http://localhost:8080
@@ -156,7 +160,7 @@
 ## Emails
 - Using NodeMailer and MailTrap SMTP, with HTML templates
 ## Uploads
-- This project can make uploads locally and in AWS S3
+- This project can make images (png, gifs, jpeg) uploads locally and in AWS S3
 ## APIs
 - This project uses 2 types of API:
    - REST
@@ -179,7 +183,6 @@
    - [Sentry.io](https://sentry.io/) => por production analysis
 
 ## Some Project Images
-
 ### Home
 ![home_1](https://user-images.githubusercontent.com/19540357/149237559-affdbb69-1db7-4e0a-9392-479e173a2f34.png)
 ![home_2](https://user-images.githubusercontent.com/19540357/149237549-fb2b9fa3-ec82-4545-952b-93958db3d20c.png)

@@ -7,12 +7,7 @@ import flash from 'connect-flash';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import express, {
-    Request,
-    Response,
-    ErrorRequestHandler,
-    NextFunction,
-} from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import session from 'express-session';
 import helmet from 'helmet';
 import { MulterError } from 'multer';
@@ -156,18 +151,15 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         return res.redirect('/');
     }
 
-    console.log(
-        'error instanceof MulterError =>',
-        error instanceof MulterError
-    );
-
-    if (error instanceof MulterError) {
+    /* if (error instanceof MulterError) {
         req.flash('warning', 'Invalid upload file type!');
         return res.redirect('/profile');
-    }
+    } */
 
     req.flash('warning', 'Something went wrong');
-    return res.redirect('/');
+    // return res.redirect('/');
+
+    next();
 });
 
 export default app;

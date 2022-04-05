@@ -120,10 +120,6 @@
                             <a class="fs-5 nav-link {{#header.navbar_pricing_active}}fw-bold text-white"{{/header.navbar_pricing_active}} aria-current="page" href="/pricing"> Pricing</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="fs-5 nav-link {{#header.navbar_projects_active}}fw-bold text-white"{{/header.navbar_projects_active}} aria-current="page" href="/projects"> Projects</a>
-                        </li>
-
                         </ul>
 
                         {{#user}}
@@ -208,11 +204,11 @@
                             </div>
                         {{/user}}
 
-                        <a href="/shop" 
-                            class="shadow-sm fw-bold fs-5 btn ms-2 btn-outline-success {{^user}}disabled{{/user}}" 
+                        <a href="/shop"
+                            class="shadow-sm fw-bold fs-5 btn ms-2 btn-outline-success {{^user}}disabled{{/user}}"
                             type="submit">
-                            <i class="bi bi-cart"></i> 
-                            My Cart 
+                            <i class="bi bi-cart"></i>
+                            My Cart
                             [
                                 <span id="total_shopCart_itens">
                                     {{#user}}
