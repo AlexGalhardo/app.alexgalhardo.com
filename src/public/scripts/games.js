@@ -41,10 +41,6 @@ async function recommendOtherGame() {
         buttonAddGameToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">${gamePriceValue}</span>]`;
     }
 
-    document.querySelector(
-        '#link_pagarme_checkout'
-    ).href = `/checkout/pagarme/game/${object.id}`;
-
     document.querySelector('#game_price').innerHTML = parseFloat(
         object.price / 100
     ).toFixed(2);

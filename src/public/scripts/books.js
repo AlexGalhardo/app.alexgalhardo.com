@@ -38,10 +38,6 @@ async function recommendOtherBook() {
         buttonAddBookToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="book_price">${bookPriceValue}</span>]`;
     }
 
-    document.querySelector(
-        '#link_pagarme_checkout'
-    ).href = `/checkout/pagarme/book/${object.id}`;
-
     document.querySelector('#book_price').innerHTML = parseFloat(
         object.price / 100
     ).toFixed(2);
