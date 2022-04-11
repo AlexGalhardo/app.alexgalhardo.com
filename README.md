@@ -154,8 +154,8 @@
       - http://localhost:5555/
 
 ## FRONT-END
-- Using Bootstrap5 and VueJS mostly in a MVC structure
-- Front-end development is not my specialty
+- Using Bootstrap5 and ReactJS mostly in a MVC structure
+- <b>Front-end development is not my specialty</b>
 
 ## EMAILS
 - Using NodeMailer and MailTrap SMTP, with HTML templates
