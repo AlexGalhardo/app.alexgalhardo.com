@@ -11,7 +11,7 @@
 
 ## LIVE DEMO
 - **Currently Version: ALPHA**
-- You can access: https://galhardoapp.com/
+- You can access: https://galhardo-app-typescript.herokuapp.com/
 - This live demo use "main" branch and are deployed in Heroku
 - Test User (you can use this default inputs already in login form to login)
    - email: test@gmail.com
