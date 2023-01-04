@@ -2,7 +2,7 @@
 
 <head>
 
-    <title>Login - Galhardo APP</title>
+    <title>Login - Galhardo Ecommerce</title>
 
     <meta charset="utf-8">
 
@@ -38,7 +38,7 @@
             <a class="text-decoration-none" href="/">
                 <b class="fw-bold text-primary">
                     <i class="bi bi-cup-straw"></i>
-                    Galhardo APP
+                    Galhardo Ecommerce
                 </b>
             </a>
         </h2>
@@ -61,35 +61,15 @@
 
             <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-            <div class="social-btn">
-                <a href="{{FacebookLoginURL}}" class="disabled shadow-sm mb-2 w-100 btn btn-primary btn-block">
-                    <i class="bi-facebook"></i> 
-                    Login with 
-                    <b>Facebook</b>
-                </a>
-                <a href="{{GitHubLoginURL}}" class="disabled shadow-sm mb-2 w-100 btn btn-warning btn-block">
-                    <i class="bi-github"></i> 
-                    Login with 
-                    <b>GitHub</b>
-                </a>
-                <a href="{{GoogleLoginURL}}" class="disabled shadow-sm mb-2 w-100 btn btn-danger btn-block">
-                    <i class="bi-google"></i> 
-                    Login with 
-                    <b>Google</b>
-                </a>
-            </div>
-
-            <hr>
-
             <div class="form-floating mb-3">
                 <input value="test@gmail.com"
-                        type="email" 
-                        class="form-control" 
-                        id="email" 
-                        name="email" 
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
-                        placeholder="Enter your email" 
-                        autofocus 
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        placeholder="Enter your email"
+                        autofocus
                         required>
                 <label for="email">Your Email Address</label>
             </div>

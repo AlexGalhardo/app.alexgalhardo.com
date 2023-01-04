@@ -15,6 +15,7 @@ import path from "path";
 import adminRoutes from "./routes/adminRoutes";
 import profileRoutes from "./routes/profileRoutes";
 import publicRoutes from "./routes/publicRoutes";
+import apiRoutes from "./routes/apiRoutes";
 
 import "express-async-errors";
 
@@ -34,11 +35,20 @@ app.use(cookieParser());
 // Secure HTTP Headers Responses & Requests
 // app.use(helmet());
 
-// COMPRESS HTTP RESPONSES
-app.use(compression());
-
 // CORS
 app.use(cors());
+
+// FLASH MESSAGES
+app.use(flash());
+
+// BODY PARSER
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// JSON
+app.use(express.json());
+
+// COMPRESS HTTP RESPONSES
+app.use(compression());
 
 // SESSION
 app.use(
@@ -53,15 +63,6 @@ app.use(
     }),
 );
 
-// FLASH MESSAGES
-app.use(flash());
-
-// BODY PARSER
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// JSON
-app.use(express.json());
-
 // TEMPLATE ENGINE
 app.set("view engine", "mustache");
 app.set("views", path.join(__dirname, "views"));
@@ -73,6 +74,7 @@ app.use(express.static("src/public"));
 // ROUTES
 app.use("/profile", profileRoutes);
 app.use("/admin", adminRoutes);
+app.use("/api", apiRoutes);
 app.use(publicRoutes);
 
 // ERROR 404
