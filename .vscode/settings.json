@@ -4,6 +4,8 @@
     "editor.fontSize": 16,
     "editor.lineHeight": 26,
     "editor.semanticHighlighting.enabled": false,
+    "editor.formatOnSave": true,
+    "typescript.preferences.importModuleSpecifier": "non-relative",
     "editor.rulers": [
         80,
         120
@@ -50,38 +52,7 @@
         "*.proto": "3d",
         "*.webpack.js": "webpack"
     },
-    "window.menuBarVisibility": "toggle",
-    "cSpell.enableFiletypes": [
-        "!asciidoc",
-        "!c",
-        "!cpp",
-        "!csharp",
-        "!go",
-        "!handlebars",
-        "!haskell",
-        "!jade",
-        "!java",
-        "!latex",
-        "!php",
-        "!pug",
-        "!python",
-        "!restructuredtext",
-        "!rust",
-        "!scala",
-        "!scss"
-    ],
-    "cSpell.language": "en,pt",
     "editor.suggestSelection": "first",
-    "cSpell.userWords": [
-        "chakra",
-        "middlewares",
-        "prefetch",
-        "rocketseat"
-    ],
     "terminal.integrated.showExitAlert": false,
-    "splitHTMLAttributes.closingBracketOnNewLine": true,
     "window.zoomLevel": 1,
-    "cSpell.words": [
-        "asynciterable"
-    ]
 }

@@ -1,28 +1,22 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 
-import Blog from '../../models/Blog';
-import Books from '../../models/Books';
-import Games from '../../models/Games';
-import Movies from '../../models/Movies';
-import TVShows from '../../models/TVShows';
+import Blog from "../../models/Blog";
+import Books from "../../models/Books";
+import Games from "../../models/Games";
+import Movies from "../../models/Movies";
+import TVShows from "../../models/TVShows";
 
 export default class AdminController {
     static getViewCreateBlogPost(req: Request, res: Response) {
-        return res.render('pages/admin/createBlogPost', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        return res.render("pages/admin/createBlogPost", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             user: global.SESSION_USER,
         });
     }
 
     static async postCreateBlogPost(req: Request, res: Response) {
-        const {
-            blog_image,
-            blog_title,
-            blog_category,
-            blog_resume,
-            blog_body,
-        } = req.body;
+        const { blog_image, blog_title, blog_category, blog_resume, blog_body } = req.body;
 
         const blogPostObject = {
             image: blog_image,
@@ -35,11 +29,11 @@ export default class AdminController {
         const blogPost = await Blog.create(blogPostObject);
 
         if (!blogPost) {
-            req.flash('warning', `ERROR: Blog Post Not Created!`);
+            req.flash("warning", `ERROR: Blog Post Not Created!`);
             return res.redirect(`/admin/create/blogPost`);
         }
 
-        req.flash('success', `SUCCESS: Blog Post Created!`);
+        req.flash("success", `SUCCESS: Blog Post Created!`);
         return res.redirect(`/admin/update/blogPost/${blogPost.id}`);
     }
 
@@ -47,23 +41,16 @@ export default class AdminController {
         const { blog_id } = req.params;
         const blogPost = await Blog.getById(blog_id);
 
-        return res.render('pages/admin/updateBlogPost', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        return res.render("pages/admin/updateBlogPost", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             blogPost,
             user: global.SESSION_USER,
         });
     }
 
     static async postUpdateBlogPost(req: Request, res: Response) {
-        const {
-            blog_id,
-            blog_title,
-            blog_resume,
-            blog_image,
-            blog_category,
-            blog_body,
-        } = req.body;
+        const { blog_id, blog_title, blog_resume, blog_image, blog_category, blog_body } = req.body;
 
         const blogPostObject = {
             id: blog_id,
@@ -77,11 +64,11 @@ export default class AdminController {
         const blogPost = await Blog.update(blogPostObject);
 
         if (!blogPost) {
-            req.flash('warning', `ERROR: Blog Post Not Updated!`);
+            req.flash("warning", `ERROR: Blog Post Not Updated!`);
             return res.redirect(`/admin/update/blogPost/${blogPost.id}`);
         }
 
-        req.flash('success', `SUCCESS: Blog Post Updated!`);
+        req.flash("success", `SUCCESS: Blog Post Updated!`);
         return res.redirect(`/admin/update/blogPost/${blogPost.id}`);
     }
 
@@ -89,16 +76,16 @@ export default class AdminController {
         const { blog_id } = req.params;
 
         if (await Blog.delete(blog_id)) {
-            req.flash('success', `Blog Post Deleted!`);
-            return res.redirect('/admin/create/blogPost');
+            req.flash("success", `Blog Post Deleted!`);
+            return res.redirect("/admin/create/blogPost");
         }
-        req.flash('warning', `Something went wrong!`);
+        req.flash("warning", `Something went wrong!`);
         return res.redirect(`/admin/update/blogPost/${blog_id}`);
     }
 
     /** ******* GAME ************** */
     static getViewCreateGame(req: Request, res: Response) {
-        return res.render('pages/admin/createGame', {
+        return res.render("pages/admin/createGame", {
             user: global.SESSION_USER,
         });
     }
@@ -133,11 +120,11 @@ export default class AdminController {
         const game = await Games.create(gameObject);
 
         if (!game) {
-            req.flash('warning', `ERROR: Game Not Created!`);
+            req.flash("warning", `ERROR: Game Not Created!`);
             return res.redirect(`/admin/create/game`);
         }
 
-        req.flash('success', `SUCCESSs: Game Created!`);
+        req.flash("success", `SUCCESSs: Game Created!`);
         return res.redirect(`/admin/update/game/${game.id}`);
     }
 
@@ -145,9 +132,9 @@ export default class AdminController {
         const { game_id } = req.params;
         const game = await Games.getById(game_id);
 
-        res.render('pages/admin/updateGame', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        res.render("pages/admin/updateGame", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             game,
             user: global.SESSION_USER,
         });
@@ -187,27 +174,27 @@ export default class AdminController {
         const game = await Games.update(gameObject);
 
         if (!game) {
-            req.flash('warning', `Error: game not updated!`);
+            req.flash("warning", `Error: game not updated!`);
             return res.redirect(`/admin/update/game/${game_id}`);
         }
 
-        req.flash('success', `SUCCESS: Game Updated!`);
+        req.flash("success", `SUCCESS: Game Updated!`);
         return res.redirect(`/admin/update/game/${game_id}`);
     }
 
     static async postDeleteGame(req: Request, res: Response) {
         const { game_id } = req.params;
         if (await Games.delete(game_id)) {
-            req.flash('success', `SUCCESS: Game DELETED!`);
-            return res.redirect('/');
+            req.flash("success", `SUCCESS: Game DELETED!`);
+            return res.redirect("/");
         }
-        req.flash('warning', `ERROR: Game NOT DELETED!`);
+        req.flash("warning", `ERROR: Game NOT DELETED!`);
         return res.redirect(`/admin/update/game/${game_id}`);
     }
 
     /** ******* BOOK ************** */
     static getViewCreateBook(req: Request, res: Response) {
-        return res.render('pages/admin/createBook', {
+        return res.render("pages/admin/createBook", {
             user: global.SESSION_USER,
         });
     }
@@ -239,11 +226,11 @@ export default class AdminController {
         const book = await Books.create(bookObject);
 
         if (!book) {
-            req.flash('warning', `Error: Book not created!`);
+            req.flash("warning", `Error: Book not created!`);
             return res.redirect(`/admin/create/book`);
         }
 
-        req.flash('warning', `Error: Book not created!`);
+        req.flash("warning", `Error: Book not created!`);
         return res.redirect(`/admin/update/book/${book.id}`);
     }
 
@@ -251,9 +238,9 @@ export default class AdminController {
         const { book_id } = req.params;
         const book = await Books.getById(book_id);
 
-        res.render('pages/admin/updateBook', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        res.render("pages/admin/updateBook", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             book,
             user: global.SESSION_USER,
         });
@@ -287,11 +274,11 @@ export default class AdminController {
         const book = await Books.update(bookObject);
 
         if (!book) {
-            req.flash('warning', `Error: Book not updated!`);
+            req.flash("warning", `Error: Book not updated!`);
             return res.redirect(`/admin/update/book/${book_id}`);
         }
 
-        req.flash('success', `SUCCESS: Book updated!`);
+        req.flash("success", `SUCCESS: Book updated!`);
         return res.redirect(`/admin/update/book/${book.id}`);
     }
 
@@ -299,16 +286,16 @@ export default class AdminController {
         const { book_id } = req.params;
 
         if (await Books.delete(book_id)) {
-            req.flash('success', `SUCCESS: Book Deleted!`);
-            return res.redirect('/');
+            req.flash("success", `SUCCESS: Book Deleted!`);
+            return res.redirect("/");
         }
-        req.flash('warning', `ERROR: Book NOT Deleted!`);
+        req.flash("warning", `ERROR: Book NOT Deleted!`);
         return res.redirect(`/admin/update/book/${book_id}`);
     }
 
     /** ******* MOVIE ************** */
     static async getViewCreateMovie(req: Request, res: Response) {
-        return res.render('pages/admin/createMovie', {
+        return res.render("pages/admin/createMovie", {
             user: global.SESSION_USER,
         });
     }
@@ -341,11 +328,11 @@ export default class AdminController {
         const movie = await Movies.create(movieObject);
 
         if (!movie) {
-            req.flash('warning', `Error: Movie not created!`);
+            req.flash("warning", `Error: Movie not created!`);
             return res.redirect(`/admin/create/movie`);
         }
 
-        req.flash('success', `SUCCESS: Movie created!`);
+        req.flash("success", `SUCCESS: Movie created!`);
         return res.redirect(`/admin/update/movie/${movie.id}`);
     }
 
@@ -353,9 +340,9 @@ export default class AdminController {
         const { movie_id } = req.params;
         const movie = await Movies.getById(movie_id);
 
-        return res.render('pages/admin/updateMovie', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        return res.render("pages/admin/updateMovie", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             movie,
             user: global.SESSION_USER,
         });
@@ -391,11 +378,11 @@ export default class AdminController {
         const movie = await Movies.update(movieObject);
 
         if (!movie) {
-            req.flash('warning', `Error: Movie not updated!`);
+            req.flash("warning", `Error: Movie not updated!`);
             return res.redirect(`/admin/update/movie/${movie.id}`);
         }
 
-        req.flash('success', `SUCCESS: Movie updated!`);
+        req.flash("success", `SUCCESS: Movie updated!`);
         return res.redirect(`/admin/update/movie/${movie.id}`);
     }
 
@@ -403,16 +390,16 @@ export default class AdminController {
         const { book_id } = req.params;
 
         if (await Movies.delete(book_id)) {
-            req.flash('success', `SUCCESS: Movie Deleted!`);
-            return res.redirect('/');
+            req.flash("success", `SUCCESS: Movie Deleted!`);
+            return res.redirect("/");
         }
-        req.flash('warning', `ERROR: Book NOT Deleted!`);
+        req.flash("warning", `ERROR: Book NOT Deleted!`);
         return res.redirect(`/admin/update/book/${book_id}`);
     }
 
     /** ******* TV SHOW ************** */
     static async getViewCreateTVShow(req: Request, res: Response) {
-        return res.render('pages/admin/createTVShow', {
+        return res.render("pages/admin/createTVShow", {
             user: global.SESSION_USER,
         });
     }
@@ -445,11 +432,11 @@ export default class AdminController {
         const tvshow = await TVShows.create(tvShowObject);
 
         if (!tvshow) {
-            req.flash('warning', `Error: TVShow not updated!`);
+            req.flash("warning", `Error: TVShow not updated!`);
             return res.redirect(`/admin/update/tvshow/${tvshow.id}`);
         }
 
-        req.flash('success', `SUCCESS: Movie updated!`);
+        req.flash("success", `SUCCESS: Movie updated!`);
         return res.redirect(`/admin/update/tvshow/${tvshow.id}`);
     }
 
@@ -457,9 +444,9 @@ export default class AdminController {
         const { tvshow_id } = req.params;
         const tvshow = await TVShows.getById(tvshow_id);
 
-        return res.render('pages/admin/updateTVShow', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        return res.render("pages/admin/updateTVShow", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             tvshow,
             user: global.SESSION_USER,
         });
@@ -495,11 +482,11 @@ export default class AdminController {
         const tvshow = await TVShows.update(tvShowObject);
 
         if (!tvshow) {
-            req.flash('warning', `Error: Movie not updated!`);
+            req.flash("warning", `Error: Movie not updated!`);
             return res.redirect(`/admin/update/tvshow/${tvshow.id}`);
         }
 
-        req.flash('success', `SUCCESS: Movie updated!`);
+        req.flash("success", `SUCCESS: Movie updated!`);
         return res.redirect(`/admin/update/tvshow/${tvshow.id}`);
     }
 
@@ -507,10 +494,10 @@ export default class AdminController {
         const { book_id } = req.params;
 
         if (await TVShows.delete(book_id)) {
-            req.flash('success', `SUCCESS: TVShow Deleted!`);
-            return res.redirect('/');
+            req.flash("success", `SUCCESS: TVShow Deleted!`);
+            return res.redirect("/");
         }
-        req.flash('warning', `ERROR: Book NOT Deleted!`);
+        req.flash("warning", `ERROR: Book NOT Deleted!`);
         return res.redirect(`/admin/update/book/${book_id}`);
     }
 }

@@ -1,15 +1,15 @@
 // https://api.telegram.org/bot<telegram_token_here>/getUpdates
 
-import https from 'https';
+import https from "https";
 
-import DateTime from './DateTime';
+import DateTime from "./DateTime";
 
 class TelegramBOTLogger {
     private token: string;
     private channelName: string;
     private baseUrl: string;
 
-    constructor(token, channelName) {
+    constructor(token: string, channelName: string) {
         this.isThereToken(token);
         this.isThereChannel(channelName);
         this.token = token;
@@ -17,37 +17,29 @@ class TelegramBOTLogger {
         this.baseUrl = `https://api.telegram.org/bot${token}`;
     }
 
-    isThereToken(token) {
-        if (!token)
-            throw new Error(
-                'There is no Telegram Token in TelegramLogger Class Constructor'
-            );
+    isThereToken(token: string) {
+        if (!token) throw new Error("There is no Telegram Token in TelegramLogger Class Constructor");
     }
 
-    isThereChannel(channel) {
-        if (!channel)
-            throw new Error(
-                'There is no Telegram Channel name in TelegramLogger Class Constructor'
-            );
+    isThereChannel(channel: string) {
+        if (!channel) throw new Error("There is no Telegram Channel name in TelegramLogger Class Constructor");
     }
 
     emojiMap() {
         return {
-            CONTACT: '💬',
-            ERROR: '🚨',
-            SUBSCRIPTION: '🏆',
-            SHOP: '💵',
+            CONTACT: "💬",
+            ERROR: "🚨",
+            SUBSCRIPTION: "🏆",
+            SHOP: "💵",
         };
     }
 
-    sendMessage(level, type, message) {
+    sendMessage(level: string, type: string, message: string) {
         const emoji = this.emojiMap()[level];
 
         message = `${emoji} ${type} ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${message}`;
 
-        const urlParams = encodeURI(
-            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
-        );
+        const urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`);
 
         const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
@@ -67,9 +59,7 @@ class TelegramBOTLogger {
 
         const message = `${emoji} CONTACT ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
 
-        const urlParams = encodeURI(
-            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
-        );
+        const urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`);
 
         const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
@@ -92,11 +82,9 @@ class TelegramBOTLogger {
         ---------------------------------------
         <b>PRODUCTS:</b> ${JSON.stringify(shopTransactionObject.products)}
         ---------------------------------------
-        <b>SHIPPING_ZIPCODE: </b> ${shopTransactionObject.shipping_address_zipcode
-            }
+        <b>SHIPPING_ZIPCODE: </b> ${shopTransactionObject.shipping_address_zipcode}
         <b>SHIPPING_STREET:</b> ${shopTransactionObject.shipping_address_street}
-        <b>SHIPPING_NEIGHBORHOOD:</b> ${shopTransactionObject.shipping_address_neighborhood
-            }
+        <b>SHIPPING_NEIGHBORHOOD:</b> ${shopTransactionObject.shipping_address_neighborhood}
         <b>SHIPPING_CITY:</b> ${shopTransactionObject.shipping_address_city}
         <b>SHIPPING_STATE:</b> ${shopTransactionObject.shipping_address_state}
         <b>SHIPPING_COUNTRY:</b> BRAZIL
@@ -104,9 +92,7 @@ class TelegramBOTLogger {
 
         const message = `${emoji} SHOP TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
 
-        const urlParams = encodeURI(
-            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
-        );
+        const urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`);
 
         const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
@@ -133,9 +119,7 @@ class TelegramBOTLogger {
 
         const message = `${emoji} SUBSCRIPTION TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
 
-        const urlParams = encodeURI(
-            `chat_id=${this.channelName}&text=${message}&parse_mode=HTML`
-        );
+        const urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`);
 
         const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
@@ -148,21 +132,18 @@ class TelegramBOTLogger {
                 const { statusCode } = res;
                 if (statusCode !== 200) {
                     let data;
-                    res.on('data', (chunk) => {
+                    res.on("data", (chunk) => {
                         data += chunk;
                     });
-                    res.on('end', () => {
+                    res.on("end", () => {
                         console.log(data);
                     });
                 }
             })
-            .on('error', (e) => {
+            .on("error", (e) => {
                 console.log(e);
             });
     }
 }
 
-export default new TelegramBOTLogger(
-    process.env.TELEGRAM_BOT_HTTP_TOKEN,
-    process.env.TELEGRAM_BOT_CHANNEL_ID
-);
+export default new TelegramBOTLogger(process.env.TELEGRAM_BOT_HTTP_TOKEN, process.env.TELEGRAM_BOT_CHANNEL_ID);
