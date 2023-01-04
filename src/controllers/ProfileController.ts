@@ -1,18 +1,17 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from "express";
 
-import Header from '../helpers/Header';
-import { inputUpdateUser } from '../helpers/InputTypes';
-import Upload from '../helpers/Upload';
-import StripeModel from '../models/StripeModel';
-import Users from '../models/Users';
+import Header from "../helpers/Header";
+import { inputUpdateUser } from "../helpers/InputTypes";
+import StripeModel from "../models/StripeModel";
+import Users from "../models/Users";
 
 export default class ProfileController {
     static async getViewProfile(req: Request, res: Response) {
-        return res.render('pages/profile/profile', {
+        return res.render("pages/profile/profile", {
             user: global.SESSION_USER,
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
-            header: Header.profile('My Profile - Galhardo APP'),
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
+            header: Header.profile("My Profile - Galhardo APP"),
         });
     }
 
@@ -21,7 +20,7 @@ export default class ProfileController {
             if (error) throw new Error(error);
         });
         global.SESSION_USER = null;
-        return res.redirect('/login');
+        return res.redirect("/login");
     }
 
     static async updateProfile(req: Request, res: Response) {
@@ -61,111 +60,78 @@ export default class ProfileController {
         };
 
         if (await Users.update(userObject)) {
-            req.flash('success', 'Profile Information Updated!');
-            return res.redirect('/profile');
+            req.flash("success", "Profile Information Updated!");
+            return res.redirect("/profile");
         }
 
-        req.flash('warning', 'Something went wrong');
-        return res.redirect('/profile');
-    }
-
-    static async updateProfileAvatar(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ) {
-        await Upload.profileAvatar(req, res, next);
-        return res.redirect('/profile');
+        req.flash("warning", "Something went wrong");
+        return res.redirect("/profile");
     }
 
     static async getViewMyShopTransactions(req: Request, res: Response) {
-        const shopTransactions = await StripeModel.getShopTransactionsByUserId(
-            global.SESSION_USER.id
-        );
+        const shopTransactions = await StripeModel.getShopTransactionsByUserId(global.SESSION_USER.id);
 
-        return res.render('pages/profile/my_shop_transactions', {
+        return res.render("pages/profile/my_shop_transactions", {
             user: global.SESSION_USER,
             shopTransactions,
-            header: Header.profile('My Shop Transactions - Galhardo APP'),
+            header: Header.profile("My Shop Transactions - Galhardo APP"),
         });
     }
 
     static async getViewShopTransactionByID(req: Request, res: Response) {
         const { shop_transaction_id } = req.params;
 
-        const shopTransaction = await StripeModel.getShopTransactionById(
-            shop_transaction_id
-        );
+        const shopTransaction = await StripeModel.getShopTransactionById(shop_transaction_id);
 
         shopTransaction.products = JSON.parse(shopTransaction.products);
 
-        return res.render('pages/profile/shop_transaction', {
+        return res.render("pages/profile/shop_transaction", {
             user: global.SESSION_USER,
             shopTransaction,
-            header: Header.profile('Shop Transaction - Galhardo APP'),
+            header: Header.profile("Shop Transaction - Galhardo APP"),
         });
     }
 
-    static async getViewMySubscriptionsTransactions(
-        req: Request,
-        res: Response
-    ) {
-        const subsTransactions =
-            await StripeModel.getSubscriptionsTransactionsByUserId(
-                global.SESSION_USER.id
-            );
+    static async getViewMySubscriptionsTransactions(req: Request, res: Response) {
+        const subsTransactions = await StripeModel.getSubscriptionsTransactionsByUserId(global.SESSION_USER.id);
 
-        return res.render('pages/profile/my_subs_transactions', {
+        return res.render("pages/profile/my_subs_transactions", {
             user: global.SESSION_USER,
             subsTransactions,
-            header: Header.profile(
-                'My Subscriptions Transactions - Galhardo APP'
-            ),
+            header: Header.profile("My Subscriptions Transactions - Galhardo APP"),
         });
     }
 
-    static async getViewSubscriptionTransactionByID(
-        req: Request,
-        res: Response
-    ) {
+    static async getViewSubscriptionTransactionByID(req: Request, res: Response) {
         const { subs_transaction_id } = req.params;
 
-        const subsTransaction =
-            await StripeModel.getSubscriptionTransactionById(
-                subs_transaction_id
-            );
+        const subsTransaction = await StripeModel.getSubscriptionTransactionById(subs_transaction_id);
 
-        return res.render('pages/profile/sub_transaction', {
+        return res.render("pages/profile/sub_transaction", {
             user: global.SESSION_USER,
             subsTransaction,
-            header: Header.profile('Subs Transaction - Galhardo APP'),
+            header: Header.profile("Subs Transaction - Galhardo APP"),
         });
     }
 
     static async deleteStripeCard(req: Request, res: Response) {
         const { stripe_card_id } = req.params;
 
-        await StripeModel.deleteStripeCard(
-            global.SESSION_USER.id,
-            stripe_card_id
-        );
+        await StripeModel.deleteStripeCard(global.SESSION_USER.id, stripe_card_id);
 
-        req.flash('success', 'Stripe Card Deleted!');
-        return res.redirect('/profile');
+        req.flash("success", "Stripe Card Deleted!");
+        return res.redirect("/profile");
     }
 
-    static async cancelStripeSubscriptionRenewAtPeriodEnd(
-        req: Request,
-        res: Response
-    ) {
+    static async cancelStripeSubscriptionRenewAtPeriodEnd(req: Request, res: Response) {
         const { stripe_currently_subscription_id } = req.params;
 
         await StripeModel.cancelStripeSubscriptionRenewAtPeriodEnd(
             global.SESSION_USER.id,
-            stripe_currently_subscription_id
+            stripe_currently_subscription_id,
         );
 
-        req.flash('success', 'Canceled Subscription Renew At Period End!');
-        return res.redirect('/profile');
+        req.flash("success", "Canceled Subscription Renew At Period End!");
+        return res.redirect("/profile");
     }
 }

@@ -13,10 +13,8 @@ import path from "path";
 
 // ROUTES
 import adminRoutes from "./routes/adminRoutes";
-import apiRoutes from "./routes/apiRoutes";
 import profileRoutes from "./routes/profileRoutes";
 import publicRoutes from "./routes/publicRoutes";
-import testRoutes from "./routes/testRoutes";
 
 import "express-async-errors";
 
@@ -30,26 +28,11 @@ global.SESSION_USER = null;
 // LocalHost HTTP
 const app = express();
 
-//  FORCE HTTP TO HTTPS
-if (process.env.NODE_ENV === "production") {
-    app.use((req: Request, res: Response, next) => {
-        if ((req.headers["x-forwarded-proto"] || "").endsWith("http")) {
-            res.redirect(`https://${req.hostname}${req.url}`);
-        } else {
-            next();
-        }
-    });
-}
-
 // CSRF
 app.use(cookieParser());
 
 // Secure HTTP Headers Responses & Requests
-app.use(
-    helmet({
-        contentSecurityPolicy: false,
-    }),
-);
+// app.use(helmet());
 
 // COMPRESS HTTP RESPONSES
 app.use(compression());
@@ -88,10 +71,8 @@ app.engine("mustache", mustache());
 app.use(express.static("src/public"));
 
 // ROUTES
-app.use("/api", apiRoutes);
 app.use("/profile", profileRoutes);
 app.use("/admin", adminRoutes);
-app.use("/test", testRoutes);
 app.use(publicRoutes);
 
 // ERROR 404

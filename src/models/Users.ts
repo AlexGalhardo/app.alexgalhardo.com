@@ -1,9 +1,9 @@
 /* eslint-disable radix */
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
-import Bcrypt from '../helpers/Bcrypt';
-import { inputCreateUser, inputUpdateUser } from '../helpers/InputTypes';
-import Number from '../helpers/Number';
+import Bcrypt from "../helpers/Bcrypt";
+import { inputCreateUser, inputUpdateUser } from "../helpers/InputTypes";
+import Number from "../helpers/Number";
 
 const prisma = new PrismaClient();
 
@@ -106,34 +106,20 @@ export default class Users {
             },
         });
 
-        if (
-            await Bcrypt.compare(userObject.older_password, userExist.password)
-        ) {
+        if (await Bcrypt.compare(userObject.older_password, userExist.password)) {
             await prisma.user.update({
                 where: {
                     id: userExist?.id,
                 },
                 data: {
-                    email: userObject.email
-                        ? userObject.email
-                        : userExist.email,
-                    password: userObject.new_password
-                        ? await Bcrypt.hash(userObject.new_password)
-                        : userExist.password,
-                    document: userObject.document
-                        ? userObject.document
-                        : userExist.document,
-                    phone: userObject.phone
-                        ? userObject.phone
-                        : userExist.phone,
-                    birth_date: userObject.birth_date
-                        ? userObject.birth_date
-                        : userExist.birth_date,
+                    email: userObject.email ? userObject.email : userExist.email,
+                    password: userObject.new_password ? await Bcrypt.hash(userObject.new_password) : userExist.password,
+                    document: userObject.document ? userObject.document : userExist.document,
+                    phone: userObject.phone ? userObject.phone : userExist.phone,
+                    birth_date: userObject.birth_date ? userObject.birth_date : userExist.birth_date,
                     address_zipcode: userObject.address_zipcode,
                     address_street: userObject.address_street,
-                    address_street_number: parseInt(
-                        userObject.address_street_number
-                    ),
+                    address_street_number: parseInt(userObject.address_street_number),
                     address_neighborhood: userObject.address_neighborhood,
                     address_city: userObject.address_city,
                     address_state: userObject.address_state,
@@ -152,11 +138,8 @@ export default class Users {
         return false;
     }
 
-    static async create(
-        userObject: inputCreateUser,
-        confirmEmailToken: string
-    ) {
-        let avatar = 'avatar.png';
+    static async create(userObject: inputCreateUser, confirmEmailToken: string) {
+        let avatar = "avatar.png";
         if (userObject.github_avatar) avatar = userObject.github_avatar;
         if (userObject.google_avatar) avatar = userObject.google_avatar;
         if (userObject.facebook_avatar) avatar = userObject.facebook_avatar;
@@ -166,12 +149,8 @@ export default class Users {
                 name: userObject.username,
                 email: userObject.email,
                 password: await Bcrypt.hash(userObject.password),
-                github_id: userObject.github_id
-                    ? parseInt(userObject.github_id)
-                    : null,
-                facebook_id: userObject.facebook_id
-                    ? userObject.facebook_id
-                    : null,
+                github_id: userObject.github_id ? parseInt(userObject.github_id) : null,
+                facebook_id: userObject.facebook_id ? userObject.facebook_id : null,
                 google_id: userObject.google_id ? userObject.google_id : null,
                 confirm_email_token: confirmEmailToken,
                 avatar,
@@ -179,10 +158,7 @@ export default class Users {
         });
     }
 
-    static async createStripeCustomer(
-        user_id: string,
-        stripe_customer_id: string
-    ) {
+    static async createStripeCustomer(user_id: string, stripe_customer_id: string) {
         await prisma.user.update({
             where: {
                 id: user_id,
@@ -193,11 +169,7 @@ export default class Users {
         });
     }
 
-    static async createStripeCard(
-        user_id: string,
-        customerCard,
-        cardNumber: string
-    ) {
+    static async createStripeCard(user_id: string, customerCard: string, cardNumber: string) {
         await prisma.user.update({
             where: {
                 id: user_id,
@@ -219,274 +191,11 @@ export default class Users {
                 id: user_id,
             },
             data: {
-                stripe_currently_subscription_id:
-                    subscriptionObject.transaction_id,
-                stripe_currently_subscription_name:
-                    subscriptionObject.plan_name,
-                stripe_subscription_start:
-                    subscriptionObject.current_period_start,
+                stripe_currently_subscription_id: subscriptionObject.transaction_id,
+                stripe_currently_subscription_name: subscriptionObject.plan_name,
+                stripe_subscription_start: subscriptionObject.current_period_start,
                 stripe_subscription_end: subscriptionObject.current_period_end,
-                stripe_cancel_at_period_end:
-                    subscriptionObject.cancel_at_period_end,
-            },
-        });
-    }
-
-    static async addGameToShopCart(game_id: string): Promise<boolean> {
-        let { shop_cart_itens } = await prisma.user.findUnique({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            select: {
-                shop_cart_itens: true,
-            },
-        });
-
-        const game = await prisma.game.findUnique({
-            where: {
-                id: game_id,
-            },
-            select: {
-                id: true,
-                image: true,
-                title: true,
-                price: true,
-            },
-        });
-
-        if (!shop_cart_itens) {
-            const shopCartItens = [];
-
-            shopCartItens.push(game);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shopCartItens),
-                },
-            });
-
-            return true;
-        }
-
-        shop_cart_itens = JSON.parse(shop_cart_itens);
-
-        if (shop_cart_itens.some((game) => game.id === game_id)) {
-            const indexToRemove = shop_cart_itens.findIndex(function (game) {
-                return game.id === game_id;
-            });
-
-            shop_cart_itens.splice(indexToRemove, 1);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shop_cart_itens),
-                },
-            });
-
-            return false;
-        }
-
-        shop_cart_itens.push(game);
-
-        await prisma.user.update({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            data: {
-                shop_cart_itens: JSON.stringify(shop_cart_itens),
-            },
-        });
-        return true;
-    }
-
-    static async addBookToShopCart(book_id: string): Promise<boolean> {
-        let { shop_cart_itens } = await prisma.user.findUnique({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            select: {
-                shop_cart_itens: true,
-            },
-        });
-
-        const book = await prisma.book.findUnique({
-            where: {
-                id: book_id,
-            },
-            select: {
-                id: true,
-                image: true,
-                title: true,
-                price: true,
-            },
-        });
-
-        if (!shop_cart_itens) {
-            const shopCartItens = [];
-
-            shopCartItens.push(book);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shopCartItens),
-                },
-            });
-
-            return true;
-        }
-
-        shop_cart_itens = JSON.parse(shop_cart_itens);
-
-        if (shop_cart_itens.some((book) => book.id === book_id)) {
-            const indexToRemove = shop_cart_itens.findIndex(function (book) {
-                return book.id === book_id;
-            });
-
-            shop_cart_itens.splice(indexToRemove, 1);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shop_cart_itens),
-                },
-            });
-
-            return false;
-        }
-
-        shop_cart_itens.push(book);
-
-        await prisma.user.update({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            data: {
-                shop_cart_itens: JSON.stringify(shop_cart_itens),
-            },
-        });
-        return true;
-    }
-
-    static async removeShopCartItem(item_id: string): Promise<boolean> {
-        let { shop_cart_itens } = await prisma.user.findUnique({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            select: {
-                shop_cart_itens: true,
-            },
-        });
-
-        shop_cart_itens = JSON.parse(shop_cart_itens);
-
-        if (shop_cart_itens.some((item) => item.id === item_id)) {
-            const indexToRemove = shop_cart_itens.findIndex(function (item) {
-                return item.id === item_id;
-            });
-
-            shop_cart_itens.splice(indexToRemove, 1);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shop_cart_itens),
-                },
-            });
-
-            return true;
-        }
-
-        return false;
-    }
-
-    static async getTotalItensShopCart(): Promise<number> {
-        if (global.SESSION_USER) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-            return shop_cart_itens?.length || 0;
-        }
-
-        return 0;
-    }
-
-    static async getShopCartItens() {
-        if (global.SESSION_USER) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-            if (shop_cart_itens && shop_cart_itens.length > 0) {
-                shop_cart_itens.forEach(
-                    (item) => (item.price = Number.toFloat(item.price))
-                );
-                return shop_cart_itens;
-            }
-            return null;
-        }
-        return null;
-    }
-
-    static async getShopCartTotalAmount(): Promise<number> {
-        if (global.SESSION_USER) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-
-            if (shop_cart_itens && shop_cart_itens.length > 0) {
-                const shopCartTotalAmount = shop_cart_itens.reduce(
-                    (sum, { price }) => sum + price,
-                    0
-                );
-
-                return Number.toFloat(shopCartTotalAmount);
-            }
-
-            return 0;
-        }
-        return 0;
-    }
-
-    static async removeAllShopCartItens(): Promise<void> {
-        await prisma.user.update({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            data: {
-                shop_cart_itens: null,
+                stripe_cancel_at_period_end: subscriptionObject.cancel_at_period_end,
             },
         });
     }
@@ -499,10 +208,7 @@ export default class Users {
         });
     }
 
-    static async createResetPasswordToken(
-        email: string,
-        resetPasswordToken: string
-    ) {
+    static async createResetPasswordToken(email: string, resetPasswordToken: string) {
         await prisma.user.update({
             where: {
                 email,
@@ -513,10 +219,7 @@ export default class Users {
         });
     }
 
-    static resetPasswordTokenIsValid(
-        email: string,
-        resetPasswordToken: string
-    ) {
+    static resetPasswordTokenIsValid(email: string, resetPasswordToken: string) {
         return prisma.user.findUnique({
             where: {
                 resetPasswordTokenIsValid: {
@@ -550,10 +253,7 @@ export default class Users {
         });
     }
 
-    static async createConfirmEmailToken(
-        email: string,
-        confirmEmailToken: string
-    ) {
+    static async createConfirmEmailToken(email: string, confirmEmailToken: string) {
         await prisma.user.update({
             where: {
                 email,
@@ -564,10 +264,7 @@ export default class Users {
         });
     }
 
-    static async verifyConfirmEmailToken(
-        email: string,
-        confirmEmailToken: string
-    ) {
+    static async verifyConfirmEmailToken(email: string, confirmEmailToken: string) {
         if (await this.emailExists(email)) {
             if (
                 await prisma.user.findUnique({

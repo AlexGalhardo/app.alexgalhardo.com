@@ -3,17 +3,12 @@
 		"target": "es2020",
 		"module": "es2020",
 		"allowJs": true,
+		"rootDir": "src/",
+		"outDir": "dist",
 		"removeComments": true,
 		"resolveJsonModule": true,
-		"typeRoots": [
-			"./node_modules/@types"
-		],
 		"sourceMap": true,
-		"outDir": "dist",
 		"strict": true,
-		"lib": [
-			"es2020"
-		],
 		"baseUrl": ".",
 		"forceConsistentCasingInFileNames": true,
 		"esModuleInterop": true,
@@ -21,14 +16,10 @@
 		"emitDecoratorMetadata": true,
 		"moduleResolution": "Node",
 		"skipLibCheck": true,
-		"paths": {
-			"@functions/*": [
-				"./src/repositories/*"
-			]
-		}
 	},
 	"include": [
-		"src/**/*",
+		"src/",
+		"src/views",
 		"tests"
 	],
 	"exclude": [

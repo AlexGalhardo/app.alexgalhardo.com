@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
-import { inputBookObject } from '../helpers/InputTypes';
+import { inputBookObject } from "../helpers/InputTypes";
 
 const prisma = new PrismaClient();
 
@@ -15,28 +15,6 @@ export default class Books {
             take: 1,
             skip,
         });
-
-        if (global.SESSION_USER && global.SESSION_USER.shop_cart_itens) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-
-            if (shop_cart_itens.length) {
-                book[0].inLoggedUserCart = await shop_cart_itens.some(
-                    (item) => item.id === book[0].id
-                );
-                return book[0];
-            }
-        }
-
-        book[0].inLoggedUserCart = false;
 
         return book[0];
     }
@@ -58,7 +36,7 @@ export default class Books {
             where: {
                 title: {
                     contains: bookTitle,
-                    mode: 'insensitive',
+                    mode: "insensitive",
                 },
             },
         });

@@ -1,17 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator';
-import jwt from 'jsonwebtoken';
+/* eslint-disable prettier/prettier */
+import { Request, Response, NextFunction } from "express";
+import { validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
 
-import Bcrypt from '../../helpers/Bcrypt';
-import DateTime from '../../helpers/DateTime';
-import Users from '../../models/Users';
+import Bcrypt from "../../helpers/Bcrypt";
+import DateTime from "../../helpers/DateTime";
+import Users from "../../models/Users";
 
 export default class APIAdminController {
-    static async postAdminLogin(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ) {
+    static async postAdminLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
@@ -23,34 +20,27 @@ export default class APIAdminController {
 
             if (!Users.emailRegistred(email)) {
                 return res.status(422).json({
-                    error: 'Email inválid!',
+                    error: "Email inválid!",
                 });
             }
 
             const user = await Users.getUserByEmail(email);
 
-            const passwordIsValid = await Bcrypt.compare(
-                password,
-                user?.password as string
-            );
+            const passwordIsValid = await Bcrypt.compare(password, user?.password as string);
 
             if (!passwordIsValid) {
                 return res.status(422).json({
-                    error: 'Incorrect password',
+                    error: "Incorrect password",
                 });
             }
 
             if (!user?.admin) {
                 return res.status(422).json({
-                    error: 'This user is NOT ADMIN!',
+                    error: "This user is NOT ADMIN!",
                 });
             }
 
-            const JWT_TOKEN = jwt.sign(
-                { user_id: user.id },
-                process.env.JWT_SECRET as string,
-                { expiresIn: '1h' }
-            );
+            const JWT_TOKEN = jwt.sign({ user_id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
 
             return res.json({
                 jwt_token: JWT_TOKEN,
@@ -60,18 +50,11 @@ export default class APIAdminController {
         }
     }
 
-    static async postAdminTestJWT(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ) {
+    static async postAdminTestJWT(req: Request, res: Response, next: NextFunction) {
         try {
-            const JWT_TOKEN = req.headers.authorization?.split(' ')[1];
+            const JWT_TOKEN = req.headers.authorization?.split(" ")[1];
 
-            const decoded = jwt.verify(
-                JWT_TOKEN as string,
-                process.env.JWT_SECRET as string
-            );
+            const decoded = jwt.verify(JWT_TOKEN as string, process.env.JWT_SECRET as string);
 
             const admin = await Users.getById(decoded.user_id);
 
@@ -91,16 +74,15 @@ export default class APIAdminController {
     static async verifyAdminAPIRequestUsingJWT(req: Request, res: Response) {
         if (
             !req.headers.authorization ||
-            !req.headers.authorization.startsWith('Bearer') ||
-            !req.headers.authorization.split(' ')[1]
+            !req.headers.authorization.startsWith("Bearer") ||
+            !req.headers.authorization.split(" ")[1]
         ) {
             return res.status(422).json({
-                message:
-                    'Please provide the ADMIN JWT Token in Header Authorization Bearer Token',
+                message: "Please provide the ADMIN JWT Token in Header Authorization Bearer Token",
             });
         }
 
-        const JWT_TOKEN = req.headers.authorization.split(' ')[1];
+        const JWT_TOKEN = req.headers.authorization.split(" ")[1];
         const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET as string);
 
         const user = await Users.getById(decoded.user_id);
@@ -108,7 +90,7 @@ export default class APIAdminController {
         return user?.admin
             ? user
             : res.status(422).json({
-                error: 'This JWT Token is Inválid!',
+                error: "This JWT Token is Inválid!",
             });
     }
 

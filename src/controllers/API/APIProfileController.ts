@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
-import Users from '../../models/Users';
+import Users from "../../models/Users";
 
 export default class APIProfileController {
     static async postLogin(req: Request, res: Response, next: NextFunction) {
@@ -55,7 +55,7 @@ export default class APIProfileController {
             return user
                 ? res.json({ user })
                 : res.json({
-                    error: 'Something went wrong',
+                    error: "Something went wrong",
                 });
         } catch (err) {
             next(err);
@@ -75,7 +75,7 @@ export default class APIProfileController {
             }
 
             return res.json({
-                status: 'Profile NOT deleted! Some error occurred!',
+                status: "Profile NOT deleted! Some error occurred!",
             });
         } catch (err) {
             next(err);

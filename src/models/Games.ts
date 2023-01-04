@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
-import { inputGameObject } from '../helpers/InputTypes';
+import { inputGameObject } from "../helpers/InputTypes";
 
 const prisma = new PrismaClient();
 
@@ -15,28 +15,6 @@ export default class Games {
             take: 1,
             skip,
         });
-
-        if (global.SESSION_USER && global.SESSION_USER.shop_cart_itens) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-
-            if (shop_cart_itens.length) {
-                game[0].inLoggedUserCart = await shop_cart_itens.some(
-                    (item) => item.id === game[0].id
-                );
-                return game[0];
-            }
-        }
-
-        game[0].inLoggedUserCart = false;
 
         return game[0];
     }
@@ -58,7 +36,7 @@ export default class Games {
             where: {
                 title: {
                     contains: gameTitle,
-                    mode: 'insensitive',
+                    mode: "insensitive",
                 },
             },
         });
