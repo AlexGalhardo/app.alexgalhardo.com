@@ -9,7 +9,6 @@ import TVShows from "../models/TVShows";
 
 export default class GamesController {
     static async getViewGames(req: Request, res: Response) {
-        console.log("chegou aqui no get");
         const game = await Games.getRandom();
         const totalGames = await Games.getTotal();
         const totalBooks = await Books.getTotal();

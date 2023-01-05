@@ -82,7 +82,7 @@ router
     .post("/shop", userIsLoggedIn, ShopController.postShopPayLog)
     .get("/removeCart/:item_id", ShopController.removeCartItem)
 
-    .get("/pricing", PlansController.getViewPricing)
+    .get("/plans", PlansController.getViewPricing)
 
     .get(
         "/plan/premium/checkout",
@@ -90,7 +90,7 @@ router
         userHasActiveSubscription,
         PlansController.getViewPlanPremiumCheckout,
     )
-    .post("/plan/premium/checkout", userIsLoggedIn, PlansController.postSubscription)
+    .post("/plan/premium/post", userIsLoggedIn, PlansController.postSubscription)
 
     .get("/login", userIsAlreadyLoggedIn, recaptcha.middleware.render, csrfProtection, AuthController.getViewLogin)
     .post("/login", userIsAlreadyLoggedIn, recaptcha.middleware.verify, csrfProtection, AuthController.postLogin)

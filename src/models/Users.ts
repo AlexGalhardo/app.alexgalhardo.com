@@ -2,8 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import Bcrypt from "../helpers/Bcrypt";
-import { inputCreateUser, inputUpdateUser } from "../helpers/InputTypes";
-import Number from "../helpers/Number";
+import { inputCreateUser, inputSubscriptionTransactionObject, inputUpdateUser } from "../helpers/InputTypes";
 
 const prisma = new PrismaClient();
 
@@ -100,23 +99,23 @@ export default class Users {
     }
 
     static async update(userObject: inputUpdateUser) {
-        const userExist = await prisma.user.findUnique({
+        const User = await prisma.user.findUnique({
             where: {
                 id: userObject.id,
             },
         });
 
-        if (await Bcrypt.compare(userObject.older_password, userExist.password)) {
+        if (User && (await Bcrypt.compare(userObject.older_password, User.password))) {
             await prisma.user.update({
                 where: {
-                    id: userExist?.id,
+                    id: User?.id,
                 },
                 data: {
-                    email: userObject.email ? userObject.email : userExist.email,
-                    password: userObject.new_password ? await Bcrypt.hash(userObject.new_password) : userExist.password,
-                    document: userObject.document ? userObject.document : userExist.document,
-                    phone: userObject.phone ? userObject.phone : userExist.phone,
-                    birth_date: userObject.birth_date ? userObject.birth_date : userExist.birth_date,
+                    email: userObject.email ? userObject.email : User.email,
+                    password: userObject.new_password ? await Bcrypt.hash(userObject.new_password) : User.password,
+                    document: userObject.document ? userObject.document : User.document,
+                    phone: userObject.phone ? userObject.phone : User.phone,
+                    birth_date: userObject.birth_date ? userObject.birth_date : User.birth_date,
                     address_zipcode: userObject.address_zipcode,
                     address_street: userObject.address_street,
                     address_street_number: parseInt(userObject.address_street_number),
@@ -135,7 +134,6 @@ export default class Users {
 
             return !!user;
         }
-        return false;
     }
 
     static async create(userObject: inputCreateUser, confirmEmailToken: string) {
@@ -169,7 +167,11 @@ export default class Users {
         });
     }
 
-    static async createStripeCard(user_id: string, customerCard: string, cardNumber: string) {
+    static async createStripeCard(
+        user_id: string,
+        customerCard: { card: { id: string; brand: string; exp_month: number; exp_year: number; last4: number } },
+        cardNumber: string,
+    ) {
         await prisma.user.update({
             where: {
                 id: user_id,
@@ -178,24 +180,27 @@ export default class Users {
                 stripe_card_id: customerCard.card.id,
                 stripe_card_brand: customerCard.card.brand,
                 stripe_card_number: cardNumber,
-                stripe_card_exp_month: parseInt(customerCard.card.exp_month),
-                stripe_card_exp_year: parseInt(customerCard.card.exp_year),
-                stripe_card_last4: parseInt(customerCard.card.last4),
+                stripe_card_exp_month: customerCard.card.exp_month,
+                stripe_card_exp_year: customerCard.card.exp_year,
+                stripe_card_last4: customerCard.card.last4,
             },
         });
     }
 
-    static async createStripeSubscription(user_id: string, subscriptionObject) {
+    static async createStripeSubscription(
+        user_id: string,
+        subscriptionTransactionObject: inputSubscriptionTransactionObject,
+    ) {
         await prisma.user.update({
             where: {
                 id: user_id,
             },
             data: {
-                stripe_currently_subscription_id: subscriptionObject.transaction_id,
-                stripe_currently_subscription_name: subscriptionObject.plan_name,
-                stripe_subscription_start: subscriptionObject.current_period_start,
-                stripe_subscription_end: subscriptionObject.current_period_end,
-                stripe_cancel_at_period_end: subscriptionObject.cancel_at_period_end,
+                stripe_currently_subscription_id: subscriptionTransactionObject.transaction_id,
+                stripe_currently_subscription_name: subscriptionTransactionObject.plan_name,
+                stripe_subscription_start: subscriptionTransactionObject.current_period_start,
+                stripe_subscription_end: subscriptionTransactionObject.current_period_end,
+                stripe_cancel_at_period_end: subscriptionTransactionObject.cancel_at_period_end,
             },
         });
     }

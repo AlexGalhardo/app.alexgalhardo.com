@@ -12,7 +12,7 @@
                 </div>
             {{/flash_warning}}
 
-            <form id="formCreditCard" action="/plan/premium/checkout" method="POST">
+            <form id="formCreditCard" action="/plan/premium/post" method="POST">
 
                 <input type="text" name="plan_name" value="PREMIUM" hidden>
 
@@ -25,7 +25,7 @@
                                 <h4 class="my-0 fw-normal">PREMIUM</h4>
                             </div>
                             <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$4.99<small class="text-muted fw-light">/month</small></h1>
+                                <h1 class="card-title plans-card-title">$4.99<small class="text-muted fw-light">/month</small></h1>
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li>✔️ Site Ilimited Recomendations</li>
                                     <li>✔️ Get Recommendations in Email</li>
@@ -41,17 +41,14 @@
 
                         <!-- CONFIRM PASSWORD -->
                         <div class="form-floating">
-                            <input type="password" id="confirm_password" name="confirm_password" value="" class="form-control" required minlength="6">
+                            <input type="password" id="confirm_password" name="confirm_password" value="test123" class="form-control" required minlength="6">
                             <label for="confirm_password">Confirm Password</label>
                         </div>
-
 
                         <br>
 
                     </div>
                     <!-- END COL LG 5 -->
-
-
 
                     <div class="col-lg-6">
 
@@ -152,6 +149,6 @@
     <script src="/scripts/render_credit_card.js"></script>
 
     {{/user}}
-    
+
 
 

@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
-import pagination from 'pagination';
+import { Request, Response } from "express";
+import pagination from "pagination";
 
-import Header from '../helpers/Header';
-import Blog from '../models/Blog';
+import Header from "../helpers/Header";
+import Blog from "../models/Blog";
 
 export default class BlogController {
     static async getViewBlog(req: Request, res: Response) {
@@ -17,15 +17,11 @@ export default class BlogController {
 
         const blog = await Blog.getPostsByPageLimit(page, blogPostsPerPage);
 
-        res.render('pages/blog/blog', {
+        res.render("pages/blog/blog", {
             blog,
             user: global.SESSION_USER,
             blog_active: true,
-            boostrapPaginator: BlogController.getRenderBootstrapPaginator(
-                page,
-                blogPostsPerPage,
-                totalBlogPosts
-            ),
+            boostrapPaginator: BlogController.getRenderBootstrapPaginator(page, blogPostsPerPage, totalBlogPosts),
             header: Header.blog(),
         });
     }
@@ -35,19 +31,16 @@ export default class BlogController {
         const searchBlogTitle = req.query.blogTitle;
 
         if (!searchBlogTitle) {
-            return res.redirect('/blog');
+            return res.redirect("/blog");
         }
 
         const blogTitlesSearched = blogPosts.filter(
-            (blogPost) =>
-                blogPost.title
-                    .toLowerCase()
-                    .indexOf(searchBlogTitle.toLowerCase()) > -1
+            (blogPost) => blogPost.title.toLowerCase().indexOf(searchBlogTitle.toLowerCase()) > -1,
         );
 
         const totalBlogPostsFoundFromSearch = blogTitlesSearched.length;
 
-        return res.render('pages/blog/blog', {
+        return res.render("pages/blog/blog", {
             blog: blogTitlesSearched,
             searchBlogTitle,
             totalBlogPostsFoundFromSearch,
@@ -60,20 +53,16 @@ export default class BlogController {
 
         const blogPost = await Blog.getBySlug(slug);
 
-        res.render('pages/blog/blogPost', {
+        res.render("pages/blog/blogPost", {
             user: global.SESSION_USER,
             blogPost,
             header: Header.blogPost(blogPost.title),
         });
     }
 
-    static getRenderBootstrapPaginator(
-        current,
-        blogPostsPerPage,
-        totalBlogPosts
-    ) {
+    static getRenderBootstrapPaginator(current, blogPostsPerPage, totalBlogPosts) {
         return new pagination.TemplatePaginator({
-            prelink: '/blog/',
+            prelink: "/blog/",
             current,
             rowsPerPage: blogPostsPerPage,
             totalResult: totalBlogPosts,
@@ -83,13 +72,14 @@ export default class BlogController {
                 let len;
                 let html = '<div><ul class="pagination">';
                 if (result.pageCount < 2) {
-                    html += '</ul></div>';
+                    html += "</ul></div>";
                     return html;
                 }
                 const prelink = this.preparePreLink(result.prelink);
                 if (result.previous) {
-                    html += `<li class="page-item"><a class="page-link" href="${prelink}${result.previous
-                        }">${this.options.translator('PREVIOUS')}</a></li>`;
+                    html += `<li class="page-item"><a class="page-link" href="${prelink}${
+                        result.previous
+                    }">${this.options.translator("PREVIOUS")}</a></li>`;
                 }
                 if (result.range.length) {
                     for (i = 0, len = result.range.length; i < len; i++) {
@@ -101,54 +91,13 @@ export default class BlogController {
                     }
                 }
                 if (result.next) {
-                    html += `<li class="page-item"><a class="page-link" href="${prelink}${result.next
-                        }" class="paginator-next">${this.options.translator(
-                            'NEXT'
-                        )}</a></li>`;
+                    html += `<li class="page-item"><a class="page-link" href="${prelink}${
+                        result.next
+                    }" class="paginator-next">${this.options.translator("NEXT")}</a></li>`;
                 }
-                html += '</ul></div>';
+                html += "</ul></div>";
                 return html;
             },
         }).render();
     }
-
-    /* async postBlogComment(req: Request, res: Response) {
-        const { slug } = req.params;
-        const { blog_comment } = req.body;
-
-        const blogComment = {
-            user_id: req.session.user_id,
-            user_logged_can_delete: true,
-            user_name: global.SESSION_USER.name,
-            user_avatar: global.SESSION_USER.avatar,
-            comment: blog_comment,
-            created_at: DateTime.getNow(),
-        };
-
-        const blogPost = await Blog.createComment(slug, blogComment);
-
-        if (!blogPost) {
-            return res.redirect('/blog');
-        }
-
-        blogPost = await BlogController.fixComments(blogPost);
-
-        req.flash('success', 'Comment Created!');
-        return res.redirect(`/ blog / ${slug} `);
-    }
-
-    async getDeleteBlogCommentByCommentID(req: Request, res: Response) {
-        const { slug, comment_id } = req.params;
-
-        let blogPost = await Blog.deleteCommentByID(slug, comment_id);
-
-        if (!blogPost) {
-            return res.redirect(`/ blog / ${slug} `);
-        }
-
-        blogPost = await BlogController.fixComments(blogPost);
-
-        req.flash('success', 'Comment Deleted!');
-        return res.redirect(`/ blog / ${slug} `);
-    } */
 }

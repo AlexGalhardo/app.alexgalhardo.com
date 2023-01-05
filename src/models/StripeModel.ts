@@ -10,7 +10,7 @@ export default class StripeModel {
         await prisma.stripeShopTransaction.create({
             data: {
                 transaction_id: shopTransactionObject.transaction_id,
-                total_amount: parseInt(shopTransactionObject.total_amount * 100),
+                total_amount: shopTransactionObject.total_amount * 100,
                 card_id: shopTransactionObject.card_id,
                 card_brand: shopTransactionObject.card_brand,
                 card_exp_month: shopTransactionObject.card_exp_month,
@@ -33,7 +33,7 @@ export default class StripeModel {
                 shipping_address_state: shopTransactionObject.shipping_address_state,
                 shipping_address_country: shopTransactionObject.shipping_address_country,
                 shipping_carrier: shopTransactionObject.shipping_carrier,
-                shipping_fee: parseInt(shopTransactionObject.shipping_fee),
+                shipping_fee: shopTransactionObject.shipping_fee,
             },
         });
     }
@@ -61,12 +61,12 @@ export default class StripeModel {
                 status: subscriptionTransactionObject.status,
                 card_id: subscriptionTransactionObject.card_id,
                 card_brand: subscriptionTransactionObject.card_brand,
-                card_exp_month: parseInt(subscriptionTransactionObject.card_exp_month),
-                card_exp_year: parseInt(subscriptionTransactionObject.card_exp_year),
-                card_last4: parseInt(subscriptionTransactionObject.card_last4),
-                plan_id: subscriptionTransactionObject.stripe_plan_id,
+                card_exp_month: subscriptionTransactionObject.card_exp_month,
+                card_exp_year: subscriptionTransactionObject.card_exp_year,
+                card_last4: subscriptionTransactionObject.card_last4,
+                plan_id: subscriptionTransactionObject.plan_id,
                 plan_name: subscriptionTransactionObject.plan_name,
-                plan_amount: parseInt(subscriptionTransactionObject.plan_amount),
+                plan_amount: subscriptionTransactionObject.plan_amount,
                 current_period_start: subscriptionTransactionObject.current_period_start,
                 current_period_end: subscriptionTransactionObject.current_period_end,
                 cancel_at_period_end: subscriptionTransactionObject.cancel_at_period_end,

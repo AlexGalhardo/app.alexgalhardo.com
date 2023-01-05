@@ -31,7 +31,7 @@ export default class PlansController {
 				</div>
 
 				<div class="card-body">
-					<h1 class="card-title pricing-card-title">$ 4.99<small class="text-muted fw-light">/month</small></h1>
+					<h1 class="card-title plans-card-title">$ 4.99<small class="text-muted fw-light">/month</small></h1>
 					<ul class="list-unstyled mt-3 mb-4">
 						<li>✔️ Site Ilimited Recomendations</li>
 						<li>✔️ Get Recommendations in Email</li>
@@ -92,16 +92,9 @@ export default class PlansController {
 
     static getStripePlan() {
         return {
-            PRO: {
-                name: "PRO",
-                id: process.env.STRIPE_PLAN_PRO_PRICE_ID,
-                amount: process.env.STRIPE_PLAN_PRO_AMOUNT,
-            },
-            PREMIUM: {
-                name: "PREMIUM",
-                id: process.env.STRIPE_PLAN_PREMIUM_PRICE_ID,
-                amount: process.env.STRIPE_PLAN_PREMIUM_AMOUNT,
-            },
+            name: "PREMIUM",
+            id: process.env.STRIPE_PLAN_PREMIUM_PRICE_ID,
+            amount: process.env.STRIPE_PLAN_PREMIUM_AMOUNT,
         };
     }
 
@@ -115,31 +108,42 @@ export default class PlansController {
     }
 
     static async postSubscription(req: Request, res: Response, next: NextFunction) {
+        console.log("chegou aqui no => postSubscription");
+
         try {
-            const { plan_name, confirm_password } = req.body;
+            const { confirm_password } = req.body;
+
+            console.log("chegou aqui no => confirm_password");
 
             if (!(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))) {
                 req.flash("warning", "Invalid Password!");
-                return res.redirect(`/shop`);
+                return res.redirect(`/plan/premium/checkout`);
             }
 
             const stripeCustomerId = await PlansController.verifyIfUserIsAlreadyAStripeCustomer();
+            console.log("stripeCustomerId => ", stripeCustomerId);
 
             const stripeCard = await PlansController.verifyIfUserAlreadyHasAStripeCardRegistred(req, stripeCustomerId);
+            console.log("stripeCard => ", stripeCard);
 
-            const stripePlan = await PlansController.getStripePlan()[plan_name];
+            const stripePlan = PlansController.getStripePlan();
+            console.log("stripePlan => ", stripePlan);
 
-            const subscription = await PlansController.createStripeSubscription(stripeCustomerId, stripePlan.id);
+            const subscription = await PlansController.createStripeSubscription(
+                stripeCustomerId,
+                stripePlan.id as string,
+            );
+            console.log("subscription => ", subscription);
 
             const subsTransactionObject = {
                 transaction_id: subscription.id,
                 status: subscription.status,
                 card_id: stripeCard.card.id,
                 card_brand: stripeCard.card.brand,
-                card_exp_month: stripeCard.card.exp_month,
+                card_exp_month: stripeCard.card.exp_month as number,
                 card_exp_year: stripeCard.card.exp_year,
                 card_last4: stripeCard.card.last4,
-                stripe_plan_id: stripePlan.id,
+                plan_id: stripePlan.id as string,
                 plan_name: stripePlan.name,
                 plan_amount: stripePlan.amount,
                 current_period_start: new Date(subscription.current_period_start * 1000),
@@ -151,6 +155,7 @@ export default class PlansController {
                 user_name: global.SESSION_USER.name,
                 createdAt: new Date(),
             };
+            console.log("subsTransactionObject => ", subsTransactionObject);
 
             await Users.createStripeSubscription(global.SESSION_USER.id, subsTransactionObject);
 
@@ -168,7 +173,7 @@ export default class PlansController {
                 divPlanBanner: PlansController.getSubscriptionBanner(),
             });
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 }

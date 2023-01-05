@@ -1,6 +1,6 @@
 {
 	"name": "galhardo-ecommerce",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "A Simple Web App To Learn how to program an Ecommerce and Subscription",
 	"main": "dist/server.js",
 	"author": "Alex Galhardo <aleexgvieira@gmail.com>",
