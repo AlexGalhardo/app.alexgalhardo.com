@@ -22,7 +22,8 @@
 		"fix:prettier": "npx prettier --write src/*.ts src/**/*.ts src/**/**/*.ts src/**/**/**/*.ts tests/**/*.ts",
 		"fix:lint": "npx eslint . --fix",
 		"precommit": "rm -rf dist/ && npm run fix:prettier && npm run fix:lint",
-		"delete:build": "rm -rf dist"
+		"delete:build": "rm -rf dist",
+		"postinstall": "npx prisma generate"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^7.6.0",
