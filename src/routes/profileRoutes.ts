@@ -5,7 +5,7 @@ import ProfileController from "../controllers/ProfileController";
 const router = Router();
 
 const userIsLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-    if (!req.session.userID) {
+    if (!req.session.user_id) {
         req.flash("warning", "You need to login first");
         return res.redirect("/login");
     }

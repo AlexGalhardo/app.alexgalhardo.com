@@ -1,5 +1,4 @@
 import csrf from "csurf";
-import dotenv from "dotenv";
 import { Router, Request, Response, NextFunction } from "express";
 import { RecaptchaV3 } from "express-recaptcha";
 
@@ -14,23 +13,23 @@ import PlansController from "../controllers/PlansController";
 import ShopController from "../controllers/ShopController";
 import TVShowsController from "../controllers/TVShowsController";
 
-const recaptcha = new RecaptchaV3(process.env.RECAPTCHA_ID, process.env.RECAPTCHA_SECRET, { callback: "cb" });
-
-dotenv.config();
+const recaptcha = new RecaptchaV3(process.env.RECAPTCHA_ID as string, process.env.RECAPTCHA_SECRET as string, {
+    callback: "cb",
+});
 
 const csrfProtection = csrf({ cookie: true });
 const router = Router();
 
 const userIsAlreadyLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-    if (req.session.userID) {
+    if (req.session.user_id) {
         req.flash("warning", "You need to logout first");
         return res.redirect("/");
     }
     return next();
 };
 
-const userIsNotLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-    if (!req.session.userID) {
+const userIsLoggedIn = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.session.user_id) {
         req.flash("warning", "You need to login first");
         return res.redirect("/login");
     }
@@ -79,22 +78,19 @@ router
         return res.redirect("/");
     })
 
-    .get("/shop", userIsNotLoggedIn, ShopController.getViewShop)
-    .post("/shop", userIsNotLoggedIn, ShopController.postShopPayLog)
+    .get("/shop", userIsLoggedIn, ShopController.getViewShop)
+    .post("/shop", userIsLoggedIn, ShopController.postShopPayLog)
     .get("/removeCart/:item_id", ShopController.removeCartItem)
 
     .get("/pricing", PlansController.getViewPricing)
 
-    .get("/plan/pro/checkout", userIsNotLoggedIn, userHasActiveSubscription, PlansController.getViewPlanProCheckout)
-    .post("/plan/pro/checkout", userIsNotLoggedIn, PlansController.postSubscription)
-
     .get(
         "/plan/premium/checkout",
-        userIsNotLoggedIn,
+        userIsLoggedIn,
         userHasActiveSubscription,
         PlansController.getViewPlanPremiumCheckout,
     )
-    .post("/plan/premium/checkout", userIsNotLoggedIn, PlansController.postSubscription)
+    .post("/plan/premium/checkout", userIsLoggedIn, PlansController.postSubscription)
 
     .get("/login", userIsAlreadyLoggedIn, recaptcha.middleware.render, csrfProtection, AuthController.getViewLogin)
     .post("/login", userIsAlreadyLoggedIn, recaptcha.middleware.verify, csrfProtection, AuthController.postLogin)

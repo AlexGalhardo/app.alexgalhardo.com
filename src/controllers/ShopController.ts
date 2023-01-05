@@ -1,14 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
-import Stripe from 'stripe';
+import { Request, Response, NextFunction } from "express";
 
-import DateTime from '../helpers/DateTime';
-import Header from '../helpers/Header';
-import NodeMailer from '../helpers/NodeMailer';
-import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
-import StripeModel from '../models/StripeModel';
-import Users from '../models/Users';
-
-const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
+import Header from "../helpers/Header";
+import NodeMailer from "../helpers/NodeMailer";
+import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
+import StripeModel from "../models/StripeModel";
+import Users from "../models/Users";
 
 export default class ShopController {
     static async getViewShop(req: Request, res: Response) {
@@ -17,13 +13,13 @@ export default class ShopController {
         const totalItensShopCart = await Users.getTotalItensShopCart();
 
         if (!shopCartItens || !totalItensShopCart) {
-            req.flash('warning', 'Add at least 1 product to your shop cart!');
-            return res.redirect('/');
+            req.flash("warning", "Add at least 1 product to your shop cart!");
+            return res.redirect("/");
         }
 
-        return res.render('pages/shop/shop_checkout', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        return res.render("pages/shop/shop_checkout", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             shopCartItens,
             shopCartTotalAmount,
             totalItensShopCart,
@@ -36,18 +32,18 @@ export default class ShopController {
         const { item_id } = req.params;
 
         if (await Users.removeShopCartItem(item_id)) {
-            req.flash('success', `Item removed from your cart!`);
-            return res.redirect('/shop');
+            req.flash("success", `Item removed from your cart!`);
+            return res.redirect("/shop");
         }
 
-        req.flash('warning', `Some error ocurred`);
-        return res.redirect('/shop');
+        req.flash("warning", `Some error ocurred`);
+        return res.redirect("/shop");
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
         if (!global.SESSION_USER.stripe_customer_id) {
             const customer = await stripe.customers.create({
-                description: 'Customer created in Subscription checkout!',
+                description: "Customer created in Subscription checkout!",
                 email: global.SESSION_USER.email,
             });
             await Users.createStripeCustomer(global.SESSION_USER.id, customer.id);
@@ -57,8 +53,7 @@ export default class ShopController {
     }
 
     static async verifyIfUserAlreadyHasAStripeCardRegistred(req: Request) {
-        const { card_number, card_exp_year, card_exp_month, card_cvc } =
-            req.body;
+        const { card_number, card_exp_year, card_exp_month, card_cvc } = req.body;
 
         const customerCard = {
             number: card_number,
@@ -72,11 +67,7 @@ export default class ShopController {
                 card: customerCard,
             });
 
-            await Users.createStripeCard(
-                global.SESSION_USER.id,
-                cardToken,
-                card_number
-            );
+            await Users.createStripeCard(global.SESSION_USER.id, cardToken, card_number);
 
             return cardToken.id;
         }
@@ -88,11 +79,7 @@ export default class ShopController {
         return cardToken.id;
     }
 
-    static async postShopPayLog(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ) {
+    static async postShopPayLog(req: Request, res: Response, next: NextFunction) {
         try {
             const {
                 total_shop_amount,
@@ -108,26 +95,20 @@ export default class ShopController {
                 shipping_fee,
             } = req.body;
 
-            if (
-                !(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))
-            ) {
-                req.flash('warning', 'Invalid Password!');
+            if (!(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))) {
+                req.flash("warning", "Invalid Password!");
                 return res.redirect(`/shop`);
             }
 
-            const stripeCustomerID =
-                await ShopController.verifyIfUserIsAlreadyAStripeCustomer();
+            const stripeCustomerID = await ShopController.verifyIfUserIsAlreadyAStripeCustomer();
 
-            const stripeCardTokenID =
-                await ShopController.verifyIfUserAlreadyHasAStripeCardRegistred(
-                    req
-                );
+            const stripeCardTokenID = await ShopController.verifyIfUserAlreadyHasAStripeCardRegistred(req);
 
             const products = await Users.getShopCartItens();
 
             const shopCardCharge = await stripe.charges.create({
                 amount: parseInt(total_shop_amount + shipping_fee * 100),
-                currency: 'usd',
+                currency: "usd",
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
                 receipt_email: customer_email,
@@ -135,9 +116,7 @@ export default class ShopController {
 
             const shopTransactionObject = {
                 transaction_id: shopCardCharge.id,
-                total_amount: parseFloat(
-                    parseFloat(total_shop_amount) + parseFloat(shipping_fee)
-                ).toFixed(2),
+                total_amount: parseFloat(parseFloat(total_shop_amount) + parseFloat(shipping_fee)).toFixed(2),
                 card_id: shopCardCharge.source.id,
                 card_brand: shopCardCharge.source.brand,
                 card_exp_month: shopCardCharge.source.exp_month,
@@ -158,8 +137,8 @@ export default class ShopController {
                 shipping_address_neighborhood: customer_neighborhood,
                 shipping_address_city: customer_city,
                 shipping_address_state: customer_state,
-                shipping_address_country: 'Brazil',
-                shipping_carrier: 'Correios',
+                shipping_address_country: "Brazil",
+                shipping_carrier: "Correios",
                 shipping_fee: parseFloat(shipping_fee).toFixed(2),
                 created_at: new Date(),
             };
@@ -170,8 +149,8 @@ export default class ShopController {
 
             await Users.removeAllShopCartItens();
 
-            return res.render('pages/shop/shopPayLog', {
-                flash_success: 'Shop Transaction Created with Success!',
+            return res.render("pages/shop/shopPayLog", {
+                flash_success: "Shop Transaction Created with Success!",
                 shopTransactionObject,
                 user: global.SESSION_USER,
                 header: Header.shop(),

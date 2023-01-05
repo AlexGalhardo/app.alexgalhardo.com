@@ -1,5 +1,5 @@
 <div align="center">
-<h1 align="center">💵 Galhardo Ecommerce 3.0 💵</h1>
+<h1 align="center">💵 Galhardo APP 3.0 💵</h1>
 <small align="center">A Simple Web App Project To Learn Ecommerce and Subscription</small>
 </div>
 

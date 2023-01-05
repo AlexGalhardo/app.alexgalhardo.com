@@ -1,4 +1,5 @@
 /* eslint-disable import-helpers/order-imports */
+import "dotenv/config";
 import bodyParser from "body-parser";
 import compression from "compression";
 import flash from "connect-flash";
@@ -95,7 +96,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 
     req.flash("warning", "Something went wrong");
 
-    next();
+    return next();
 });
 
 export default app;

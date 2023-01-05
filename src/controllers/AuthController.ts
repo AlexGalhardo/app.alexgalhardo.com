@@ -45,7 +45,7 @@ export default class AuthController {
                 return res.redirect("/login");
             }
 
-            req.session.userID = user.id;
+            req.session.user_id = user.id;
             global.SESSION_USER = user;
             req.flash("success", `Welcome back, ${user.name} :D`);
             return res.redirect("/");

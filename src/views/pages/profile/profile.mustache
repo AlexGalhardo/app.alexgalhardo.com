@@ -21,25 +21,6 @@
 
             <div class="col-sm-4">
 
-                <form action="/profile/avatar"
-                    method="POST" 
-                    enctype="multipart/form-data"
-                    class="col-lg-8">
-                
-                    <img src="/uploads/avatars/{{avatar}}" class="d-block mx-auto w-50 h-50 image-fluid rounded-circle" alt="avatar">
-
-                    <br>
-                    
-                    <input class="form-control mb-2" type="file" id="avatar" name="avatar">
-                    
-                    <button class="btn btn-sm btn-outline-primary shadow" type="submit">
-                        <i class="bi bi-upload"></i>  
-                        Upload Avatar
-                    </button>
-                </form>
-
-                <hr>
-
                 <div class="form-floating mb-3">
                       <input class="mb-2 form-control" name="created_at" type="text" value="{{created_at}}" readonly>
                       <label for="name">CREATED_AT</label>
@@ -64,21 +45,6 @@
                       <input class="mb-2 form-control" name="browser" id="browser" type="text" readonly>
                       <label for="browser">BROWSER</label>
                 </div>
-
-                <!--<div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="public_ip" id="public_ip" type="text" readonly>
-                      <label for="public_ip">PUBLIC IP</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                      <input  class="mb-2 form-control" name="latitude" id="latitude" type="text" readonly>
-                      <label for="latitude">LATITUDE</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" type="text" name="longitude" id="longitude" readonly>
-                      <label for="longitude">LONGITUDE</label>
-                </div>-->
 
             </div>
 
@@ -526,7 +492,7 @@
 
         </div>
         <!-- END ROW -->
-        
+
     </main>
 
 

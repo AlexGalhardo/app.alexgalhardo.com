@@ -85,7 +85,7 @@ export default class Header {
         };
     }
 
-    static pricing(headTitle: string) {
+    static plans(headTitle: string) {
         return {
             title: headTitle,
             navbar_pricing_active: true,

@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import Stripe from "stripe";
 
 import Header from "../helpers/Header";
 import NodeMailer from "../helpers/NodeMailer";
@@ -7,22 +6,12 @@ import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
 import StripeModel from "../models/StripeModel";
 import Users from "../models/Users";
 
-const stripe = new Stripe(`${process.env.STRIPE_SK_TEST}`);
-
 export default class PlansController {
     static getViewPricing(req: Request, res: Response) {
-        return res.render("pages/pricing/pricing", {
+        return res.render("pages/plans/plans", {
             flash_warning: req.flash("warning"),
             user: global.SESSION_USER,
-            header: Header.pricing("Plans - Galhardo APP"),
-        });
-    }
-
-    static getViewPlanProCheckout(req: Request, res: Response) {
-        return res.render("pages/plans/pro_checkout", {
-            flash_warning: req.flash("warning"),
-            user: global.SESSION_USER,
-            header: Header.plans("Plan PRO - Galhardo APP"),
+            header: Header.plans("Plans - Galhardo APP"),
         });
     }
 
@@ -34,43 +23,24 @@ export default class PlansController {
         });
     }
 
-    static getSubscriptionBanner(plan_name) {
-        if (plan_name === "PRO") {
-            return `
-            <div class="card mb-4 rounded-3 shadow-sm text-center">
-                    <div class="card-header py-3 bg-warning">
-                        <h4 class="my-0 fw-bold"><i class="bi bi-award"></i>Now You Are PRO!</h4>
-                    </div>
-
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$ 1.99<small class="text-muted fw-light">/month</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>✔️ Site Ilimited Recomendations</li>
-                            <li>✔️ Get Recommendations in your Email</li>
-                            <li>❌ Get Recommendations in your Telegram</li>
-                        </ul>
-                    </div>
-
-                </div>`;
-        }
-
+    static getSubscriptionBanner() {
         return `
-                <div class="card mb-4 rounded-3 shadow-sm text-center">
-                    <div class="card-header py-3 bg-info">
-                        <h4 class="my-0 fw-normal">You Are PREMIUM!</h4>
-                    </div>
+			<div class="card mb-4 rounded-3 shadow-sm text-center">
+				<div class="card-header py-3 bg-info">
+					<h4 class="my-0 fw-normal">You Are PREMIUM!</h4>
+				</div>
 
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$ 4.99<small class="text-muted fw-light">/month</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>✔️ Site Ilimited Recomendations</li>
-                            <li>✔️ Get Recommendations in Email</li>
-                            <li>✔️ Get Recommendations in Telegram</li>
-                        </ul>
-                    </div>
+				<div class="card-body">
+					<h1 class="card-title pricing-card-title">$ 4.99<small class="text-muted fw-light">/month</small></h1>
+					<ul class="list-unstyled mt-3 mb-4">
+						<li>✔️ Site Ilimited Recomendations</li>
+						<li>✔️ Get Recommendations in Email</li>
+						<li>✔️ Get Recommendations in Telegram</li>
+					</ul>
+				</div>
 
-                </div>
-            `;
+			</div>
+		`;
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
@@ -188,14 +158,14 @@ export default class PlansController {
 
             await NodeMailer.sendSubscriptionTransaction(subsTransactionObject);
 
-            await TelegramBOTLogger.logSubscriptionTransaction(subsTransactionObject);
+            TelegramBOTLogger.logSubscriptionTransaction(subsTransactionObject);
 
             return res.render("pages/plans/planPayLog", {
                 flash_success: "Subscription Created with Success!",
                 subsTransactionObject,
                 user: global.SESSION_USER,
                 header: Header.plans("Plan Pay Status - Galhardo APP"),
-                divPlanBanner: PlansController.getSubscriptionBanner(plan_name),
+                divPlanBanner: PlansController.getSubscriptionBanner(),
             });
         } catch (error) {
             next(error);

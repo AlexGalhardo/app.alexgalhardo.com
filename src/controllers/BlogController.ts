@@ -117,7 +117,7 @@ export default class BlogController {
         const { blog_comment } = req.body;
 
         const blogComment = {
-            user_id: req.session.userID,
+            user_id: req.session.user_id,
             user_logged_can_delete: true,
             user_name: global.SESSION_USER.name,
             user_avatar: global.SESSION_USER.avatar,

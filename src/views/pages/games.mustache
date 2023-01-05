@@ -34,6 +34,8 @@
                 <div class="col-lg-3 text-center">
                     <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="game_image">
 
+					<button onclick="buyThisGame()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow" id="button_buy_this_game"><i class="bi bi-cash-coin"></i> Buy for <span id="game_price">{{price}}</span></button>
+
                     {{#user.admin}}
                         <a id="game_admin_update_link" href="/admin/update/game/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">
                         <i class="bi bi-unlock-fill"></i>
