@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
+import { stripe } from "../config/stripe";
+import DateTime from "../helpers/DateTime";
 import Header from "../helpers/Header";
 import NodeMailer from "../helpers/NodeMailer";
 import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
@@ -21,26 +23,6 @@ export default class PlansController {
             user: global.SESSION_USER,
             header: Header.plans("Plan PREMIUM - Galhardo APP"),
         });
-    }
-
-    static getSubscriptionBanner() {
-        return `
-			<div class="card mb-4 rounded-3 shadow-sm text-center">
-				<div class="card-header py-3 bg-info">
-					<h4 class="my-0 fw-normal">You Are PREMIUM!</h4>
-				</div>
-
-				<div class="card-body">
-					<h1 class="card-title plans-card-title">$ 4.99<small class="text-muted fw-light">/month</small></h1>
-					<ul class="list-unstyled mt-3 mb-4">
-						<li>✔️ Site Ilimited Recomendations</li>
-						<li>✔️ Get Recommendations in Email</li>
-						<li>✔️ Get Recommendations in Telegram</li>
-					</ul>
-				</div>
-
-			</div>
-		`;
     }
 
     static async verifyIfUserIsAlreadyAStripeCustomer() {
@@ -66,14 +48,24 @@ export default class PlansController {
         };
 
         if (!global.SESSION_USER.stripe_card_id) {
-            const cardToken = await stripe.tokens.create({
+            const stripeCardToken = await stripe.tokens.create({
                 card: customerCard,
             });
+
+            const cardToken = {
+                card: {
+                    id: stripeCardToken?.id,
+                    brand: stripeCardToken.card?.brand as string,
+                    exp_month: stripeCardToken.card?.exp_month as number,
+                    exp_year: stripeCardToken.card?.exp_year as number,
+                    last4: Number(stripeCardToken.card?.last4),
+                },
+            };
 
             await Users.createStripeCard(global.SESSION_USER.id, cardToken, card_number);
 
             await stripe.customers.createSource(stripeCustomerId, {
-                source: cardToken.id,
+                source: cardToken.card.id,
             });
 
             return cardToken;
@@ -113,7 +105,7 @@ export default class PlansController {
         try {
             const { confirm_password } = req.body;
 
-            console.log("chegou aqui no => confirm_password");
+            console.log("confirm_password => ", confirm_password);
 
             if (!(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))) {
                 req.flash("warning", "Invalid Password!");
@@ -135,17 +127,17 @@ export default class PlansController {
             );
             console.log("subscription => ", subscription);
 
-            const subsTransactionObject = {
+            const subscriptionTransactionObject = {
                 transaction_id: subscription.id,
                 status: subscription.status,
-                card_id: stripeCard.card.id,
-                card_brand: stripeCard.card.brand,
-                card_exp_month: stripeCard.card.exp_month as number,
-                card_exp_year: stripeCard.card.exp_year,
-                card_last4: stripeCard.card.last4,
+                card_id: stripeCard?.card?.id as string,
+                card_brand: stripeCard?.card?.brand as string,
+                card_exp_month: stripeCard?.card?.exp_month as number,
+                card_exp_year: stripeCard?.card?.exp_year as number,
+                card_last4: Number(stripeCard?.card?.last4),
                 plan_id: stripePlan.id as string,
                 plan_name: stripePlan.name,
-                plan_amount: stripePlan.amount,
+                plan_amount: Number(stripePlan.amount),
                 current_period_start: new Date(subscription.current_period_start * 1000),
                 current_period_end: new Date(subscription.current_period_end * 1000),
                 cancel_at_period_end: subscription.cancel_at_period_end,
@@ -153,24 +145,23 @@ export default class PlansController {
                 user_id: global.SESSION_USER.id,
                 user_email: global.SESSION_USER.email,
                 user_name: global.SESSION_USER.name,
-                createdAt: new Date(),
+                created_at: DateTime.getNow(),
             };
-            console.log("subsTransactionObject => ", subsTransactionObject);
+            console.log("subscriptionTransactionObject => ", subscriptionTransactionObject);
 
-            await Users.createStripeSubscription(global.SESSION_USER.id, subsTransactionObject);
+            await Users.createStripeSubscription(global.SESSION_USER.id, subscriptionTransactionObject);
 
-            await StripeModel.createSubscriptionTransaction(subsTransactionObject);
+            await StripeModel.createSubscriptionTransaction(subscriptionTransactionObject);
 
-            await NodeMailer.sendSubscriptionTransaction(subsTransactionObject);
+            await NodeMailer.sendSubscriptionTransaction(subscriptionTransactionObject);
 
-            TelegramBOTLogger.logSubscriptionTransaction(subsTransactionObject);
+            TelegramBOTLogger.logSubscriptionTransaction(subscriptionTransactionObject);
 
-            return res.render("pages/plans/planPayLog", {
+            return res.render("pages/plans/premium_checkout_status", {
                 flash_success: "Subscription Created with Success!",
-                subsTransactionObject,
+                subscriptionTransactionObject,
                 user: global.SESSION_USER,
-                header: Header.plans("Plan Pay Status - Galhardo APP"),
-                divPlanBanner: PlansController.getSubscriptionBanner(),
+                header: Header.plans("Premium Subscriptions Successfully!"),
             });
         } catch (error) {
             return next(error);

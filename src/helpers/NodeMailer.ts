@@ -80,7 +80,7 @@ export default class NodeMailer {
             transaction_id: subsTransactionObject.transaction_id,
             status: subsTransactionObject.status,
             plan_name: subsTransactionObject.plan_name,
-            amount: parseFloat(subsTransactionObject.plan_amount / 100).toFixed(2),
+            amount: Number(subsTransactionObject.plan_amount / 100).toFixed(2),
             card_id: subsTransactionObject.card_id,
             card_brand: subsTransactionObject.card_brand,
             card_exp_month: subsTransactionObject.card_exp_month,

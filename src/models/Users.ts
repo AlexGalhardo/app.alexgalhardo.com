@@ -134,24 +134,16 @@ export default class Users {
 
             return !!user;
         }
+        return null;
     }
 
     static async create(userObject: inputCreateUser, confirmEmailToken: string) {
-        let avatar = "avatar.png";
-        if (userObject.github_avatar) avatar = userObject.github_avatar;
-        if (userObject.google_avatar) avatar = userObject.google_avatar;
-        if (userObject.facebook_avatar) avatar = userObject.facebook_avatar;
-
         return prisma.user.create({
             data: {
                 name: userObject.username,
                 email: userObject.email,
                 password: await Bcrypt.hash(userObject.password),
-                github_id: userObject.github_id ? parseInt(userObject.github_id) : null,
-                facebook_id: userObject.facebook_id ? userObject.facebook_id : null,
-                google_id: userObject.google_id ? userObject.google_id : null,
                 confirm_email_token: confirmEmailToken,
-                avatar,
             },
         });
     }
@@ -182,7 +174,7 @@ export default class Users {
                 stripe_card_number: cardNumber,
                 stripe_card_exp_month: customerCard.card.exp_month,
                 stripe_card_exp_year: customerCard.card.exp_year,
-                stripe_card_last4: customerCard.card.last4,
+                stripe_card_last4: Number(customerCard.card.last4 as number),
             },
         });
     }

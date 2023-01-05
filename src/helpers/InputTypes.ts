@@ -140,11 +140,12 @@ export type inputSubscriptionTransactionObject = {
     plan_id: string;
     plan_name: string;
     plan_amount: number;
-    current_period_start: string;
-    current_period_end: string;
+    current_period_start: Date;
+    current_period_end: Date;
     cancel_at_period_end: boolean;
     stripe_customer_id: string;
     user_id: string;
     user_email: string;
     user_name: string;
+    created_at: string;
 };

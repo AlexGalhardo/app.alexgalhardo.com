@@ -94,7 +94,8 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         return res.redirect("/");
     }
 
-    req.flash("warning", "Something went wrong");
+    console.log("----- ERROR => ", error);
+    req.flash("warning", `Something went wrong ERROR => ${error}`);
 
     return next();
 });
