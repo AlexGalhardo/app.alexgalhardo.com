@@ -1,7 +1,7 @@
 {
-	"name": "galhardo-ecommerce",
+	"name": "galhardo-app",
 	"version": "3.0.0",
-	"description": "A Simple Web App To Learn how to program an Ecommerce and Subscription",
+	"description": "A Simple Web App Project To Learn how to program a Ecommerce and Subscriptions System",
 	"main": "dist/server.js",
 	"author": "Alex Galhardo <aleexgvieira@gmail.com>",
 	"license": "MIT",
