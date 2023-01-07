@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
-import Number from "../helpers/Number";
+import Number from "../helpers/NumberHelper";
 import Books from "../models/Books";
 import Games from "../models/Games";
 import Movies from "../models/Movies";

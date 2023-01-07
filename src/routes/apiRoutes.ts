@@ -1,4 +1,6 @@
-import { Router } from "express";
+import axios from "axios";
+import { calcularPrecoPrazo } from "correios-brasil";
+import { Router, Request, Response } from "express";
 
 import APIController from "../controllers/API/APIController";
 import APIProfileController from "../controllers/API/APIProfileController";
@@ -35,4 +37,36 @@ export default router
 
     .post("/profile/login", APIProfileController.postLogin)
     .patch("/profile/patch", APIProfileController.patchProfile)
-    .delete("/profile/delete", APIProfileController.deleteProfile);
+    .delete("/profile/delete", APIProfileController.deleteProfile)
+
+    .get("/addCart/game/:game_id", APIPublicController.addGameToCart)
+
+    .get("/addCart/book/:book_id", APIPublicController.addBookToCart)
+
+    .get("/shipping/:zipcode", async (req, res) => {
+        const { zipcode } = req.params;
+
+        const args = {
+            sCepOrigem: "16050590",
+            sCepDestino: zipcode,
+            nVlPeso: "5",
+            nCdFormato: "1",
+            nVlComprimento: "20",
+            nVlAltura: "20",
+            nVlLargura: "20",
+            nCdServico: ["04014"],
+            nVlDiametro: "0",
+        };
+
+        const response = await calcularPrecoPrazo(args);
+
+        res.json(response);
+    })
+
+    .get("/cep/:cep", async (req: Request, res: Response) => {
+        const { cep } = req.params;
+
+        const request = await axios.get(`http://viacep.com.br/ws/${cep}/json`);
+
+        return res.json(request.data);
+    });

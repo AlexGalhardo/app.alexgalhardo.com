@@ -69,17 +69,8 @@ router
 
     .get("/blog/:slug", BlogController.getViewBlogPost)
 
-    .get("/newsletter-confirm-email", (req, res) => {
-        req.flash("success", "Confirm your newsletter subscription by clicking in the link send to your email inbox!");
-        return res.redirect("/");
-    })
-    .get("/newsletter-email-confirmed", (req, res) => {
-        req.flash("success", "Your newsletter subscription was confirmed! Welcome aboard :D");
-        return res.redirect("/");
-    })
-
     .get("/shop", userIsLoggedIn, ShopController.getViewShop)
-    .post("/shop", userIsLoggedIn, ShopController.postShopPayLog)
+    .post("/shop", userIsLoggedIn, ShopController.postShop)
     .get("/removeCart/:item_id", ShopController.removeCartItem)
 
     .get("/plans", PlansController.getViewPricing)
@@ -92,8 +83,13 @@ router
     )
     .post("/plan/premium/post", userIsLoggedIn, PlansController.postSubscription)
 
-    .get("/login", userIsAlreadyLoggedIn, recaptcha.middleware.render, csrfProtection, AuthController.getViewLogin)
-    .post("/login", userIsAlreadyLoggedIn, recaptcha.middleware.verify, csrfProtection, AuthController.postLogin)
+    .get(
+        "/login",
+        userIsAlreadyLoggedIn,
+        /* recaptcha.middleware.render, */ csrfProtection,
+        AuthController.getViewLogin,
+    )
+    .post("/login", userIsAlreadyLoggedIn, /* recaptcha.middleware.verify, */ csrfProtection, AuthController.postLogin)
 
     .get(
         "/register",

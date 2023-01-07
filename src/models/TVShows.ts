@@ -1,8 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-import { inputTvShowObject } from '../helpers/InputTypes';
-
-const prisma = new PrismaClient();
+import prisma from "../config/prisma";
+import { inputTvShowObject } from "../helpers/InputTypes";
 
 export default class TVShows {
     static getAll() {
@@ -34,7 +31,7 @@ export default class TVShows {
             where: {
                 title: {
                     contains: tvShowTitle,
-                    mode: 'insensitive',
+                    mode: "insensitive",
                 },
             },
         });

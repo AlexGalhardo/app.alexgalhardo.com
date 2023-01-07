@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
+import { stripe } from "../config/stripe";
 import Header from "../helpers/Header";
 import NodeMailer from "../helpers/NodeMailer";
 import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
@@ -79,7 +80,7 @@ export default class ShopController {
         return cardToken.id;
     }
 
-    static async postShopPayLog(req: Request, res: Response, next: NextFunction) {
+    static async postShop(req: Request, res: Response, next: NextFunction) {
         try {
             const {
                 total_shop_amount,
@@ -107,7 +108,7 @@ export default class ShopController {
             const products = await Users.getShopCartItens();
 
             const shopCardCharge = await stripe.charges.create({
-                amount: parseInt(total_shop_amount + shipping_fee * 100),
+                amount: parseInt(total_shop_amount + shipping_fee * 100, 10),
                 currency: "usd",
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
@@ -145,18 +146,18 @@ export default class ShopController {
 
             await StripeModel.createShopTransaction(shopTransactionObject);
             await NodeMailer.sendShopTransaction(shopTransactionObject);
-            await TelegramBOTLogger.logShopTransaction(shopTransactionObject);
+            TelegramBOTLogger.logShopTransaction(shopTransactionObject);
 
             await Users.removeAllShopCartItens();
 
-            return res.render("pages/shop/shopPayLog", {
+            return res.render("pages/shop/shop_checkout_status", {
                 flash_success: "Shop Transaction Created with Success!",
                 shopTransactionObject,
                 user: global.SESSION_USER,
                 header: Header.shop(),
             });
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 }

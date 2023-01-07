@@ -55,8 +55,8 @@ export default class APIProfileController {
             return user
                 ? res.json({ user })
                 : res.json({
-                    error: "Something went wrong",
-                });
+                      error: "Something went wrong",
+                  });
         } catch (err) {
             next(err);
         }

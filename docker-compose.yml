@@ -1,10 +1,9 @@
 version: '3'
 
 services:
-
-    galhardo_ecommerce_pg:
+    galhardo_app_pg:
         image: postgres
-        container_name: galhardo_ecommerce_pg
+        container_name: galhardo_app_pg
         environment:
             POSTGRES_PASSWORD: "root"
         ports:
@@ -12,20 +11,20 @@ services:
         volumes:
             - postgres-data:/var/lib/postgresql
         networks:
-            - galhardo_ecommerce_network
+            - galhardo_app_network
 
-    # POSTGRE username: postgres | password: root |server: galhardo_ecommerce_pg
-    galhardo_ecommerce_adminer:
+    # POSTGRE username: postgres | password: root |server: galhardo_app_pg
+    galhardo_app_adminer:
         image: adminer
-        container_name: galhardo_ecommerce_adminer
+        container_name: galhardo_app_adminer
         ports:
             - "9090:8080"
         networks:
-            - galhardo_ecommerce_network
+            - galhardo_app_network
 
 networks:
-    galhardo_ecommerce_network:
+    galhardo_app_network:
         driver: bridge
 
 volumes:
-   postgres-data: null
+    postgres-data: null

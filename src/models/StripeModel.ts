@@ -1,9 +1,6 @@
 /* eslint-disable radix */
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "../config/prisma";
 import { inputShopTransactionObject, inputSubscriptionTransactionObject } from "../helpers/InputTypes";
-
-const prisma = new PrismaClient();
 
 export default class StripeModel {
     static async createShopTransaction(shopTransactionObject: inputShopTransactionObject) {
@@ -33,7 +30,7 @@ export default class StripeModel {
                 shipping_address_state: shopTransactionObject.shipping_address_state,
                 shipping_address_country: shopTransactionObject.shipping_address_country,
                 shipping_carrier: shopTransactionObject.shipping_carrier,
-                shipping_fee: shopTransactionObject.shipping_fee,
+                shipping_fee: Number(shopTransactionObject.shipping_fee),
             },
         });
     }

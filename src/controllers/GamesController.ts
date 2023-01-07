@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
-import Number from "../helpers/Number";
+import NumberHelper from "../helpers/NumberHelper";
 import Books from "../models/Books";
 import Games from "../models/Games";
 import Movies from "../models/Movies";
 import TVShows from "../models/TVShows";
+import Users from "../models/Users";
 
 export default class GamesController {
     static async getViewGames(req: Request, res: Response) {
@@ -14,7 +15,8 @@ export default class GamesController {
         const totalBooks = await Books.getTotal();
         const totalMovies = await Movies.getTotal();
         const totalTVShows = await TVShows.getTotal();
-        game.price = Number.toFloat(game.price);
+        const totalItensShopCart = await Users.getTotalItensShopCart();
+        game.price = NumberHelper.toFloat(game.price as unknown as string);
 
         return res.render("pages/games", {
             flash_success: req.flash("success"),
@@ -24,6 +26,7 @@ export default class GamesController {
             totalBooks,
             totalMovies,
             totalTVShows,
+            totalItensShopCart,
             user: global.SESSION_USER,
             app_url: process.env.APP_URL,
             header: Header.games(),
