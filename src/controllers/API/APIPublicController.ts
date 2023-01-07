@@ -1,12 +1,12 @@
 /* eslint-disable consistent-return */
 import { Request, Response, NextFunction } from "express";
 
-import Blog from "../../models/Blog";
-import Books from "../../models/Books";
-import Games from "../../models/Games";
-import Movies from "../../models/Movies";
-import TVShows from "../../models/TVShows";
-import Users from "../../models/Users";
+import Blog from "../../repositories/Blog";
+import Books from "../../repositories/Books";
+import Games from "../../repositories/Games";
+import Movies from "../../repositories/Movies";
+import TVShows from "../../repositories/TVShows";
+import Users from "../../repositories/Users";
 
 export default class APIPublicController {
     static async verifyIfEmailIsAlreadyRegistred(req: Request, res: Response, next: NextFunction) {

@@ -1,6 +1,12 @@
+/* eslint-disable no-param-reassign */
 // https://api.telegram.org/bot<telegram_token_here>/getUpdates
 
 import https from "https";
+import {
+    inputContactObject,
+    inputShopTransactionObject,
+    inputSubscriptionTransactionObject,
+} from "src/helpers/InputTypes";
 
 import DateTime from "./DateTime";
 
@@ -37,16 +43,16 @@ class TelegramBOTLogger {
     sendMessage(level: string, type: string, message: string) {
         const emoji = this.emojiMap()[level];
 
-        message = `${emoji} ${type} ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${message}`;
+        const messageToSend = `${emoji} ${type} ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${message}`;
 
-        const urlParams = encodeURI(`chat_id=${this.channelName}&text=${message}&parse_mode=HTML`);
+        const urlParams = encodeURI(`chat_id=${this.channelName}&text=${messageToSend}&parse_mode=HTML`);
 
         const url = `${this.baseUrl}/sendMessage?${urlParams}`;
 
         this.sendRequest(url);
     }
 
-    logContact(contactObject) {
+    logContact(contactObject: inputContactObject) {
         const emoji = this.emojiMap().CONTACT;
 
         const log = `
@@ -66,7 +72,7 @@ class TelegramBOTLogger {
         this.sendRequest(url);
     }
 
-    logShopTransaction(shopTransactionObject) {
+    logShopTransaction(shopTransactionObject: inputShopTransactionObject) {
         const emoji = this.emojiMap().SHOP;
 
         const log = `
@@ -99,22 +105,22 @@ class TelegramBOTLogger {
         this.sendRequest(url);
     }
 
-    logSubscriptionTransaction(subsTransactionObject) {
+    logSubscriptionTransaction(subscriptionTransactionObject: inputSubscriptionTransactionObject) {
         const emoji = this.emojiMap().SUBSCRIPTION;
 
         const log = `
-        <b>TRANSACTION_ID:</b> ${subsTransactionObject.transaction_id}
-        <b>STATUS: </b> ${subsTransactionObject.status}
+        <b>TRANSACTION_ID:</b> ${subscriptionTransactionObject.transaction_id}
+        <b>STATUS: </b> ${subscriptionTransactionObject.status}
         ---------------------------------------------
-        <b>PLAN_NAME:</b> ${subsTransactionObject.plan_name}
-        <b>PLAN_AMOUNT:</b> ${subsTransactionObject.plan_amount}
+        <b>PLAN_NAME:</b> ${subscriptionTransactionObject.plan_name}
+        <b>PLAN_AMOUNT:</b> ${subscriptionTransactionObject.plan_amount}
         ---------------------------------------------
-        <b>CARD_ID:</b> ${subsTransactionObject.card_id}
+        <b>CARD_ID:</b> ${subscriptionTransactionObject.card_id}
         ---------------------------------------------
-        <b>CUSTOMER_ID:</b> ${subsTransactionObject.user_id}
-        <b>CUSTOMER_STRIPE_ID:</b> ${subsTransactionObject.stripe_customer_id}
-        <b>CUSTOMER_EMAIL:</b> ${subsTransactionObject.user_email}
-        <b>CUSTOMER_NAME:</b> ${subsTransactionObject.user_name}
+        <b>CUSTOMER_ID:</b> ${subscriptionTransactionObject.user_id}
+        <b>CUSTOMER_STRIPE_ID:</b> ${subscriptionTransactionObject.stripe_customer_id}
+        <b>CUSTOMER_EMAIL:</b> ${subscriptionTransactionObject.user_email}
+        <b>CUSTOMER_NAME:</b> ${subscriptionTransactionObject.user_name}
         `;
 
         const message = `${emoji} SUBSCRIPTION TRANSACTION ${emoji}\n\n <b>CREATED_AT:</b> ${DateTime.getNow()}\n ${log}`;
@@ -126,12 +132,12 @@ class TelegramBOTLogger {
         this.sendRequest(url);
     }
 
-    sendRequest(url) {
+    sendRequest(url: string) {
         return https
             .get(url, (res) => {
                 const { statusCode } = res;
                 if (statusCode !== 200) {
-                    let data;
+                    let data: string;
                     res.on("data", (chunk) => {
                         data += chunk;
                     });
@@ -146,4 +152,7 @@ class TelegramBOTLogger {
     }
 }
 
-export default new TelegramBOTLogger(process.env.TELEGRAM_BOT_HTTP_TOKEN, process.env.TELEGRAM_BOT_CHANNEL_ID);
+export default new TelegramBOTLogger(
+    process.env.TELEGRAM_BOT_HTTP_TOKEN as string,
+    process.env.TELEGRAM_BOT_CHANNEL_ID as string,
+);

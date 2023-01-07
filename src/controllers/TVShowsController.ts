@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
-import Books from "../models/Books";
-import Games from "../models/Games";
-import Movies from "../models/Movies";
-import TVShows from "../models/TVShows";
+import Books from "../repositories/Books";
+import Games from "../repositories/Games";
+import Movies from "../repositories/Movies";
+import TVShows from "../repositories/TVShows";
 
 export default class TVShowsController {
     static async getViewTVShows(req: Request, res: Response) {
@@ -35,7 +35,7 @@ export default class TVShowsController {
             return res.redirect("/");
         }
 
-        const searchTVShows = await TVShows.searchTitle(searchTVShowTitle);
+        const searchTVShows = await TVShows.searchTitle(searchTVShowTitle as string);
 
         if (!searchTVShows.length) {
             req.flash("warning", `No tvshows found from search: ${searchTVShowTitle}! Recommending a Random TVShow`);

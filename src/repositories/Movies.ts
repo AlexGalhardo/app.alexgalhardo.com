@@ -1,8 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-import { inputMovieObject } from '../helpers/InputTypes';
-
-const prisma = new PrismaClient();
+import prisma from "../config/prisma";
+import { inputMovieObject } from "../helpers/InputTypes";
 
 export default class Movies {
     static getAll() {
@@ -34,7 +31,7 @@ export default class Movies {
             where: {
                 title: {
                     contains: movieTitle,
-                    mode: 'insensitive',
+                    mode: "insensitive",
                 },
             },
         });
@@ -44,10 +41,10 @@ export default class Movies {
         return prisma.movie.create({
             data: {
                 title: movieObject.title,
-                year_release: parseInt(movieObject.year_release),
+                year_release: Number(movieObject.year_release),
                 image: movieObject.image,
                 tmdb_link: movieObject.tmdb_link,
-                tmdb_rating: parseInt(movieObject.tmdb_rating),
+                tmdb_rating: Number(movieObject.tmdb_rating),
                 justwatch_link: movieObject.justwatch_link,
                 resume: movieObject.resume,
                 duration: movieObject.duration,
@@ -64,10 +61,10 @@ export default class Movies {
             data: {
                 id: movieObject.id,
                 title: movieObject.title,
-                year_release: parseInt(movieObject.year_release),
+                year_release: Number(movieObject.year_release),
                 image: movieObject.image,
                 tmdb_link: movieObject.tmdb_link,
-                tmdb_rating: parseInt(movieObject.tmdb_rating),
+                tmdb_rating: Number(movieObject.tmdb_rating),
                 justwatch_link: movieObject.justwatch_link,
                 resume: movieObject.resume,
                 duration: movieObject.duration,

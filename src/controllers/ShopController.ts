@@ -4,8 +4,8 @@ import { stripe } from "../config/stripe";
 import Header from "../helpers/Header";
 import NodeMailer from "../helpers/NodeMailer";
 import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
-import StripeModel from "../models/StripeModel";
-import Users from "../models/Users";
+import StripeModel from "../repositories/StripeModel";
+import Users from "../repositories/Users";
 
 export default class ShopController {
     static async getViewShop(req: Request, res: Response) {
@@ -108,24 +108,26 @@ export default class ShopController {
             const products = await Users.getShopCartItens();
 
             const shopCardCharge = await stripe.charges.create({
-                amount: parseInt(total_shop_amount + shipping_fee * 100, 10),
+                amount: Number(total_shop_amount + shipping_fee * 100),
                 currency: "usd",
                 source: stripeCardTokenID,
                 description: JSON.stringify(products),
                 receipt_email: customer_email,
             });
 
+            console.log("shopCardCharge => ", shopCardCharge);
+
             const shopTransactionObject = {
                 transaction_id: shopCardCharge.id,
-                total_amount: parseFloat(parseFloat(total_shop_amount) + parseFloat(shipping_fee)).toFixed(2),
-                card_id: shopCardCharge.source.id,
-                card_brand: shopCardCharge.source.brand,
-                card_exp_month: shopCardCharge.source.exp_month,
-                card_exp_year: shopCardCharge.source.exp_year,
-                card_last4: parseInt(shopCardCharge.source.last4),
+                total_amount: Number(total_shop_amount + shipping_fee).toFixed(2),
+                card_id: shopCardCharge.source?.id,
+                card_brand: shopCardCharge.source?.brand,
+                card_exp_month: shopCardCharge.source?.exp_month,
+                card_exp_year: shopCardCharge.source?.exp_year,
+                card_last4: Number(shopCardCharge?.source?.last4),
                 currency: shopCardCharge.currency,
                 paid: shopCardCharge.paid,
-                products_amount: parseFloat(total_shop_amount),
+                products_amount: Number(total_shop_amount),
                 products,
                 stripe_customer_id: stripeCustomerID,
                 user_id: global.SESSION_USER.id,
@@ -140,9 +142,12 @@ export default class ShopController {
                 shipping_address_state: customer_state,
                 shipping_address_country: "Brazil",
                 shipping_carrier: "Correios",
-                shipping_fee: parseFloat(shipping_fee).toFixed(2),
+                shipping_fee: Number(shipping_fee).toFixed(2),
                 created_at: new Date(),
             };
+
+            console.log("shopTransactionObject => ", shopTransactionObject);
+            console.log("shopTransactionObject.total_amount => ", typeof shopTransactionObject.total_amount);
 
             await StripeModel.createShopTransaction(shopTransactionObject);
             await NodeMailer.sendShopTransaction(shopTransactionObject);

@@ -5,8 +5,8 @@ import DateTime from "../helpers/DateTime";
 import Header from "../helpers/Header";
 import NodeMailer from "../helpers/NodeMailer";
 import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
-import StripeModel from "../models/StripeModel";
-import Users from "../models/Users";
+import StripeModel from "../repositories/StripeModel";
+import Users from "../repositories/Users";
 
 export default class PlansController {
     static getViewPricing(req: Request, res: Response) {
@@ -100,12 +100,8 @@ export default class PlansController {
     }
 
     static async postSubscription(req: Request, res: Response, next: NextFunction) {
-        console.log("chegou aqui no => postSubscription");
-
         try {
             const { confirm_password } = req.body;
-
-            console.log("confirm_password => ", confirm_password);
 
             if (!(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))) {
                 req.flash("warning", "Invalid Password!");
@@ -113,19 +109,15 @@ export default class PlansController {
             }
 
             const stripeCustomerId = await PlansController.verifyIfUserIsAlreadyAStripeCustomer();
-            console.log("stripeCustomerId => ", stripeCustomerId);
 
             const stripeCard = await PlansController.verifyIfUserAlreadyHasAStripeCardRegistred(req, stripeCustomerId);
-            console.log("stripeCard => ", stripeCard);
 
             const stripePlan = PlansController.getStripePlan();
-            console.log("stripePlan => ", stripePlan);
 
             const subscription = await PlansController.createStripeSubscription(
                 stripeCustomerId,
                 stripePlan.id as string,
             );
-            console.log("subscription => ", subscription);
 
             const subscriptionTransactionObject = {
                 transaction_id: subscription.id,
@@ -147,8 +139,6 @@ export default class PlansController {
                 user_name: global.SESSION_USER.name,
                 created_at: DateTime.getNow(),
             };
-            console.log("subscriptionTransactionObject => ", subscriptionTransactionObject);
-
             await Users.createStripeSubscription(global.SESSION_USER.id, subscriptionTransactionObject);
 
             await StripeModel.createSubscriptionTransaction(subscriptionTransactionObject);

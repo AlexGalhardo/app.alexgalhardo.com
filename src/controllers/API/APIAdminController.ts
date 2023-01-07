@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 import Bcrypt from "../../helpers/Bcrypt";
 import DateTime from "../../helpers/DateTime";
-import Users from "../../models/Users";
+import Users from "../../repositories/Users";
 
 export default class APIAdminController {
     static async postAdminLogin(req: Request, res: Response, next: NextFunction) {

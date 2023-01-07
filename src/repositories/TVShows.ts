@@ -41,10 +41,10 @@ export default class TVShows {
         return prisma.tvshow.create({
             data: {
                 title: tvShowObject.title,
-                year_release: parseInt(tvShowObject.year_release),
+                year_release: Number(tvShowObject.year_release),
                 image: tvShowObject.image,
                 tmdb_link: tvShowObject.tmdb_link,
-                tmdb_rating: parseInt(tvShowObject.tmdb_rating),
+                tmdb_rating: Number(tvShowObject.tmdb_rating),
                 justwatch_link: tvShowObject.justwatch_link,
                 resume: tvShowObject.resume,
                 duration: tvShowObject.duration,
@@ -61,10 +61,10 @@ export default class TVShows {
             data: {
                 id: tvShowObject.id,
                 title: tvShowObject.title,
-                year_release: parseInt(tvShowObject.year_release),
+                year_release: Number(tvShowObject.year_release),
                 image: tvShowObject.image,
                 tmdb_link: tvShowObject.tmdb_link,
-                tmdb_rating: parseInt(tvShowObject.tmdb_rating),
+                tmdb_rating: Number(tvShowObject.tmdb_rating),
                 justwatch_link: tvShowObject.justwatch_link,
                 resume: tvShowObject.resume,
                 duration: tvShowObject.duration,

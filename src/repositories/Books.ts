@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "../config/prisma";
 import { inputBookObject } from "../helpers/InputTypes";
-
-const prisma = new PrismaClient();
 
 export default class Books {
     static getAll() {
@@ -46,11 +43,11 @@ export default class Books {
         return prisma.book.create({
             data: {
                 title: bookObject.title,
-                year_release: parseInt(bookObject.year_release),
+                year_release: Number(bookObject.year_release),
                 price: bookObject.price,
                 image: bookObject.image,
                 genres: bookObject.genres,
-                pages: parseInt(bookObject.pages),
+                pages: Number(bookObject.pages),
                 author: bookObject.author,
                 amazon_link: bookObject.amazon_link,
                 resume: bookObject.resume,
@@ -66,11 +63,11 @@ export default class Books {
             data: {
                 id: bookObject.id,
                 title: bookObject.title,
-                year_release: parseInt(bookObject.year_release),
+                year_release: Number(bookObject.year_release),
                 price: bookObject.price,
                 image: bookObject.image,
                 genres: bookObject.genres,
-                pages: parseInt(bookObject.pages),
+                pages: Number(bookObject.pages),
                 author: bookObject.author,
                 amazon_link: bookObject.amazon_link,
                 resume: bookObject.resume,

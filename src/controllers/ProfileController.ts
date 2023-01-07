@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
 import { inputUpdateUser } from "../helpers/InputTypes";
-import StripeModel from "../models/StripeModel";
-import Users from "../models/Users";
+import StripeModel from "../repositories/StripeModel";
+import Users from "../repositories/Users";
 
 export default class ProfileController {
     static async getViewProfile(req: Request, res: Response) {

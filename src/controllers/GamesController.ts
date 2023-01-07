@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
 import NumberHelper from "../helpers/NumberHelper";
-import Books from "../models/Books";
-import Games from "../models/Games";
-import Movies from "../models/Movies";
-import TVShows from "../models/TVShows";
-import Users from "../models/Users";
+import Books from "../repositories/Books";
+import Games from "../repositories/Games";
+import Movies from "../repositories/Movies";
+import TVShows from "../repositories/TVShows";
+import Users from "../repositories/Users";
 
 export default class GamesController {
     static async getViewGames(req: Request, res: Response) {

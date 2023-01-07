@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "../config/prisma";
 import { inputGameObject } from "../helpers/InputTypes";
-
-const prisma = new PrismaClient();
 
 export default class Games {
     static getAll() {

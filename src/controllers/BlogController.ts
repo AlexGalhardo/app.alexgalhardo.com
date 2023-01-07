@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import pagination from "pagination";
 
 import Header from "../helpers/Header";
-import Blog from "../models/Blog";
+import Blog from "../repositories/Blog";
 
 export default class BlogController {
     static async getViewBlog(req: Request, res: Response) {

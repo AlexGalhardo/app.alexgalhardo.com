@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
-import Books from "../models/Books";
-import Games from "../models/Games";
-import Movies from "../models/Movies";
-import TVShows from "../models/TVShows";
+import Books from "../repositories/Books";
+import Games from "../repositories/Games";
+import Movies from "../repositories/Movies";
+import TVShows from "../repositories/TVShows";
 
 export default class MoviesController {
     static async getViewMovies(req: Request, res: Response) {

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
-import Blog from "../../models/Blog";
-import Books from "../../models/Books";
-import Games from "../../models/Games";
-import Movies from "../../models/Movies";
-import TVShows from "../../models/TVShows";
+import Blog from "../../repositories/Blog";
+import Books from "../../repositories/Books";
+import Games from "../../repositories/Games";
+import Movies from "../../repositories/Movies";
+import TVShows from "../../repositories/TVShows";
 
 export default class AdminController {
     static getViewCreateBlogPost(req: Request, res: Response) {

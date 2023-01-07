@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-import slugify from 'slugify';
+import slugify from "slugify";
 
-import { inputBlogObject } from '../helpers/InputTypes';
-
-const prisma = new PrismaClient();
+import prisma from "../config/prisma";
+import { inputBlogObject } from "../helpers/InputTypes";
 
 export default class Blog {
     static getAll() {
@@ -35,7 +33,7 @@ export default class Blog {
             where: {
                 title: {
                     contains: blogTitle,
-                    mode: 'insensitive',
+                    mode: "insensitive",
                 },
             },
         });
@@ -81,8 +79,8 @@ export default class Blog {
     }
 
     static getPostsByPageLimit(page: number, blogPostsPerPage: number) {
-        const offset = parseInt(page * blogPostsPerPage - blogPostsPerPage);
-        const getUntil = parseInt(page * blogPostsPerPage);
+        const offset = Number(page * blogPostsPerPage - blogPostsPerPage);
+        const getUntil = Number(page * blogPostsPerPage);
         return prisma.blog.findMany({
             skip: offset,
             take: getUntil,

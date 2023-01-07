@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import Users from "../../models/Users";
+import Users from "../../repositories/Users";
 
 export default class APIProfileController {
     static async postLogin(req: Request, res: Response, next: NextFunction) {

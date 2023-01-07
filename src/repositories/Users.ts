@@ -1,5 +1,5 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable radix */
-
 import prisma from "../config/prisma";
 import Bcrypt from "../helpers/Bcrypt";
 import { inputCreateUser, inputSubscriptionTransactionObject, inputUpdateUser } from "../helpers/InputTypes";
@@ -484,7 +484,9 @@ export default class Users {
 
             shop_cart_itens = JSON.parse(shop_cart_itens);
             if (shop_cart_itens && shop_cart_itens.length > 0) {
-                shop_cart_itens.forEach((item) => (item.price = NumberHelper.toFloat(item.price)));
+                shop_cart_itens.forEach(
+                    (item: { price: string | number }) => (item.price = NumberHelper.toFloat(item.price)),
+                );
                 return shop_cart_itens;
             }
             return null;
