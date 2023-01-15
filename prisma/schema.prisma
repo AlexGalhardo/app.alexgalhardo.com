@@ -147,7 +147,7 @@ model StripeShopTransaction {
     card_last4                     Int
     currency                       String
     paid                           Boolean
-    products_amount                Float
+    products_amount                Int
     products                       String
     stripe_customer_id             String
     user_id                        String
