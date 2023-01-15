@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 import Bcrypt from "../../helpers/Bcrypt";
 import DateTime from "../../helpers/DateTime";
-import Users from "../../repositories/Users";
+import Users from "../../repositories/UsersRepository";
 
 export default class APIAdminController {
     static async postAdminLogin(req: Request, res: Response, next: NextFunction) {
@@ -90,8 +90,8 @@ export default class APIAdminController {
         return user?.admin
             ? user
             : res.status(422).json({
-                error: "This JWT Token is Inválid!",
-            });
+                  error: "This JWT Token is Inválid!",
+              });
     }
 
     static async getUsersRegistred(req: Request, res: Response) {

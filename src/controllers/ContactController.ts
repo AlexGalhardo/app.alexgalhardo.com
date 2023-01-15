@@ -1,15 +1,15 @@
-import { NextFunction, Request, Response } from 'express';
-import { validationResult } from 'express-validator';
+import { NextFunction, Request, Response } from "express";
+import { validationResult } from "express-validator";
 
-import Header from '../helpers/Header';
-import NodeMailer from '../helpers/NodeMailer';
-import TelegramBOTLogger from '../helpers/TelegramBOTLogger';
+import Header from "../helpers/Header";
+import NodeMailer from "../helpers/NodeMailer";
+import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
 
 export default class ContactController {
     static getViewContact(req: Request, res: Response) {
-        res.render('pages/contact', {
-            flash_success: req.flash('success'),
-            flash_warning: req.flash('warning'),
+        res.render("pages/contact", {
+            flash_success: req.flash("success"),
+            flash_warning: req.flash("warning"),
             user: global.SESSION_USER,
             header: Header.contact(),
             captcha: res.recaptcha,
@@ -23,12 +23,12 @@ export default class ContactController {
 
             if (!req.recaptcha.error) {
                 if (!errors.isEmpty()) {
-                    req.flash('warning', `${errors.array()[0].msg}`);
-                    return res.redirect('/contact');
+                    req.flash("warning", `${errors.array()[0].msg}`);
+                    return res.redirect("/contact");
                 }
             } else {
-                req.flash('warning', `Invalid Recaptcha!`);
-                return res.redirect('/contact');
+                req.flash("warning", `Invalid Recaptcha!`);
+                return res.redirect("/contact");
             }
 
             const { name, email, subject, message } = req.body;
@@ -43,8 +43,8 @@ export default class ContactController {
             await NodeMailer.sendContact(contactObject);
             await TelegramBOTLogger.logContact(contactObject);
 
-            req.flash('success', 'Message Send!');
-            return res.redirect('/contact');
+            req.flash("success", "Message Send!");
+            return res.redirect("/contact");
         } catch (error) {
             next(error);
         }

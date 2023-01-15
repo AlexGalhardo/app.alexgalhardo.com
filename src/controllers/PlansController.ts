@@ -5,8 +5,8 @@ import DateTime from "../helpers/DateTime";
 import Header from "../helpers/Header";
 import NodeMailer from "../helpers/NodeMailer";
 import TelegramBOTLogger from "../helpers/TelegramBOTLogger";
-import StripeModel from "../repositories/StripeModel";
-import Users from "../repositories/Users";
+import StripeModel from "../repositories/StripeRepository";
+import Users from "../repositories/UsersRepository";
 
 export default class PlansController {
     static getViewPricing(req: Request, res: Response) {

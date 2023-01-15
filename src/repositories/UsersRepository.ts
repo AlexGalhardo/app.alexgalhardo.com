@@ -5,7 +5,7 @@ import Bcrypt from "../helpers/Bcrypt";
 import { inputCreateUser, inputSubscriptionTransactionObject, inputUpdateUser } from "../helpers/InputTypes";
 import NumberHelper from "../helpers/NumberHelper";
 
-export default class Users {
+export default class UsersRepository {
     static getAll() {
         return prisma.user.findMany();
     }

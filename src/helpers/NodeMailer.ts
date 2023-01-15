@@ -3,7 +3,7 @@ import handlebars from "handlebars";
 import path from "path";
 
 import MailTrap from "../config/smtp";
-import Users from "../repositories/Users";
+import Users from "../repositories/UsersRepository";
 import { inputShopTransactionObject, inputSubscriptionTransactionObject, inputContactObject } from "./InputTypes";
 
 export default class NodeMailer {

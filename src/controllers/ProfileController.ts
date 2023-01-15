@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 
 import Header from "../helpers/Header";
 import { inputUpdateUser } from "../helpers/InputTypes";
-import StripeModel from "../repositories/StripeModel";
-import Users from "../repositories/Users";
+import StripeRepository from "../repositories/StripeRepository";
+import Users from "../repositories/UsersRepository";
 
 export default class ProfileController {
     static async getViewProfile(req: Request, res: Response) {
@@ -69,7 +69,7 @@ export default class ProfileController {
     }
 
     static async getViewMyShopTransactions(req: Request, res: Response) {
-        const shopTransactions = await StripeModel.getShopTransactionsByUserId(global.SESSION_USER.id);
+        const shopTransactions = await StripeRepository.getShopTransactionsByUserId(global.SESSION_USER.id);
 
         return res.render("pages/profile/my_shop_transactions", {
             user: global.SESSION_USER,
@@ -81,9 +81,9 @@ export default class ProfileController {
     static async getViewShopTransactionByID(req: Request, res: Response) {
         const { shop_transaction_id } = req.params;
 
-        const shopTransaction = await StripeModel.getShopTransactionById(shop_transaction_id);
+        const shopTransaction = await StripeRepository.getShopTransactionById(shop_transaction_id);
 
-        shopTransaction.products = JSON.parse(shopTransaction.products);
+        shopTransaction!.products = JSON.parse(shopTransaction!.products);
 
         return res.render("pages/profile/shop_transaction", {
             user: global.SESSION_USER,
@@ -93,7 +93,7 @@ export default class ProfileController {
     }
 
     static async getViewMySubscriptionsTransactions(req: Request, res: Response) {
-        const subsTransactions = await StripeModel.getSubscriptionsTransactionsByUserId(global.SESSION_USER.id);
+        const subsTransactions = await StripeRepository.getSubscriptionsTransactionsByUserId(global.SESSION_USER.id);
 
         return res.render("pages/profile/my_subs_transactions", {
             user: global.SESSION_USER,
@@ -105,7 +105,7 @@ export default class ProfileController {
     static async getViewSubscriptionTransactionByID(req: Request, res: Response) {
         const { subs_transaction_id } = req.params;
 
-        const subsTransaction = await StripeModel.getSubscriptionTransactionById(subs_transaction_id);
+        const subsTransaction = await StripeRepository.getSubscriptionTransactionById(subs_transaction_id);
 
         return res.render("pages/profile/sub_transaction", {
             user: global.SESSION_USER,
@@ -117,7 +117,7 @@ export default class ProfileController {
     static async deleteStripeCard(req: Request, res: Response) {
         const { stripe_card_id } = req.params;
 
-        await StripeModel.deleteStripeCard(global.SESSION_USER.id, stripe_card_id);
+        await StripeRepository.deleteStripeCard(global.SESSION_USER.id, stripe_card_id);
 
         req.flash("success", "Stripe Card Deleted!");
         return res.redirect("/profile");
@@ -126,7 +126,7 @@ export default class ProfileController {
     static async cancelStripeSubscriptionRenewAtPeriodEnd(req: Request, res: Response) {
         const { stripe_currently_subscription_id } = req.params;
 
-        await StripeModel.cancelStripeSubscriptionRenewAtPeriodEnd(
+        await StripeRepository.cancelStripeSubscriptionRenewAtPeriodEnd(
             global.SESSION_USER.id,
             stripe_currently_subscription_id,
         );

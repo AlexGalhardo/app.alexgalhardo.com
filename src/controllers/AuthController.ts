@@ -3,7 +3,7 @@ import { validationResult } from "express-validator";
 import randomToken from "rand-token";
 
 import NodeMailer from "../helpers/NodeMailer";
-import Users from "../repositories/Users";
+import Users from "../repositories/UsersRepository";
 
 export default class AuthController {
     static async getViewLogin(req: Request, res: Response) {

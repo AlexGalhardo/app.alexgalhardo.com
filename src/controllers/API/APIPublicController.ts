@@ -6,7 +6,7 @@ import Books from "../../repositories/Books";
 import Games from "../../repositories/Games";
 import Movies from "../../repositories/Movies";
 import TVShows from "../../repositories/TVShows";
-import Users from "../../repositories/Users";
+import Users from "../../repositories/UsersRepository";
 
 export default class APIPublicController {
     static async verifyIfEmailIsAlreadyRegistred(req: Request, res: Response, next: NextFunction) {

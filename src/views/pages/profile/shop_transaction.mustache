@@ -12,17 +12,17 @@
             </h4>
 
 			<div class="col-lg-4 mb-3">
-	                    
+
 	            <ul class="list-group text-center">
-	                
+
 	                {{#products}}
-		                
+
 		                <li class="list-group-item d-flex justify-content-between align-items-center">
-		                    
+
 		                    <img class="h-25 w-25" src="{{image}}">
-		                    
+
 		                    {{title}}
-		                    
+
 		                    <b>
 		                    	$
 		                    	<span>
@@ -31,49 +31,101 @@
 		                   	</b>
 		                </li>
 
-	                {{/products}}  
+	                {{/products}}
 
 	                <li class="list-group-item d-flex justify-content-between align-items-center">
-	                    Shipping Fee  
+	                    Shipping Fee
 	                    <b>$ <span>{{shipping_fee}}</span></b>
 	                </li>
 
 	                <li class="list-group-item d-flex justify-content-between align-items-center bg-warning">
-	                    <b>TOTAL</b>  
+	                    <b>TOTAL</b>
 	                    <b>$ <span>{{total_amount}}</span></b>
 	                </li>
-	            
+
 	            </ul>
 
 	        </div>
 
 			<div class="col-lg-4">
-    			<ul class="list-group list-group-flush text-start">
-                    <li class="list-group-item"><b>Currency:</b> {{currency}}</li>
-                    <li class="list-group-item"><b>Total Amount:</b> {{total_amount}}</li>
-                    <li class="list-group-item"><b>Paid:</b> {{paid}}</li>
-                    <li class="list-group-item"><b>Stripe Card ID:</b> {{card_id}}</li>
-                    <li class="list-group-item"><b>Stripe Card BRAND:</b> {{card_brand}}</li>
-                    <li class="list-group-item"><b>Stripe Card EXP_YEAR:</b> {{card_exp_year}}</li>
-                    <li class="list-group-item"><b>Stripe Card EXP_MONTH:</b> {{card_exp_month}}</li>
-                    <li class="list-group-item"><b>Stripe Card LAST4:</b> {{card_last4}}</li>
-                    <li class="list-group-item"><b>Created At:</b> {{created_at}}</li>
-                </ul>
+				<div class="card-body">
+					<table class="table table-striped table-hover">
+						<tbody>
+							<tr>
+								<th colspan="2">CURRENCY</th>
+								<td>{{currency}}</td>
+							</tr>
+							<tr>
+								<th colspan="2">TOTAL AMOUNT</th>
+								<td>{{total_amount}}</td>
+							</tr>
+							<tr>
+								<th colspan="2">PAID</th>
+								<td>{{paid}}</td>
+							<tr>
+								<th colspan="2">CARD ID</th>
+								<td>{{card_id}}</td>
+							<tr>
+								<th colspan="2">CARD BRAND</th>
+								<td>{{card_brand}}</td>
+							<tr>
+								<th colspan="2">CARD EXP YEAR</th>
+								<td>{{card_exp_year}}</td>
+							<tr>
+								<th colspan="2">CARD EXP MONTH</th>
+								<td>{{card_exp_month}}</td>
+							<tr>
+								<th colspan="2">CARD LAST 4 DIGITS</th>
+								<td>{{card_last4}}</td>
+							<tr>
+								<th colspan="2">CREATED AT</th>
+								<td>{{created_at}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 	        </div>
 
 	        <div class="col-lg-4">
-    			<ul class="list-group list-group-flush text-start">
-                    <li class="list-group-item"><b>Customer:</b> {{user_name}}</li>
-                    <li class="list-group-item"><b>Phone:</b> {{user_phone}}</li>
-                    <li class="list-group-item"><b>Email:</b> {{user_email}}</li>
-                    <li class="list-group-item"><b>Shipping ZipCode:</b> {{shipping_address_zipcode}}</li>
-                    <li class="list-group-item"><b>Shipping Street:</b> {{shipping_address_street}}</li>
-                    <li class="list-group-item"><b>Shipping Neighborhood:</b> {{shipping_address_neighborhood}}</li>
-                    <li class="list-group-item"><b>Shipping City:</b> {{shipping_address_city}}</li>
-                    <li class="list-group-item"><b>Shipping State:</b> {{shipping_address_state}}</li>
-                    <li class="list-group-item"><b>Shipping Country:</b> {{shipping_address_country}}</li>
-                    <li class="list-group-item"><b>Shipping Carrier:</b> {{shipping_carrier}}</li>
-                </ul>
+				<div class="card-body">
+					<table class="table table-striped table-hover">
+						<tbody>
+							<tr>
+								<th colspan="2"></i>CUSTOMER NAME</th>
+								<td>{{user_name}}</td>
+							</tr>
+							<tr>
+								<th colspan="2">PHONE</th>
+								<td>{{user_phone}}</td>
+							</tr>
+							<tr>
+								<th colspan="2">EMAIL</th>
+								<td>{{user_email}}</td>
+							<tr>
+								<th colspan="2">SHIPPING ZIPCODE</th>
+								<td>{{shipping_address_zipcode}}</td>
+							<tr>
+								<th colspan="2">SHIPPING STREET</th>
+								<td>{{shipping_address_street}}</td>
+							<tr>
+								<th colspan="2">SHIPPING NEIGHBORHOOD</th>
+								<td>{{shipping_address_neighborhood}}</td>
+							<tr>
+								<th colspan="2">SHIPPING CITY</th>
+								<td>{{shipping_address_city}}</td>
+							<tr>
+								<th colspan="2">SHIPPING STATE</th>
+								<td>{{shipping_address_state}}</td>
+							<tr>
+								<th colspan="2">SHIPPING COUNTRY</th>
+								<td>{{shipping_address_country}}</td>
+							<tr>
+								<th colspan="2">SHIPPING CARRIER</th>
+								<td>{{shipping_carrier}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 	        </div>
 
         </div>

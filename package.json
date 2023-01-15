@@ -23,7 +23,9 @@
 		"fix:lint": "npx eslint . --fix",
 		"precommit": "rm -rf dist/ && npm run fix:prettier && npm run fix:lint",
 		"delete:build": "rm -rf dist",
-		"postinstall": "npx prisma generate"
+		"postinstall": "npx prisma generate",
+		"trunk:fmt": "trunk fmt --all",
+		"trunk:check": "trunk check --all"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^7.6.0",
@@ -75,6 +77,7 @@
 		"@types/connect-flash": "^0.0.37",
 		"@types/cookie-parser": "^1.4.3",
 		"@types/cors": "^2.8.13",
+		"@trunkio/launcher": "^1.2.3",
 		"@types/csurf": "^1.11.2",
 		"@types/express": "^4.17.15",
 		"@types/express-session": "^1.17.5",
