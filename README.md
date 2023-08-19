@@ -30,7 +30,10 @@ cp .env-example .env
 ```
 sudo docker-compose up -d
 ```
-- You can see your docker postgres server ip address using the command: `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' galhardoapp_pg`
+- You can see your docker postgres server IP Address using the command:
+```
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' galhardoapp_pg
+```
 - Run PrismaORM migrations
 ```
 npx prisma migrate dev
