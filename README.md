@@ -1,4 +1,4 @@
-# 💵 Galhardo Ecommerce 3.0 💵
+# 💵 Galhardo APP 4.0 💵
 
 ## Preview Subscription
 
