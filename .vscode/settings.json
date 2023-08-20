@@ -54,5 +54,5 @@
     },
     "editor.suggestSelection": "first",
     "terminal.integrated.showExitAlert": false,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
 }

@@ -44,9 +44,6 @@ export default router
 
     .get("/create/tvshow", isAdmin, AdminController.getViewCreateTVShow)
     .post("/create/tvshow", isAdmin, AdminController.postCreateTVShow)
-
     .get("/update/tvshow/:tvshow_id", isAdmin, AdminController.getViewUpdateTVShow)
-
     .post("/update/tvshow/:tvshow_id", isAdmin, AdminController.postUpdateTVShow)
-
     .post("/delete/tvshow/:tvshow_id", isAdmin, AdminController.postDeleteTVShow);

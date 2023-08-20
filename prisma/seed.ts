@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
 import slugify from "slugify";
 
-import Bcrypt from "../src/helpers/Bcrypt";
+import Bcrypt from "../src/utils/Bcrypt";
 
 const prisma = new PrismaClient();
 

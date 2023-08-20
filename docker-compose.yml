@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-    galhardoapp_pg:
+    galhardo_ecommerce_postgres:
         image: postgres
-        container_name: galhardoapp_pg
+        container_name: galhardo_ecommerce_postgres
         environment:
             POSTGRES_PASSWORD: "root"
         ports:
@@ -11,18 +11,9 @@ services:
         volumes:
             - postgres-data:/var/lib/postgresql
         networks:
-            - galhardoapp_network
+            - galhardo_ecommerce_network
 
-    # POSTGRE username: postgres | password: root |server: galhardoapp_pg
-    galhardoapp_adminer:
-        image: adminer
-        container_name: galhardoapp_adminer
-        ports:
-            - "9090:8080"
-        networks:
-            - galhardoapp_network
-
-    galhardoapp_rabbitmq:
+    galhardo_ecommerce_rabbitmq:
         image: rabbitmq:3-management
         container_name: 'rabbitmq'
         restart: always
@@ -33,10 +24,10 @@ services:
             - 5672:5672
             - 15672:15672
         networks:
-            - galhardoapp_network
+            - galhardo_ecommerce_network
 
 networks:
-    galhardoapp_network:
+    galhardo_ecommerce_network:
         driver: bridge
 
 volumes:

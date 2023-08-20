@@ -1,14 +1,14 @@
 import slugify from "slugify";
 
 import prisma from "../config/prisma";
-import { inputBlogObject } from "../helpers/InputTypes";
+import { createBlogDTO, updateBlogDTO } from "../utils/InputTypes";
 
 export default class Blog {
-    static getAll() {
+    static getAll () {
         return prisma.blog.findMany();
     }
 
-    static async getRandom() {
+    static async getRandom () {
         const skip = Math.floor(Math.random() * (await prisma.blog.count()));
         return prisma.blog.findMany({
             take: 1,
@@ -16,11 +16,11 @@ export default class Blog {
         });
     }
 
-    static getTotal() {
+    static getTotal () {
         return prisma.blog.count();
     }
 
-    static getById(blog_id: string) {
+    static getById (blog_id: string) {
         return prisma.blog.findUnique({
             where: {
                 id: blog_id,
@@ -28,7 +28,7 @@ export default class Blog {
         });
     }
 
-    static searchTitle(blogTitle: string) {
+    static searchTitle (blogTitle: string) {
         return prisma.blog.findMany({
             where: {
                 title: {
@@ -39,38 +39,36 @@ export default class Blog {
         });
     }
 
-    static create(blogObject: inputBlogObject) {
+    static create (createBlog: createBlogDTO) {
         return prisma.blog.create({
             data: {
-                title: blogObject.title,
-                image: blogObject.image,
-                category: blogObject.category,
-                slug: slugify(blogObject.title),
-                resume: blogObject.resume,
-                body: blogObject.body,
+                title: createBlog.title,
+                image: createBlog.image,
+                category: createBlog.category,
+                slug: slugify(createBlog.title),
+                resume: createBlog.resume,
+                body: createBlog.body,
             },
         });
     }
 
-    static update(blogObject: inputBlogObject) {
+    static update (updateBlog: updateBlogDTO) {
         return prisma.blog.update({
             where: {
-                id: blogObject.id,
+                id: updateBlog.id,
             },
             data: {
-                id: blogObject.id,
-                title: blogObject.title,
-                image: blogObject.image,
-                category: blogObject.category,
-                slug: blogObject.slug,
-                resume: blogObject.resume,
-                body: blogObject.body,
+                title: updateBlog.title,
+                image: updateBlog.image,
+                category: updateBlog.category,
+                resume: updateBlog.resume,
+                body: updateBlog.body,
                 updated_at: new Date(),
             },
         });
     }
 
-    static delete(blog_id: string) {
+    static delete (blog_id: string) {
         return prisma.blog.delete({
             where: {
                 id: blog_id,
@@ -78,7 +76,7 @@ export default class Blog {
         });
     }
 
-    static getPostsByPageLimit(page: number, blogPostsPerPage: number) {
+    static getPostsByPageLimit (page: number, blogPostsPerPage: number) {
         const offset = Number(page * blogPostsPerPage - blogPostsPerPage);
         const getUntil = Number(page * blogPostsPerPage);
         return prisma.blog.findMany({
@@ -87,7 +85,7 @@ export default class Blog {
         });
     }
 
-    static getBySlug(slug: string) {
+    static getBySlug (slug: string) {
         return prisma.blog.findUnique({
             where: {
                 slug,
