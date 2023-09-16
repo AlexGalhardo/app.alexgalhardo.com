@@ -1,4 +1,4 @@
-# 💵 Galhardo APP 4.0 💵
+# Galhardo APP 3.0
 
 ## Preview Subscription
 
