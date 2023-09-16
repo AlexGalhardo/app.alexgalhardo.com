@@ -14,7 +14,7 @@
 
 <!---->
 
-    git clone https://github.com/AlexGalhardo/Galhardo-Ecommerce-3.0
+    git clone https://github.com/AlexGalhardo/Galhardo-APP-3.0
 
 * Enter Folder
 
