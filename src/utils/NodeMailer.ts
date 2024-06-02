@@ -2,8 +2,8 @@ import fs from "fs-extra";
 import handlebars from "handlebars";
 import path from "path";
 
-import MailTrap from "../config/smtp";
-import Users from "../repositories/UsersRepository";
+import Resend from "../config/smtp";
+import Users from "../repositories/users.repository";
 import { inputShopTransactionObject, inputSubscriptionTransactionObject, inputContactObject } from "./InputTypes";
 
 export default class NodeMailer {
@@ -23,7 +23,7 @@ export default class NodeMailer {
 
         const htmlBody = template(replacements);
 
-        await MailTrap.sendMail({
+        await Resend.sendMail({
             from: contactObject.email,
             to: process.env.APP_EMAIL,
             subject: `Galhardo APP Contact: ${contactObject.subject} from ${contactObject.name}`,
@@ -31,7 +31,7 @@ export default class NodeMailer {
             html: htmlBody,
         });
 
-        MailTrap.close();
+        Resend.close();
     }
 
     static async sendShopTransaction(shopTransactionObject: inputShopTransactionObject) {
@@ -59,14 +59,14 @@ export default class NodeMailer {
 
         const htmlBody = template(replacements);
 
-        await MailTrap.sendMail({
+        await Resend.sendMail({
             from: process.env.APP_EMAIL,
             to: "aleexgvieira@gmail.com", // shopTransactionObject.customer.email,
             subject: `Galhardo APP: Shop Transaction Success!`,
             html: htmlBody,
         });
 
-        MailTrap.close();
+        Resend.close();
     }
 
     static async sendSubscriptionTransaction(subsTransactionObject: inputSubscriptionTransactionObject) {
@@ -93,14 +93,14 @@ export default class NodeMailer {
 
         const htmlBody = template(replacements);
 
-        await MailTrap.sendMail({
+        await Resend.sendMail({
             from: process.env.APP_EMAIL,
             to: "aleexgvieira@gmail.com", // subsTransactionObject.customer.email,
             subject: `Galhardo APP: Subscription Transaction Success!`,
             html: htmlBody,
         });
 
-        MailTrap.close();
+        Resend.close();
     }
 
     static async sendConfirmEmailLink(email: string, confirmEmailToken: string) {
@@ -120,14 +120,14 @@ export default class NodeMailer {
 
         await Users.createConfirmEmailToken(email, confirmEmailToken);
 
-        await MailTrap.sendMail({
+        await Resend.sendMail({
             from: process.env.APP_EMAIL,
             to: email,
             subject: `GALHARDO APP: Confirm Your Email!`,
             html: htmlBody,
         });
 
-        MailTrap.close();
+        Resend.close();
     }
 
     static async sendForgetPasswordLink(email: string, resetPasswordToken: string) {
@@ -145,13 +145,13 @@ export default class NodeMailer {
 
         const htmlBody = template(replacements);
 
-        await MailTrap.sendMail({
+        await Resend.sendMail({
             from: process.env.APP_EMAIL,
             to: email,
             subject: `GALHARDO APP: Recover Your Password!`,
             html: htmlBody,
         });
 
-        MailTrap.close();
+        Resend.close();
     }
 }

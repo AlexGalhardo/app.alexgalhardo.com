@@ -1,4 +1,10 @@
-# Galhardo APP 3.0
+<div align="center">
+   <h1 align="center"><a href="https://mvc.alexgalhardo.com/" target="_blank">mvc.alexgalhardo.com</a></h1>
+</div>
+
+## Introduction
+
+* A simple MVC full stack web application using NodeJS.
 
 ## Preview Subscription
 
@@ -8,74 +14,22 @@
 
 <https://user-images.githubusercontent.com/19540357/212559673-ec93690e-edb8-441f-ae3c-8356d9d89aba.mp4>
 
-## Setup
+## Development Setup Local
 
-* Clone Repository
+1. Clone repository
+```
+git clone https://github.com/AlexGalhardo/todo-api-clean-architecture.alexgalhardo.com
+```
 
-<!---->
+2. Enter repository
+```
+cd todo-api-clean-architecture.alexgalhardo.com/
+```
 
-    git clone https://github.com/AlexGalhardo/Galhardo-APP-3.0
-
-* Enter Folder
-
-<!---->
-
-    cd Galhardo-APP-3.0
-
-* Install dependencies
-
-<!---->
-
-    npm install
-
-* Create .env file
-
-<!---->
-
-    cp .env-example .env
-
-* Up docker-compose
-
-<!---->
-
-    sudo docker-compose up -d
-
-* You can see your docker postgres server IP Address using the command:
-
-<!---->
-
-    docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' galhardo_ecommerce_postgres
-
-* Run PrismaORM migrations
-
-<!---->
-
-    npx prisma migrate dev
-
-* Run PrismaORM seeds
-
-<!---->
-
-    npx prisma db seed
-
-* Up local server
-
-<!---->
-
-    npm run dev
-
-* Go to: <http://localhost:3000>
-
-## RabbitMQ
-
-* <http://localhost:15672/>
-
-## Services used
-
-* Telegram API Key: <https://api.telegram.org/>
-* Mailtrap.io: <https://mailtrap.io/>
-* Stripe: <http://dashboard.stripe.com/>
-* Recaptcha: <https://www.google.com/recaptcha/admin/>
+3. Run setup.sh
+```
+chmod +x ./setup.sh && ./setup.sh
+```
 
 ## LICENSE
 

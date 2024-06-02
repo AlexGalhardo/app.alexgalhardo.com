@@ -34,7 +34,7 @@ async function recommendOtherGame() {
     } else {
         buttonAddGameToCart.classList.add("btn-outline-success");
         buttonAddGameToCart.classList.remove("btn-success");
-        buttonAddGameToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">${gamePriceValue}</span>]`;
+        buttonAddGameToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add Cart`;
     }
 
     document.querySelector("#game_price").innerHTML = parseFloat(object.price / 100).toFixed(2);
@@ -49,7 +49,7 @@ async function addGameToCart() {
 
     buttonAddGameToCart.classList.add("btn-outline-success");
     buttonAddGameToCart.classList.remove("btn-success");
-    buttonAddGameToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add To Cart [$ <span id="game_price">${gamePriceValue}</span>]`;
+    buttonAddGameToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add Cart`;
 
     if (object.inLoggedUserCart) {
         buttonAddGameToCart.classList.remove("btn-outline-success");

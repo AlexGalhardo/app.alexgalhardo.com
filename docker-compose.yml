@@ -1,21 +1,19 @@
-version: '3'
-
 services:
-    galhardo_ecommerce_postgres:
+    postgres:
         image: postgres
-        container_name: galhardo_ecommerce_postgres
+        container_name: galhardo-app-db
         environment:
-            POSTGRES_PASSWORD: "root"
+            POSTGRES_PASSWORD: "postgres"
         ports:
-            - "15432:5432"
+            - "5432:5432"
         volumes:
-            - postgres-data:/var/lib/postgresql
+            - postgres:/var/lib/postgresql
         networks:
-            - galhardo_ecommerce_network
+            - network
 
-    galhardo_ecommerce_rabbitmq:
+    rabbitmq:
         image: rabbitmq:3-management
-        container_name: 'rabbitmq'
+        container_name: galhardo-app-rabbitmq
         restart: always
         environment:
             - "RABBITMQ_DEFAULT_PASS=rabbitmq"
@@ -24,11 +22,12 @@ services:
             - 5672:5672
             - 15672:15672
         networks:
-            - galhardo_ecommerce_network
+            - network
 
 networks:
-    galhardo_ecommerce_network:
+    network:
         driver: bridge
 
 volumes:
-    postgres-data: null
+    postgres:
+        driver: local

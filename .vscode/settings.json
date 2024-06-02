@@ -1,58 +1,62 @@
 {
-    "terminal.integrated.fontSize": 14,
-    "editor.tabSize": 2,
-    "editor.fontSize": 16,
-    "editor.lineHeight": 26,
-    "editor.semanticHighlighting.enabled": false,
-    "editor.formatOnSave": true,
-    "typescript.preferences.importModuleSpecifier": "non-relative",
-    "editor.rulers": [
-        80,
-        120
-    ],
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "files.associations": {
-        ".sequelizerc": "javascript",
-        ".stylelintrc": "json",
-        ".prettierrc": "json",
-        "*.tsx": "typescriptreact"
-    },
-    "typescript.tsserver.log": "verbose",
-    "material-icon-theme.activeIconPack": "nest",
-    "material-icon-theme.folders.associations": {
-        "infra": "app",
-        "entities": "class",
-        "domain": "class",
-        "schemas": "class",
-        "typeorm": "database",
-        "repositories": "mappings",
-        "http": "container",
-        "migrations": "tools",
-        "modules": "components",
-        "implementations": "core",
-        "dtos": "typescript",
-        "fakes": "mock",
-        "websockets": "pipe",
-        "protos": "pipe",
-        "grpc": "pipe",
-        "providers": "include",
-        "subscribers": "messages",
-        "useCases": "controller",
-        "kafka": "scripts",
-        "mappers": "meta",
-        "_shared": "shared",
-        "eslint-config": "tools",
-        "kube": "kubernetes"
-    },
-    "material-icon-theme.files.associations": {
-        "ormconfig.json": "database",
-        "tsconfig.json": "tune",
-        "*.proto": "3d",
-        "*.webpack.js": "webpack"
-    },
-    "editor.suggestSelection": "first",
-    "terminal.integrated.showExitAlert": false,
-    "window.zoomLevel": 1,
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.colorTheme": "Omni",
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"workbench.editor.wrapTabs": true,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"workbench.statusBar.visible": true,
+	"explorer.confirmDelete": true,
+	"editor.suggestSelection": "first",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"editor.formatOnPaste": true,
+	"json.format.keepLines": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit"
+	},
+	"javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+	"javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+	"javascript.format.placeOpenBraceOnNewLineForFunctions": false,
+	"typescript.format.insertSpaceBeforeFunctionParenthesis": false,
+	"typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+	"typescript.format.placeOpenBraceOnNewLineForFunctions": false,
+	"explorer.confirmDragAndDrop": true,
+	"editor.inlineSuggest.enabled": true,
+	"git.autofetch": true,
+	"css.format.enable": false,
+	"php.validate.enable": false,
+	"editor.insertSpaces": false,
+	"json.format.enable": true,
+	"editor.unicodeHighlight.invisibleCharacters": false,
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"editor.fontSize": 16,
+	"editor.wordWrap": "on",
+	"editor.formatOnSave": true,
+	"files.exclude": {
+		"**/.trunk/*out": true,
+		"**/.trunk/*out/": true,
+		"**/.trunk/*actions/": true,
+		"**/.trunk/*logs/": true,
+		"**/.trunk/*plugins/": true
+	},
+	"files.watcherExclude": {
+		"**/.trunk/*out": true,
+		"**/.trunk/*out/": true,
+		"**/.trunk/*actions/": true,
+		"**/.trunk/*logs/": true,
+		"**/.trunk/*plugins/": true
+	},
+	"errorLens.excludeBySource": [
+		"dockerfile-utils(37)"
+	],
+	"[typescript]": {},
+	"files.associations": {
+		"*.ts": "typescript"
+	},
+	"window.zoomLevel": 1,
+	"workbench.editor.empty.hint": "hidden"
 }

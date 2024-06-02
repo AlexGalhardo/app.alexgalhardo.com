@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
 
-const MailTrap = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+const Resend = nodemailer.createTransport({
+    host: "smtp.resend.com",
+    port: 465,
     auth: {
-        user: process.env.MAILTRAP_USERNAME,
-        pass: process.env.MAILTRAP_PASSWORD,
+        user: "resend",
+        pass: process.env.RESEND_API_KEY,
     },
 });
 
-export default MailTrap;
+export default Resend;

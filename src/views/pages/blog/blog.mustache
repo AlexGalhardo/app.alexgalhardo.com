@@ -1,6 +1,6 @@
 {{>partials/header}}
 
-	<main class="container col-lg-12">
+	<main class="container col-lg-9">
 
         <div class="row">
 
@@ -16,7 +16,7 @@
  					<h6 class="alert alert-success fw-bold text-success">Total Blog Posts Search Found:  {{totalBlogPostsFoundFromSearch}}</h6>
  				{{/totalBlogPostsFoundFromSearch}}
         	</div>
-			    
+
 			{{#blog}}
 			    <div class="container col-md-10">
 			      	<a class="text-dark text-decoration-none" href="/blog/{{slug}}">
@@ -30,14 +30,14 @@
 			          		<br>
 			          		<p class="card-text mb-auto">{{resume}}</p>
 			        	</div>
-			        	
+
 			      		</div>
 			      	</a>
 			    </div>
 			{{/blog}}
 
 			<div class="container col-md-10">{{{boostrapPaginator}}}</div>
-			
+
 		</div>
 
 	</main>
