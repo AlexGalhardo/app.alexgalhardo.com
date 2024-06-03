@@ -12,17 +12,17 @@
 
                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-                    {{#flash_success}}
+                    @if(flash_success)
                         <div class="text-center alert alert-success" role="alert">
                             <b>{{flash_success}}</b>
                         </div>
-                    {{/flash_success}}
+                    @end
 
-                    {{#flash_warning}}
+                    @if(flash_warning)
                         <div class="text-center alert alert-warning" role="alert">
                             <b>{{flash_warning}}</b>
                         </div>
-                    {{/flash_warning}}
+                    @end
 
                     <div class="form-floating mb-3">
                         <input type="txt" class="mb-3 form-control" id="name" name="name" required autofocus>

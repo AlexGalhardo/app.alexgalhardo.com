@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
 import Blog from "../../repositories/blog.repository";
-import Books from "../../repositories/books.repository";
-import Games from "../../repositories/games.repository";
-import Movies from "../../repositories/movies.repository";
-import TVShows from "../../repositories/tv-shows.repository";
+import BooksRepository from "../../repositories/books.repository";
+import GamesRepository from "../../repositories/games.repository";
+import MoviesRepository from "../../repositories/movies.repository";
+import TVShowsRepository from "../../repositories/tv-shows.repository";
 import { createBlogDTO } from "src/utils/InputTypes";
 
 export default class AdminController {
@@ -118,7 +118,7 @@ export default class AdminController {
 			resume: game_resume,
 		};
 
-		const game = await Games.create(gameObject);
+		const game = await GamesRepository.create(gameObject);
 
 		if (!game) {
 			req.flash("warning", `ERROR: Game Not Created!`);
@@ -131,7 +131,7 @@ export default class AdminController {
 
 	static async getViewUpdateGame(req: Request, res: Response) {
 		const { game_id } = req.params;
-		const game = await Games.getById(game_id);
+		const game = await GamesRepository.getById(game_id);
 
 		res.render("pages/admin/updateGame", {
 			flash_success: req.flash("success"),
@@ -172,7 +172,7 @@ export default class AdminController {
 			resume: game_resume,
 		};
 
-		const game = await Games.update(gameObject);
+		const game = await GamesRepository.update(gameObject);
 
 		if (!game) {
 			req.flash("warning", `Error: game not updated!`);
@@ -185,7 +185,7 @@ export default class AdminController {
 
 	static async postDeleteGame(req: Request, res: Response) {
 		const { game_id } = req.params;
-		if (await Games.delete(game_id)) {
+		if (await GamesRepository.delete(game_id)) {
 			req.flash("success", `SUCCESS: Game DELETED!`);
 			return res.redirect("/");
 		}
@@ -224,7 +224,7 @@ export default class AdminController {
 			author: book_author,
 		};
 
-		const book = await Books.create(bookObject);
+		const book = await BooksRepository.create(bookObject);
 
 		if (!book) {
 			req.flash("warning", `Error: Book not created!`);
@@ -237,7 +237,7 @@ export default class AdminController {
 
 	static async getViewUpdateBook(req: Request, res: Response) {
 		const { book_id } = req.params;
-		const book = await Books.getById(book_id);
+		const book = await BooksRepository.getById(book_id);
 
 		res.render("pages/admin/updateBook", {
 			flash_success: req.flash("success"),
@@ -272,7 +272,7 @@ export default class AdminController {
 			author: book_author,
 		};
 
-		const book = await Books.update(bookObject);
+		const book = await BooksRepository.update(bookObject);
 
 		if (!book) {
 			req.flash("warning", `Error: Book not updated!`);
@@ -286,7 +286,7 @@ export default class AdminController {
 	static async postDeleteBook(req: Request, res: Response) {
 		const { book_id } = req.params;
 
-		if (await Books.delete(book_id)) {
+		if (await BooksRepository.delete(book_id)) {
 			req.flash("success", `SUCCESS: Book Deleted!`);
 			return res.redirect("/");
 		}
@@ -430,7 +430,7 @@ export default class AdminController {
 			genres: tvshow_genres,
 		};
 
-		const tvshow = await TVShows.create(tvShowObject);
+		const tvshow = await TVShowsRepository.create(tvShowObject);
 
 		if (!tvshow) {
 			req.flash("warning", `Error: TVShow not updated!`);
@@ -443,7 +443,7 @@ export default class AdminController {
 
 	static async getViewUpdateTVShow(req: Request, res: Response) {
 		const { tvshow_id } = req.params;
-		const tvshow = await TVShows.getById(tvshow_id);
+		const tvshow = await TVShowsRepository.getById(tvshow_id);
 
 		return res.render("pages/admin/updateTVShow", {
 			flash_success: req.flash("success"),
@@ -480,7 +480,7 @@ export default class AdminController {
 			genres: tvshow_genres,
 		};
 
-		const tvshow = await TVShows.update(tvShowObject);
+		const tvshow = await TVShowsRepository.update(tvShowObject);
 
 		if (!tvshow) {
 			req.flash("warning", `Error: Movie not updated!`);
@@ -494,7 +494,7 @@ export default class AdminController {
 	static async postDeleteTVShow(req: Request, res: Response) {
 		const { book_id } = req.params;
 
-		if (await TVShows.delete(book_id)) {
+		if (await TVShowsRepository.delete(book_id)) {
 			req.flash("success", `SUCCESS: TVShow Deleted!`);
 			return res.redirect("/");
 		}

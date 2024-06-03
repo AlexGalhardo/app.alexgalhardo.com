@@ -4,11 +4,11 @@
 
 		<div class="row">
 
-            {{#flash_warning}}
+            @if(flash_warning)
                 <div class="text-center alert alert-warning" role="alert">
                     <b>{{flash_warning}}</b>
                 </div>
-            {{/flash_warning}}
+            @end
 
             <h3 class="fw-bold text-white mt-3"> Enjoy even more the App with Premium Plan!</h3>
 

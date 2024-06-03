@@ -1,81 +1,78 @@
-{{>partials/header}}
+@layout.main({ title: "TV Shows" })
 
 	<div class="container col-lg-9 mt-3">
 
       	<div class="row">
             <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
 
-            {{^movies}}
-                {{^movie}}
+            @if(!tvshows)
+                @if(!tvshow)
                     <div class="text-center alert alert-warning" role="alert" class="mb-3">
-                        <b class="fw-bold">No movies found!</b>
+                        <b class="fw-bold">No tvshows found!</b>
                     </div>
-                {{/movie}}
-            {{/movies}}
+                @end
+            @end
 
 
-            {{#flash_success}}
+            @if(flash_success)
                 <div class="text-center alert alert-success" role="alert">
                     <b>{{flash_success}}</b>
                 </div>
-            {{/flash_success}}
+            @end
 
-            {{#flash_warning}}
+            @if(flash_warning)
                 <div class="text-center alert alert-warning" role="alert">
                     <b>{{flash_warning}}</b>
                 </div>
-            {{/flash_warning}}
+            @end
 
-
-
-            {{#movie}}
-                <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
+            @if(tvshow)
+                <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{ tvshow.id }}">
 
                 <div class="col-lg-3 text-center">
-                    <img id="movie_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="movie_image">
+                    <img id="tvshow_image" src="{{ tvshow.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="tvshow_image">
 
-                    {{#user.admin}}
-                        <a href="/admin/update/movie/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">
+                    @if(user?.admin)
+                        <a href="/admin/update/tvshow/{{ tvshow.id }}" class="w-75 shadow mb-2 btn btn-warning shadow">
                         <i class="bi bi-unlock-fill"></i>
-                        Edit This Movie</a>
-                    {{/user.admin}}
+                        Edit This TVShow</a>
+                    @end
                 </div>
 
                 <div class="col-lg-6">
                     <div class="card-body">
 
-                        <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
+                        <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{ tvshow.id }}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="movie_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
-                                <span id="movie_title" class="fw-bold">{{title}}</span>
+                            <a target="_blank" id="tvshow_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
+                                <span id="tvshow_title" class="fw-bold">{{ tvshow.title }}</span>
                             </a>
 
                             <h4 class="fw-bold text-warning">⭐
-                                <span id="movie_tmdb_rating">
-                                    {{tmdb_rating}}
+                                <span id="tvshow_tmdb_rating">
+                                    {{ tvshow.tmdb_rating }}
                                 </span>
                             </h4>
                         </div>
 
-                        <p class="card-text" id="movie_resume">{{resume}}</p>
+                        <p class="card-text" id="tvshow_resume">{{ tvshow.resume }}</p>
 
                         <ul class="mt-3 text-white">
-							<li><b>Release Year:</b> <small id="movie_year_release">{{year_release}}</small></li>
+						    <li><b>Release Year:</b> <small id="tvshow_year_release">{{ tvshow.year_release }}</small></li>
 
-                            <li><b>Genres:</b> <small id="movie_genres">{{genres}}</small></li>
+                            <li><b>Genres:</b> <small id="tvshow_genres">{{ tvshow.genres }}</small></li>
 
-                            <li><b>Duration:</b> <small id="movie_duration">{{duration}}</small></li>
+                            <li><b>Duration:</b> <small id="tvshow_duration">{{ tvshow.duration }}</small></li>
                         </ul>
                     </div>
                 </div>
-                <!-- END MOVIE POST -->
 
 
                 <div class="col-lg-3 mb-3">
 
-                    <form class="mb-3" action="/searchMovie" method="GET">
-                        <input class="form-control" type="search" placeholder="Search Movie Title..." aria-label="Search" name="title">
+                    <form class="mb-3" action="/searchTVShow" method="GET">
+                        <input class="form-control" type="search" placeholder="Search TVShow Title..." aria-label="Search" name="title">
                     </form>
 
                     <div class="list-group">
@@ -91,76 +88,73 @@
                             <span>{{totalBooks}}</span>
                         </a>
 
-                        <a href="/movies" class="d-flex justify-content-between list-group-item list-group-item-action text-white bg-dark">
+                        <a href="/movies" class="d-flex justify-content-between list-group-item list-group-item-action">
                             <i class="bi bi-tv"></i>
                             <span>Movies</span>
                             <span>{{totalMovies}}</span>
                         </a>
 
-                        <a href="/tvshows" class="d-flex justify-content-between list-group-item list-group-item-action">
+                        <a href="/tvshows" class="d-flex justify-content-between list-group-item list-group-item-action text-white bg-dark">
                             <i class="bi bi-tv"></i>
                             <span>TV Shows</span>
                             <span>{{totalTVShows}}</span>
                         </a>
                     </div>
 
-                    <button class="mt-3 w-100 btn btn-outline-light shadow mb-3" onclick="recommendOtherMovie()">
+                    <button class="mt-3 w-100 btn btn-outline-light shadow mb-3" onclick="recommendOtherTVShow()">
                             <i class="bi bi-play-fill"></i>
                             Recommend Random
                     </button>
 
-                    {{^user}}
-                        <div id="newsletter_card">
 
-                        </div>
-                    {{/user}}
                 </div>
-            {{/movie}}
+            @end
 
 
 
 
-            {{#movies}}
+            @if(tvshows)
 
                 <div class="col-lg-3 text-center">
-                    <img id="movie_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="movie_image">
+                    <img id="tvshow_image" src="{{ tvshow.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="tvshow_image">
                 </div>
 
                 <div class="col-lg-6">
                     <div class="card-body">
 
-                        <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
+                        <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{ tvshow.id }}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="movie_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
-                                <span id="movie_title" class="fw-bold">{{title}}</span>
+                            <a target="_blank" id="tvshow_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
+                                <span id="tvshow_title" class="fw-bold">{{ tvshow.title }}</span>
                             </a>
 
                             <h4 class="fw-bold text-warning">⭐
-                                <span id="movie_tmdb_rating">
-                                    {{tmdb_rating}}
+                                <span id="tvshow_tmdb_rating">
+                                    {{ tvshow.tmdb_rating }}
                                 </span>
                             </h4>
                         </div>
 
-                        <p class="card-text" id="movie_resume">{{resume}}</p>
+                        <p class="card-text" id="tvshow_resume">{{ tvshow.resume }}</p>
 
                         <ul class="mt-3 text-white">
-							<li><b>Release Year:</b> <small id="movie_year_release">{{year_release}}</small></li>
+						    <li><b>Release Year:</b> <small id="tvshow_year_release">{{ tvshow.year_release }}</small></li>
 
-                            <li><b>Genres:</b> <small id="movie_genres">{{genres}}</small></li>
+                            <li><b>Genres:</b> <small id="tvshow_genres">{{ tvshow.genres }}</small></li>
 
-                            <li><b>Duration:</b> <small id="movie_duration">{{duration}}</small></li>
+                            <li><b>Duration:</b> <small id="tvshow_duration">{{ tvshow.duration }}</small></li>
                         </ul>
                     </div>
                 </div>
 
 
-                {{#firstMovie}}
+
+                @if(firstTVShow)
                     <div class="col-lg-3 mb-3">
 
-                        <form class="mb-3" action="/searchBook" method="GET">
-                            <input class="form-control" type="search" placeholder="Search Book Title..." aria-label="Search" name="title">
+                        <form class="mb-3" action="/searchTVShow" method="GET">
+                            <input class="form-control" type="search" placeholder="Search TVShow Title..." aria-label="Search" name="title">
                         </form>
 
                         <div class="list-group">
@@ -170,37 +164,31 @@
                                 <span>{{totalGames}}</span>
                             </a>
 
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white">
+                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
                                 <i class="bi bi-book"></i>
                                 <span>Books</span>
                                 <span>{{totalBooks}}</span>
                             </a>
 
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <a href="/movies" class="d-flex justify-content-between list-group-item list-group-item-action">
                                 <i class="bi bi-tv"></i>
                                 <span>Movies</span>
                                 <span>{{totalMovies}}</span>
                             </a>
 
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
+                            <a href="/tvshows" class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white">
                                 <i class="bi bi-tv"></i>
                                 <span>TV Shows</span>
                                 <span>{{totalTVShows}}</span>
                             </a>
                         </div>
 
-                        {{^user}}
-                            <div id="newsletter_card">
 
-                            </div>
-                        {{/user}}
 
                     </div>
-                {{/firstMovie}}
+                @end
 
-                {{^firstMovie}}<div class="col-lg-3"></div>{{/firstMovie}}
-
-            {{/movies}}
+            @end
 
 
         </div>
@@ -209,6 +197,6 @@
     </div>
     <!-- END CONTAINER -->
 
-    <script src="scripts/movies.js"></script>
+    <script src="scripts/tvshows.js"></script>
 
-{{>partials/footer}}
+@end

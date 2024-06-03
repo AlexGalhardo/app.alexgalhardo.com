@@ -1,31 +1,38 @@
 import { Request, Response } from "express";
 
 import Header from "../../utils/Header";
-import Books from "../../repositories/books.repository";
-import Games from "../../repositories/games.repository";
-import Movies from "../../repositories/movies.repository";
-import TVShows from "../../repositories/tv-shows.repository";
+import BooksRepository from "../../repositories/books.repository";
+import GamesRepository from "../../repositories/games.repository";
+import MoviesRepository from "../../repositories/movies.repository";
+import TVShowsRepository from "../../repositories/tv-shows.repository";
+import edge from "../../config/edge";
 
 export default class MoviesController {
 	static async getViewMovies(req: Request, res: Response) {
-		const movie = await Movies.getRandom();
-		const totalGames = await Games.getTotal();
-		const totalBooks = await Books.getTotal();
-		const totalMovies = await Movies.getTotal();
-		const totalTVShows = await TVShows.getTotal();
+		try {
+			const movie = await Movies.getRandom();
+			const totalGames = await GamesRepository.getTotal();
+			const totalBooks = await BooksRepository.getTotal();
+			const totalMovies = await Movies.getTotal();
+			const totalTVShows = await TVShowsRepository.getTotal();
 
-		return res.render("pages/movies", {
-			flash_success: req.flash("success"),
-			flash_warning: req.flash("warning"),
-			movie,
-			totalGames,
-			totalBooks,
-			totalMovies,
-			totalTVShows,
-			user: global.SESSION_USER,
-			app_url: process.env.APP_URL,
-			header: Header.movies(),
-		});
+			return res.setHeader("Content-Type", "text/html").end(
+				await edge.render("pages/movies", {
+					flash_success: req.flash("success").length ?? null,
+					flash_warning: req.flash("warning").length ?? null,
+					movie,
+					totalGames,
+					totalBooks,
+					totalMovies,
+					totalTVShows,
+					user: global.SESSION_USER,
+					app_url: process.env.APP_URL,
+					header: Header.movies(),
+				}),
+			);
+		} catch (error: any) {
+			res.status(500).send(error.message);
+		}
 	}
 
 	static async getSearchMovieTitle(req: Request, res: Response) {

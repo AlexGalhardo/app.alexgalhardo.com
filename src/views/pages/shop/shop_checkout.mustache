@@ -1,6 +1,6 @@
 {{>partials/header}}
 
-    {{#user}}
+    @if(user)
 
 	<div class="container col-lg-9 mt-3 mb-3 mx-auto">
 
@@ -10,17 +10,17 @@
 
           	<div class="row">
 
-                {{#flash_success}}
+                @if(flash_success)
                     <div class="text-center alert alert-success" role="alert">
                         <b>{{flash_success}}</b>
                     </div>
-                {{/flash_success}}
+                @end
 
-                {{#flash_warning}}
+                @if(flash_warning)
                     <div class="text-center alert alert-warning" role="alert">
                         <b>{{flash_warning}}</b>
                     </div>
-                {{/flash_warning}}
+                @end
 
                 <div class="col-lg-4 mb-3">
 
@@ -237,4 +237,4 @@
     <script src="scripts/render_credit_card.js"></script>
     <script src="scripts/shop.js"></script>
 
-    {{/user}}
+    @end

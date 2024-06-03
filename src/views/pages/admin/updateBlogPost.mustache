@@ -1,24 +1,24 @@
 {{>partials/header}}
 
-	{{#user.admin}}
-	
+	@if(user?.admin)
+
 	{{#blogPost}}
 
 	<main class="container col-lg-10 mt-3">
 
         <div class="row">
 
-        	{{#flash_success}}
+        	@if(flash_success)
                 <div class="text-center alert alert-success" role="alert">
                     <b>{{flash_success}}</b>
                 </div>
-            {{/flash_success}}
+            @end
 
-            {{#flash_warning}}
+            @if(flash_warning)
                 <div class="text-center alert alert-warning" role="alert">
                     <b>{{flash_warning}}</b>
                 </div>
-            {{/flash_warning}}
+            @end
 
         	<form action="/admin/update/blogPost/{{id}}" method="POST">
 
@@ -96,6 +96,6 @@
 
     {{/blogPost}}
 
-    {{/user.admin}}
+    @end
 
-{{>partials/footer}}
+@end

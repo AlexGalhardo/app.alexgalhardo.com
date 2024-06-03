@@ -1,6 +1,6 @@
 {{>partials/header}}
-	
-	{{#user.admin}}
+
+	@if(user?.admin)
 
 	<main class="container col-lg-10 mt-3 text-center">
 
@@ -10,20 +10,20 @@
 
 	        	<div class="mb-3 row">
 
-	        		{{#flash_success}}
+	        		@if(flash_success)
                         <div class="text-center alert alert-success" role="alert">
                             <b>{{flash_success}}</b>
                         </div>
-                    {{/flash_success}}
+                    @end
 
-                    {{#flash_warning}}
+                    @if(flash_warning)
                         <div class="text-center alert alert-warning" role="alert">
                             <b>{{flash_warning}}</b>
                         </div>
-                    {{/flash_warning}}
+                    @end
 
 			        <div class="col-lg-6">
-					    
+
 					    <div class="form-floating mb-3">
 						  	<input type="text" class="form-control" name="game_title" id="game_title" value="{{title}}" required>
 						  	<label for="game_title">GAME_TITLE</label>
@@ -79,7 +79,7 @@
 						  	<label for="game_resume">GAME_RESUME</label>
 						</div>
 					</div>
-					
+
 				</div>
 
 				<button type="submit" class="mb-5 w-25 btn btn-outline-success shadow">
@@ -92,6 +92,6 @@
 
     </main>
 
-    {{/user.admin}}
+    @end
 
-{{>partials/footer}}
+@end

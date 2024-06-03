@@ -10,11 +10,11 @@
             		<h3 class="fw-bold text-white">{{title}}</h3>
             		<small class="mb-5">{{updated_at}}</small>
                     <br><br>
-                    {{#user.admin}}
+                    @if(user?.admin)
                         <a href="/admin/update/blogPost/{{id}}" class="w-50 shadow mb-2 btn btn-warning shadow-sm">
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Blog Post</a>
-                    {{/user.admin}}
+                    @end
                 </div>
 
                 <div id="blog_body" class="mb-5 text-white">

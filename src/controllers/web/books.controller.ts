@@ -2,32 +2,39 @@ import { Request, Response } from "express";
 
 import Header from "../../utils/Header";
 import Number from "../../utils/Numbers";
-import Books from "../../repositories/books.repository";
-import Games from "../../repositories/games.repository";
-import Movies from "../../repositories/movies.repository";
-import TVShows from "../../repositories/tv-shows.repository";
+import BooksRepository from "../../repositories/books.repository";
+import GamesRepository from "../../repositories/games.repository";
+import MoviesRepository from "../../repositories/movies.repository";
+import TVShowsRepository from "../../repositories/tv-shows.repository";
+import edge from "../../config/edge";
 
 export default class BooksController {
 	static async getViewBooks(req: Request, res: Response) {
-		const book = await Books.getRandom();
-		const totalGames = await Games.getTotal();
-		const totalBooks = await Books.getTotal();
-		const totalMovies = await Movies.getTotal();
-		const totalTVShows = await TVShows.getTotal();
-		book.price = Number.toFloat(book.price);
+		try {
+			const book = await BooksRepository.getRandom();
+			const totalGames = await GamesRepository.getTotal();
+			const totalBooks = await BooksRepository.getTotal();
+			const totalMovies = await Movies.getTotal();
+			const totalTVShows = await TVShowsRepository.getTotal();
+			book.price = Number.toFloat(book.price as unknown as string);
 
-		return res.render("pages/books", {
-			flash_success: req.flash("success"),
-			flash_warning: req.flash("warning"),
-			book,
-			totalGames,
-			totalBooks,
-			totalMovies,
-			totalTVShows,
-			user: global.SESSION_USER,
-			app_url: process.env.APP_URL,
-			header: Header.books(),
-		});
+			return res.setHeader("Content-Type", "text/html").end(
+				await edge.render("pages/books", {
+					flash_success: req.flash("success").length ?? null,
+					flash_warning: req.flash("warning").length ?? null,
+					book,
+					totalGames,
+					totalBooks,
+					totalMovies,
+					totalTVShows,
+					user: global.SESSION_USER,
+					app_url: process.env.APP_URL,
+					header: Header.books(),
+				}),
+			);
+		} catch (error: any) {
+			res.status(500).send(error.message);
+		}
 	}
 
 	static async getSearchBookTitle(req: Request, res: Response) {
@@ -37,7 +44,7 @@ export default class BooksController {
 			return res.redirect("/books");
 		}
 
-		const searchedBooks = await Books.searchTitle(searchBookTitle);
+		const searchedBooks = await BooksRepository.searchTitle(String(searchBookTitle));
 
 		if (!searchedBooks.length) {
 			req.flash("warning", `No books found from search: ${searchBookTitle}! Recommending a Random Book`);

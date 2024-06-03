@@ -1,23 +1,23 @@
 {{>partials/header}}
 
-    {{#user}}
+    @if(user)
 
     <main class="container col-lg-9 mt-3 mb-5">
 
         <!-- ROW -->
         <div class="row">
 
-            {{#flash_success}}
+            @if(flash_success)
                 <div class="text-center alert alert-success" role="alert">
                     <b>{{flash_success}}</b>
                 </div>
-            {{/flash_success}}
+            @end
 
-            {{#flash_warning}}
+            @if(flash_warning)
                 <div class="text-center alert alert-warning" role="alert">
                     <b>{{flash_warning}}</b>
                 </div>
-            {{/flash_warning}}
+            @end
 
             <div class="col-sm-4">
 
@@ -125,7 +125,7 @@
                     <small><span id="alert_name" class="fw-bold text-danger"></span></small>
 
                     <div class="form-floating mb-3">
-                      <input type="email" class="form-control" name="name" id="name" value="{{name}}" {{#user.admin}} disabled {{/user.admin}}>
+                      <input type="email" class="form-control" name="name" id="name" value="{{name}}" @if(user?.admin) disabled @end>
                       <label for="name">NAME</label>
                     </div>
 
@@ -448,7 +448,7 @@
             <br>
 
 
-        {{/user}}
+        @end
 
 
             {{^user.admin}}
@@ -460,7 +460,7 @@
                             Delete Account
                     </button>
                 </form>
-            {{/user.admin}}
+            @end
 
 
         </div>

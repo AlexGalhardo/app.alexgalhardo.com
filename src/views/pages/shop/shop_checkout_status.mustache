@@ -2,11 +2,11 @@
 
 	<div class="container col-lg-9 mt-3 mx-auto">
 
-		{{#flash_success}}
+		@if(flash_success)
 			<div class="text-center alert alert-success" role="alert">
 				<b>{{flash_success}}</b>
 			</div>
-		{{/flash_success}}
+		@end
 
 		<div class="row">
 

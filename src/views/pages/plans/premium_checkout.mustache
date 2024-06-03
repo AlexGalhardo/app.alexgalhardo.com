@@ -1,16 +1,16 @@
 {{>partials/header}}
 
-    {{#user}}
+    @if(user)
 
     <div class="container col-lg-7 mt-2">
 
         <div class="row">
 
-            {{#flash_warning}}
+            @if(flash_warning)
                 <div class="text-center alert alert-warning" role="alert">
                     <b>{{flash_warning}}</b>
                 </div>
-            {{/flash_warning}}
+            @end
 
             <form id="formCreditCard" action="/plan/premium/post" method="POST">
 
@@ -148,7 +148,7 @@
     <script src="/scripts/jquery.card.js"></script>
     <script src="/scripts/render_credit_card.js"></script>
 
-    {{/user}}
+    @end
 
 
 

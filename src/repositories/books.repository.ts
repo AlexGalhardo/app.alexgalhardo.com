@@ -1,7 +1,7 @@
 import prisma from "../config/prisma";
 import { inputBookObject } from "../utils/InputTypes";
 
-export default class Books {
+export default class BooksRepository {
     static getAll() {
         return prisma.book.findMany();
     }

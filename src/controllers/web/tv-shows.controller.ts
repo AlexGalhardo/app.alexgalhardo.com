@@ -1,31 +1,38 @@
 import { Request, Response } from "express";
 
 import Header from "../../utils/Header";
-import Books from "../../repositories/books.repository";
-import Games from "../../repositories/games.repository";
-import Movies from "../../repositories/movies.repository";
-import TVShows from "../../repositories/tv-shows.repository";
+import BooksRepository from "../../repositories/books.repository";
+import GamesRepository from "../../repositories/games.repository";
+import MoviesRepository from "../../repositories/movies.repository";
+import TVShowsRepository from "../../repositories/tv-shows.repository";
+import edge from "../../config/edge";
 
 export default class TVShowsController {
 	static async getViewTVShows(req: Request, res: Response) {
-		const tvshow = await TVShows.getRandom();
-		const totalGames = await Games.getTotal();
-		const totalBooks = await Books.getTotal();
-		const totalMovies = await Movies.getTotal();
-		const totalTVShows = await TVShows.getTotal();
+		try {
+			const tvshow = await TVShowsRepository.getRandom();
+			const totalGames = await GamesRepository.getTotal();
+			const totalBooks = await BooksRepository.getTotal();
+			const totalMovies = await Movies.getTotal();
+			const totalTVShows = await TVShowsRepository.getTotal();
 
-		return res.render("pages/tvshows", {
-			flash_success: req.flash("success"),
-			flash_warning: req.flash("warning"),
-			tvshow,
-			totalGames,
-			totalBooks,
-			totalMovies,
-			totalTVShows,
-			user: global.SESSION_USER,
-			app_url: process.env.APP_URL,
-			header: Header.books(),
-		});
+			return res.setHeader("Content-Type", "text/html").end(
+				await edge.render("pages/tvshows", {
+					flash_success: req.flash("success").length ?? null,
+					flash_warning: req.flash("warning").length ?? null,
+					tvshow,
+					totalGames,
+					totalBooks,
+					totalMovies,
+					totalTVShows,
+					user: global.SESSION_USER,
+					app_url: process.env.APP_URL,
+					header: Header.books(),
+				}),
+			);
+		} catch (error: any) {
+			res.status(500).send(error.message);
+		}
 	}
 
 	static async getSearchTVShowTitle(req: Request, res: Response) {
@@ -35,7 +42,7 @@ export default class TVShowsController {
 			return res.redirect("/");
 		}
 
-		const searchTVShows = await TVShows.searchTitle(searchTVShowTitle as string);
+		const searchTVShows = await TVShowsRepository.searchTitle(searchTVShowTitle as string);
 
 		if (!searchTVShows.length) {
 			req.flash("warning", `No tvshows found from search: ${searchTVShowTitle}! Recommending a Random TVShow`);
