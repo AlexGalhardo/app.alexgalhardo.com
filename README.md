@@ -10,7 +10,7 @@
 
 1. Clone repository
 ```
-git clone git@github.com:AlexGalhardo/galhardo-app.git
+git clone git@github.com:AlexGalhardo/app.alexgalhardo.com.git
 ```
 
 2. Enter repository
