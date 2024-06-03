@@ -10,66 +10,67 @@ import Users from "../../repositories/users.repository";
 import edge from "../../config/edge";
 
 export default class GamesController {
-	static async getViewGames(req: Request, res: Response) {
-		try {
-			const game = await GamesRepository.getRandom();
-			const totalGames = await GamesRepository.getTotal();
-			const totalBooks = await BooksRepository.getTotal();
-			const totalMovies = await MoviesRepository.getTotal();
-			const totalTVShows = await TVShowsRepository.getTotal();
-			const totalItensShopCart = await Users.getTotalItensShopCart();
-			game.price = NumberHelper.toFloat(game.price as unknown as string);
+    static async getViewGames(req: Request, res: Response) {
+        try {
+            const game = await GamesRepository.getRandom();
+            const totalGames = await GamesRepository.getTotal();
+            const totalBooks = await BooksRepository.getTotal();
+            const totalMovies = await MoviesRepository.getTotal();
+            const totalTVShows = await TVShowsRepository.getTotal();
+            const totalItensShopCart = await Users.getTotalItensShopCart();
+            game.price = NumberHelper.toFloat(game.price as unknown as string);
 
-			return res.setHeader("Content-Type", "text/html").end(
-				await edge.render("pages/games", {
-					flash_success: req.flash("success").length ?? null,
-					flash_warning: req.flash("warning").length ?? null,
-					game,
-					totalGames,
-					totalBooks,
-					totalMovies,
-					totalTVShows,
-					totalItensShopCart: totalItensShopCart ?? 0,
-					user: global.SESSION_USER,
-					app_url: process.env.APP_URL,
-					header: Header.games(),
-				}),
-			);
-		} catch (error: any) {
-			res.status(500).send(error.message);
-		}
-	}
+            return res.setHeader("Content-Type", "text/html").end(
+                await edge.render("pages/games", {
+                    flash_success: req.flash("success").length ?? null,
+                    flash_warning: req.flash("warning").length ?? null,
+                    game,
+                    totalGames,
+                    totalBooks,
+                    totalMovies,
+                    totalTVShows,
+                    totalItensShopCart: totalItensShopCart ?? 0,
+                    user: global.SESSION_USER,
+                    app_url: process.env.APP_URL,
+                    header: Header.games(),
+                }),
+            );
+        } catch (error: any) {
+            res.status(500).send(error.message);
+        }
+    }
 
-	static async getSearchGameTitle(req: Request, res: Response) {
-		const searchGameTitle = req.query.title;
+    static async getSearchGameTitle(req: Request, res: Response) {
+        const searchGameTitle = req.query.title;
 
-		if (!searchGameTitle) {
-			return res.redirect("/");
-		}
+        if (!searchGameTitle) {
+            return res.redirect("/");
+        }
 
-		let searchedGames = await GamesRepository.searchTitle(searchGameTitle as string);
+        let searchedGames = await GamesRepository.searchTitle(searchGameTitle as string);
 
-		if (!searchedGames.length) {
-			req.flash("warning", `No games found from search: ${String(searchGameTitle)}! Recommending a Random Game`);
-			return res.redirect("/");
-		}
+        if (!searchedGames.length) {
+            req.flash("warning", `No games found from search: ${String(searchGameTitle)}! Recommending a Random Game`);
+            return res.redirect("/");
+        }
 
-		if (searchedGames.length > 1) {
-			searchedGames[0].firstGame = true;
-			return res.render("pages/games", {
-				flash_success: `${searchedGames.length
-					} Games Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
-				games: searchedGames,
-				user: global.SESSION_USER,
-				header: Header.games(),
-			});
-		}
+        if (searchedGames.length > 1) {
+            searchedGames[0].firstGame = true;
+            return res.render("pages/games", {
+                flash_success: `${
+                    searchedGames.length
+                } Games Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
+                games: searchedGames,
+                user: global.SESSION_USER,
+                header: Header.games(),
+            });
+        }
 
-		return res.render("pages/games", {
-			flash_success: `1 Game Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
-			game: searchedGames[0],
-			user: global.SESSION_USER,
-			header: Header.games(),
-		});
-	}
+        return res.render("pages/games", {
+            flash_success: `1 Game Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
+            game: searchedGames[0],
+            user: global.SESSION_USER,
+            header: Header.games(),
+        });
+    }
 }
