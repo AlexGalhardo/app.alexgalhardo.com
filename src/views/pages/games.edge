@@ -1,48 +1,47 @@
-{{>partials/header}}
+@layout.main({ title: "Games" })
 
 	<div class="container col-lg-9">
 
       	<div class="row">
 
-            {{^games}}
-                {{^game}}
+            @if(!games)
+                @if(!game)
                     <div class="text-center alert alert-warning" role="alert" class="mb-3">
                         <b class="fw-bold">No games found!</b>
                     </div>
-                {{/game}}
-            {{/games}}
+                @end
+            @end
 
-
-            {{#flash_success}}
+			@if(flash_success)
                 <div class="text-center alert alert-dark" role="alert">
-                    <b>{{flash_success}}</b>
+                    <b>{{ flash_success }}</b>
                 </div>
-            {{/flash_success}}
+            @end
 
-            {{#flash_warning}}
+			@if(flash_warning)
                 <div class="text-center alert alert-danger" role="alert">
-                    <b>{{flash_warning}}</b>
+                    <b>{{ flash_warning }}</b>
                 </div>
-            {{/flash_warning}}
+            @end
 
-            {{#game}}
-                <input id="game_id" name="game_id" type="hidden" value="{{id}}">
-                <input id="game_price_value" name="game_price_value" type="hidden" value="{{price}}">
+            @if(game)
+                <input id="game_id" name="game_id" type="hidden" value="{{ id }}">
+                <input id="game_price_value" name="game_price_value" type="hidden" value="{{ price }}">
 
-                <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
+                <input type="text" id="app_url" hidden value="{{ app_url }}" readonly>
 
                 <div class="col-lg-3 text-center">
-                    <img id="game_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="game_image">
+                    <img id="game_image" src="{{ game.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="game_image">
 
-					{{#user}}
-						<button onclick="addGameToCart()" class="btn btn-outline-light {{^user}}disabled{{/user}} fw-bold w-100 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add Cart</span></button>
-					{{/user}}
+					@if(user)
+						<button onclick="addGameToCart()" class="btn btn-outline-light @if(!user) disabled @end fw-bold w-100 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add Cart</span></button>
+					@end
 
-                    {{#user.admin}}
-                        <a id="game_admin_update_link" href="/admin/update/game/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">
+                    @if(user?.admin)
+                        <a id="game_admin_update_link" href="/admin/update/game/{{ id }}" class="w-75 shadow btn btn-warning shadow-sm">
                         <i class="bi bi-unlock-fill"></i>
                         Edit This Game</a>
-                    {{/user.admin}}
+                    @end
                 </div>
 
                 <div class="col-lg-6">
@@ -50,28 +49,28 @@
                     <div class="card-body">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="game_igdb_link" href="{{igdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
-                                <span id="game_title" class="fw-bold">{{title}}</span>
+                            <a target="_blank" id="game_igdb_link" href="{{ igdb_link }}" class="fs-3 text-decoration-none fw-bold text-white">
+                                <span id="game_title" class="fw-bold">{{ game.title }}</span>
                             </a>
 
                             <h4 class="fw-bold text-warning">⭐
                                 <span id="game_igdb_rating">
-									{{igdb_rating}}
+									{{ game.igdb_rating }}
                                 </span>
                             </h4>
                         </div>
 
-                        <p class="card-text" id="game_resume">{{resume}}</p>
+                        <p class="card-text" id="game_resume">{{ game.resume }}</p>
 
                         <ul class="mt-3 text-white">
 
-							<li class=""><b>Release Year:</b> <span id="game_year_release">{{year_release}}</span></li>
+							<li class=""><b>Release Year:</b> <span id="game_year_release">{{ game.year_release}}</span></li>
 
-                            <li class=""><b>Genres:</b> <span id="game_genres">{{genres}}</span></li>
+                            <li class=""><b>Genres:</b> <span id="game_genres">{{game.genres}}</span></li>
 
-                            <li class=""><b>Platforms:</b> <span id="game_platforms">{{platforms}}</span></li>
+                            <li class=""><b>Platforms:</b> <span id="game_platforms">{{ game.platforms }}</span></li>
 
-                            <li class=""><b>Developer:</b> <span id="game_developer">{{developer}}</span></li>
+                            <li class=""><b>Developer:</b> <span id="game_developer">{{ game.developer }}</span></li>
                         </ul>
                     </div>
 
@@ -117,27 +116,20 @@
                             Recommend Random
                     </button>
 
-                    {{^user}}
-                        <div id="newsletter_card">
-
-                        </div>
-                    {{/user}}
-
                 </div>
-            {{/game}}
+            @end
 
 
 
-            {{#games}}
+            @if(games)
 
                 <div class="mt-2"></div>
 
                 <div class="col-lg-3 text-center">
 
-                    <img id="game_image" src="{{image}}" crossorigin="anonymous" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="game_image">
+                    <img id="game_image" src="{{ game.image }}" crossorigin="anonymous" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="game_image">
 
                 </div>
-
 
                 <div class="col-lg-6">
 
@@ -145,31 +137,30 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <a target="_blank" id="game_igdb_link" href="{{igdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
-                                <span id="game_title" class="fw-bold">{{title}}</span>
+                                <span id="game_title" class="fw-bold">{{ game.title }}</span>
                             </a>
 
                             <h4 class="fw-bold text-warning">⭐
-                                <span id="game_igdb_rating">{{igdb_rating}}</span>
+                                <span id="game_igdb_rating">{{ game.igdb_rating }}</span>
                             </h4>
                         </div>
 
-                        <small class="card-text text-white" id="game_resume">{{resume}}</small>
+                        <small class="card-text text-white" id="game_resume">{{ game.resume }}</small>
 
                         <ul class="mt-3 text-white">
-                            <li class=""><b>Release Year:</b> <span id="game_year_release">{{year_release}}</span></li>
+                            <li class=""><b>Release Year:</b> <span id="game_year_release">{{ game.year_release }}</span></li>
 
-                            <li class=""><b>Genres:</b> <span id="game_genres">{{genres}}</span></li>
+                            <li class=""><b>Genres:</b> <span id="game_genres">{{ game.genres}}</span></li>
 
-                            <li class=""><b>Platforms:</b> <span id="game_platforms">{{platforms}}</span></li>
+                            <li class=""><b>Platforms:</b> <span id="game_platforms">{{ game.platforms }}</span></li>
 
-                            <li class=""><b>Developer:</b> <span id="game_developer">{{developer}}</span></li>
+                            <li class=""><b>Developer:</b> <span id="game_developer">{{ game.developer }}</span></li>
                         </ul>
                     </div>
 
                 </div>
-                <!-- END GAME POST -->
 
-                {{#firstGame}}
+                @if(firstGame)
                     <div class="col-lg-3 mb-3">
 
                         <form class="mb-3" action="/searchGame" method="GET">
@@ -202,18 +193,10 @@
                             </a>
                         </div>
 
-                        {{^user}}
-                            <div id="newsletter_card">
-
-                            </div>
-                        {{/user}}
-
                     </div>
-                {{/firstGame}}
+                @end
 
-                {{^firstGame}}<div class="col-lg-3"></div>{{/firstGame}}
-
-            {{/games}}
+            @end
 
 
         </div>
@@ -222,4 +205,4 @@
 
     <script src="scripts/games.js"></script>
 
-{{>partials/footer}}
+@end

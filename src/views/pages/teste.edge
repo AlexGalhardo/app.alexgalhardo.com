@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+  <h1>
+    Hello {{ user.fullName }} e tenho {{ age }}
+
+	@if(user.fullName)
+		<p> Hello {{ user.fullName }}! </p>
+	@elseif(user.firstName)
+		<p> Hello {{ user.firstName }}! </p>
+	@else
+		<p> Hello Guest! </p>
+	@end
+  </h1>
+</body>
+</html>

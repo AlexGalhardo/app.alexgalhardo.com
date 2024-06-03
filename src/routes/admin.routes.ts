@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from "express";
 
-import AdminController from "../controllers/admin/admin.controller";
+import AdminController from "../controllers/web/admin.controller";
 
 const router = Router();
 
