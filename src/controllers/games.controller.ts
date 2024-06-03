@@ -43,7 +43,7 @@ export default class GamesController {
         const searchedGames = await Games.searchTitle(searchGameTitle as string);
 
         if (!searchedGames.length) {
-            req.flash("warning", `No games found from search: ${searchGameTitle}! Recommending a Random Game`);
+            req.flash("warning", `No games found from search: ${String(searchGameTitle)}! Recommending a Random Game`);
             return res.redirect("/");
         }
 
@@ -52,7 +52,7 @@ export default class GamesController {
             return res.render("pages/games", {
                 flash_success: `${
                     searchedGames.length
-                } Games Found From Search Title: ${searchGameTitle.toUpperCase()}`,
+                } Games Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
                 games: searchedGames,
                 user: global.SESSION_USER,
                 header: Header.games(),
@@ -60,7 +60,7 @@ export default class GamesController {
         }
 
         return res.render("pages/games", {
-            flash_success: `1 Game Found From Search Title: ${searchGameTitle.toUpperCase()}`,
+            flash_success: `1 Game Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
             game: searchedGames[0],
             user: global.SESSION_USER,
             header: Header.games(),

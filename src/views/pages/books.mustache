@@ -34,7 +34,9 @@
                 <div class="col-lg-3 text-center">
                     <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="book_image">
 
-                    <button onclick="buyThisBook()" class="btn btn-outline-light {{^user}}disabled{{/user}} fw-bold w-100 mb-3 shadow" id="button_buy_this_book"><i class="bi bi-cart-plus"></i> Add Cart</button>
+                    {{#user}}
+						<button onclick="buyThisBook()" class="btn btn-outline-light {{^user}}disabled{{/user}} fw-bold w-100 mb-3 shadow" id="button_buy_this_book"><i class="bi bi-cart-plus"></i> Add Cart</button>
+					{{/user}}
 
                     {{#user.admin}}
                         <a id="book_admin_update_link" href="/admin/update/book/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">

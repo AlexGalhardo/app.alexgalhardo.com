@@ -4,12 +4,12 @@
 
         <div class="row">
 
-        	<div class="container col-md-10 d-flex justify-content-between mb-3">
+        	<div class="container col-md-10 d-flex justify-content-between mb-2">
         		{{{boostrapPaginator}}}
 
-        		<form action="/blog/search" method="GET" class="d-flex">
-			        <input class="form-control me-2" type="search" placeholder="Search blog title..." name="blogTitle" value="{{searchBlogTitle}}" required>
-			        <button class="btn btn-outline-dark" type="submit">Search</button>
+        		<form action="/blog/search" method="GET" class="d-flex w-50">
+			        <input class="form-control me-3" type="search" placeholder="Search blog title..." name="blogTitle" value="{{searchBlogTitle}}" required>
+			        <button class="btn btn-outline-light" type="submit">Search</button>
 			    </form>
 
 			    {{#totalBlogPostsFoundFromSearch}}
@@ -18,15 +18,15 @@
         	</div>
 
 			{{#blog}}
-			    <div class="container col-md-10">
+			    <div class="container col-md-10 mt-5">
 			      	<a class="text-dark text-decoration-none" href="/blog/{{slug}}">
 			      		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 			      		<div class="col-auto d-none d-lg-block">
 			          		<img src="{{image}}">
 			        	</div>
 			        	<div class="col p-4 d-flex flex-column position-static">
-			          		<h3 class="fw-bold text-primary">{{title}}</h3>
-			          		<div class="mb-1 text-muted"><small>{{created_at}}</small></div>
+			          		<h3 class="fw-bold text-white">{{title}}</h3>
+			          		<div class="mb-1 text-white"><small>{{created_at}}</small></div>
 			          		<br>
 			          		<p class="card-text mb-auto">{{resume}}</p>
 			        	</div>
@@ -36,7 +36,7 @@
 			    </div>
 			{{/blog}}
 
-			<div class="container col-md-10">{{{boostrapPaginator}}}</div>
+			<div class="container col-md-10 mb-5">{{{boostrapPaginator}}}</div>
 
 		</div>
 

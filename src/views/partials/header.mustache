@@ -166,22 +166,19 @@
                         {{/user}}
 
 
+						{{#user}}
 						<a href="/shop"
-                            class="shadow-sm fw-bold btn ms-2 btn-outline-success {{^user}}disabled{{/user}}"
+                            class="shadow-sm fw-bold btn ms-2 btn-outline-light"
                             type="submit">
                             <i class="bi bi-cart"></i>
                             My Cart
                             [
                                 <span id="total_shopCart_itens">
-                                    {{#user}}
-                                        {{totalItensShopCart}}
-                                    {{/user}}
-                                    {{^user}}
-                                        0
-                                    {{/user}}
+                                    {{totalItensShopCart}}
                                 </span>
                             ]
                         </a>
+						{{/user}}
 
                 </div>
 
