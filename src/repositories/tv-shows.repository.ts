@@ -1,5 +1,5 @@
 import prisma from "../config/prisma";
-import { inputTvShowObject } from "../utils/InputTypes";
+import { CreateTVShowDTO } from "../utils/DTOs";
 
 export default class TVShowsRepository {
     static getAll() {
@@ -37,7 +37,7 @@ export default class TVShowsRepository {
         });
     }
 
-    static create(tvShowObject: inputTvShowObject) {
+    static create(tvShowObject: CreateTVShowDTO) {
         return prisma.tvshow.create({
             data: {
                 title: tvShowObject.title,
@@ -53,7 +53,7 @@ export default class TVShowsRepository {
         });
     }
 
-    static update(tvShowObject: inputTvShowObject) {
+    static update(tvShowObject: CreateTVShowDTO) {
         return prisma.tvshow.update({
             where: {
                 id: tvShowObject.id,

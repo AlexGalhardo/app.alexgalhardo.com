@@ -1,4 +1,4 @@
-export type inputCreateUser = {
+export type CreateUserDTO = {
     username: string;
     email: string;
     password: string;
@@ -11,7 +11,7 @@ export type inputCreateUser = {
     google_avatar: string;
 };
 
-export type inputUpdateUser = {
+export type UpdateUserDTO = {
     id: string;
     username: string;
     email: string;
@@ -29,7 +29,7 @@ export type inputUpdateUser = {
     address_country: string;
 };
 
-export type inputBookObject = {
+export type CreateBookDTO = {
     id: string;
     title: string;
     year_release: number;
@@ -43,7 +43,7 @@ export type inputBookObject = {
     updated_at: string;
 };
 
-export interface createBlogDTO {
+export interface CreateBlogDTO {
     title: string;
     image: string;
     category: string;
@@ -51,7 +51,7 @@ export interface createBlogDTO {
     body: string;
 }
 
-export interface updateBlogDTO {
+export interface UpdateBlogDTO {
     id: string;
     title: string;
     image: string;
@@ -60,7 +60,7 @@ export interface updateBlogDTO {
     body: string;
 }
 
-export type inputGameObject = {
+export type CreateGameDTO = {
     id: string;
     title: string;
     price: number;
@@ -75,7 +75,7 @@ export type inputGameObject = {
     resume: string;
 };
 
-export type inputMovieObject = {
+export type CreateMovieDTO = {
     id: string;
     title: string;
     year_release: number;
@@ -88,7 +88,7 @@ export type inputMovieObject = {
     genres: string;
 };
 
-export type inputTvShowObject = {
+export type CreateTVShowDTO = {
     id: string;
     title: string;
     year_release: number;

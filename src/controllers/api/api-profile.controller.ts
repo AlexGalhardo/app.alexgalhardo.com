@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
-import Users from "../../repositories/users.repository";
+import UsersRepository from "../../repositories/users.repository";
 
 export default class APIProfileController {
     static async postLogin(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
-            return res.json(await Users.login(email, password));
+            return res.json(await UsersRepository.login(email, password));
         } catch (err) {
             next(err);
         }
@@ -50,7 +50,7 @@ export default class APIProfileController {
                 country,
             };
 
-            const user = await Users.update(userObject);
+            const user = await UsersRepository.update(userObject);
 
             return user
                 ? res.json({ user })
@@ -66,7 +66,7 @@ export default class APIProfileController {
         try {
             const { email, password } = req.body;
 
-            const profileDeleted = await Users.delete(email, password);
+            const profileDeleted = await UsersRepository.delete(email, password);
 
             if (profileDeleted) {
                 return res.json({

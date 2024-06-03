@@ -1,11 +1,10 @@
-/* eslint-disable prettier/prettier */
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
 import Bcrypt from "../../utils/Bcrypt";
 import DateTime from "../../utils/DateTime";
-import Users from "../../repositories/users.repository";
+import UsersRepository from "../../repositories/users.repository";
 
 export default class APIAdminController {
     static async postAdminLogin(req: Request, res: Response, next: NextFunction) {
@@ -18,13 +17,13 @@ export default class APIAdminController {
 
             const { email, password } = req.body;
 
-            if (!Users.emailRegistred(email)) {
+            if (!UsersRepository.emailRegistred(email)) {
                 return res.status(422).json({
                     error: "Email inválid!",
                 });
             }
 
-            const user = await Users.getUserByEmail(email);
+            const user = await UsersRepository.getUserByEmail(email);
 
             const passwordIsValid = await Bcrypt.compare(password, user?.password as string);
 
@@ -56,7 +55,7 @@ export default class APIAdminController {
 
             const decoded = jwt.verify(JWT_TOKEN as string, process.env.JWT_SECRET as string);
 
-            const admin = await Users.getById(decoded.user_id);
+            const admin = await UsersRepository.getById(decoded.user_id);
 
             return res.json({
                 admin: {
@@ -85,7 +84,7 @@ export default class APIAdminController {
         const JWT_TOKEN = req.headers.authorization.split(" ")[1];
         const decoded = jwt.verify(JWT_TOKEN, process.env.JWT_SECRET as string);
 
-        const user = await Users.getById(decoded.user_id);
+        const user = await UsersRepository.getById(decoded.user_id);
 
         return user?.admin
             ? user
@@ -95,6 +94,6 @@ export default class APIAdminController {
     }
 
     static async getUsersRegistred(req: Request, res: Response) {
-        return res.json(await Users.getAll());
+        return res.json(await UsersRepository.getAll());
     }
 }

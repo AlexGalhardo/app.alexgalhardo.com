@@ -1,4 +1,4 @@
-@layout.main({ title: "Games" })
+@layout.main({ title: "Games", user })
 
 	<div class="container col-lg-9">
 
@@ -34,7 +34,7 @@
                     <img id="game_image" src="{{ game.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="game_image">
 
 					@if(user)
-						<button onclick="addGameToCart()" class="btn btn-outline-light @if(!user) disabled @end fw-bold w-100 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add Cart</span></button>
+						<button onclick="addGameToCart()" class="btn btn-outline-light fw-bold w-100 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add Cart</span></button>
 					@end
 
                     @if(user?.admin)

@@ -1,5 +1,5 @@
 import prisma from "../config/prisma";
-import { ShopTransactionDTO, SubscriptionTransactionDTO } from "../utils/InputTypes";
+import { ShopTransactionDTO, SubscriptionTransactionDTO } from "../utils/DTOs";
 
 export default class StripeRepository {
     static async createShopTransaction({

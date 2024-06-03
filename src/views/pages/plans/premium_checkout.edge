@@ -66,13 +66,13 @@
                             <div class="row g-2 mb-2">
                               <div class="col-md">
                                 <div class="form-floating">
-                                  <input type="text" class="form-control" name="card_exp_year" id="card_exp_month" value="{{stripe.card_exp_month}}" readonly>
+                                  <input type="text" class="form-control" name="card_exp_year" id="card_exp_month" value="{{stripe?.card_exp_month}}" readonly>
                                   <label for="card_exp_month">CARD_EXP_MONTH</label>
                                 </div>
                               </div>
                               <div class="col-md">
                                 <div class="form-floating">
-                                  <input type="text" class="form-control" name="card_exp_year" id="card_exp_year" value="{{stripe.card_exp_year}}" readonly>
+                                  <input type="text" class="form-control" name="card_exp_year" id="card_exp_year" value="{{stripe?.card_exp_year}}" readonly>
                                   <label for="card_exp_year">CARD_EXP_YEAR</label>
                                 </div>
                               </div>
@@ -86,7 +86,7 @@
                             <div id="div_credit_card"></div>
 
                             <div class="form-floating mb-3 mt-3">
-                                <input type="text" class="form-control" name="holder_name" id="holder_name" value="{{stripe.card_holder_name}}">
+                                <input type="text" class="form-control" name="holder_name" id="holder_name" value="{{stripe?.card_holder_name}}">
                                 <label for="holder_name">CARD_HOLDER_NAME</label>
                             </div>
 

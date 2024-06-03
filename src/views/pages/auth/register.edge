@@ -60,32 +60,17 @@
             <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
             <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-            {{#github_id}}
-                <input value="{{github_id}}" name="github_id" hidden onkeydown="return false;">
-                <input value="{{github_avatar}}" name="github_avatar" hidden onkeydown="return false;">
-            {{/github_id}}
-
-            {{#google_id}}
-                <input value="{{google_id}}" name="google_id" hidden onkeydown="return false;">
-                <input value="{{google_avatar}}" name="google_avatar" hidden onkeydown="return false;">
-            {{/google_id}}
-
-            {{#facebook_id}}
-                <input value="{{facebook_id}}" name="facebook_id" hidden onkeydown="return false;">
-                <input value="{{facebook_avatar}}" name="facebook_avatar" hidden onkeydown="return false;">
-            {{/facebook_id}}
-
             <small><span id="alert_name" class="fw-bold text-danger"></span></small>
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control mb-3" id="username" name="username" placeholder="Enter your username" required autofocus value="{{username}}" minlength="4" maxlength="32">
+                <input type="text" class="form-control mb-3" id="username" name="username" placeholder="Enter your username" required autofocus value="" minlength="4" maxlength="32">
                 <label for="username">Username</label>
             </div>
 
             <small><span id="alert_email" class="fw-bold text-danger"></span></small>
 
             <div class="form-floating mb-3">
-                <input type="email" class="form-control mb-3" name="email" id="email" required value="{{email}}" {{#email_readonly}}onkeydown="return false;" title="You can't delete email if sign up with social login"{{/email_readonly}}>
+                <input type="email" class="form-control mb-3" name="email" id="email" required value="">
                 <label for="email">Email</label>
             </div>
 

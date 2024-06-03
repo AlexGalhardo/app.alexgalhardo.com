@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 
-import Blog from "../../repositories/blog.repository";
+import BlogRepository from "../../repositories/blog.repository";
 import BooksRepository from "../../repositories/books.repository";
 import GamesRepository from "../../repositories/games.repository";
 import MoviesRepository from "../../repositories/movies.repository";
 import TVShowsRepository from "../../repositories/tv-shows.repository";
-import { createBlogDTO } from "src/utils/InputTypes";
+import { CreateBlogDTO } from "src/utils/DTOs";
 
 export default class AdminController {
     static getViewCreateBlogPost(req: Request, res: Response) {
@@ -19,7 +19,7 @@ export default class AdminController {
     static async postCreateBlogPost(req: Request, res: Response) {
         const { blog_image, blog_title, blog_category, blog_resume, blog_body } = req.body;
 
-        const blogPostObject: createBlogDTO = {
+        const blogPostObject: CreateBlogDTO = {
             image: blog_image,
             title: blog_title,
             category: blog_category,
@@ -27,7 +27,7 @@ export default class AdminController {
             body: blog_body,
         };
 
-        const blogPost = await Blog.create(blogPostObject);
+        const blogPost = await BlogRepository.create(blogPostObject);
 
         if (!blogPost) {
             req.flash("warning", `ERROR: Blog Post Not Created!`);
@@ -40,7 +40,7 @@ export default class AdminController {
 
     static async getViewUpdateBlogPost(req: Request, res: Response) {
         const { blog_id } = req.params;
-        const blogPost = await Blog.getById(blog_id);
+        const blogPost = await BlogRepository.getById(blog_id);
 
         return res.render("pages/admin/updateBlogPost", {
             flash_success: req.flash("success"),
@@ -62,7 +62,7 @@ export default class AdminController {
             body: blog_body,
         };
 
-        const blogPost = await Blog.update(blogPostObject);
+        const blogPost = await BlogRepository.update(blogPostObject);
 
         if (!blogPost) {
             req.flash("warning", `ERROR: Blog Post Not Updated!`);
@@ -76,7 +76,7 @@ export default class AdminController {
     static async postDeleteBlogPost(req: Request, res: Response) {
         const { blog_id } = req.params;
 
-        if (await Blog.delete(blog_id)) {
+        if (await BlogRepository.delete(blog_id)) {
             req.flash("success", `Blog Post Deleted!`);
             return res.redirect("/admin/create/blogPost");
         }
@@ -212,7 +212,7 @@ export default class AdminController {
             book_author,
         } = req.body;
 
-        const bookObject = {
+        const newBook = {
             id: null,
             title: book_title,
             year_release: parseInt(book_year_release),
@@ -222,9 +222,11 @@ export default class AdminController {
             pages: parseInt(book_pages),
             genres: book_genres,
             author: book_author,
+            price: null,
+            updated_at: null,
         };
 
-        const book = await BooksRepository.create(bookObject);
+        const book = await BooksRepository.create(newBook);
 
         if (!book) {
             req.flash("warning", `Error: Book not created!`);
@@ -326,7 +328,7 @@ export default class AdminController {
             genres: movie_genres,
         };
 
-        const movie = await Movies.create(movieObject);
+        const movie = await MoviesRepository.create(movieObject);
 
         if (!movie) {
             req.flash("warning", `Error: Movie not created!`);
@@ -339,7 +341,7 @@ export default class AdminController {
 
     static async getViewUpdateMovie(req: Request, res: Response) {
         const { movie_id } = req.params;
-        const movie = await Movies.getById(movie_id);
+        const movie = await MoviesRepository.getById(movie_id);
 
         return res.render("pages/admin/updateMovie", {
             flash_success: req.flash("success"),
@@ -376,7 +378,7 @@ export default class AdminController {
             genres: movie_genres,
         };
 
-        const movie = await Movies.update(movieObject);
+        const movie = await MoviesRepository.update(movieObject);
 
         if (!movie) {
             req.flash("warning", `Error: Movie not updated!`);
@@ -390,7 +392,7 @@ export default class AdminController {
     static async postDeleteMovie(req: Request, res: Response) {
         const { book_id } = req.params;
 
-        if (await Movies.delete(book_id)) {
+        if (await MoviesRepository.delete(book_id)) {
             req.flash("success", `SUCCESS: Movie Deleted!`);
             return res.redirect("/");
         }

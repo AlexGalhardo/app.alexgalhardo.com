@@ -1,7 +1,7 @@
 import slugify from "slugify";
 
 import prisma from "../config/prisma";
-import { createBlogDTO, updateBlogDTO } from "../utils/InputTypes";
+import { CreateBlogDTO, UpdateBlogDTO } from "../utils/DTOs";
 
 export default class BlogRepository {
     static getAll() {
@@ -39,7 +39,7 @@ export default class BlogRepository {
         });
     }
 
-    static create(createBlog: createBlogDTO) {
+    static create(createBlog: CreateBlogDTO) {
         return prisma.blog.create({
             data: {
                 title: createBlog.title,
@@ -52,7 +52,7 @@ export default class BlogRepository {
         });
     }
 
-    static update(updateBlog: updateBlogDTO) {
+    static update(updateBlog: UpdateBlogDTO) {
         return prisma.blog.update({
             where: {
                 id: updateBlog.id,

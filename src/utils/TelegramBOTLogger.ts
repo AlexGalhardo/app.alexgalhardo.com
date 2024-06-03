@@ -2,7 +2,7 @@
 // https://api.telegram.org/bot<telegram_token_here>/getUpdates
 
 import https from "https";
-import { SendContactDTO, ShopTransactionDTO, SubscriptionTransactionDTO } from "src/utils/InputTypes";
+import { SendContactDTO, ShopTransactionDTO, SubscriptionTransactionDTO } from "src/utils/DTOs";
 
 import DateTime from "./DateTime";
 

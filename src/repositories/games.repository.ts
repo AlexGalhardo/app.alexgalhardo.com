@@ -1,5 +1,5 @@
 import prisma from "../config/prisma";
-import { inputGameObject } from "../utils/InputTypes";
+import { CreateGameDTO } from "../utils/DTOs";
 
 export default class GamesRepository {
     static getAll() {
@@ -39,7 +39,7 @@ export default class GamesRepository {
         });
     }
 
-    static create(gameObject: inputGameObject) {
+    static create(gameObject: CreateGameDTO) {
         return prisma.game.create({
             data: {
                 title: gameObject.title,
@@ -57,7 +57,7 @@ export default class GamesRepository {
         });
     }
 
-    static update(gameObject: inputGameObject) {
+    static update(gameObject: CreateGameDTO) {
         return prisma.game.update({
             where: {
                 id: gameObject.id,

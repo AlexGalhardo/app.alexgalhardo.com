@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { stripe } from "../../config/stripe";
 import Header from "../../utils/Header";
-import Users from "../../repositories/users.repository";
+import UsersRepository from "../../repositories/users.repository";
 
 export default class ShopController {
     static async getViewShop(req: Request, res: Response) {
-        const shopCartItens = await Users.getShopCartItens();
-        const shopCartTotalAmount = await Users.getShopCartTotalAmount();
-        const totalItensShopCart = await Users.getTotalItensShopCart();
+        const shopCartItens = await UsersRepository.getShopCartItens();
+        const shopCartTotalAmount = await UsersRepository.getShopCartTotalAmount();
+        const totalItensShopCart = await UsersRepository.getTotalItensShopCart();
 
         if (!shopCartItens || !totalItensShopCart) {
             req.flash("warning", "Add at least 1 product to your shop cart!");
@@ -28,7 +28,7 @@ export default class ShopController {
     static async removeCartItem(req: Request, res: Response) {
         const { item_id } = req.params;
 
-        if (await Users.removeShopCartItem(item_id)) {
+        if (await UsersRepository.removeShopCartItem(item_id)) {
             req.flash("success", `Item removed from your cart!`);
             return res.redirect("/shop");
         }
@@ -43,7 +43,7 @@ export default class ShopController {
                 description: "Customer created in Subscription checkout!",
                 email: global.SESSION_USER.email,
             });
-            await Users.createStripeCustomer(global.SESSION_USER.id, customer.id);
+            await UsersRepository.createStripeCustomer(global.SESSION_USER.id, customer.id);
             return customer.id;
         }
         return global.SESSION_USER.stripe_customer_id;
@@ -64,7 +64,7 @@ export default class ShopController {
                 card: customerCard,
             });
 
-            await Users.createStripeCard(global.SESSION_USER.id, cardToken, card_number);
+            await UsersRepository.createStripeCard(global.SESSION_USER.id, cardToken, card_number);
 
             return cardToken.id;
         }
@@ -92,7 +92,7 @@ export default class ShopController {
                 shipping_fee,
             } = req.body;
 
-            if (!(await Users.verifyPassword(global.SESSION_USER.id, confirm_password))) {
+            if (!(await UsersRepository.verifyPassword(global.SESSION_USER.id, confirm_password))) {
                 req.flash("warning", "Invalid Password!");
                 return res.redirect(`/shop`);
             }
@@ -101,7 +101,7 @@ export default class ShopController {
 
             const stripeCardTokenID = await ShopController.verifyIfUserAlreadyHasAStripeCardRegistred(req);
 
-            const products = await Users.getShopCartItens();
+            const products = await UsersRepository.getShopCartItens();
 
             const shopCardCharge = await stripe.charges.create({
                 amount: Math.floor((Number(total_shop_amount) + Number(shipping_fee)) * 100),

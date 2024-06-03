@@ -6,23 +6,17 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Request, Response, NextFunction } from "express";
 import session from "express-session";
-import mustache from "mustache-express";
-import path from "path";
 import adminRoutes from "./routes/admin.routes";
 import profileRoutes from "./routes/profile.routes";
 import publicRoutes from "./routes/public.routes";
-import "express-async-errors";
 import apiRoutes from "./routes/api.routes";
+import "express-async-errors";
 
 global.SESSION_USER = null;
 
 const app = express();
 
-app.set("view engine", "mustache");
-app.set("views", path.join(__dirname, "views"));
-
-app.engine("mustache", mustache())
-    .use(cookieParser())
+app.use(cookieParser())
     .use(cors())
     .use(flash())
     .use(bodyParser.urlencoded({ extended: true }))

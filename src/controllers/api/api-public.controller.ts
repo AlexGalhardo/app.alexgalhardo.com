@@ -1,18 +1,18 @@
 /* eslint-disable consistent-return */
 import { Request, Response, NextFunction } from "express";
 
-import Blog from "../../repositories/blog.repository";
+import BlogRepository from "../../repositories/blog.repository";
 import BooksRepository from "../../repositories/books.repository";
 import GamesRepository from "../../repositories/games.repository";
 import MoviesRepository from "../../repositories/movies.repository";
 import TVShowsRepository from "../../repositories/tv-shows.repository";
-import Users from "../../repositories/users.repository";
+import UsersRepository from "../../repositories/users.repository";
 
 export default class APIPublicController {
     static async verifyIfEmailIsAlreadyRegistred(req: Request, res: Response, next: NextFunction) {
         try {
             const { email } = req.params;
-            if (await Users.emailExists(email)) {
+            if (await UsersRepository.emailExists(email)) {
                 return res.json({
                     emailRegistred: true,
                 });
@@ -28,7 +28,7 @@ export default class APIPublicController {
     /** ********* BLOG *********** */
     static async getPublicBlog(req: Request, res: Response, next: NextFunction) {
         try {
-            return res.json(await Blog.getAll());
+            return res.json(await BlogRepository.getAll());
         } catch (err) {
             next(err);
         }
@@ -37,7 +37,7 @@ export default class APIPublicController {
     static async getPublicBlogByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { blog_id } = req.params;
-            return res.json(await Blog.getById(blog_id));
+            return res.json(await BlogRepository.getById(blog_id));
         } catch (err) {
             next(err);
         }
@@ -45,7 +45,7 @@ export default class APIPublicController {
 
     static async getPublicBlogRandom(req: Request, res: Response, next: NextFunction) {
         try {
-            return res.json(await Blog.getRandom());
+            return res.json(await BlogRepository.getRandom());
         } catch (err) {
             next(err);
         }
@@ -106,7 +106,7 @@ export default class APIPublicController {
     /** ********* MOVIES *********** */
     static async getPublicMovies(req: Request, res: Response, next: NextFunction) {
         try {
-            return res.json(await Movies.getAll());
+            return res.json(await MoviesRepository.getAll());
         } catch (err) {
             next(err);
         }
@@ -115,7 +115,7 @@ export default class APIPublicController {
     static async getPublicMovieByID(req: Request, res: Response, next: NextFunction) {
         try {
             const { movie_id } = req.params;
-            return res.json(await Movies.getById(movie_id));
+            return res.json(await MoviesRepository.getById(movie_id));
         } catch (err) {
             next(err);
         }
@@ -123,7 +123,7 @@ export default class APIPublicController {
 
     static async getPublicRandomMovie(req: Request, res: Response, next: NextFunction) {
         try {
-            return res.json(await Movies.getRandom());
+            return res.json(await MoviesRepository.getRandom());
         } catch (err) {
             next(err);
         }
@@ -164,7 +164,7 @@ export default class APIPublicController {
                 });
             }
 
-            if (await Users.addGameToShopCart(game_id)) {
+            if (await UsersRepository.addGameToShopCart(game_id)) {
                 return res.json({
                     inLoggedUserCart: true,
                 });
@@ -186,7 +186,7 @@ export default class APIPublicController {
                 });
             }
 
-            if (await Users.addBookToShopCart(book_id)) {
+            if (await UsersRepository.addBookToShopCart(book_id)) {
                 return res.json({
                     inLoggedUserCart: true,
                 });

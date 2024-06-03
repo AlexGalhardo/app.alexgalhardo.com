@@ -1,5 +1,5 @@
 import prisma from "../config/prisma";
-import { inputBookObject } from "../utils/InputTypes";
+import { CreateBookDTO } from "../utils/DTOs";
 
 export default class BooksRepository {
     static getAll() {
@@ -39,7 +39,7 @@ export default class BooksRepository {
         });
     }
 
-    static create(bookObject: inputBookObject) {
+    static create(bookObject: CreateBookDTO) {
         return prisma.book.create({
             data: {
                 title: bookObject.title,
@@ -55,7 +55,7 @@ export default class BooksRepository {
         });
     }
 
-    static update(bookObject: inputBookObject) {
+    static update(bookObject: CreateBookDTO) {
         return prisma.book.update({
             where: {
                 id: bookObject.id,

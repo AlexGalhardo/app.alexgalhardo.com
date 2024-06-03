@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-undef */
-
 const app_url = document.querySelector("#app_url").value;
 
 const bookPriceValue = document.querySelector("#book_price_value").value;
+
+const buttonAddBookToCart = document.querySelector("#button_add_book_to_cart");
+
+const totalShopCartItens = document.querySelector("#total_shopCart_itens");
 
 async function recommendOtherBook() {
     const response = await fetch(`${app_url}/api/public/books/random`);
@@ -24,4 +25,23 @@ async function recommendOtherBook() {
     document.querySelector("#book_price").innerHTML = parseFloat(object.price / 100).toFixed(2);
 
     document.querySelector("#book_admin_update_link").href = `/admin/update/book/${object.id}`;
+}
+
+async function addBookToCart() {
+    const bookId = document.querySelector("#book_id").value;
+    const response = await fetch(`${app_url}/api/addCart/book/${bookId}`);
+    const object = await response.json();
+
+    buttonAddBookToCart.classList.add("btn-outline-success");
+    buttonAddBookToCart.classList.remove("btn-success");
+    buttonAddBookToCart.innerHTML = `<i class="bi bi-cart-plus"></i> Add Cart`;
+
+    if (object.inLoggedUserCart) {
+        buttonAddBookToCart.classList.remove("btn-outline-success");
+        buttonAddBookToCart.classList.add("btn-success");
+        buttonAddBookToCart.innerHTML = `Added To Cart!`;
+        totalShopCartItens.innerHTML = parseInt(totalShopCartItens.innerHTML) + 1;
+    } else {
+        totalShopCartItens.innerHTML = parseInt(totalShopCartItens.innerHTML) - 1;
+    }
 }

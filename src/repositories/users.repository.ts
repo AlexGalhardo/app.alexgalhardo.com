@@ -1,6 +1,6 @@
 import prisma from "../config/prisma";
 import Bcrypt from "../utils/Bcrypt";
-import { inputCreateUser, SubscriptionTransactionDTO, inputUpdateUser } from "../utils/InputTypes";
+import { CreateUserDTO, SubscriptionTransactionDTO, UpdateUserDTO } from "../utils/DTOs";
 import NumberHelper from "../utils/Numbers";
 
 export default class UsersRepository {
@@ -84,7 +84,7 @@ export default class UsersRepository {
         return !!user;
     }
 
-    static async update(userObject: inputUpdateUser) {
+    static async update(userObject: UpdateUserDTO) {
         const User = await prisma.user.findUnique({
             where: {
                 id: userObject.id,
@@ -121,7 +121,7 @@ export default class UsersRepository {
         return null;
     }
 
-    static async create(userObject: inputCreateUser, confirmEmailToken: string) {
+    static async create(userObject: CreateUserDTO, confirmEmailToken: string) {
         return prisma.user.create({
             data: {
                 name: userObject.username,

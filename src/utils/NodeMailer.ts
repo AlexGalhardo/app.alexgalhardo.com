@@ -4,7 +4,7 @@ import path from "path";
 
 import Resend from "../config/smtp";
 import Users from "../repositories/users.repository";
-import { ShopTransactionDTO, SubscriptionTransactionDTO, SendContactDTO } from "./InputTypes";
+import { ShopTransactionDTO, SubscriptionTransactionDTO, SendContactDTO } from "./DTOs";
 import DateTime from "./DateTime";
 
 export default class NodeMailer {
@@ -142,7 +142,7 @@ export default class NodeMailer {
 
         const htmlBody = template(replacements);
 
-        await Users.createConfirmEmailToken(email, confirmEmailToken);
+        await UsersRepository.createConfirmEmailToken(email, confirmEmailToken);
 
         await Resend.sendMail({
             from: process.env.APP_EMAIL,

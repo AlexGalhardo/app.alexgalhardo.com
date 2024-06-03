@@ -1,4 +1,4 @@
-@layout.main({ title: "Movies" })
+@layout.main({ title: "Movies", user })
 
 	<div class="container col-lg-9 mt-3">
 
@@ -12,7 +12,6 @@
                     </div>
                 @end
             @end
-
 
             @if(flash_success)
                 <div class="text-center alert alert-success" role="alert">
@@ -68,7 +67,6 @@
                         </ul>
                     </div>
                 </div>
-                <!-- END MOVIE POST -->
 
 
                 <div class="col-lg-3 mb-3">

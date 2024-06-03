@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-undef */
 const app_url = document.querySelector("#app_url").value;
 
 const gamePriceValue = document.querySelector("#game_price_value").value;
@@ -10,7 +8,6 @@ const totalShopCartItens = document.querySelector("#total_shopCart_itens");
 
 async function recommendOtherGame() {
     const response = await fetch(`${app_url}/api/public/games/random`);
-    // const response = await fetch(`http://localhost:3000/api/public/games/random`);
     const object = await response.json();
 
     Object.entries(object).forEach(([key, value]) => {
