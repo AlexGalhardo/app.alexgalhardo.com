@@ -2,6 +2,7 @@ const message = document.getElementById("message");
 const length = message.getAttribute("maxlength");
 const count = document.getElementById("count");
 count.innerHTML = `${length} words left`;
+
 message.onkeyup = function () {
     document.getElementById("count").innerHTML = `${length - this.value.length} words left`;
 };
