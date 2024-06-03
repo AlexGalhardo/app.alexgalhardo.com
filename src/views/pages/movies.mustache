@@ -32,7 +32,7 @@
                 <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
 
                 <div class="col-lg-3 text-center">
-                    <img id="movie_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="movie_image">
+                    <img id="movie_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="movie_image">
 
                     {{#user.admin}}
                         <a href="/admin/update/movie/{{id}}" class="w-75 shadow mb-2 btn btn-warning shadow">
@@ -49,21 +49,22 @@
                         <input id="movie_id" name="movie_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="movie_tmdb_link" style="text-decoration:none;" href="{{tmdb_link}}" class="fs-3 card-link text-decoration-none">
+                            <a target="_blank" id="movie_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
                                 <span id="movie_title" class="fw-bold">{{title}}</span>
-                                (<span id="movie_year_release" class="text-muted">{{year_release}}</span>)
                             </a>
 
-                            <h3 class="fw-bold text-warning">⭐
+                            <h4 class="fw-bold text-warning">⭐
                                 <span id="movie_tmdb_rating">
                                     {{tmdb_rating}}
                                 </span>
-                            </h3>
+                            </h4>
                         </div>
 
                         <p class="card-text" id="movie_resume">{{resume}}</p>
 
-                        <ul class="mt-3">
+                        <ul class="mt-3 text-white">
+
+							<li><b>Release Year:</b> <small id="movie_year_release">{{year_release}}</small></li>
 
                             <li><b>Genres:</b> <small id="movie_genres">{{genres}}</small></li>
 
@@ -128,7 +129,7 @@
             {{#movies}}
 
                 <div class="col-lg-3 text-center">
-                    <img id="movie_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="movie_image">
+                    <img id="movie_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="movie_image">
                 </div>
 
                 <div class="col-lg-6">
@@ -143,11 +144,11 @@
                                 (<span id="movie_year_release" class="text-muted">{{year_release}}</span>)
                             </a>
 
-                            <h3 class="fw-bold text-warning">⭐
+                            <h4 class="fw-bold text-warning">⭐
                                 <span id="movie_tmdb_rating">
                                     {{tmdb_rating}}
                                 </span>
-                            </h3>
+                            </h4>
                         </div>
 
                         <small class="card-text" id="movie_resume">{{resume}}</small>

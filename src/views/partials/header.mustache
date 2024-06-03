@@ -9,6 +9,9 @@
     <!-- CHARSET -->
     <meta charset="utf-8">
 
+    <!-- FAVICON -->
+	<link rel="icon" type="image/png" href="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-play-icon-png-image_695339.jpg">
+
     <!-- CANONICAL -->
     <link rel="canonical" href="https://galhardo-app.up.railway.app/">
 
@@ -158,16 +161,13 @@
 
                         {{^user}}
                             <div class="pull-right">
-
-                                <a href="/login" class="shadow-sm fw-bold fs-5 btn btn-outline-success" type="submit">Login</a>
-
-                                <a href="/register" class="shadow-sm fw-bold fs-5 ms-2 btn btn-outline-primary" type="submit">Sign Up</a>
+                                <a href="/login" class="shadow-sm fw-bold btn btn-outline-light" type="submit">Login</a>
                             </div>
                         {{/user}}
 
 
 						<a href="/shop"
-                            class="shadow-sm fw-bold fs-5 btn ms-2 btn-outline-success {{^user}}disabled{{/user}}"
+                            class="shadow-sm fw-bold btn ms-2 btn-outline-success {{^user}}disabled{{/user}}"
                             type="submit">
                             <i class="bi bi-cart"></i>
                             My Cart

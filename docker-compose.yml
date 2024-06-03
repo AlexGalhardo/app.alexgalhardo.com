@@ -11,19 +11,6 @@ services:
         networks:
             - network
 
-    rabbitmq:
-        image: rabbitmq:3-management
-        container_name: galhardo-app-rabbitmq
-        restart: always
-        environment:
-            - "RABBITMQ_DEFAULT_PASS=rabbitmq"
-            - "RABBITMQ_DEFAULT_USER=rabbitmq"
-        ports:
-            - 5672:5672
-            - 15672:15672
-        networks:
-            - network
-
 networks:
     network:
         driver: bridge

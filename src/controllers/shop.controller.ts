@@ -1,6 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-
-import RabbitMQ from "../config/rabbitmq";
 import { stripe } from "../config/stripe";
 import Header from "../utils/Header";
 import Users from "../repositories/users.repository";
@@ -141,9 +139,6 @@ export default class ShopController {
                 shipping_fee: Number(shipping_fee) * 100,
                 created_at: new Date(),
             };
-
-            RabbitMQ.sendMessage("shop-transactions-queue", JSON.stringify(shopTransactionObject));
-            RabbitMQ.consumeMessage("shop-transactions-queue");
 
             return res.render("pages/shop/shop_checkout_status", {
                 flash_success: "Shop Transaction Created with Success!",

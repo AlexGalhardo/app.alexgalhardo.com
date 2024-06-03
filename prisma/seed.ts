@@ -46,7 +46,7 @@ const main = async () => {
 			},
 			{
 				email: "test@gmail.com",
-				name: "TEST USER",
+				name: "User Test",
 				confirmed_email: true,
 				confirm_email_token: null,
 				password: await Bcrypt.hash("test123"),

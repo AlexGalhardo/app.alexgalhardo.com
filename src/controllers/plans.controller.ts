@@ -13,7 +13,7 @@ export default class PlansController {
         return res.render("pages/plans/plans", {
             flash_warning: req.flash("warning"),
             user: global.SESSION_USER,
-            header: Header.plans("Plans - Galhardo APP"),
+            header: Header.plans("Plans "),
         });
     }
 
@@ -21,7 +21,7 @@ export default class PlansController {
         return res.render("pages/plans/premium_checkout", {
             flash_warning: req.flash("warning"),
             user: global.SESSION_USER,
-            header: Header.plans("Plan PREMIUM - Galhardo APP"),
+            header: Header.plans("Plan PREMIUM "),
         });
     }
 

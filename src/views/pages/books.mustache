@@ -1,6 +1,6 @@
 {{>partials/header}}
 
-	<div class="container col-lg-9 mt-3">
+	<div class="container col-lg-9">
 
       	<div class="row">
 
@@ -32,9 +32,9 @@
                 <input id="book_price_value" name="book_price_value" type="hidden" value="{{price}}">
 
                 <div class="col-lg-3 text-center">
-                    <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="book_image">
+                    <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="book_image">
 
-                    <button onclick="buyThisBook()" class="btn btn-outline-success {{^user}}disabled{{/user}} fw-bold w-75 mb-3 shadow" id="button_buy_this_book"><i class="bi bi-cash-coin"></i> Add Cart</button>
+                    <button onclick="buyThisBook()" class="btn btn-outline-light {{^user}}disabled{{/user}} fw-bold w-100 mb-3 shadow" id="button_buy_this_book"><i class="bi bi-cart-plus"></i> Add Cart</button>
 
                     {{#user.admin}}
                         <a id="book_admin_update_link" href="/admin/update/book/{{id}}" class="w-75 shadow btn btn-warning shadow-sm">
@@ -51,16 +51,17 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">
-                                <a target="_blank" id="amazon_link" style="text-decoration:none;" href="{{amazon_link}}" class="card-link">
+                                <a target="_blank" id="amazon_link" class="fs-3 text-decoration-none fw-bold text-white" href="{{amazon_link}}">
                                     <span id="book_title" class="fw-bold">{{title}}</span>
-                                    (<span id="book_year_release" class="text-muted">{{year_release}}</span>)
                                 </a>
                             </h3>
                         </div>
 
                         <p class="card-text" id="book_resume">{{resume}}</p>
 
-                        <ul class="mt-3">
+                        <ul class="mt-3 text-white">
+
+							<li><b>Release Year:</b></small> <small id="book_year_release">{{year_release}}</small></li>
 
                             <li><b>Author:</b></small> <small id="book_author">{{author}}</small></li>
 
@@ -127,7 +128,7 @@
             {{#books}}
 
                 <div class="col-lg-3 text-center">
-                    <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-75 image-fluid mb-3" alt="book_image">
+                    <img id="book_image" src="{{image}}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="book_image">
                 </div>
 
 

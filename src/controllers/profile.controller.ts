@@ -11,7 +11,7 @@ export default class ProfileController {
             user: global.SESSION_USER,
             flash_success: req.flash("success"),
             flash_warning: req.flash("warning"),
-            header: Header.profile("My Profile - Galhardo APP"),
+            header: Header.profile("My Profile "),
         });
     }
 
@@ -74,7 +74,7 @@ export default class ProfileController {
         return res.render("pages/profile/my_shop_transactions", {
             user: global.SESSION_USER,
             shopTransactions,
-            header: Header.profile("My Shop Transactions - Galhardo APP"),
+            header: Header.profile("My Shop Transactions "),
         });
     }
 
@@ -88,7 +88,7 @@ export default class ProfileController {
         return res.render("pages/profile/shop_transaction", {
             user: global.SESSION_USER,
             shopTransaction,
-            header: Header.profile("Shop Transaction - Galhardo APP"),
+            header: Header.profile("Shop Transaction "),
         });
     }
 
@@ -98,7 +98,7 @@ export default class ProfileController {
         return res.render("pages/profile/my_subs_transactions", {
             user: global.SESSION_USER,
             subsTransactions,
-            header: Header.profile("My Subscriptions Transactions - Galhardo APP"),
+            header: Header.profile("My Subscriptions Transactions "),
         });
     }
 
@@ -110,7 +110,7 @@ export default class ProfileController {
         return res.render("pages/profile/sub_transaction", {
             user: global.SESSION_USER,
             subsTransaction,
-            header: Header.profile("Subs Transaction - Galhardo APP"),
+            header: Header.profile("Subs Transaction "),
         });
     }
 

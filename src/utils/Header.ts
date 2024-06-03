@@ -8,7 +8,7 @@ const scroll_bar_script = `<script src="scripts/scroll_bar.js"></script>`;
 export default class Header {
     static games() {
         return {
-            title: "Games - Galhardo APP",
+            title: "Games ",
             scroll_bar_div,
             scroll_bar_script,
         };
@@ -16,7 +16,7 @@ export default class Header {
 
     static books() {
         return {
-            title: "Books - Galhardo APP",
+            title: "Books ",
             scroll_bar_div,
             scroll_bar_script,
         };
@@ -24,7 +24,7 @@ export default class Header {
 
     static movies() {
         return {
-            title: "Movies - Galhardo APP",
+            title: "Movies ",
             scroll_bar_div,
             scroll_bar_script,
         };
@@ -32,7 +32,7 @@ export default class Header {
 
     static tvshows() {
         return {
-            title: "TVShows - Galhardo APP",
+            title: "TVShows ",
             scroll_bar_div,
             scroll_bar_script,
         };
@@ -40,7 +40,7 @@ export default class Header {
 
     static privacy() {
         return {
-            title: "Privacy and Terms of Use - Galhardo APP",
+            title: "Privacy and Terms of Use ",
             navbar_privacy_active: true,
             scroll_bar_div,
             scroll_bar_script,
@@ -49,7 +49,7 @@ export default class Header {
 
     static blog() {
         return {
-            title: "Blog - Galhardo APP",
+            title: "Blog ",
             navbar_blog_active: true,
             scroll_bar_div,
             scroll_bar_script,
@@ -80,7 +80,7 @@ export default class Header {
 
     static contact() {
         return {
-            title: "Contact - Galhardo APP",
+            title: "Contact ",
             navbar_contact_active: true,
         };
     }
@@ -104,7 +104,7 @@ export default class Header {
 
     static shop() {
         return {
-            title: "Shop - Galhardo APP",
+            title: "Shop ",
             navbar_shop_active: true,
         };
     }
