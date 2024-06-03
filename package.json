@@ -2,7 +2,7 @@
 	"name": "galhardo-app",
 	"scripts": {
 		"dev": "bun run --watch src/server.ts",
-		"format": "prettier --write \"src/**/*.ts\"",
+		"format": "prettier --write \"src/**/*.ts\" \"prisma/**/*.ts\"",
 		"prepare": "husky install",
 		"test": "bun test"
 	},

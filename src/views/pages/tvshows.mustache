@@ -26,8 +26,6 @@
                 </div>
             {{/flash_warning}}
 
-
-
             {{#tvshow}}
                 <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
@@ -41,9 +39,7 @@
                     {{/user.admin}}
                 </div>
 
-
                 <div class="col-lg-6">
-
                     <div class="card-body">
 
                         <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
@@ -63,7 +59,6 @@
                         <p class="card-text" id="tvshow_resume">{{resume}}</p>
 
                         <ul class="mt-3 text-white">
-
 						    <li><b>Release Year:</b> <small id="tvshow_year_release">{{year_release}}</small></li>
 
                             <li><b>Genres:</b> <small id="tvshow_genres">{{genres}}</small></li>
@@ -72,7 +67,7 @@
                         </ul>
                     </div>
                 </div>
-                <!-- END BOOK POST -->
+                <!-- END TV SHOW POST -->
 
 
                 <div class="col-lg-3 mb-3">
@@ -123,9 +118,6 @@
 
 
 
-
-
-
             {{#tvshows}}
 
                 <div class="col-lg-3 text-center">
@@ -133,15 +125,13 @@
                 </div>
 
                 <div class="col-lg-6">
-
                     <div class="card-body">
 
                         <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{id}}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" style="text-decoration:none;" href="{{tmdb_link}}" class="fs-3 card-link text-decoration-none">
-                                <span id="tvshow_title" id="tvshow_tmdb_link" class="fw-bold">{{title}}</span>
-                                (<span id="tvshow_year_release" class="text-muted">{{year_release}}</span>)
+                            <a target="_blank" id="tvshow_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
+                                <span id="tvshow_title" class="fw-bold">{{title}}</span>
                             </a>
 
                             <h4 class="fw-bold text-warning">⭐
@@ -151,15 +141,14 @@
                             </h4>
                         </div>
 
-                        <small class="card-text" id="tvshow_resume">{{resume}}</small>
+                        <p class="card-text" id="tvshow_resume">{{resume}}</p>
 
-                        <ul class="mt-3">
+                        <ul class="mt-3 text-white">
+						    <li><b>Release Year:</b> <small id="tvshow_year_release">{{year_release}}</small></li>
 
-                            <li class=""><b><a onclick="return false;" target="_blank" href="#"><i class="bi bi-link-45deg"></i>JustWatch Link</a></b></li>
+                            <li><b>Genres:</b> <small id="tvshow_genres">{{genres}}</small></li>
 
-                            <li><small><b>Genres:</b></small> <small id="tvshow_genres">{{genres}}</small></li>
-
-                            <li><small><b>Duration:</b></small> <small id="tvshow_duration">{{duration}}</small></li>
+                            <li><b>Duration:</b> <small id="tvshow_duration">{{duration}}</small></li>
                         </ul>
                     </div>
                 </div>

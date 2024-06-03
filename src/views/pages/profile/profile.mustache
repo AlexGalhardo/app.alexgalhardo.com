@@ -23,39 +23,20 @@
 
                 <div class="form-floating mb-3">
                       <input class="mb-2 form-control" name="created_at" type="text" value="{{created_at}}" readonly>
-                      <label for="name">CREATED_AT</label>
+                      <label for="name">Created At</label>
                 </div>
 
                 <div class="form-floating mb-3">
                       <input class="mb-2 form-control" name="updated_at" type="text" value="{{updated_at}}" readonly>
-                      <label for="name">LAST_UPDATED_AT</label>
+                      <label for="name">Last Updated At</label>
                 </div>
 
-                <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="admin" type="text" value="{{admin}}" readonly>
-                      <label for="admin">ADMIN</label>
-                </div>
+				<hr>
 
-                <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="operation_system" id="operation_system" type="text" readonly>
-                      <label for="operation_system">OPERATION_SYSTEM</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                      <input class="mb-2 form-control" name="browser" id="browser" type="text" readonly>
-                      <label for="browser">BROWSER</label>
-                </div>
-
-            </div>
-
-            <div class="col-lg-4">
-
-                <div class="form-floating mb-3">
+				<div class="form-floating mb-3">
                     <input class="mb-2 form-control" name="stripe_customer_id" type="text" value="{{stripe_customer_id}}" readonly>
                     <label for="name">STRIPE_CUSTOMER_ID</label>
                 </div>
-
-                <hr>
 
                 <div class="form-floating mb-3">
                       <input id="stripe_card_id" name="stripe_card_id" class="mb-2 form-control" type="text" value="{{stripe_card_id}}" readonly>
@@ -91,7 +72,9 @@
                     </div>
                 {{/stripe.card_id}}
 
-                <hr>
+            </div>
+
+            <div class="col-lg-4">
 
                 <div class="form-floating mb-3">
                       <input class="mb-2 form-control" type="text" value="{{stripe_currently_subscription_name}}" readonly>
@@ -456,7 +439,7 @@
                     <label for="country">COUNTRY</label>
                     </div>
 
-                    <input type="submit" id="button_update_profile" class="mt-3 mb-3 shadow w-100 btn btn btn-outline-success" value="Update Profile">
+                    <input type="submit" id="button_update_profile" class="mt-3 mb-3 shadow w-100 btn btn btn-outline-light fw-bold" value="Update Profile">
 
                 </form>
 

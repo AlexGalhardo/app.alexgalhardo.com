@@ -1,0 +1,8 @@
+POST http://localhost:3000/contact
+
+{
+	"name": "Testando",
+	"email": "testando@gmail.com",
+	"subject": "feedback",
+	"message": "New message"
+}

@@ -36,7 +36,7 @@ const isNotAuthenticated = (req: Request, res: Response, next: NextFunction) => 
     return next();
 };
 
-export { isNotAuthenticated }
+export { isNotAuthenticated };
 
 const userHasActiveSubscription = (req: Request, res: Response, next: NextFunction) => {
     if (global.SESSION_USER.stripe_currently_subscription_name !== "FREE") {
