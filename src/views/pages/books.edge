@@ -28,8 +28,8 @@
             @end
 
             @if(book)
-                <input id="book_id" name="book_id" type="hidden" value="{{book.id}}">
-                <input id="book_price_value" name="book_price_value" type="hidden" value="{{book.price}}">
+                <input id="book_id" name="book_id" type="hidden" value="{{ book.id }}">
+                <input id="book_price_value" name="book_price_value" type="hidden" value="{{ book.price }}">
 
                 <div class="col-lg-3 text-center">
                     <img id="book_image" src="{{ book.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="book_image">
@@ -53,7 +53,7 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">
-                                <a target="_blank" id="amazon_link" class="fs-3 text-decoration-none fw-bold text-white" href="{{amazon_link}}">
+                                <a target="_blank" id="amazon_link" class="fs-3 text-decoration-none fw-bold text-white" href="{{ book.amazon_link }}">
                                     <span id="book_title" class="fw-bold">{{ book.title }}</span>
                                 </a>
                             </h3>
@@ -129,7 +129,7 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">
-                                <a target="_blank" id="amazon_link" class="fs-3 text-decoration-none fw-bold text-white" href="{{amazon_link}}">
+                                <a target="_blank" id="amazon_link" class="fs-3 text-decoration-none fw-bold text-white" href="{{ book.amazon_link }}">
                                     <span id="book_title" class="fw-bold">{{ book.title }}</span>
                                 </a>
                             </h3>

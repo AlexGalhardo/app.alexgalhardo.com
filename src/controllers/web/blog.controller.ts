@@ -17,11 +17,11 @@ export default class BlogController {
                 page = 1;
             }
 
-            const blog = await BlogRepository.getPostsByPageLimit(Number(page), blogPostsPerPage);
+            const posts = await BlogRepository.getPostsByPageLimit(Number(page), blogPostsPerPage);
 
             return res.setHeader("Content-Type", "text/html").end(
                 await edge.render("pages/blog/blog", {
-                    blog,
+                    posts,
                     user: global.SESSION_USER,
                     blog_active: true,
                     boostrapPaginator: BlogController.getRenderBootstrapPaginator(
@@ -38,37 +38,49 @@ export default class BlogController {
     }
 
     static async getSearchBlogTitle(req: Request, res: Response) {
-        const blogPosts = await BlogRepository.getAll();
-        const searchBlogTitle = req.query.blogTitle;
+        try {
+            const blogPosts = await BlogRepository.getAll();
+            const searchBlogTitle = req.query.blogTitle;
 
-        if (!searchBlogTitle) {
-            return res.redirect("/blog");
+            if (!searchBlogTitle) {
+                return res.redirect("/blog");
+            }
+
+            const blogTitlesSearched = blogPosts.filter(
+                (blogPost) => blogPost.title.toLowerCase().indexOf(String(searchBlogTitle).toLowerCase()) > -1,
+            );
+
+            const totalBlogPostsFoundFromSearch = blogTitlesSearched.length;
+
+            return res.setHeader("Content-Type", "text/html").end(
+                await edge.render("pages/blog/blog", {
+                    blog: blogTitlesSearched,
+                    searchBlogTitle,
+                    totalBlogPostsFoundFromSearch,
+                    header: Header.blog(),
+                }),
+            );
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
-
-        const blogTitlesSearched = blogPosts.filter(
-            (blogPost) => blogPost.title.toLowerCase().indexOf(String(searchBlogTitle).toLowerCase()) > -1,
-        );
-
-        const totalBlogPostsFoundFromSearch = blogTitlesSearched.length;
-
-        return res.render("pages/blog/blog", {
-            blog: blogTitlesSearched,
-            searchBlogTitle,
-            totalBlogPostsFoundFromSearch,
-            header: Header.blog(),
-        });
     }
 
     static async getViewBlogPost(req: Request, res: Response) {
-        const { slug } = req.params;
+        try {
+            const { slug } = req.params;
 
-        const blogPost = await BlogRepository.getBySlug(slug);
+            const blogPost = await BlogRepository.getBySlug(slug);
 
-        res.render("pages/blog/blogPost", {
-            user: global.SESSION_USER,
-            blogPost,
-            header: Header.blogPost(blogPost!.title),
-        });
+            return res.setHeader("Content-Type", "text/html").end(
+                await edge.render("pages/blog/blog", {
+                    user: global.SESSION_USER,
+                    blogPost,
+                    header: Header.blogPost(blogPost!.title),
+                }),
+            );
+        } catch (error: any) {
+            res.status(500).send(error.message);
+        }
     }
 
     static getRenderBootstrapPaginator(current: number, blogPostsPerPage: number, totalBlogPosts: number) {

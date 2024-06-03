@@ -1,4 +1,4 @@
-@layout.main({ title: "Blog Posts" })
+@layout.main({ title: "Blog Posts", user })
 
 	<main class="container col-lg-9">
 
@@ -8,7 +8,7 @@
         		{{{ boostrapPaginator }}}
 
         		<form action="/blog/search" method="GET" class="d-flex w-50">
-			        <input class="form-control me-3" type="search" placeholder="Search blog title..." name="blogTitle" value="{{ searchBlogTitle }}" required>
+			        <input class="form-control me-3" type="search" placeholder="Search blog title..." name="blogTitle" value="" required>
 			        <button class="btn btn-outline-light" type="submit">Search</button>
 			    </form>
 
@@ -17,18 +17,18 @@
  				@end
         	</div>
 
-			@if(blog)
+			@each(post in posts)
 			    <div class="container col-md-10 mt-5">
-			      	<a class="text-dark text-decoration-none" href="/blog/{{ blog.slug}}">
+			      	<a class="text-dark text-decoration-none" href="/blog/{{ post.slug}}">
 			      		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 			      		<div class="col-auto d-none d-lg-block">
-			          		<img src="{{ blog.image}}">
+			          		<img src="{{ post.image}}">
 			        	</div>
 			        	<div class="col p-4 d-flex flex-column position-static">
-			          		<h3 class="fw-bold text-white">{{ blog.title }}</h3>
-			          		<div class="mb-1 text-white"><small>{{ blog.created_at }}</small></div>
+			          		<h3 class="fw-bold text-white">{{ post.title }}</h3>
+			          		<div class="mb-1 text-white"><small>{{ post.created_at }}</small></div>
 			          		<br>
-			          		<p class="card-text mb-auto">{{ blog.resume }}</p>
+			          		<p class="card-text mb-auto">{{ post.resume }}</p>
 			        	</div>
 
 			      		</div>

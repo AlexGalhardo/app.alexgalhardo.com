@@ -4,7 +4,9 @@
 
 ## Introduction
 
-* A simple MVC full stack web application using NodeJS.
+- A simple MVC full stack web application.
+- I created this side project to learn how to program a simple ecommerce checkout and a MicroSaaS back em 2020.
+- This is the fourth big refactor I do in this code.
 
 ## Development Setup Local
 

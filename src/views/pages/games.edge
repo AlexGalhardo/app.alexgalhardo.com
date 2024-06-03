@@ -25,8 +25,8 @@
             @end
 
             @if(game)
-                <input id="game_id" name="game_id" type="hidden" value="{{ id }}">
-                <input id="game_price_value" name="game_price_value" type="hidden" value="{{ price }}">
+                <input id="game_id" name="game_id" type="hidden" value="{{ game.id }}">
+                <input id="game_price_value" name="game_price_value" type="hidden" value="{{ game.price }}">
 
                 <input type="text" id="app_url" hidden value="{{ app_url }}" readonly>
 
@@ -49,7 +49,7 @@
                     <div class="card-body">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="game_igdb_link" href="{{ igdb_link }}" class="fs-3 text-decoration-none fw-bold text-white">
+                            <a target="_blank" id="game_igdb_link" href="{{ game.igdb_link }}" class="fs-3 text-decoration-none fw-bold text-white">
                                 <span id="game_title" class="fw-bold">{{ game.title }}</span>
                             </a>
 
@@ -136,7 +136,7 @@
                     <div class="card-body">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="game_igdb_link" href="{{igdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
+                            <a target="_blank" id="game_igdb_link" href="{{ game.igdb_link }}" class="fs-3 text-decoration-none fw-bold text-white">
                                 <span id="game_title" class="fw-bold">{{ game.title }}</span>
                             </a>
 

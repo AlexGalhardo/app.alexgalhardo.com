@@ -11,6 +11,9 @@ export default class Header {
             title: "Games ",
             scroll_bar_div,
             scroll_bar_script,
+            navbar_blog_active: false,
+            navbar_contact_active: false,
+            navbar_plans_active: false,
         };
     }
 

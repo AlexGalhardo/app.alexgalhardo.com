@@ -3,7 +3,7 @@
 	<div class="container col-lg-9 mt-3">
 
       	<div class="row">
-            <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
+            <input type="text" id="app_url" hidden value="{{ app_url }}" readonly>
 
             @if(!tvshows)
                 @if(!tvshow)
@@ -45,7 +45,7 @@
                         <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{ tvshow.id }}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="tvshow_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
+                            <a target="_blank" id="tvshow_tmdb_link" href="{{ tvshow.tmdb_link }}" class="fs-3 text-decoration-none fw-bold text-white">
                                 <span id="tvshow_title" class="fw-bold">{{ tvshow.title }}</span>
                             </a>
 
@@ -125,7 +125,7 @@
                         <input id="tvshow_id" name="tvshow_id" type="hidden" value="{{ tvshow.id }}">
 
                         <div class="d-flex justify-content-between mb-3">
-                            <a target="_blank" id="tvshow_tmdb_link" href="{{tmdb_link}}" class="fs-3 text-decoration-none fw-bold text-white">
+                            <a target="_blank" id="tvshow_tmdb_link" href="{{ tvshow.tmdb_link }}" class="fs-3 text-decoration-none fw-bold text-white">
                                 <span id="tvshow_title" class="fw-bold">{{ tvshow.title }}</span>
                             </a>
 
