@@ -31,6 +31,13 @@ chmod +x ./setup.sh && ./setup.sh
 bun run dev
 ```
 
+## Tests
+
+Run all Tests
+```
+bun run test
+```
+
 ## LICENSE
 
 [MIT](http://opensource.org/licenses/MIT)
