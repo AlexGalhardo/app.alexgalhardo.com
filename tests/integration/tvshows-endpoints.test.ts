@@ -1,6 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import request from "supertest";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 
 import app from "../../src/server";
 
