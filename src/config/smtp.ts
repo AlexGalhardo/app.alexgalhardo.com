@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
 
 const Resend = nodemailer.createTransport({
-    host: "smtp.resend.com",
+    host: "sandbox.smtp.mailtrap.io", //"smtp.resend.com"
     secure: true,
-    port: 465,
+    port: 2525, // 465
     auth: {
-        user: "resend",
-        pass: Bun.env.RESEND_API_KEY,
+        user: "13afdd8c0b853c", // "resend"
+        pass: process.env.RESEND_API_KEY,
     },
 });
 

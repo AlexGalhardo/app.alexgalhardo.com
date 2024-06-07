@@ -111,15 +111,13 @@
             @end
 
 
-
-
-            @if(movies)
+            @each(movie in movies)
 
                 <div class="col-lg-3 text-center">
                     <img id="movie_image" src="{{ movie?.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="movie_image">
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="card-body">
 
                         <input id="movie_id" name="movie_id" type="hidden" value="{{ movie?.id }}">
@@ -147,43 +145,6 @@
                         </ul>
                     </div>
                 </div>
-
-
-                @if(firstMovie)
-                    <div class="col-lg-3 mb-3">
-
-                        <form class="mb-3" action="/searchBook" method="GET">
-                            <input class="form-control" type="search" placeholder="Search Book Title..." aria-label="Search" name="title">
-                        </form>
-
-                        <div class="list-group">
-                            <a href="/" class="d-flex justify-content-between list-group-item list-group-item-action" aria-current="true">
-                                <i class="bi bi-controller"></i>
-                                <span>Games</span>
-                                <span>{{totalGames}}</span>
-                            </a>
-
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action bg-dark text-white">
-                                <i class="bi bi-book"></i>
-                                <span>Books</span>
-                                <span>{{totalBooks}}</span>
-                            </a>
-
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
-                                <i class="bi bi-tv"></i>
-                                <span>Movies</span>
-                                <span>{{totalMovies}}</span>
-                            </a>
-
-                            <a href="/books" class="d-flex justify-content-between list-group-item list-group-item-action">
-                                <i class="bi bi-tv"></i>
-                                <span>TV Shows</span>
-                                <span>{{totalTVShows}}</span>
-                            </a>
-                        </div>
-
-                    </div>
-                @end
 
             @end
 

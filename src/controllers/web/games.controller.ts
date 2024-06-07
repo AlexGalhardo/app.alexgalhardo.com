@@ -41,36 +41,43 @@ export default class GamesController {
     }
 
     static async getSearchGameTitle(req: Request, res: Response) {
-        const searchGameTitle = req.query.title;
+        try {
+            const searchGameTitle = req.query.title as string;
 
-        if (!searchGameTitle) {
-            return res.redirect("/");
+            if (!searchGameTitle) {
+                return res.redirect("/");
+            }
+
+            let searchedGames = await GamesRepository.searchTitle(searchGameTitle);
+
+            if (!searchedGames.length) {
+                req.flash("warning", `No games found from search: ${searchGameTitle}! Recommending a Random Game`);
+                return res.redirect("/");
+            }
+
+            if (searchedGames.length > 1) {
+                return res.setHeader("Content-Type", "text/html").end(
+                    await edge.render("pages/games", {
+                        flash_success: `${
+                            searchedGames.length
+                        } Games Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
+                        games: searchedGames,
+                        user: global.SESSION_USER,
+                        header: Header.games(),
+                    }),
+                );
+            }
+
+            return res.setHeader("Content-Type", "text/html").end(
+                await edge.render("pages/games", {
+                    flash_success: `1 Game Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
+                    games: searchedGames,
+                    user: global.SESSION_USER,
+                    header: Header.games(),
+                }),
+            );
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
-
-        let searchedGames = await GamesRepository.searchTitle(searchGameTitle as string);
-
-        if (!searchedGames.length) {
-            req.flash("warning", `No games found from search: ${String(searchGameTitle)}! Recommending a Random Game`);
-            return res.redirect("/");
-        }
-
-        if (searchedGames.length > 1) {
-            searchedGames[0].firstGame = true;
-            return res.render("pages/games", {
-                flash_success: `${
-                    searchedGames.length
-                } Games Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
-                games: searchedGames,
-                user: global.SESSION_USER,
-                header: Header.games(),
-            });
-        }
-
-        return res.render("pages/games", {
-            flash_success: `1 Game Found From Search Title: ${String(searchGameTitle).toUpperCase()}`,
-            game: searchedGames[0],
-            user: global.SESSION_USER,
-            header: Header.games(),
-        });
     }
 }

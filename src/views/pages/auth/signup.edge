@@ -2,7 +2,7 @@
 
 <head>
 
-    <title>Register Account</title>
+    <title>Create Account</title>
 
     <meta charset="utf-8">
 
@@ -53,9 +53,9 @@
             </div>
         @end
 
-        {{{captcha}}}
+        {{{ captcha }}}
 
-        <form action="/register" method="POST" id="form_register">
+        <form action="/signup" method="POST" id="form_register">
 
             <input type="text" id="app_url" hidden value="{{app_url}}" readonly>
             <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -111,7 +111,7 @@
 
     </div>
 
-    <script src="scripts/register.js"></script>
+    <script src="scripts/signup.js"></script>
 
 </body>
 

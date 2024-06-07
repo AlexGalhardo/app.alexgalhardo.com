@@ -4,28 +4,24 @@
 
         <div class="row mb-3 mt-3">
 
-        	@if(blogPost)
+			<div class="text-center mb-3">
+				<h3 class="fw-bold text-white">{{ blogPost.title }}</h3>
+				<small class="mb-5">{{ blogPost.updated_at }}</small>
+				<br><br>
+				@if(user?.admin)
+					<a href="/admin/update/blogPost/{{ blogPost.id }}" class="w-50 shadow mb-2 btn btn-warning shadow-sm">
+					<i class="bi bi-unlock-fill"></i>
+					Edit This Blog Post</a>
+				@end
+			</div>
 
-                <div class="text-center mb-3">
-            		<h3 class="fw-bold text-white">{{ blogPost.title }}</h3>
-            		<small class="mb-5">{{ blogPost.updated_at }}</small>
-                    <br><br>
-                    @if(user?.admin)
-                        <a href="/admin/update/blogPost/{{ blogPost.id }}" class="w-50 shadow mb-2 btn btn-warning shadow-sm">
-                        <i class="bi bi-unlock-fill"></i>
-                        Edit This Blog Post</a>
-                    @end
-                </div>
+			<div id="blog_body" class="mb-5 text-white">
+				{{{ blogPost.body }}}
+			</div>
 
-                <div id="blog_body" class="mb-5 text-white">
-        		    {{{ blogPost.body }}}
-                </div>
-
-                @if(header.use_disqus)
-                    {{{header.disqus_comments}}}
-                @end
-
-        	@end
+			@if(header.use_disqus)
+				{{{header.disqus_comments}}}
+			@end
 
         </div>
 

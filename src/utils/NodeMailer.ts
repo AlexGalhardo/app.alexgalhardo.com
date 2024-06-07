@@ -3,34 +3,38 @@ import handlebars from "handlebars";
 import path from "path";
 
 import Resend from "../config/smtp";
-import Users from "../repositories/users.repository";
 import { ShopTransactionDTO, SubscriptionTransactionDTO, SendContactDTO } from "./DTOs";
 import DateTime from "./DateTime";
+import UsersRepository from "../repositories/users.repository";
 
 export default class NodeMailer {
     static async sendContact({ name, email, subject, message }: SendContactDTO) {
-        const filePath = path.join(__dirname, "../views/emails/contact.html");
+        try {
+            const filePath = path.join(__dirname, "../views/emails/contact.html");
 
-        const source = fs.readFileSync(filePath, "utf-8").toString();
+            const source = fs.readFileSync(filePath, "utf-8").toString();
 
-        const template = handlebars.compile(source);
+            const template = handlebars.compile(source);
 
-        const replacements = {
-            name,
-            email,
-            subject,
-            message,
-        };
+            const replacements = {
+                name,
+                email,
+                subject,
+                message,
+            };
 
-        const htmlBody = template(replacements);
+            const htmlBody = template(replacements);
 
-        const messageSend = await Resend.sendMail({
-            from: email,
-            to: process.env.APP_EMAIL,
-            subject: `Galhardo APP Contact: ${subject} from ${name}`,
-            text: subject,
-            html: htmlBody,
-        });
+            await Resend.sendMail({
+                from: email,
+                to: process.env.APP_EMAIL,
+                subject: `app.alexgalhardo.com Contact: ${subject} from ${name}`,
+                text: message,
+                html: htmlBody,
+            });
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
     }
 
     static async sendShopTransaction({
@@ -77,8 +81,6 @@ export default class NodeMailer {
             subject: `Galhardo APP: Shop Transaction Success!`,
             html: htmlBody,
         });
-
-        Resend.close();
     }
 
     static async sendSubscriptionTransaction({
@@ -123,12 +125,10 @@ export default class NodeMailer {
             subject: `Galhardo APP: Subscription Transaction Success!`,
             html: htmlBody,
         });
-
-        Resend.close();
     }
 
     static async sendConfirmEmailLink(email: string, confirmEmailToken: string) {
-        const confirmEmailLinkURL = `${process.env.APP_URL}/confirmEmail/${email}/${confirmEmailToken}`;
+        const confirmEmailLinkURL = `${process.env.APP_URL}/confirm-email/${email}/${confirmEmailToken}`;
 
         const filePath = path.join(__dirname, "../views/emails/confirm_email.html");
 
@@ -150,12 +150,10 @@ export default class NodeMailer {
             subject: `GALHARDO APP: Confirm Your Email!`,
             html: htmlBody,
         });
-
-        Resend.close();
     }
 
     static async sendForgetPasswordLink(email: string, resetPasswordToken: string) {
-        const resetPasswordLinkURL = `${process.env.APP_URL}/resetPassword/${email}/${resetPasswordToken}`;
+        const resetPasswordLinkURL = `${process.env.APP_URL}/change-password/${email}/${resetPasswordToken}`;
 
         const filePath = path.join(__dirname, "../views/emails/forget_password.html");
 
@@ -175,7 +173,5 @@ export default class NodeMailer {
             subject: `GALHARDO APP: Recover Your Password!`,
             html: htmlBody,
         });
-
-        Resend.close();
     }
 }

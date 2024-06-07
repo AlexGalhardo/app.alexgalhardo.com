@@ -71,8 +71,10 @@ export default class BlogController {
 
             const blogPost = await BlogRepository.getBySlug(slug);
 
+            console.log("blogPost => ", blogPost);
+
             return res.setHeader("Content-Type", "text/html").end(
-                await edge.render("pages/blog/blog", {
+                await edge.render("pages/blog/blogPost", {
                     user: global.SESSION_USER,
                     blogPost,
                     header: Header.blogPost(blogPost!.title),

@@ -60,7 +60,7 @@ export default class AuthController {
         }
     }
 
-    static async getViewRegister(req: Request, res: Response) {
+    static async getViewSignup(req: Request, res: Response) {
         try {
             const { username, email } = req.query;
 
@@ -68,7 +68,7 @@ export default class AuthController {
             if (email) email_readonly = true;
 
             return res.setHeader("Content-Type", "text/html").end(
-                await edge.render("pages/auth/register", {
+                await edge.render("pages/auth/signup", {
                     flash_success: req.flash("success").length ? req.flash("success")[0] : null,
                     flash_warning: req.flash("warning").length ? req.flash("warning")[0] : null,
                     username,
@@ -84,18 +84,18 @@ export default class AuthController {
         }
     }
 
-    static async postRegister(req: Request, res: Response, next: NextFunction) {
+    static async postSignup(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
 
             if (!req.recaptcha?.error) {
                 if (!errors.isEmpty()) {
                     req.flash("warning", errors.array()[0].msg);
-                    return res.redirect("/register");
+                    return res.redirect("/signup");
                 }
             } else {
                 req.flash("warning", "Invalid Recaptcha!");
-                return res.redirect("/register");
+                return res.redirect("/signup");
             }
 
             const {
@@ -140,7 +140,7 @@ export default class AuthController {
     static async getViewForgetPassword(req: Request, res: Response) {
         try {
             return res.setHeader("Content-Type", "text/html").end(
-                await edge.render("pages/auth/forgetPassword", {
+                await edge.render("pages/auth/forget-password", {
                     flash_success: req.flash("success").length ? req.flash("success")[0] : null,
                     flash_warning: req.flash("warning").length ? req.flash("warning")[0] : null,
                 }),
@@ -151,37 +151,41 @@ export default class AuthController {
     }
 
     static async postForgetPassword(req: Request, res: Response) {
-        const { email } = req.body;
+        try {
+            const { email } = req.body;
 
-        const resetPasswordToken = randomToken.generate(24);
+            const resetPasswordToken = randomToken.generate(24);
 
-        if (await UsersRepository.emailExists(email)) {
-            await UsersRepository.createResetPasswordToken(email, resetPasswordToken);
-            await NodeMailer.sendForgetPasswordLink(email, resetPasswordToken);
+            if (await UsersRepository.emailExists(email)) {
+                await UsersRepository.createResetPasswordToken(email, resetPasswordToken);
+                await NodeMailer.sendForgetPasswordLink(email, resetPasswordToken);
+            }
+
+            req.flash("success", `If this email exists, we'll send a link to this email to recover password!`);
+            return res.redirect("/forget-password");
+        } catch (error: any) {
+            throw new Error(error.message);
         }
-
-        req.flash("success", `If this email exists, we'll send a link to this email to recover password!`);
-        return res.redirect("/forgetPassword");
     }
 
     static async sendToForgetPassword(req: Request, res: Response) {
-        return res.redirect("/forgetPassword");
+        return res.redirect("/forget-password");
     }
 
-    static async getViewResetPassword(req: Request, res: Response) {
+    static async getViewChangePassword(req: Request, res: Response) {
         try {
             const { email, token } = req.params;
 
             if (!email || !token) {
-                return res.redirect("/forgetPassword");
+                return res.redirect("/forget-password");
             }
 
             if (!(await UsersRepository.resetPasswordTokenIsValid(email, token))) {
-                return res.redirect("/forgetPassword");
+                return res.redirect("/forget-password");
             }
 
             return res.setHeader("Content-Type", "text/html").end(
-                await edge.render("pages/auth/resetPassword", {
+                await edge.render("pages/auth/change-password", {
                     email,
                     flash_success: req.flash("success").length ? req.flash("success")[0] : null,
                     flash_warning: req.flash("warning").length ? req.flash("warning")[0] : null,
@@ -196,7 +200,7 @@ export default class AuthController {
         const { email, new_password } = req.body;
 
         if (!(await UsersRepository.resetPassword(email, new_password))) {
-            return res.redirect("/forgetPassword");
+            return res.redirect("/forget-password");
         }
 
         req.flash("success", "Password updated successfull!");
@@ -206,7 +210,7 @@ export default class AuthController {
     static async getViewResendConfirmEmailLink(req: Request, res: Response) {
         try {
             return res.setHeader("Content-Type", "text/html").end(
-                await edge.render("pages/auth/confirmEmail", {
+                await edge.render("pages/auth/confirm-email", {
                     flash_success: req.flash("success").length ? req.flash("success")[0] : null,
                 }),
             );
@@ -228,7 +232,7 @@ export default class AuthController {
             "success",
             "If this email is registred and not confirmed yet, we'll send a link to confirm this email!",
         );
-        return res.redirect("/confirmEmail");
+        return res.redirect("/confirm-email");
     }
 
     static async getVerifyIfConfirmEmailURLIsValid(req: Request, res: Response) {

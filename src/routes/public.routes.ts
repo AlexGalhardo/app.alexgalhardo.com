@@ -89,23 +89,23 @@ router
     .get("/login", isAuthenticated, /* recaptcha.middleware.render, */ csrfProtection, AuthController.getViewLogin)
     .post("/login", isAuthenticated, /* recaptcha.middleware.verify, */ csrfProtection, AuthController.postLogin)
 
-    .get("/register", isAuthenticated, recaptcha.middleware.render, csrfProtection, AuthController.getViewRegister)
-    .post("/register", isAuthenticated, recaptcha.middleware.verify, csrfProtection, AuthController.postRegister)
+    .get("/signup", isAuthenticated, recaptcha.middleware.render, csrfProtection, AuthController.getViewSignup)
+    .post("/signup", isAuthenticated, recaptcha.middleware.verify, csrfProtection, AuthController.postSignup)
 
-    .get("/forgetPassword", isAuthenticated, AuthController.getViewForgetPassword)
-    .post("/forgetPassword", isAuthenticated, AuthController.postForgetPassword)
+    .get("/forget-password", isAuthenticated, AuthController.getViewForgetPassword)
+    .post("/forget-password", isAuthenticated, AuthController.postForgetPassword)
 
-    .get("/confirmEmail/:email/:token", AuthController.getVerifyIfConfirmEmailURLIsValid)
+    .get("/confirm-email/:email/:token", AuthController.getVerifyIfConfirmEmailURLIsValid)
 
-    .get("/confirmEmail", AuthController.getViewResendConfirmEmailLink)
-    .post("/confirmEmail", AuthController.postSendConfirmEmailLink)
+    .get("/confirm-email", AuthController.getViewResendConfirmEmailLink)
+    .post("/confirm-email", AuthController.postSendConfirmEmailLink)
 
-    .get("/resetPassword/:email/:token", isAuthenticated, AuthController.getViewResetPassword)
+    .get("/change-password/:email/:token", isAuthenticated, AuthController.getViewChangePassword)
 
-    .get("/resetPassword/:any", isAuthenticated, AuthController.sendToForgetPassword)
+    .get("/change-password/:any", isAuthenticated, AuthController.sendToForgetPassword)
 
-    .get("/resetPassword", isAuthenticated, AuthController.sendToForgetPassword)
+    .get("/change-password", isAuthenticated, AuthController.sendToForgetPassword)
 
-    .post("/resetPassword", isAuthenticated, AuthController.postResetPassword);
+    .post("/change-password", isAuthenticated, AuthController.postResetPassword);
 
 export default router;

@@ -36,36 +36,43 @@ export default class MoviesController {
     }
 
     static async getSearchMovieTitle(req: Request, res: Response) {
-        const searchMovieTitle = req.query.title;
+        try {
+            const searchMovieTitle = req.query.title as string;
 
-        if (!searchMovieTitle) {
-            return res.redirect("/");
+            if (!searchMovieTitle) {
+                return res.redirect("/");
+            }
+
+            const searchedMovies = await MoviesRepository.searchTitle(String(searchMovieTitle));
+
+            if (!searchedMovies.length) {
+                req.flash("warning", `No movies found from search: ${searchMovieTitle}! Recommending a Random Movie`);
+                return res.redirect("/");
+            }
+
+            if (searchedMovies.length > 1) {
+                return res.setHeader("Content-Type", "text/html").end(
+                    await edge.render("pages/movies", {
+                        flash_success: `${
+                            searchedMovies.length
+                        } Movies Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
+                        movies: searchedMovies,
+                        user: global.SESSION_USER,
+                        header: Header.movies(),
+                    }),
+                );
+            }
+
+            return res.setHeader("Content-Type", "text/html").end(
+                await edge.render("pages/movies", {
+                    flash_success: `1 Movie Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
+                    movie: searchedMovies[0],
+                    user: global.SESSION_USER,
+                    header: Header.movies(),
+                }),
+            );
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
-
-        const searchedMovies = await MoviesRepository.searchTitle(String(searchMovieTitle));
-
-        if (!searchedMovies.length) {
-            req.flash("warning", `No movies found from search: ${searchMovieTitle}! Recommending a Random Movie`);
-            return res.redirect("/");
-        }
-
-        if (searchedMovies.length > 1) {
-            searchedMovies[0].firstMovie = true;
-            return res.render("pages/movies", {
-                flash_success: `${
-                    searchedMovies.length
-                } Movies Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
-                movies: searchedMovies,
-                user: global.SESSION_USER,
-                header: Header.movies(),
-            });
-        }
-
-        return res.render("pages/movies", {
-            flash_success: `1 Game Found From Search Title: ${searchMovieTitle.toUpperCase()}`,
-            movie: searchedMovies[0],
-            user: global.SESSION_USER,
-            header: Header.movies(),
-        });
     }
 }

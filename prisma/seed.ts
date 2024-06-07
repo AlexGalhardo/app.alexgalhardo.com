@@ -80,7 +80,7 @@ const main = async () => {
             {
                 title: "Why Simpsons Is So Succesfull?",
                 resume: "blog resume 1",
-                image: faker.image.urlPicsumPhotos(),
+                image: faker.image.urlLoremFlickr(),
                 category: "Software",
                 slug: slugify("Why Simpsons Is So Succesfull?", {
                     lower: true,
@@ -90,7 +90,7 @@ const main = async () => {
             {
                 title: "Awesome Blog Post 2",
                 resume: faker.lorem.text(),
-                image: faker.image.urlPicsumPhotos(),
+                image: faker.image.urlLoremFlickr(),
                 category: "Software",
                 slug: slugify("Awesome Blog Post 2", { lower: true }),
                 body: faker.lorem.paragraphs(),
@@ -98,7 +98,7 @@ const main = async () => {
             {
                 title: "Some Blog Post 3",
                 resume: faker.lorem.text(),
-                image: faker.image.urlPicsumPhotos(),
+                image: faker.image.urlLoremFlickr(),
                 category: "Software",
                 slug: slugify("Some Blog Post 3", { lower: true }),
                 body: faker.lorem.paragraphs(),
@@ -106,7 +106,7 @@ const main = async () => {
             {
                 title: "Some Blog Post 4",
                 resume: faker.lorem.text(),
-                image: faker.image.urlPicsumPhotos(),
+                image: faker.image.urlLoremFlickr(),
                 category: "Software",
                 slug: slugify("Some Blog Post 4", { lower: true }),
                 body: faker.lorem.paragraphs(),
@@ -114,7 +114,7 @@ const main = async () => {
             {
                 title: "Some Blog Post 5",
                 resume: faker.lorem.text(),
-                image: faker.image.urlPicsumPhotos(),
+                image: faker.image.urlLoremFlickr(),
                 category: "Software",
                 slug: slugify("Some Blog Post 5", { lower: true }),
                 body: faker.lorem.paragraphs(),
@@ -122,7 +122,7 @@ const main = async () => {
             {
                 title: "Some Blog Post 6",
                 resume: faker.lorem.text(),
-                image: faker.image.urlPicsumPhotos(),
+                image: faker.image.urlLoremFlickr(),
                 category: "Software",
                 slug: slugify("Some Blog Post 6", { lower: true }),
                 body: faker.lorem.paragraphs(),

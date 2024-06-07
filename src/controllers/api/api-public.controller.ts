@@ -129,7 +129,6 @@ export default class APIPublicController {
         }
     }
 
-    /** ********* TVSHOWS *********** */
     static async getPublicTVShows(req: Request, res: Response, next: NextFunction) {
         try {
             return res.json(await TVShowsRepository.getAll());

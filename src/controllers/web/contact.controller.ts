@@ -40,14 +40,14 @@ export default class ContactController {
 
             const { name, email, subject, message } = req.body;
 
-            const contactObject = {
+            const contactPayload = {
                 name,
                 email,
                 subject,
                 message,
             };
 
-            await NodeMailer.sendContact(contactObject);
+            await NodeMailer.sendContact(contactPayload);
             // await TelegramBOTLogger.logContact(contactObject);
 
             req.flash("success", "Message Send!");
