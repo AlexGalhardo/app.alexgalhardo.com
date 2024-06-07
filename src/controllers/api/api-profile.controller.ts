@@ -14,23 +14,7 @@ export default class APIProfileController {
 
     static async patchProfile(req: Request, res: Response, next: NextFunction) {
         try {
-            const {
-                name,
-                email,
-                new_email,
-                password,
-                new_password,
-                document,
-                phone,
-                birth_date,
-                zipcode,
-                street,
-                street_number,
-                neighborhood,
-                city,
-                state,
-                country,
-            } = req.body;
+            const { name, email, new_email, password, new_password } = req.body;
 
             const userObject = {
                 name,
@@ -38,23 +22,14 @@ export default class APIProfileController {
                 new_email,
                 password,
                 new_password,
-                document,
-                phone,
-                birth_date,
-                zipcode,
-                street,
-                street_number,
-                neighborhood,
-                city,
-                state,
-                country,
             };
 
             const user = await UsersRepository.update(userObject);
 
             return user
-                ? res.json({ user })
+                ? res.json({ success: true, user })
                 : res.json({
+                      success: false,
                       error: "Something went wrong",
                   });
         } catch (err) {

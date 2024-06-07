@@ -3,12 +3,6 @@ export type CreateUserDTO = {
     email: string;
     password: string;
     confirm_password: string;
-    github_id: string;
-    github_avatar: string;
-    facebook_id: string;
-    facebook_avatar: string;
-    google_id: string;
-    google_avatar: string;
 };
 
 export type UpdateUserDTO = {
@@ -17,16 +11,6 @@ export type UpdateUserDTO = {
     email: string;
     older_password: string;
     new_password: string;
-    document: string;
-    phone: string;
-    birth_date: string;
-    address_zipcode: string;
-    address_street: string;
-    address_street_number: string;
-    address_neighborhood: string;
-    address_city: string;
-    address_state: string;
-    address_country: string;
 };
 
 export type CreateBookDTO = {

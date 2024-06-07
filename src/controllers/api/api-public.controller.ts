@@ -12,7 +12,7 @@ export default class APIPublicController {
     static async verifyIfEmailIsAlreadyRegistred(req: Request, res: Response, next: NextFunction) {
         try {
             const { email } = req.params;
-            if (await UsersRepository.emailExists(email)) {
+            if (await UsersRepository.emailRegistred(email)) {
                 return res.json({
                     emailRegistred: true,
                 });
@@ -151,50 +151,6 @@ export default class APIPublicController {
             return res.json(await TVShowsRepository.getRandom());
         } catch (err) {
             next(err);
-        }
-    }
-
-    static async addGameToCart(req: Request, res: Response, next: NextFunction) {
-        try {
-            const { game_id } = req.params;
-            if (!global.SESSION_USER) {
-                return res.json({
-                    inLoggedUserCart: false,
-                });
-            }
-
-            if (await UsersRepository.addGameToShopCart(game_id)) {
-                return res.json({
-                    inLoggedUserCart: true,
-                });
-            }
-            return res.json({
-                inLoggedUserCart: false,
-            });
-        } catch (err) {
-            return next(err);
-        }
-    }
-
-    static async addBookToCart(req: Request, res: Response, next: NextFunction) {
-        try {
-            const { book_id } = req.params;
-            if (!global.SESSION_USER) {
-                return res.json({
-                    inLoggedUserCart: false,
-                });
-            }
-
-            if (await UsersRepository.addBookToShopCart(book_id)) {
-                return res.json({
-                    inLoggedUserCart: true,
-                });
-            }
-            return res.json({
-                inLoggedUserCart: false,
-            });
-        } catch (err) {
-            return next(err);
         }
     }
 }

@@ -1,7 +1,6 @@
 import prisma from "../config/prisma";
 import Bcrypt from "../utils/Bcrypt";
-import { CreateUserDTO, SubscriptionTransactionDTO, UpdateUserDTO } from "../utils/DTOs";
-import NumberHelper from "../utils/Numbers";
+import { CreateUserDTO, UpdateUserDTO } from "../utils/DTOs";
 
 export default class UsersRepository {
     static getAll() {
@@ -20,18 +19,18 @@ export default class UsersRepository {
         });
     }
 
-    static verifyIfAdminById(user_id: string) {
+    static isAdmin(id: string) {
         return prisma.user.findUnique({
             where: {
                 isAdmin: {
-                    id: user_id,
+                    id,
                     admin: true,
                 },
             },
         });
     }
 
-    static getUserByEmail(email: string) {
+    static getByEmail(email: string) {
         return prisma.user.findUnique({
             where: {
                 email,
@@ -99,14 +98,6 @@ export default class UsersRepository {
                 data: {
                     email: userObject.email ? userObject.email : User.email,
                     password: userObject.new_password ? await Bcrypt.hash(userObject.new_password) : User.password,
-                    phone: userObject.phone ? userObject.phone : User.phone,
-                    address_zipcode: userObject.address_zipcode,
-                    address_street: userObject.address_street,
-                    address_street_number: parseInt(userObject.address_street_number),
-                    address_neighborhood: userObject.address_neighborhood,
-                    address_city: userObject.address_city,
-                    address_state: userObject.address_state,
-                    address_country: userObject.address_country,
                 },
             });
 
@@ -121,67 +112,13 @@ export default class UsersRepository {
         return null;
     }
 
-    static async create(userObject: CreateUserDTO, confirmEmailToken: string) {
+    static async store(userObject: CreateUserDTO, confirmEmailToken: string) {
         return prisma.user.create({
             data: {
                 name: userObject.username,
                 email: userObject.email,
                 password: await Bcrypt.hash(userObject.password),
                 confirm_email_token: confirmEmailToken,
-            },
-        });
-    }
-
-    static async createStripeCustomer(user_id: string, stripe_customer_id: string) {
-        await prisma.user.update({
-            where: {
-                id: user_id,
-            },
-            data: {
-                stripe_customer_id,
-            },
-        });
-    }
-
-    static async createStripeCard(
-        user_id: string,
-        customerCard: { card: { id: string; brand: string; exp_month: number; exp_year: number; last4: number } },
-        cardNumber: string,
-    ) {
-        await prisma.user.update({
-            where: {
-                id: user_id,
-            },
-            data: {
-                stripe_card_id: customerCard.card.id,
-                stripe_card_brand: customerCard.card.brand,
-                stripe_card_number: cardNumber,
-                stripe_card_exp_month: customerCard.card.exp_month,
-                stripe_card_exp_year: customerCard.card.exp_year,
-                stripe_card_last4: Number(customerCard.card.last4 as number),
-            },
-        });
-    }
-
-    static async createStripeSubscription(user_id: string, subscriptionTransactionObject: SubscriptionTransactionDTO) {
-        await prisma.user.update({
-            where: {
-                id: user_id,
-            },
-            data: {
-                stripe_currently_subscription_id: subscriptionTransactionObject.transaction_id,
-                stripe_currently_subscription_name: subscriptionTransactionObject.plan_name,
-                stripe_subscription_start: subscriptionTransactionObject.current_period_start,
-                stripe_subscription_end: subscriptionTransactionObject.current_period_end,
-                stripe_cancel_at_period_end: subscriptionTransactionObject.cancel_at_period_end,
-            },
-        });
-    }
-
-    static async emailExists(email: string) {
-        return prisma.user.findUnique({
-            where: {
-                email,
             },
         });
     }
@@ -243,7 +180,7 @@ export default class UsersRepository {
     }
 
     static async verifyConfirmEmailToken(email: string, confirmEmailToken: string) {
-        if (await this.emailExists(email)) {
+        if (await this.emailRegistred(email)) {
             if (
                 await prisma.user.findUnique({
                     where: {
@@ -266,261 +203,5 @@ export default class UsersRepository {
             }
         }
         return false;
-    }
-
-    static async addGameToShopCart(game_id: string): Promise<boolean> {
-        let { shop_cart_itens } = await prisma.user.findUnique({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            select: {
-                shop_cart_itens: true,
-            },
-        });
-
-        const game = await prisma.game.findUnique({
-            where: {
-                id: game_id,
-            },
-            select: {
-                id: true,
-                image: true,
-                title: true,
-                price: true,
-            },
-        });
-
-        if (!shop_cart_itens) {
-            const shopCartItens = [];
-
-            shopCartItens.push(game);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shopCartItens),
-                },
-            });
-
-            return true;
-        }
-
-        shop_cart_itens = JSON.parse(shop_cart_itens);
-
-        if (shop_cart_itens.some((game) => game.id === game_id)) {
-            const indexToRemove = shop_cart_itens.findIndex(function (game) {
-                return game.id === game_id;
-            });
-
-            shop_cart_itens.splice(indexToRemove, 1);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shop_cart_itens),
-                },
-            });
-
-            return false;
-        }
-
-        shop_cart_itens.push(game);
-
-        await prisma.user.update({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            data: {
-                shop_cart_itens: JSON.stringify(shop_cart_itens),
-            },
-        });
-        return true;
-    }
-
-    static async addBookToShopCart(book_id: string): Promise<boolean> {
-        let { shop_cart_itens } = await prisma.user.findUnique({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            select: {
-                shop_cart_itens: true,
-            },
-        });
-
-        const book = await prisma.book.findUnique({
-            where: {
-                id: book_id,
-            },
-            select: {
-                id: true,
-                image: true,
-                title: true,
-                price: true,
-            },
-        });
-
-        if (!shop_cart_itens) {
-            const shopCartItens = [];
-
-            shopCartItens.push(book);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shopCartItens),
-                },
-            });
-
-            return true;
-        }
-
-        shop_cart_itens = JSON.parse(shop_cart_itens);
-
-        if (shop_cart_itens.some((book) => book.id === book_id)) {
-            const indexToRemove = shop_cart_itens.findIndex(function (book) {
-                return book.id === book_id;
-            });
-
-            shop_cart_itens.splice(indexToRemove, 1);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shop_cart_itens),
-                },
-            });
-
-            return false;
-        }
-
-        shop_cart_itens.push(book);
-
-        await prisma.user.update({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            data: {
-                shop_cart_itens: JSON.stringify(shop_cart_itens),
-            },
-        });
-        return true;
-    }
-
-    static async removeShopCartItem(item_id: string): Promise<boolean> {
-        let { shop_cart_itens } = await prisma.user.findUnique({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            select: {
-                shop_cart_itens: true,
-            },
-        });
-
-        shop_cart_itens = JSON.parse(shop_cart_itens);
-
-        if (shop_cart_itens.some((item) => item.id === item_id)) {
-            const indexToRemove = shop_cart_itens.findIndex(function (item) {
-                return item.id === item_id;
-            });
-
-            shop_cart_itens.splice(indexToRemove, 1);
-
-            await prisma.user.update({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                data: {
-                    shop_cart_itens: JSON.stringify(shop_cart_itens),
-                },
-            });
-
-            return true;
-        }
-
-        return false;
-    }
-
-    static async getTotalItensShopCart(): Promise<number> {
-        if (global.SESSION_USER) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-            return shop_cart_itens?.length || 0;
-        }
-
-        return 0;
-    }
-
-    static async getShopCartItens() {
-        if (global.SESSION_USER) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-            if (shop_cart_itens && shop_cart_itens.length > 0) {
-                shop_cart_itens.forEach(
-                    (item: { price: string | number }) => (item.price = NumberHelper.toFloat(item.price)),
-                );
-                return shop_cart_itens;
-            }
-            return null;
-        }
-        return null;
-    }
-
-    static async getShopCartTotalAmount(): Promise<number> {
-        if (global.SESSION_USER) {
-            let { shop_cart_itens } = await prisma.user.findUnique({
-                where: {
-                    id: global.SESSION_USER.id,
-                },
-                select: {
-                    shop_cart_itens: true,
-                },
-            });
-
-            shop_cart_itens = JSON.parse(shop_cart_itens);
-
-            if (shop_cart_itens && shop_cart_itens.length > 0) {
-                const shopCartTotalAmount = shop_cart_itens.reduce((sum: number, { price }) => sum + price, 0);
-
-                return NumberHelper.toFloat(shopCartTotalAmount);
-            }
-
-            return 0;
-        }
-        return 0;
-    }
-
-    static async removeAllShopCartItens(): Promise<void> {
-        await prisma.user.update({
-            where: {
-                id: global.SESSION_USER.id,
-            },
-            data: {
-                shop_cart_itens: null,
-            },
-        });
     }
 }

@@ -1,5 +1,5 @@
 export default class Numbers {
-    static toFloat(number: string): number {
+    static toFloat(number: any): number {
         return Number((number / 100).toFixed(2));
     }
 }

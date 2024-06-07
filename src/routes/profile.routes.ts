@@ -10,24 +10,4 @@ export default router
 
     .post("/", isNotAuthenticated, ProfileController.updateProfile)
 
-    .get("/shop/transactions", isNotAuthenticated, ProfileController.getViewMyShopTransactions)
-
-    .get("/shop/transaction/:shop_transaction_id", isNotAuthenticated, ProfileController.getViewShopTransactionByID)
-
-    .get("/subscriptions/transactions", isNotAuthenticated, ProfileController.getViewMySubscriptionsTransactions)
-
-    .get(
-        "/subscription/transaction/:subs_transaction_id",
-        isNotAuthenticated,
-        ProfileController.getViewSubscriptionTransactionByID,
-    )
-
-    .get("/logout", isNotAuthenticated, ProfileController.logout)
-
-    .get("/delete/stripeCard/:stripe_card_id", isNotAuthenticated, ProfileController.deleteCard)
-
-    .get(
-        "/cancel/subscription/:stripe_currently_subscription_id",
-        isNotAuthenticated,
-        ProfileController.cancelSubscriptionRenewAtPeriodEnd,
-    );
+    .get("/logout", isNotAuthenticated, ProfileController.logout);

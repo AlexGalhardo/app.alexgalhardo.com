@@ -127,7 +127,7 @@ export default class AuthController {
                 confirmEmailToken,
             };
 
-            await UsersRepository.create(newUser, confirmEmailToken);
+            await UsersRepository.store(newUser, confirmEmailToken);
             await NodeMailer.sendConfirmEmailLink(email, confirmEmailToken);
 
             req.flash("success", "Account Created! Confirm your email by clicking the link send to your email inbox!");
@@ -156,7 +156,7 @@ export default class AuthController {
 
             const resetPasswordToken = randomToken.generate(24);
 
-            if (await UsersRepository.emailExists(email)) {
+            if (await UsersRepository.emailRegistred(email)) {
                 await UsersRepository.createResetPasswordToken(email, resetPasswordToken);
                 await NodeMailer.sendForgetPasswordLink(email, resetPasswordToken);
             }
