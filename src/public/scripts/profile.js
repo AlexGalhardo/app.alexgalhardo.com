@@ -53,38 +53,3 @@ buttonUpdateProfile.addEventListener("click", async (e) => {
         formUpdateProfile.submit();
     }
 });
-
-document.querySelector("#zipcode").addEventListener("change", async function (e) {
-    const zipcode = e.target.value;
-
-    const responseCEP = await fetch(`https://galhardo-correios.herokuapp.com/cep/${zipcode}`);
-    const cepJson = await responseCEP.json();
-
-    const { logradouro, bairro, localidade, uf } = cepJson;
-
-    document.querySelector("#street").value = logradouro;
-    document.querySelector("#neighborhood").value = bairro;
-    document.querySelector("#city").value = localidade;
-    document.querySelector("#state").value = uf;
-});
-
-(async function () {
-    document.getElementById("operation_system").value = window.navigator.platform;
-
-    if (navigator.userAgent.indexOf("Chrome") != -1) {
-        document.getElementById("browser").value = "Google Chrome";
-    } else {
-        document.getElementById("browser").value = "Firefox";
-    }
-
-    const response = await fetch("https://api.ipify.org/?format=json");
-    const public_ip = await response.json();
-    document.getElementById("public_ip").value = public_ip.ip;
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            document.getElementById("latitude").value = position.coords.latitude.toFixed(6);
-            document.getElementById("longitude").value = position.coords.longitude.toFixed(6);
-        });
-    }
-})();
