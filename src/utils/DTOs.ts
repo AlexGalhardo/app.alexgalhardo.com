@@ -9,8 +9,8 @@ export type UpdateUserDTO = {
     id: string;
     username: string;
     email: string;
-    older_password: string;
-    new_password: string;
+    older_password?: string;
+    new_password?: string;
 };
 
 export type CreateBookDTO = {

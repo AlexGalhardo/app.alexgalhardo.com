@@ -36,17 +36,6 @@ const isNotAuthenticated = (req: Request, res: Response, next: NextFunction) => 
 
 export { isNotAuthenticated };
 
-const userHasActiveSubscription = (req: Request, res: Response, next: NextFunction) => {
-    if (global.SESSION_USER.stripe_currently_subscription_name !== "FREE") {
-        req.flash(
-            "warning",
-            `You already have a currently plan ${global.SESSION_USER.stripe_currently_subscription_name} active! Wait until it ends to make a new subscription transaction!`,
-        );
-        return res.redirect("/plans");
-    }
-    return next();
-};
-
 router
     .get("/teste", AppController.teste)
     .get("/", GamesController.getViewGames)

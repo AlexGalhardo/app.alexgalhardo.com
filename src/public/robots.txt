@@ -1,4 +1,4 @@
 userAgent: *
 allow: "/"
-disallow: ["/admin", "/stripe"]
+disallow: ["/admin"]
 crawlDelay: 2
