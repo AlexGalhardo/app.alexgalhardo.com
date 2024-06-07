@@ -8,40 +8,16 @@ datasource db {
 }
 
 model User {
-  id                                 String    @id @default(uuid())
-  name                               String
-  email                              String    @unique
-  confirmed_email                    Boolean   @default(false)
-  confirm_email_token                String?
-  password                           String
-  reset_password_token               String?
-  admin                              Boolean   @default(false)
-  phone                              String?
-  address_zipcode                    String?
-  address_street                     String?
-  address_street_number              Int?
-  address_neighborhood               String?
-  address_city                       String?
-  address_state                      String?
-  address_country                    String?
-  shop_cart_itens                    String?
-  stripe_customer_id                 String?   @unique
-  stripe_card_id                     String?   @unique
-  stripe_card_number                 String?
-  stripe_card_brand                  String?
-  stripe_card_last4                  Int?
-  stripe_card_exp_month              Int?
-  stripe_card_exp_year               Int?
-  stripe_currently_subscription_id   String?   @unique
-  stripe_currently_subscription_name String?
-  stripe_subscription_start          DateTime?
-  stripe_subscription_end            DateTime?
-  stripe_cancel_at_period_end        Boolean?
-  created_at                         DateTime  @default(now())
-  updated_at                         DateTime?
-
-  StripeShopTransaction         StripeShopTransaction[]
-  StripeSubscriptionTransaction StripeSubscriptionTransaction[]
+  id                   String    @id @default(uuid())
+  name                 String
+  email                String    @unique
+  confirmed_email      Boolean   @default(false)
+  confirm_email_token  String?
+  password             String
+  reset_password_token String?
+  admin                Boolean   @default(false)
+  created_at           DateTime  @default(now())
+  updated_at           DateTime?
 
   @@unique(fields: [email, confirm_email_token], name: "confirmEmailTokenIsValid")
   @@unique(fields: [email, reset_password_token], name: "resetPasswordTokenIsValid")
@@ -65,39 +41,37 @@ model Blog {
 }
 
 model Game {
-  id                   String    @id @default(uuid())
-  title                String    @unique
-  year_release         Int
-  price                Int
-  resume               String    @unique
-  image                String    @unique
-  igdb_link            String    @unique
-  igdb_rating          Int
-  platforms            String
-  developer            String
-  genres               String
-  amazon_link          String?   @unique
-  stripe_checkout_link String?   @unique
-  created_at           DateTime  @default(now())
-  updated_at           DateTime?
+  id           String    @id @default(uuid())
+  title        String    @unique
+  year_release Int
+  price        Int
+  resume       String    @unique
+  image        String    @unique
+  igdb_link    String    @unique
+  igdb_rating  Int
+  platforms    String
+  developer    String
+  genres       String
+  amazon_link  String?   @unique
+  created_at   DateTime  @default(now())
+  updated_at   DateTime?
 
   @@map("games")
 }
 
 model Book {
-  id                   String    @id @default(uuid())
-  title                String    @unique
-  year_release         Int
-  price                Int
-  image                String    @unique
-  resume               String    @unique
-  pages                Int
-  genres               String
-  author               String
-  amazon_link          String?   @unique
-  stripe_checkout_link String?   @unique
-  created_at           DateTime  @default(now())
-  updated_at           DateTime?
+  id           String    @id @default(uuid())
+  title        String    @unique
+  year_release Int
+  price        Int
+  image        String    @unique
+  resume       String    @unique
+  pages        Int
+  genres       String
+  author       String
+  amazon_link  String?   @unique
+  created_at   DateTime  @default(now())
+  updated_at   DateTime?
 
   @@map("books")
 }
@@ -134,62 +108,4 @@ model Tvshow {
   updated_at     DateTime?
 
   @@map("tv_shows")
-}
-
-model StripeShopTransaction {
-  id                             String   @id @default(uuid())
-  transaction_id                 String   @unique
-  total_amount                   Int
-  card_id                        String
-  card_brand                     String
-  card_exp_month                 Int
-  card_exp_year                  Int
-  card_last4                     Int
-  currency                       String
-  paid                           Boolean
-  products_amount                Int
-  products                       String
-  stripe_customer_id             String
-  user_id                        String
-  user                           User     @relation(fields: [user_id], references: [id])
-  user_email                     String
-  user_phone                     String
-  user_name                      String
-  shipping_address_zipcode       String
-  shipping_address_street        String
-  shipping_address_street_number Int
-  shipping_address_neighborhood  String
-  shipping_address_city          String
-  shipping_address_state         String
-  shipping_address_country       String
-  shipping_carrier               String
-  shipping_fee                   Int
-  created_at                     DateTime @default(now())
-
-  @@map("stripe_shop_transactions")
-}
-
-model StripeSubscriptionTransaction {
-  id                   String   @id @default(uuid())
-  created_at           DateTime @default(now())
-  transaction_id       String
-  status               String
-  user_id              String
-  user                 User     @relation(fields: [user_id], references: [id])
-  user_email           String
-  user_name            String
-  stripe_customer_id   String
-  card_id              String
-  card_brand           String
-  card_exp_month       Int
-  card_exp_year        Int
-  card_last4           Int
-  plan_id              String
-  plan_name            String
-  plan_amount          Int
-  current_period_start DateTime
-  current_period_end   DateTime
-  cancel_at_period_end Boolean
-
-  @@map("stripe_subscriptions_transactions")
 }

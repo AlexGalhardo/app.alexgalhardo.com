@@ -9,8 +9,6 @@ import BooksController from "../controllers/web/books.controller";
 import ContactController from "../controllers/web/contact.controller";
 import GamesController from "../controllers/web/games.controller";
 import MoviesController from "../controllers/web/movies.controller";
-import PlansController from "../controllers/web/plans.controller";
-import ShopController from "../controllers/web/shop.controller";
 import TVShowsController from "../controllers/web/tv-shows.controller";
 
 const recaptcha = new RecaptchaV3(process.env.RECAPTCHA_ID as string, process.env.RECAPTCHA_SECRET as string, {
@@ -71,20 +69,6 @@ router
     .get("/blog/page/:page", BlogController.getViewBlog)
 
     .get("/blog/:slug", BlogController.getViewBlogPost)
-
-    .get("/shop", isNotAuthenticated, ShopController.getViewShop)
-    .post("/shop", isNotAuthenticated, ShopController.postShop)
-    .get("/removeCart/:item_id", ShopController.removeCartItem)
-
-    .get("/plans", PlansController.getViewPlans)
-
-    .get(
-        "/plan/premium/checkout",
-        isNotAuthenticated,
-        userHasActiveSubscription,
-        PlansController.getViewPlanPremiumCheckout,
-    )
-    .post("/plan/premium/post", isNotAuthenticated, PlansController.postSubscription)
 
     .get("/login", isAuthenticated, /* recaptcha.middleware.render, */ csrfProtection, AuthController.getViewLogin)
     .post("/login", isAuthenticated, /* recaptcha.middleware.verify, */ csrfProtection, AuthController.postLogin)

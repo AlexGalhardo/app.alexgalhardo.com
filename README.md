@@ -25,6 +25,13 @@ cd app.alexgalhardo.com/
 chmod +x ./setup.sh && ./setup.sh
 ```
 
+4. Set yours environment variables at file `.env`
+
+5. Run server
+```
+bun run dev
+```
+
 ## LICENSE
 
 [MIT](http://opensource.org/licenses/MIT)

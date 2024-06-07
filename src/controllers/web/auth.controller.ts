@@ -141,8 +141,8 @@ export default class AuthController {
         try {
             return res.setHeader("Content-Type", "text/html").end(
                 await edge.render("pages/auth/forget-password", {
-                    flash_success: req.flash("success").length ? req.flash("success")[0] : null,
-                    flash_warning: req.flash("warning").length ? req.flash("warning")[0] : null,
+                    flash_success: req.flash("success").length ? req.flash("success") : null,
+                    flash_warning: req.flash("warning").length ? req.flash("warning") : null,
                 }),
             );
         } catch (error: any) {

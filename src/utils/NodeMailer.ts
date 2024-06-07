@@ -153,25 +153,29 @@ export default class NodeMailer {
     }
 
     static async sendForgetPasswordLink(email: string, resetPasswordToken: string) {
-        const resetPasswordLinkURL = `${process.env.APP_URL}/change-password/${email}/${resetPasswordToken}`;
+        try {
+            const resetPasswordLinkURL = `${process.env.APP_URL}/change-password/${email}/${resetPasswordToken}`;
 
-        const filePath = path.join(__dirname, "../views/emails/forget_password.html");
+            const filePath = path.join(__dirname, "../views/emails/forget_password.html");
 
-        const source = fs.readFileSync(filePath, "utf-8").toString();
+            const source = fs.readFileSync(filePath, "utf-8").toString();
 
-        const template = handlebars.compile(source);
+            const template = handlebars.compile(source);
 
-        const replacements = {
-            resetPasswordLinkURL,
-        };
+            const replacements = {
+                resetPasswordLinkURL,
+            };
 
-        const htmlBody = template(replacements);
+            const htmlBody = template(replacements);
 
-        await Resend.sendMail({
-            from: process.env.APP_EMAIL,
-            to: email,
-            subject: `GALHARDO APP: Recover Your Password!`,
-            html: htmlBody,
-        });
+            await Resend.sendMail({
+                from: process.env.APP_EMAIL,
+                to: email,
+                subject: `GALHARDO APP: Recover Your Password!`,
+                html: htmlBody,
+            });
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
     }
 }

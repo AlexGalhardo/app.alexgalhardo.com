@@ -26,16 +26,11 @@
 
             @if(game)
                 <input id="game_id" name="game_id" type="hidden" value="{{ game.id }}">
-                <input id="game_price_value" name="game_price_value" type="hidden" value="{{ game.price }}">
 
                 <input type="text" id="app_url" hidden value="{{ app_url }}" readonly>
 
                 <div class="col-lg-3 text-center">
                     <img id="game_image" src="{{ game.image }}" class="shadow mx-auto d-block w-100 image-fluid mb-3" alt="game_image">
-
-					@if(user)
-						<button onclick="addGameToCart()" class="btn btn-outline-light fw-bold w-100 mb-3 shadow" id="button_add_game_to_cart"><i class="bi bi-cart-plus"></i> Add Cart</span></button>
-					@end
 
                     @if(user?.admin)
                         <a id="game_admin_update_link" href="/admin/update/game/{{ id }}" class="w-75 shadow btn btn-warning shadow-sm">

@@ -80,10 +80,6 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="fs-5 nav-link" aria-current="page" href="/plans"> Plans</a>
-                        </li>
-
 						<li class="nav-item">
                             <a class="fs-5 nav-link" aria-current="page" href="https://github.com/AlexGalhardo/app.alexgalhardo.com" target="_blank"> Source Code</a>
                         </li>
@@ -91,7 +87,7 @@
                         </ul>
 
                         @if(user)
-							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<ul class="navbar-nav mb-2 mb-lg-0">
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 										<i class="bi bi-person-circle"></i>
@@ -102,18 +98,6 @@
 											<a class="dropdown-item fw-bold" href="/profile">
 												<i class="bi bi-pencil-square"></i>
 												My Profile
-											</a>
-										</li>
-										<li>
-											<a class="dropdown-item fw-bold" href="/profile/shop/transactions">
-												<i class="bi bi-cart"></i>
-												My Shop Transactions
-											</a>
-										</li>
-										<li>
-											<a class="dropdown-item fw-bold" href="/profile/subscriptions/transactions">
-												<i class="bi bi-award"></i>
-												My Plans Transactions
 											</a>
 										</li>
 										@if(user?.admin)
@@ -168,21 +152,6 @@
                                 <a href="/login" class="shadow-sm fw-bold btn btn-outline-light" type="submit">Login</a>
                             </div>
                         @end
-
-
-						@if(user)
-							<a href="/shop"
-								class="shadow-sm fw-bold btn ms-2 btn-outline-light"
-								type="submit">
-								<i class="bi bi-cart"></i>
-								My Cart
-								[
-									<span id="total_shopCart_itens">
-										{{ totalItensShopCart ?? 0 }}
-									</span>
-								]
-							</a>
-						@end
 
                 </div>
 

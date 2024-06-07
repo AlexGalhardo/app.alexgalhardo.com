@@ -9,4 +9,3 @@ bun prisma generate
 bun prisma migrate dev
 bun prisma db push
 bun prisma db seed
-bun run dev
