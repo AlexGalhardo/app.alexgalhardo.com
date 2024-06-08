@@ -3,7 +3,7 @@
 	"scripts": {
 		"dev": "bun run --watch src/server.ts",
 		"format": "prettier --write \"src/**/*.ts\" \"prisma/**/*.ts\"",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"test": "bun test"
 	},
 	"prisma": {
